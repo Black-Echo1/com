@@ -22,25 +22,24 @@
 
     <div class="container section-padding">
         <h2 class="section-title">مكتبة تدريب <span class="rgb-text">الشباب</span></h2>
-        
-        <!-- هذا المربع هو الذي سيقوم الكود بملئه تلقائياً بالفيديوهات -->
         <div id="video-grid" class="video-grid" data-category="men"></div>
     </div>
 
-    <!-- نافذة الإعلان -->
     <div id="adModal" class="modal">
         <div class="modal-content">
-            <div class="ad-placeholder">مساحة إعلانية لدعم الفريق (ضع كود الإعلان هنا لاحقاً)</div>
-            <p>الرجاء الانتظار <span id="countdown" class="rgb-text">5</span> ثوانٍ...</p>
-            <button class="close-ad" onclick="openVideo()">تخطي الإعلان ومشاهدة المقطع</button>
+            <div class="ad-placeholder">مساحة إعلانية لدعم سيرفرات الأكاديمية</div>
+            <p>انتظر <span id="countdown" class="rgb-text">5</span> ثوانٍ لتشغيل المشغل...</p>
+            <button class="close-ad" onclick="openVideo()">تخطي ومشاهدة المقطع</button>
         </div>
     </div>
 
-    <!-- نافذة المشاهدة -->
     <div id="videoModal" class="modal">
         <div class="modal-content video-modal-content">
-            <button class="close-video" onclick="closeVideo()">× إغلاق المشهد</button>
-            <iframe id="mainVideoFrame" src="" allowfullscreen></iframe>
+            <button class="close-video" onclick="closeVideo()">× إغلاق العرض</button>
+            <div id="server-tabs" class="server-tabs-container"></div>
+            <div class="video-wrapper">
+                <iframe id="mainVideoFrame" src="" allowfullscreen></iframe>
+            </div>
         </div>
     </div>
 
@@ -49,7 +48,6 @@
         <p>&copy; 2026 أكاديمية Black Echo.</p>
     </footer>
 
-    <!-- استدعاء الملفات البرمجية -->
     <script src="data.js"></script>
     <script src="script.js"></script>
 </body>
