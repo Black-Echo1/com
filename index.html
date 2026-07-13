@@ -6,8 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>أكاديمية Black Echo للدبلجة</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- أيقونة المتصفح (Favicon) -->
+    <link rel="icon" type="image/png" href="icon-192.png">
     <link rel="stylesheet" href="style.css">
-</head>
+</head><link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#111111">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('تم تسجيل التطبيق بنجاح!', reg))
+        .catch(err => console.log('فشل تسجيل التطبيق:', err));
+    });
+  }
+</script>
 <body class="animated-bg">
 
     <header>
@@ -22,7 +37,7 @@
     </header>
 
     <div class="container section-padding" style="text-align: center; height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <h1 style="font-size: 3.5rem; margin-bottom: 20px;">هلا بك في المناصقة الرسمية<span class="rgb-text">Black Echo</span></h1>
+        <h1 style="font-size: 2rem; margin-bottom: 20px;">هلا بك في المناصقة الرسمية لفريق <span class="rgb-text">Black Echo</span></h1>
         <p style="color: var(--text-gray); font-size: 1.2rem; margin-bottom: 40px; max-width: 650px;">مرحباً بك في منصة التدريب الرسمية لفريق Black Echo. حمل المقاطع بنسخها المترجمة أو الخام، وابدأ صقل موهبتك الفنية.</p>
         <div>
             <a href="men.html" class="download-btn btn-subs" style="display: inline-block; padding: 15px 35px; margin-left: 15px; font-size: 16px;">مكتبة الشباب</a>

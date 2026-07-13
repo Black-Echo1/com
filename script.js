@@ -1,3 +1,6 @@
+// خيار التحكم بالإعلانات: اجعلها true لتفعيلها مستقبلاً، أو false لتعطيلها وتجميدها تماماً
+const ENABLE_ADS = false; 
+
 document.addEventListener("DOMContentLoaded", () => {
     const grid = document.getElementById("video-grid");
     
@@ -6,9 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
         const videos = videosData[category] || [];
         
         videos.forEach((video, index) => {
-            // التعديل: قراءة روابط دودو ستريم مباشرة من قاعدة البيانات
-            const linkWithSubs = video.downloadWithSubsUrl;
-            const linkNoSubs = video.downloadNoSubsUrl;
+            // التعديل هنا: تحويل معرف جوجل درايف إلى رابط تحميل مباشر يتخطى صفحة الفحص
+            const linkWithSubs = `https://drive.google.com/uc?export=download&id=${video.downloadWithSubsid}`;
+            const linkNoSubs = `https://drive.google.com/uc?export=download&id=${video.downloadNoSubsid}`;
             
             const cardHTML = `
                 <div class="video-card">
@@ -18,8 +21,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     </div>
                     <h3>${video.title}</h3>
                     <div class="download-buttons-holder">
-                        <a href="${linkWithSubs}" target="_blank" class="download-btn btn-subs">تحميل المقطع (مترجم)</a>
-                        <a href="${linkNoSubs}" target="_blank" class="download-btn btn-no-subs">تحت التطوير - تحميل المقطع (خام)</a>
+                        <a href="${linkWithSubs}" class="download-btn btn-subs">تحميل المقطع (مترجم)</a>
+                        <a href="${linkNoSubs}" class="download-btn btn-no-subs">تحميل المقطع (خام)</a>
                     </div>
                 </div>
             `;
@@ -35,31 +38,38 @@ let adTimer;
 function triggerAdAndPlay(category, index) {
     currentCategory = category;
     currentIndex = index;
-    let adModal = document.getElementById("adModal");
-    let closeAdBtn = document.querySelector(".close-ad");
-    let countdownElement = document.getElementById("countdown");
 
-    if(adModal) {
-        adModal.style.display = "flex";
-        closeAdBtn.style.display = "none";
-        
-        let timeLeft = 5; 
-        countdownElement.innerText = timeLeft;
+    if (ENABLE_ADS) {
+        let adModal = document.getElementById("adModal");
+        let closeAdBtn = document.querySelector(".close-ad");
+        let countdownElement = document.getElementById("countdown");
 
-        adTimer = setInterval(function() {
-            timeLeft--;
-            countdownElement.innerText = timeLeft;
+        if(adModal) {
+            adModal.style.display = "flex";
+            closeAdBtn.style.display = "none";
             
-            if (timeLeft <= 0) {
-                clearInterval(adTimer);
-                closeAdBtn.style.display = "block";
-            }
-        }, 1000);
+            let timeLeft = 5; 
+            countdownElement.innerText = timeLeft;
+
+            adTimer = setInterval(function() {
+                timeLeft--;
+                countdownElement.innerText = timeLeft;
+                
+                if (timeLeft <= 0) {
+                    clearInterval(adTimer);
+                    closeAdBtn.style.display = "block";
+                }
+            }, 1000);
+        }
+    } else {
+        openVideo();
     }
 }
 
 function openVideo() {
-    document.getElementById("adModal").style.display = "none";
+    let adModal = document.getElementById("adModal");
+    if (adModal) adModal.style.display = "none";
+    
     let videoModal = document.getElementById("videoModal");
     let serverContainer = document.getElementById("server-tabs");
     let videoFrame = document.getElementById("mainVideoFrame");
@@ -87,6 +97,8 @@ function openVideo() {
 
     if(videoModal && videoFrame) {
         videoFrame.src = firstServerUrl;
+        videoFrame.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
+        videoFrame.setAttribute("allowfullscreen", "true");
         videoModal.style.display = "flex";
     }
 }
