@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مشاهدة - Black Echo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="watch_style.css">
+</head>
+<body class="animated-bg">
+
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo rgb-text">Black Echo</div>
+            <nav>
+                <a href="browse.html">الرئيسية</a>
+                <a href="#">الشباب</a>
+                <a href="#">الفتيات</a>
+                <a href="course.html">كورس الدبلجة 🎓</a>
+            </nav>
+        </div>
+    </header>
+
+    <div class="container section-padding">
+        
+        <div class="main-player-section">
+            <div class="player-wrapper">
+                <iframe id="activeVideoPlayer" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+            </div>
+            <h2 id="project-title" style="margin-top: 15px; color: #fff;">جاري التحميل...</h2>
+            <p id="project-desc" style="color: var(--text-gray); font-size: 0.95rem;"></p>
+        </div>
+
+        <div id="episodes-section" class="episodes-section" style="display: none;">
+            <h3 class="section-title">الحلقات المتوفرة</h3>
+            <div class="episodes-slider" id="episodesList">
+                </div>
+        </div>
+
+        <div class="control-panel">
+            <div class="panel-section">
+                <div class="lang-tabs" id="langTabsContainer"></div>
+            </div>
+
+            <div class="panel-section toggle-wrapper">
+                <span class="toggle-label">الإصدار:</span>
+                <div class="sub-dub-toggle">
+                    <button class="toggle-btn active" id="btn-dub" onclick="setReleaseType('DUB')">DUB (مدبلج)</button>
+                    <button class="toggle-btn" id="btn-sub" onclick="setReleaseType('SUB')">SUB (مترجم)</button>
+                </div>
+            </div>
+
+            <div class="resolutions-container" id="resolutionsList"></div>
+        </div>
+    </div>
+
+    <script src="../data/projects_db.js"></script>
+    <script src="../data/watch_script.js"></script>
+</body>
+</html>

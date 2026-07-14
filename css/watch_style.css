@@ -1,0 +1,274 @@
+/* ==========================================
+   تصميم مشغل الأفلام وتنسيقات السيرفرات المتطورة
+========================================== */
+
+/* المشغل السينمائي الكبير */
+.main-player-section {
+    margin-bottom: 30px;
+    background: rgba(21, 24, 33, 0.4);
+    padding: 15px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+}
+.player-wrapper {
+    position: relative;
+    padding-bottom: 56.25%; /* أبعاد 16:9 */
+    height: 0;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+}
+.player-wrapper iframe {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    border: none;
+}
+
+/* لوحة التحكم الاحترافية */
+.control-panel {
+    background: rgba(14, 16, 22, 0.95);
+    border-radius: 12px;
+    padding: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.03);
+}
+
+/* تابات اللغات */
+.lang-tabs {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+.lang-tab {
+    background: #1c1e27;
+    color: #9ca3af;
+    border: 1px solid rgba(255,255,255,0.05);
+    padding: 10px 24px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+}
+.lang-tab.active {
+    background: #343746;
+    color: #fff;
+    border-color: var(--accent-red);
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.2);
+}
+
+/* مفتاح التبديل SUB / DUB */
+.toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+.toggle-label {
+    font-weight: bold;
+    color: #e5e7eb;
+}
+.sub-dub-toggle {
+    display: flex;
+    background: #151821;
+    border-radius: 8px;
+    padding: 4px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.toggle-btn {
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.toggle-btn.active {
+    background: var(--accent-red);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(229, 9, 20, 0.3);
+}
+
+/* الجودات والسيرفرات */
+.resolution-group {
+    margin-bottom: 20px;
+}
+.resolution-title {
+    color: var(--accent-gold);
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgba(241, 196, 15, 0.2);
+    padding-bottom: 5px;
+}
+.servers-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.server-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(28, 30, 39, 0.6);
+    border-radius: 8px;
+    padding: 10px 15px;
+    border: 1px solid rgba(255,255,255,0.02);
+    transition: all 0.3s ease;
+}
+.server-row:hover {
+    background: rgba(28, 30, 39, 0.9);
+    border-color: rgba(255,255,255,0.08);
+}
+.server-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.status-indicator {
+    width: 8px;
+    height: 8px;
+    background: #2ea043; /* نقطة خضراء للسيرفر الشغال */
+    border-radius: 50%;
+    box-shadow: 0 0 8px #2ea043;
+}
+.server-name {
+    color: #fff;
+    font-weight: bold;
+    font-size: 0.95rem;
+}
+
+/* أزرار السيرفرات */
+.server-actions {
+    display: flex;
+    gap: 10px;
+}
+.action-btn {
+    border: none;
+    padding: 6px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    font-size: 0.85rem;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+.action-btn.play {
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+.action-btn.play:hover {
+    background: #fff;
+    color: #000;
+}
+.action-btn.download {
+    background: rgba(241, 196, 15, 0.1);
+    color: var(--accent-gold);
+    border: 1px solid var(--accent-gold);
+}
+.action-btn.download:hover {
+    background: var(--accent-gold);
+    color: #000;
+}
+.no-source-msg {
+    color: #9ca3af;
+    text-align: center;
+    padding: 20px;
+}
+
+/* توافق الهواتف */
+@media (max-width: 600px) {
+    .server-row {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .server-actions {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+/* شريط الحلقات الأفقي (Slider) */
+.episodes-section {
+    margin-bottom: 30px;
+}
+.episodes-section .section-title {
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.2rem;
+    border-right: 4px solid var(--accent-red);
+    padding-right: 10px;
+}
+.episodes-slider {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 15px;
+    /* لإخفاء شريط التمرير بشياكة */
+    scrollbar-width: thin;
+    scrollbar-color: var(--accent-red) rgba(255,255,255,0.05);
+}
+.episodes-slider::-webkit-scrollbar {
+    height: 6px;
+}
+.episodes-slider::-webkit-scrollbar-thumb {
+    background: var(--accent-red);
+    border-radius: 10px;
+}
+
+/* بطاقة الحلقة (Episode Card) */
+.ep-slide-card {
+    min-width: 160px;
+    background: #151821;
+    border: 2px solid transparent;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.ep-slide-card:hover {
+    transform: translateY(-3px);
+    border-color: rgba(255,255,255,0.1);
+}
+.ep-slide-card.active {
+    border-color: var(--accent-red);
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.4);
+}
+.ep-thumb {
+    position: relative;
+    height: 90px;
+}
+.ep-thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.8;
+}
+.ep-slide-card.active .ep-thumb img {
+    opacity: 1;
+}
+.ep-num {
+    position: absolute;
+    bottom: 5px; right: 5px;
+    background: var(--accent-red);
+    color: white;
+    font-size: 10px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+}
+.ep-slide-card h4 {
+    color: #fff;
+    font-size: 0.85rem;
+    padding: 10px;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>المسابقة الأسبوعية - Black Echo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="icon" type="image/png" href="../icon-192.png">
+</head>
+<body class="animated-bg">
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo rgb-text">Black Echo</div>
+           <nav>
+    <a href="index.html" class="active">الرئيسية</a>
+    <a href="men.html">الشباب</a>
+    <a href="women.html">الفتيات</a>
+    <a href="competition.html">المسابقة 🏆</a>
+        </nav>
+        </div>
+    </header>
+
+    <div class="container section-padding">
+        <h2 class="section-title" id="comp-week-title" style="color: var(--accent-gold); text-shadow: 0 0 15px rgba(241,196,15,0.3);">جاري تحميل المسابقة...</h2>
+        <p style="text-align: center; color: var(--text-gray); margin-bottom: 40px;">شاهد إبداعات أعضاء الفريق وصوّت للأداء المفضل لديك. (يحق لك التصويت مرة واحدة فقط)   لم تبدا بعد</p>
+        
+        <div id="competition-grid" class="video-grid"></div>
+    </div>
+
+    <div id="videoModal" class="modal">
+        <div class="modal-content video-modal-content">
+            <button class="close-video" onclick="closeVideo()">إغلاق المشهد</button>
+            <div style="clear: both;"></div>
+            <div class="video-wrapper">
+                <iframe id="mainVideoFrame" src="" allow="autoplay; fullscreen; picture-in-picture" allowfullscreen="true"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <footer><p>&copy; 2026 أكاديمية Black Echo.</p></footer>
+    
+    <script src="../data/competition_data.js"></script>
+    <script src="../data/script.js"></script>
+</body>
+</html>

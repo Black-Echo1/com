@@ -131,3 +131,73 @@ nav a:hover, nav a.active { color: var(--accent-gold); text-shadow: 0 0 10px rgb
 footer { text-align: center; padding: 30px; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); font-size: 0.9rem; }
 footer a { color: var(--text-gray); text-decoration: none; margin: 0 10px; transition: all 0.3s; }
 footer a:hover { color: var(--text-light); text-shadow: 0 0 8px rgba(255,255,255,0.5); }
+/* ==========================================
+   تصميم صفحة الدروس (مستوحى من تطبيقات الأنمي)
+========================================== */
+
+/* الهيدر الخاص بالكورس (Hero Section) */
+.course-hero {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    height: 350px;
+    background: linear-gradient(to top, var(--bg-dark) 10%, rgba(9,10,15,0.2)), url('https://images.unsplash.com/photo-1598751337485-0639d6ec3400?q=80&w=1200&auto=format&fit=crop') center/cover;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 30px;
+    border: 1px solid rgba(255,255,255,0.05);
+}
+.course-hero h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; text-shadow: 0 4px 10px rgba(0,0,0,0.8); }
+.course-hero p { color: #d1d5db; max-width: 600px; font-size: 1.1rem; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+
+/* تبويبات التطبيق (Details, Episodes) */
+.app-tabs {
+    display: flex; gap: 20px; border-bottom: 2px solid rgba(255,255,255,0.05); margin-bottom: 25px; padding-bottom: 10px;
+}
+.app-tabs span { font-size: 1.1rem; color: var(--text-gray); font-weight: bold; cursor: pointer; padding: 5px 10px; transition: var(--transition); }
+.app-tabs span.active { color: #fff; border-bottom: 3px solid var(--accent-red); border-radius: 2px; }
+
+/* بطاقة الدرس (Episode Card) - تصميم أفقي مثل الهاتف */
+.episode-card {
+    display: flex; align-items: center; background: rgba(21, 24, 33, 0.6);
+    border-radius: 10px; padding: 10px; margin-bottom: 15px;
+    border: 1px solid rgba(255,255,255,0.03); cursor: pointer; transition: all 0.3s ease;
+}
+.episode-card:hover { background: rgba(255,255,255,0.05); transform: translateX(-5px); border-color: rgba(229, 9, 20, 0.3); }
+
+/* صورة الدرس والوقت */
+.ep-thumbnail {
+    position: relative; width: 140px; height: 80px; border-radius: 6px; overflow: hidden; flex-shrink: 0;
+}
+.ep-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
+.ep-time {
+    position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.8);
+    color: white; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: bold;
+}
+
+/* معلومات الدرس */
+.ep-info { flex-grow: 1; padding: 0 15px; }
+.ep-info h3 { font-size: 1.1rem; margin-bottom: 5px; color: #fff; }
+.ep-info p { font-size: 0.85rem; color: var(--text-gray); margin: 0; display: -webkit-box; -webkit-line-clamp: 1; line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+
+/* شريط التقدم الوهمي */
+.progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 8px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent-gold); }
+
+/* زر التشغيل */
+.ep-action { flex-shrink: 0; padding-right: 10px; }
+.play-btn {
+    background: var(--accent-red); color: white; border: none; padding: 8px 16px; border-radius: 6px;
+    font-weight: bold; font-size: 13px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(229,9,20,0.3);
+}
+.play-btn:hover { background: #ff0f1a; transform: scale(1.05); }
+.play-btn.continue { background: rgba(241, 196, 15, 0.2); border: 1px solid var(--accent-gold); color: var(--accent-gold); box-shadow: none; }
+
+/* توافق الشاشات الصغيرة (الجوال) */
+@media (max-width: 600px) {
+    .episode-card { flex-direction: column; align-items: stretch; text-align: right; }
+    .ep-thumbnail { width: 100%; height: 150px; margin-bottom: 10px; }
+    .ep-info { padding: 0; margin-bottom: 10px; }
+    .ep-action { text-align: left; }
+    .play-btn { width: 100%; }
+}
