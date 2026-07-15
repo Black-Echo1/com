@@ -1,0 +1,178 @@
+/* قسم الغلاف (Hero Section) */
+.anime-cover-section {
+    position: relative;
+    width: 100%;
+    height: 50vh;
+    min-height: 400px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    margin-bottom: 50px;
+}
+
+.cover-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, var(--bg-dark) 0%, rgba(9, 10, 15, 0.7) 50%, rgba(9, 10, 15, 0.4) 100%);
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: -50px;
+}
+
+.anime-details-content {
+    display: flex;
+    gap: 30px;
+    transform: translateY(40px); /* لجعل البوستر يبرز للأسفل قليلاً */
+}
+
+.anime-poster {
+    flex-shrink: 0;
+    width: 220px;
+    height: 310px;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.8);
+    border: 2px solid rgba(255,255,255,0.1);
+}
+
+.anime-poster img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.anime-info {
+    padding-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+.anime-info h1 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+}
+
+.anime-meta {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.meta-tag {
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: bold;
+    background: rgba(255,255,255,0.1);
+    backdrop-filter: blur(5px);
+}
+.meta-tag.status { background: #2ea043; color: white; }
+.meta-tag.rating { background: var(--accent-gold); color: #000; }
+.meta-tag.type { background: var(--accent-red); color: white; }
+
+.anime-story {
+    font-size: 1rem;
+    color: #ccc;
+    line-height: 1.8;
+    max-width: 800px;
+    margin-bottom: 15px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+}
+
+.genres {
+    display: flex;
+    gap: 10px;
+}
+.genres span {
+    color: var(--text-gray);
+    font-size: 0.9rem;
+    border: 1px solid var(--text-gray);
+    padding: 2px 8px;
+    border-radius: 20px;
+}
+
+/* قسم الحلقات (Episodes Grid) */
+.episodes-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid rgba(255,255,255,0.05);
+    padding-bottom: 15px;
+    margin-bottom: 30px;
+}
+.ep-count {
+    color: var(--accent-red);
+    font-weight: bold;
+}
+
+.episodes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.ep-card {
+    background: #151821;
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: 1px solid rgba(255,255,255,0.03);
+}
+
+.ep-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--accent-red);
+    box-shadow: 0 5px 15px rgba(229, 9, 20, 0.2);
+}
+
+.ep-thumb-container {
+    position: relative;
+    height: 160px;
+    width: 100%;
+}
+.ep-thumb-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.ep-play-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s;
+}
+.ep-card:hover .ep-play-overlay {
+    opacity: 1;
+}
+.ep-play-overlay i {
+    font-size: 40px;
+    color: white;
+}
+.ep-duration {
+    position: absolute;
+    bottom: 8px; right: 8px;
+    background: rgba(0,0,0,0.8);
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+.ep-card-info {
+    padding: 15px;
+}
+.ep-card-info h4 {
+    margin-bottom: 5px;
+    font-size: 1.1rem;
+    color: #fff;
+}
+.ep-card-info p {
+    font-size: 0.85rem;
+    color: var(--text-gray);
+}

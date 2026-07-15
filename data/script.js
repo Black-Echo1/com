@@ -212,4 +212,26 @@ function playLesson(lessonId, videoUrl, index) {
         videoFrame.setAttribute("allow", "autoplay; fullscreen");
         videoModal.style.display = "flex";
     }
-}
+}// دالة لفتح وإغلاق القائمة الجانبية عند الضغط على الأزرار
+
+document.addEventListener("DOMContentLoaded", function() {
+    const menuIcon = document.querySelector('.menu-icon');
+    const closeBtn = document.querySelector('.close-btn');
+    const navMenu = document.getElementById('navMenu');
+
+    // تفعيل الفتح عند الضغط على الثلاث خطوط
+    if (menuIcon && navMenu) {
+        menuIcon.addEventListener('click', function(e) {
+             e.stopPropagation();
+            navMenu.classList.toggle('active');
+        });
+    }
+
+    // تفعيل الإغلاق عند الضغط على زر X
+    if (closeBtn && navMenu) {
+        closeBtn.addEventListener('click', function(e) {
+            e.stopPropagation();
+            navMenu.classList.remove('active');
+        });
+    }
+});

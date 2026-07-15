@@ -201,3 +201,171 @@ footer a:hover { color: var(--text-light); text-shadow: 0 0 8px rgba(255,255,255
     .ep-action { text-align: left; }
     .play-btn { width: 100%; }
 }
+/* تنسيق الهيدر الأساسي */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: #151a22;
+    border-bottom: 1px solid #252e3b;
+    position: relative;
+    z-index: 1000;
+}
+
+header h1 {
+    font-size: 24px;
+}
+
+header h1 span {
+    color: var(--highlight-color);
+}
+
+/* قائمة التنقل للشاشات الكبيرة */
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: var(--highlight-color);
+}
+
+/* زر إغلاق القائمة (مخفي افتراضياً على الكمبيوتر) */
+.close-btn {
+    display: none;
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--text-color);
+    align-self: flex-end;
+    margin-bottom: 20px;
+}
+
+/* أيقونة الثلاث خطوط (مخفية افتراضياً على الكمبيوتر) */
+.menu-icon {
+    display: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text-color);
+}
+
+/* الهيدر الأساسي - توزيع مثالي للشاشات الكبيرة والصغيرة */
+.main-header {
+    display: flex !important;
+    justify-content: space-between !important; /* يدفع الشعار لليمين والأيقونة لليسار تماماً */
+    align-items: center !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+    padding: 15px 5% !important; /* مساحة أمان مريحة من الأطراف */
+    background-color: #151a22;
+    border-bottom: 1px solid #252e3b;
+    position: relative;
+    z-index: 1000;
+}
+
+.main-header h1 {
+    font-size: 22px;
+    margin: 0;
+    white-space: nowrap; /* يمنع نزول اسم الفريق لسطر جديد */
+}
+
+.main-header h1 span {
+    color: #ff3838; /* لون التميز الخاص بك */
+}
+
+/* قائمة التنقل الافتراضية (شاشات الكمبيوتر) */
+nav {
+    display: flex;
+    gap: 20px;
+}
+
+nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s;
+}
+
+nav a:hover {
+    color: #ff3838;
+}
+
+/* زر الإغلاق داخل القائمة الجانبية */
+.close-btn {
+    display: none;
+    font-size: 35px;
+    cursor: pointer;
+    color: #ff3838;
+    align-self: flex-start;
+    margin-bottom: 20px;
+    user-select: none;
+}
+
+/* زر الثلاث خطوط المطور */
+.menu-icon {
+    display: none; /* مخفي تلقائياً على الكمبيوتر */
+    font-size: 30px;
+    cursor: pointer;
+    color: #ffffff;
+    padding: 5px 10px; /* مساحة ضغط مريحة دون الاقتراب من الشعار */
+    user-select: none;
+    z-index: 1001;
+}
+
+/* تحويل القائمة لجانبية منزلقة عند تخطي عرض الشاشة 768px (الهواتف) */
+/* تحويل القائمة لجانبية منزلقة من اليسار عند الشاشات الصغيرة (الهواتف) */
+@media (max-width: 768px) {
+    .menu-icon {
+        display: block !important; /* إظهار زر الثلاث خطوط */
+    }
+
+    nav {
+        display: flex !important;
+        flex-direction: column !important;
+        position: fixed !important;
+        top: 0 !important;
+        
+        /* التعديل الجذري: نقل القائمة لليسار وإلغاء تأثير اليمين */
+        left: -300px !important; 
+        right: auto !important; 
+        
+        width: 260px !important;
+        height: 100vh !important;
+        background-color: #151a22 !important;
+        
+        /* تعديل اتجاه الظل ليظهر بشكل صحيح من اليسار لليمين */
+        box-shadow: 5px 0 15px rgba(217, 255, 0, 0.5) !important; 
+        
+        padding: 30px 20px !important;
+        
+        /* حركة انزلاق ناعمة تعتمد على المحور الأيسر */
+        transition: left 0.3s ease-in-out !important; 
+        z-index: 9999 !important;
+    }
+
+    /* القائمة عندما تصبح نشطة (تظهر بالكامل من اليسار) */
+    nav.active {
+        left: 0 !important; 
+    }
+
+    nav a {
+        font-size: 18px;
+        padding: 15px 10px;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        text-align: right; /* الحفاظ على محاذاة النص العربي لليمين لتظل القراءة مريحة */
+    }
+
+    .close-btn {
+        display: block !important; /* إظهار زر X */
+        align-self: flex-end !important; /* دفع زر الإغلاق لزاوية القائمة بشكل متناسق */
+    }
+}
