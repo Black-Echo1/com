@@ -216,22 +216,26 @@ function playLesson(lessonId, videoUrl, index) {
 
 document.addEventListener("DOMContentLoaded", function() {
     const menuIcon = document.querySelector('.menu-icon');
-    const closeBtn = document.querySelector('.close-btn');
     const navMenu = document.getElementById('navMenu');
+    const closeBtn = document.querySelector('.close-btn');
 
-    // تفعيل الفتح عند الضغط على الثلاث خطوط
-    if (menuIcon && navMenu) {
-        menuIcon.addEventListener('click', function(e) {
-             e.stopPropagation();
-            navMenu.classList.toggle('active');
-        });
-    }
+    // تأكد أن العناصر موجودة فعلياً في هذه الصفحة قبل تنفيذ أي شيء
+    if (!menuIcon || !navMenu) return; 
 
-    // تفعيل الإغلاق عند الضغط على زر X
-    if (closeBtn && navMenu) {
+    // إزالة الأحداث القديمة (إن وجدت) لتجنب التكرار
+    menuIcon.replaceWith(menuIcon.cloneNode(true));
+    const newMenuIcon = document.querySelector('.menu-icon');
+
+    newMenuIcon.addEventListener('click', function(e) {
+        e.stopPropagation();
+        navMenu.classList.toggle('active');
+    });
+
+    if (closeBtn) {
         closeBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             navMenu.classList.remove('active');
         });
     }
 });
+    
