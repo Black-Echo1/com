@@ -14,6 +14,12 @@ const animeCatalog = [
         malId: 54900,
         isHero: true // هذا الأنمي سيظهر في البانر الكبير بالأعلى
     }
+    ,
+    {
+        id: "Super Dragon Ball Heroes",
+        malId: 37885,
+        isHero: false // هذا الأنمي سيظهر في البانر الكبير بالأعلى
+    }
 ];
 
 function openAnime(animeId) {

@@ -216,26 +216,29 @@ function playLesson(lessonId, videoUrl, index) {
 
 document.addEventListener("DOMContentLoaded", function() {
     const menuIcon = document.querySelector('.menu-icon');
-    const navMenu = document.getElementById('navMenu');
     const closeBtn = document.querySelector('.close-btn');
+    const navMenu = document.getElementById('navMenu');
+// أضف هذا الجزء في ملف الجافاسكريبت
+const navLinks = document.querySelectorAll('#navMenu a'); 
 
-    // تأكد أن العناصر موجودة فعلياً في هذه الصفحة قبل تنفيذ أي شيء
-    if (!menuIcon || !navMenu) return; 
-
-    // إزالة الأحداث القديمة (إن وجدت) لتجنب التكرار
-    menuIcon.replaceWith(menuIcon.cloneNode(true));
-    const newMenuIcon = document.querySelector('.menu-icon');
-
-    newMenuIcon.addEventListener('click', function(e) {
-        e.stopPropagation();
-        navMenu.classList.toggle('active');
+navLinks.forEach(link => {
+    link.addEventListener('click', () => {
+        navMenu.classList.remove('active'); // إغلاق القائمة فور الضغط
     });
+});
+    // تفعيل الفتح عند الضغط على الثلاث خطوط
+    if (menuIcon && navMenu) {
+        menuIcon.addEventListener('click', function(e) {
+             e.stopPropagation();
+            navMenu.classList.toggle('active');
+        });
+    }
 
-    if (closeBtn) {
+    // تفعيل الإغلاق عند الضغط على زر X
+    if (closeBtn && navMenu) {
         closeBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             navMenu.classList.remove('active');
         });
     }
 });
-    

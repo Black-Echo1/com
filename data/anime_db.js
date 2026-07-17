@@ -47,5 +47,42 @@ const animeDetailsDatabase = {
                 videoLink: "#"
             }
         ]
+    },
+     "Super Dragon Ball Heroes": {
+        malId: 37885,
+        episodes: [
+            {
+                number: 1,
+                title: "الحلقة 1: غوكو ضد غوكو! تبدأ معركة خارقة على كوكب السجن!",
+                thumbnail: "https://cdn.myanimelist.net/images/anime/1480/92990l.jpg",
+                duration: "23:45",
+                date: "Jul 15, 2026",
+                videoLink: "https://playmogo.com/e/mlq51a79h84f"
+            },
+            {
+                number: 2,
+                title:"الحلقة 2: غوكو يهيج! عربدة السايان الشرير!!",
+                thumbnail: "https://cdn.myanimelist.net/images/anime/1480/92990l.jpg",
+                duration: "23:45",
+                date: "Jun 28, 2026",
+                videoLink: "https://playmogo.com/e/uiegtkpz72w5"
+            },
+            {
+                number: 3,
+                title: "الحلقة 3: الإشراقة الأشد! فيجيتو بلو كايو-كن ينفجر!!",
+                thumbnail: "https://cdn.myanimelist.net/images/anime/1480/92990l.jpg",
+                duration: "23:45",
+                date: "Jun 21, 2026",
+                videoLink: ""
+            },
+            {
+                number: 4,
+                title: "الحلقة 4: غضب! ظهور فو الخارق!",
+                thumbnail: "https://cdn.myanimelist.net/images/anime/1480/92990l.jpg",
+                duration: "23:45",
+                date: "Jun 18, 2026",
+                videoLink: ""
+            }
+        ]
     }
 };
