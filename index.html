@@ -48,7 +48,9 @@
             <a href="html/browse.html" class="download-btn btn-no-subs" style="padding: 15px 40px; font-size: 15px;"> الأنيميات المدبلجة</a>
         </div>
     </div>
-
+<button id="installAppBtn" style="display: none; background: var(--accent-red); color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; margin: 10px auto;">
+    تثبيت التطبيق 📱
+</button>
  <footer>
         <a href="html/legal.html">سياسة الخصوصية</a> | <a href="#">تواصل معنا</a>
         <p>&copy; 2026 أكاديمية Black Echo.</p>
@@ -57,14 +59,44 @@
     <script src="data/competition_data.js"></script>
     <script src="data/script.js"></script>
 
-    <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('تم تسجيل التطبيق بنجاح!', reg))
-        .catch(err => console.log('فشل تسجيل التطبيق:', err));
+<script>
+    // 1. تسجيل Service Worker (الكود الذي يعمل لديك مسبقاً)
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => console.log('تم تشغيل Service Worker بنجاح'))
+                .catch(error => console.log('فشل التسجيل:', error));
+        });
+    }
+
+    // 2. برمجة زر التثبيت اليدوي
+    let deferredPrompt;
+    const installBtn = document.getElementById('installAppBtn');
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+        // منع المتصفح من إظهار النافذة التلقائية
+        e.preventDefault();
+        // حفظ الحدث لاستخدامه عند الضغط على الزر
+        deferredPrompt = e;
+        // إظهار زر التثبيت الذي صممناه
+        installBtn.style.display = 'block';
     });
-  }
+
+    installBtn.addEventListener('click', async () => {
+        if (deferredPrompt) {
+            // إظهار نافذة التثبيت الرسمية الخاصة بالنظام
+            deferredPrompt.prompt();
+            // انتظار رد المستخدم (موافق أو رفض)
+            const { outcome } = await deferredPrompt.userChoice;
+            if (outcome === 'accepted') {
+                console.log('المستخدم وافق على التثبيت');
+            }
+            // تفريغ الحدث
+            deferredPrompt = null;
+            // إخفاء الزر بعد التثبيت
+            installBtn.style.display = 'none';
+        }
+    });
 </script>
 </body>
 </html>
