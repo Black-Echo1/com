@@ -20,7 +20,7 @@ const videosData = {
             downloadNoSubsid: "ضع_هنا_ID_جوجل_درايف_للفيديو_بدون_ترجمة", 
             servers: {
                 "Streamtape": "/https://playmogo.com/e/ui7oyog1fnhd",
-                "Google Drive": "https://drive.google.com/file/d/1RYEhExhTJnKfChakO-bOg8evEg5C8G2b/preview"
+                "Google Drive": ""
             }
         },
         { 
@@ -69,7 +69,7 @@ const videosData = {
             servers: {
                 "Streamtape": "https://playmogo.com/d/cq007a973lfw",
                 "Doodstream": "https://dood.to/e/ضع_رابط_التضمين_هنا",
-                "Google Drive": "https://drive.google.com/file/d/125FQDtEHbe3_JwYU1Z-CUD4Qi68p9c1T/preview"
+                "Google Drive": "125FQDtEHbe3_JwYU1Z-CUD4Qi68p9c1T"
             }
         }
     ]

@@ -8,7 +8,10 @@ const animeDetailsDatabase = {
                 thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaPpMB6nk2ezw4Qk0HW6wPWdgIvpEySx54WC5easZgyE3rM0NaGMdGYU&s=10",
                 duration: "24:00",
                 date: "14 يوليو 2026",
-                videoLink: "https://playmogo.com/e/t01folzr84qp"
+                servers: [
+                    { name: "سيرفر رئيسي", url: "https://playmogo.com/e/t01folzr84qp" },
+                    { name: "سيرفر احتياطي", url: "https://playmogo.com/e/t01folzr84qp" }
+                ]
             }
         ]
     },
@@ -22,7 +25,10 @@ const animeDetailsDatabase = {
                 thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmbQcMtLAkC4vHUhwFg0QpZbJKF7QgdC4_tHe-aJyB9g&s=10",
                 duration: "24:00",
                 date: "14 يوليو 2026",
-                videoLink: "https://playmogo.com/e/hx57bibiiic2"
+                servers: [
+                    { name: "سيرفر رئيسي", url: "https://playmogo.com/e/hx57bibiiic2" },
+                    { name: "سيرفر احتياطي", url: "https://playmogo.com/e/hx57bibiiic2" }
+                ]
             },
             {
                 number: 2,
@@ -30,7 +36,10 @@ const animeDetailsDatabase = {
                 thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmbQcMtLAkC4vHUhwFg0QpZbJKF7QgdC4_tHe-aJyB9g&s=10",
                 duration: "24:00",
                 date: "14 يوليو 2026",
-                videoLink: "https://playmogo.com/e/hufniairsle3"
+                servers: [
+                    { name: "سيرفر رئيسي", url: "https://playmogo.com/e/hufniairsle3" },
+                    { name: "سيرفر احتياطي", url: "https://playmogo.com/e/hufniairsle3" }
+                ]
             }
         ]
     }, 
@@ -44,7 +53,9 @@ const animeDetailsDatabase = {
                 thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRML5iZVQPxL5ZdRdQAHmYDlFNW-SMGsF_YAzXYhbyNoOq4fgKhUbI4WDc&s=10",
                 duration: "23:45",
                 date: "قريباً",
-                videoLink: "#"
+                servers: [
+                    { name: "سيرفر رئيسي", url: "#" }
+                ]
             }
         ]
     },
@@ -57,7 +68,10 @@ const animeDetailsDatabase = {
                 thumbnail: "https://cdn.myanimelist.net/images/anime/1480/92990l.jpg",
                 duration: "23:45",
                 date: "Jul 15, 2026",
-                videoLink: "https://playmogo.com/e/mlq51a79h84f"
+                servers: [
+                    { name: "سيرفر رئيسي", url: "https://playmogo.com/e/mlq51a79h84f" },
+                    { name: "سيرفر احتياطي", url: "https://playmogo.com/e/ml" }
+                ]
             },
             {
                 number: 2,
@@ -65,7 +79,10 @@ const animeDetailsDatabase = {
                 thumbnail: "https://cdn.myanimelist.net/images/anime/1480/92990l.jpg",
                 duration: "23:45",
                 date: "Jun 28, 2026",
-                videoLink: "https://playmogo.com/e/uiegtkpz72w5"
+                servers: [
+                    { name: "سيرفر رئيسي", url: "https://playmogo.com/e/uiegtkpz72w5" },
+                    { name: "سيرفر احتياطي", url: "https://playmogo.com/e/uiegtkpz72w5" }
+                ]
             },
             {
                 number: 3,
@@ -73,7 +90,9 @@ const animeDetailsDatabase = {
                 thumbnail: "https://cdn.myanimelist.net/images/anime/1480/92990l.jpg",
                 duration: "23:45",
                 date: "Jun 21, 2026",
-                videoLink: ""
+                servers: [
+                    { name: "قريباً", url: "#" }
+                ]
             },
             {
                 number: 4,
@@ -81,7 +100,9 @@ const animeDetailsDatabase = {
                 thumbnail: "https://cdn.myanimelist.net/images/anime/1480/92990l.jpg",
                 duration: "23:45",
                 date: "Jun 18, 2026",
-                videoLink: ""
+                servers: [
+                    { name: "قريباً", url: "#" }
+                ]
             }
         ]
     }

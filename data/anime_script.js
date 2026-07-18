@@ -1,6 +1,4 @@
 // دالة محسنة لجلب البيانات - إذا فشل الاتصال ستستمر الصفحة في العمل
-
-
 async function getAnimeDataFromMAL(malId) {
     const cacheKey = `anime_mal_${malId}`;
     const cachedData = localStorage.getItem(cacheKey);
@@ -17,9 +15,8 @@ async function getAnimeDataFromMAL(malId) {
     }
     
     try {
-        // إضافة timeout بسيط للـ fetch لضمان عدم تعليق الصفحة
         const controller = new AbortController();
-        const timeoutId = setTimeout(() => controller.abort(), 5000); // 5 ثواني حد أقصى
+        const timeoutId = setTimeout(() => controller.abort(), 5000); 
         
         const response = await fetch(`https://api.jikan.moe/v4/anime/${malId}`, { signal: controller.signal });
         clearTimeout(timeoutId);
@@ -37,47 +34,8 @@ async function getAnimeDataFromMAL(malId) {
     } catch (error) {
         console.error("خطأ في جلب بيانات MAL:", error);
     }
-    return null; // تعود بقيمة فارغة بدلاً من تعليق البرنامج
+    return null; 
 }
-
-document.addEventListener("DOMContentLoaded", async () => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const animeId = urlParams.get('id') || 'death_note'; 
-    const localData = animeDetailsDatabase[animeId];
-
-    if (!localData) {
-        document.getElementById("anime-title").innerText = "الأنمي غير موجود في قاعدة بياناتنا";
-        return;
-    }
-
-    // جلب البيانات مع توفير قيم افتراضية في حال فشل الـ API
-    const apiData = await getAnimeDataFromMAL(localData.malId);
-
-    // إذا فشل الـ API، نستخدم البيانات المحلية المتاحة فقط
-    const title = localData.title || (apiData ? (apiData.title_english || apiData.title) : "اسم الأنمي");
-    const poster = apiData ? (apiData.images?.jpg?.large_image_url || localData.poster) : localData.poster;
-    const coverBanner = localData.coverBanner || poster;
-    const status = apiData ? mapStatusToArabic(apiData.status) : "غير معروف";
-    const type = apiData ? mapTypeToArabic(apiData.type) : "غير معروف";
-    const rating = apiData && apiData.score ? `★ ${apiData.score}` : "★ -";
-    const rawStory = localData.story || (apiData ? apiData.synopsis : "لا تتوفر قصة حالياً.");
-    
-    // تعبئة البيانات (بدون شرط انتظار الـ API)
-    document.getElementById("anime-cover").style.backgroundImage = `url('${coverBanner}')`;
-    document.getElementById("anime-poster-img").src = poster;
-    document.getElementById("anime-title").innerText = title;
-    document.getElementById("anime-status").innerText = status;
-    document.getElementById("anime-type").innerText = type;
-    document.getElementById("anime-rating").innerText = rating;
-    document.getElementById("ep-count").innerText = `${localData.episodes.length} حلقة`;
-
-    // ... (باقي الكود الخاص بالقصة والحلقات كما هو)
-    // لاحظ: إذا كانت القصة غير موجودة تماماً، نضع نصاً افتراضياً
-    const storyContainer = document.getElementById("anime-story");
-    storyContainer.innerText = rawStory; 
-    
-    // (أعد وضع كود "اقرأ المزيد" وتوليد الحلقات هنا كما في الكود السابق)
-});
 
 // دوال تحويل النصوص إلى العربية
 function mapStatusToArabic(status) {
@@ -98,51 +56,79 @@ function mapTypeToArabic(type) {
     return type;
 }
 
-// دالة تشغيل الفيديو المدمج وحظر الإعلانات
-window.playEpisode = function(videoLink, episodeTitle) {
+// دالة تشغيل الفيديو الجديدة الداعمة للسيرفرات
+window.playEpisode = function(animeId, epIndex) {
+    const epData = animeDetailsDatabase[animeId].episodes[epIndex];
     const playerContainer = document.getElementById("video-player-container");
     const iframe = document.getElementById("video-iframe");
     const titleElement = document.getElementById("playing-episode-title");
+    const serversContainer = document.getElementById("servers-container");
 
-    if (playerContainer && iframe) {
-        iframe.src = videoLink;
-        if (titleElement) {
-            titleElement.innerText = `جاري تشغيل: ${episodeTitle}`;
-        }
+    if (playerContainer && iframe && epData.servers && epData.servers.length > 0) {
+        // تشغيل السيرفر الأول افتراضياً
+        changeServer(epData.servers[0].url);
+        titleElement.innerText = `جاري تشغيل: ${epData.title}`;
+        
+        // توليد أزرار السيرفرات
+        serversContainer.innerHTML = "";
+        epData.servers.forEach((server, index) => {
+            const btn = document.createElement("button");
+            btn.className = `server-btn ${index === 0 ? 'active' : ''}`;
+            btn.innerText = server.name;
+            btn.onclick = (e) => {
+                // إزالة التفعيل من باقي الأزرار
+                document.querySelectorAll('.server-btn').forEach(b => b.classList.remove('active'));
+                e.target.classList.add('active');
+                changeServer(server.url);
+            };
+            serversContainer.appendChild(btn);
+        });
+
         playerContainer.style.display = "block";
         playerContainer.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+        alert("لا توجد سيرفرات متاحة لهذه الحلقة حالياً.");
     }
 };
 
+// دالة مساعدة لتغيير السيرفر
+function changeServer(url) {
+    const iframe = document.getElementById("video-iframe");
+    iframe.src = url;
+}
+
+// دالة إغلاق المشغل
+window.closeInlinePlayer = function() {
+    const playerContainer = document.getElementById("video-player-container");
+    const iframe = document.getElementById("video-iframe");
+    playerContainer.style.display = "none";
+    iframe.src = ""; 
+};
+
+// الكود المدمج لتجهيز الصفحة عند التحميل (بدلاً من دالتين منفصلتين)
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const animeId = urlParams.get('id') || 'death_note'; 
-
     const localData = animeDetailsDatabase[animeId];
 
     if (!localData) {
-        document.getElementById("anime-title").innerText = "الأنمي غير موجود";
+        document.getElementById("anime-title").innerText = "الأنمي غير موجود في قاعدة بياناتنا";
         return;
     }
 
     document.getElementById("anime-title").innerText = "جاري تحميل البيانات...";
-
     const apiData = await getAnimeDataFromMAL(localData.malId);
 
-    if (!apiData) {
-        document.getElementById("anime-title").innerText = "فشل تحميل البيانات من MAL";
-        return;
-    }
-
-    const title = localData.title || apiData.title_english || apiData.title;
-    const poster = apiData.images?.jpg?.large_image_url || localData.poster;
-    const coverBanner = localData.coverBanner || poster; 
-    const status = mapStatusToArabic(apiData.status);
-    const type = mapTypeToArabic(apiData.type);
-    const rating = apiData.score ? `★ ${apiData.score}` : "★ غير متوفر";
-    const rawStory = localData.story || apiData.synopsis || "لا توجد قصة متوفرة حالياً.";
-    const genres = apiData.genres?.map(g => g.name) || [];
-
+    const title = localData.title || (apiData ? (apiData.title_english || apiData.title) : "اسم الأنمي");
+    const poster = apiData ? (apiData.images?.jpg?.large_image_url || localData.poster) : localData.poster;
+    const coverBanner = localData.coverBanner || poster;
+    const status = apiData ? mapStatusToArabic(apiData.status) : "غير معروف";
+    const type = apiData ? mapTypeToArabic(apiData.type) : "غير معروف";
+    const rating = apiData && apiData.score ? `★ ${apiData.score}` : "★ -";
+    const rawStory = localData.story || (apiData ? apiData.synopsis : "لا تتوفر قصة حالياً.");
+    const genres = apiData && apiData.genres ? apiData.genres.map(g => g.name) : [];
+    
+    // تعبئة البيانات الأساسية
     document.getElementById("anime-cover").style.backgroundImage = `url('${coverBanner}')`;
     document.getElementById("anime-poster-img").src = poster;
     document.getElementById("anime-title").innerText = title;
@@ -151,17 +137,15 @@ document.addEventListener("DOMContentLoaded", async () => {
     document.getElementById("anime-rating").innerText = rating;
     document.getElementById("ep-count").innerText = `${localData.episodes.length} حلقة`;
 
-    // نظام "اقرأ المزيد" التلقائي للقصة
+    // نظام "اقرأ المزيد"
     const storyContainer = document.getElementById("anime-story");
     const limit = 250; 
-
     if (rawStory.length > limit) {
         const shortStory = rawStory.substring(0, limit) + "... ";
         storyContainer.innerHTML = `
             <span id="story-text">${shortStory}</span>
             <span id="read-more-btn" style="color: var(--accent-red); cursor: pointer; font-weight: bold; margin-right: 5px; text-decoration: underline;">اقرأ المزيد</span>
         `;
-
         document.getElementById("read-more-btn").addEventListener("click", function() {
             const textSpan = document.getElementById("story-text");
             if (this.innerText === "اقرأ المزيد") {
@@ -176,18 +160,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         storyContainer.innerText = rawStory;
     }
 
+    // التصنيفات (Genres)
     const genresContainer = document.getElementById("anime-genres");
-    genresContainer.innerHTML = ""; 
-    genres.forEach(genre => {
-        genresContainer.innerHTML += `<span>${genre}</span>`;
-    });
+    if(genresContainer) {
+        genresContainer.innerHTML = ""; 
+        genres.forEach(genre => {
+            genresContainer.innerHTML += `<span>${genre}</span>`;
+        });
+    }
 
-    // توليد الحلقات وتفعيل دالة تشغيل الفيديو عند الضغط
+    // توليد الحلقات وتمرير (معرف الأنمي ورقم الحلقة) بدلاً من الرابط النصي
     const episodesGrid = document.getElementById("episodes-grid");
     episodesGrid.innerHTML = ""; 
-    localData.episodes.forEach(ep => {
+    localData.episodes.forEach((ep, index) => {
         const epCard = `
-            <div class="ep-card" onclick="playEpisode('${ep.videoLink}', '${ep.title}')" style="cursor: pointer;">
+            <div class="ep-card" onclick="playEpisode('${animeId}', ${index})" style="cursor: pointer;">
                 <div class="ep-thumb-container">
                     <img src="${ep.thumbnail}" alt="${ep.title}">
                     <span class="ep-duration">${ep.duration}</span>

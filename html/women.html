@@ -14,7 +14,15 @@
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 
-
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('./sw.js')
+        .then(reg => console.log('تم تسجيل التطبيق بنجاح!', reg))
+        .catch(err => console.log('فشل تسجيل التطبيق:', err));
+    });
+  }
+</script>
 </head>
 <body class="animated-bg">
    <header class="main-header">
@@ -67,14 +75,5 @@
 
     <script src="../data/data.js"></script>
     <script src="../data/script.js"></script>
-    <script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('تم تسجيل التطبيق بنجاح!', reg))
-        .catch(err => console.log('فشل تسجيل التطبيق:', err));
-    });
-  }
-</script>
 </body>
 </html>
