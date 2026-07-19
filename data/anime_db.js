@@ -10,7 +10,7 @@ const animeDetailsDatabase = {
                 date: "14 يوليو 2026",
                 servers: [
                     { name: "سيرفر رئيسي", url: "https://playmogo.com/e/t01folzr84qp" },
-                    { name: "سيرفر احتياطي", url: "https://playmogo.com/e/t01folzr84qp" }
+                    { name: "سيرفر احتياطي", url: "https://vidmoly.biz/embed-8leny8xszpi5.html" }
                 ]
             }
         ]
