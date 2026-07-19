@@ -10,7 +10,7 @@ const animeDetailsDatabase = {
                 date: "14 يوليو 2026",
                 servers: [
                     { name: "سيرفر رئيسي", url: "https://playmogo.com/e/t01folzr84qp" },
-                    { name: "سيرفر احتياطي", url: "https://vidmoly.biz/embed-8leny8xszpi5.html" }
+                    { name: "سيرفر احتياطي", url: "https://luluvdo.com/e/d4f4gfzbfh9r" }
                 ]
             }
         ]
@@ -27,18 +27,18 @@ const animeDetailsDatabase = {
                 date: "14 يوليو 2026",
                 servers: [
                     { name: "سيرفر رئيسي", url: "https://playmogo.com/e/hx57bibiiic2" },
-                    { name: "سيرفر احتياطي", url: "https://playmogo.com/e/hx57bibiiic2" }
+                    { name: "سيرفر احتياطي", url: "https://mixdrop.top/e/nl0vrm70slorqj7" }
                 ]
             },
             {
                 number: 2,
                 title: "الندم: الجزء 2",
                 thumbnail: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQmbQcMtLAkC4vHUhwFg0QpZbJKF7QgdC4_tHe-aJyB9g&s=10",
-                duration: "24:00",
+                duration: "34:00",
                 date: "14 يوليو 2026",
                 servers: [
                     { name: "سيرفر رئيسي", url: "https://playmogo.com/e/hufniairsle3" },
-                    { name: "سيرفر احتياطي", url: "https://playmogo.com/e/hufniairsle3" }
+                    { name: "سيرفر احتياطي", url: "https://mixdrop.top/e/z1pg0deru10no1" }
                 ]
             }
         ]
@@ -81,7 +81,7 @@ const animeDetailsDatabase = {
                 date: "Jun 28, 2026",
                 servers: [
                     { name: "سيرفر رئيسي", url: "https://playmogo.com/e/uiegtkpz72w5" },
-                    { name: "سيرفر احتياطي", url: "https://playmogo.com/e/uiegtkpz72w5" }
+                    { name: "سيرفر احتياطي", url: "https://vidmoly.biz/embed-8leny8xszpi5.html" }
                 ]
             },
             {

@@ -1,3 +1,4 @@
+
 :root {
     --bg-dark: #090a0f;
     --card-bg: #11131a;
@@ -12,19 +13,13 @@
 body { background-color: var(--bg-dark); color: var(--text-light); line-height: 1.6; }
 .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
 
-/* تأثيرات الخلفية */
 .animated-bg {
     background: linear-gradient(-45deg, #090a0f, #150d1c, #090a0f, #1c0811);
     background-size: 400% 400%;
     animation: gradientBG 15s ease infinite;
 }
-@keyframes gradientBG {
-    0% { background-position: 0% 50%; }
-    50% { background-position: 100% 50%; }
-    100% { background-position: 0% 50%; }
-}
+@keyframes gradientBG { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
 
-/* نصوص RGB */
 .rgb-text {
     background: linear-gradient(to right, var(--accent-red), var(--accent-gold), var(--accent-red));
     background-size: 200% auto;
@@ -37,335 +32,125 @@ body { background-color: var(--bg-dark); color: var(--text-light); line-height: 
 @keyframes shine { to { background-position: 200% center; } }
 
 /* الترويسة */
-header {
-    background: rgba(9, 10, 15, 0.85); padding: 20px 0; 
-    border-bottom: 1px solid rgba(255,255,255,0.05);
-    position: sticky; top: 0; z-index: 1000; backdrop-filter: blur(15px);
+.main-header {
+    display: flex; justify-content: space-between; align-items: center; width: 100%;
+    box-sizing: border-box; padding: 15px 5%; background-color: #151a22;
+    border-bottom: 1px solid #252e3b; position: relative; z-index: 1000;
 }
-.nav-wrapper { display: flex; justify-content: space-between; align-items: center; }
-.logo { font-size: 26px; font-weight: bold; letter-spacing: 1px; }
-nav a { color: var(--text-light); text-decoration: none; margin-right: 20px; font-weight: 700; transition: all 0.3s ease; }
+.logo { font-size: 24px; font-weight: bold; letter-spacing: 1px; white-space: nowrap; }
+nav { display: flex; gap: 20px; }
+nav a { color: var(--text-light); text-decoration: none; font-size: 16px; font-weight: 700; transition: all 0.3s ease; }
 nav a:hover, nav a.active { color: var(--accent-gold); text-shadow: 0 0 10px rgba(241, 196, 15, 0.5); }
+.close-btn { display: none; font-size: 35px; cursor: pointer; color: var(--accent-red); align-self: flex-start; margin-bottom: 20px; user-select: none; }
+.menu-icon { display: none; font-size: 30px; cursor: pointer; color: #ffffff; padding: 5px 10px; user-select: none; z-index: 1001; }
 
-/* الأقسام والشبكة */
 .section-padding { padding: 80px 0; }
 .section-title { text-align: center; margin-bottom: 50px; font-size: 2.2rem; }
 .video-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 25px; }
 
-/* بطاقات الفيديوهات (تصميم حاد واحترافي) */
-.video-card {
-    background: var(--card-bg); padding: 15px; border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.05); text-align: center; transition: var(--transition);
-}
-.video-card:hover { 
-    transform: translateY(-5px); 
-    border-color: rgba(229, 9, 20, 0.5); 
-    box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(229, 9, 20, 0.2); 
-}
+.video-card { background: var(--card-bg); padding: 15px; border-radius: 6px; border: 1px solid rgba(255,255,255,0.05); text-align: center; transition: var(--transition); }
+.video-card:hover { transform: translateY(-5px); border-color: rgba(229, 9, 20, 0.5); box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(229, 9, 20, 0.2); }
 .video-card h3 { margin: 15px 0; font-size: 1.1rem; color: #e2e8f0; }
 
 .download-buttons-holder { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
-
-/* أزرار التحميل بتقنية الـ RGB Glow */
-.download-btn {
-    display: block; padding: 12px; text-decoration: none; border-radius: 4px; font-weight: 700; font-size: 13px; 
-    transition: all 0.3s ease; position: relative; overflow: hidden; letter-spacing: 0.5px;
-}
+.download-btn { display: block; padding: 12px; text-decoration: none; border-radius: 4px; font-weight: 700; font-size: 13px; transition: all 0.3s ease; position: relative; overflow: hidden; letter-spacing: 0.5px; text-align: center; }
 .download-btn.btn-subs { background: #161b22; color: #c9d1d9; border: 1px solid rgba(255,255,255,0.1); }
 .download-btn.btn-no-subs { background: #0d1117; color: var(--text-gray); border: 1px solid rgba(255,255,255,0.05); }
+.comp-btn { background: rgba(241, 196, 15, 0.1); border: 1px solid var(--accent-gold); color: var(--accent-gold); }
+.download-btn:hover { color: #fff; border-color: transparent; box-shadow: 0 0 15px rgba(229, 9, 20, 0.4), 0 0 15px rgba(241, 196, 15, 0.2); }
 
-.download-btn:hover {
-    color: #fff;
-    border-color: transparent;
-    box-shadow: 0 0 15px rgba(229, 9, 20, 0.4), 0 0 15px rgba(241, 196, 15, 0.2);
-}
-.download-btn.btn-subs:hover { background: #1f242e; border-color: var(--accent-gold); box-shadow: 0 0 15px rgba(241, 196, 15, 0.3); }
-.download-btn.btn-no-subs:hover { background: #1a1e26; border-color: var(--accent-red); box-shadow: 0 0 15px rgba(229, 9, 20, 0.3); }
-
-/* الصورة المصغرة وزر التشغيل الزجاجي */
-.smart-thumbnail {
-    width: 100%; height: 180px; border-radius: 4px; position: relative; overflow: hidden; cursor: pointer; background: #000;
-}
+.smart-thumbnail { width: 100%; height: 180px; border-radius: 4px; position: relative; overflow: hidden; cursor: pointer; background: #000; }
 .smart-thumbnail img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; transition: var(--transition); }
 .smart-thumbnail:hover img { opacity: 0.3; transform: scale(1.1); }
 
-/* زر التشغيل الاحترافي (بدون إيموجي) */
-.play-overlay {
-    position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%);
-    background: rgba(10, 10, 15, 0.7);
-    backdrop-filter: blur(8px); /* تأثير الزجاج */
-    -webkit-backdrop-filter: blur(8px);
-    border: 1px solid rgba(255,255,255,0.1);
-    color: var(--text-light);
-    padding: 10px 25px; border-radius: 4px; font-weight: 800; letter-spacing: 1px; pointer-events: none; opacity: 0; transition: var(--transition);
-}
-.smart-thumbnail:hover .play-overlay { 
-    opacity: 1; 
-    border-color: var(--accent-red);
-    box-shadow: 0 0 20px rgba(229, 9, 20, 0.6);
-}
+.play-overlay { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); background: rgba(10, 10, 15, 0.7); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px); border: 1px solid rgba(255,255,255,0.1); color: var(--text-light); padding: 10px 25px; border-radius: 4px; font-weight: 800; opacity: 0; transition: var(--transition); }
+.smart-thumbnail:hover .play-overlay { opacity: 1; border-color: var(--accent-red); box-shadow: 0 0 20px rgba(229, 9, 20, 0.6); }
 
-/* حل مشكلة الهاتف - أبعاد سينمائية */
 .video-wrapper { position: relative; width: 100%; padding-top: 56.25%; background: #000; border-radius: 4px; overflow: hidden; border: 1px solid rgba(255,255,255,0.05); }
 .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
 
-/* أزرار السيرفرات المتعددة */
 .server-tabs-container { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; margin-bottom: 20px; padding: 10px; background: rgba(0, 0, 0, 0.4); border-radius: 4px; border: 1px solid rgba(255,255,255,0.05); }
-.server-btn { background: #161b22; color: #c9d1d9; border: 1px solid rgba(255,255,255,0.1); padding: 8px 18px; border-radius: 4px; cursor: pointer; font-weight: 700; font-size: 13px; transition: all 0.3s ease; text-transform: uppercase; letter-spacing: 1px; }
+.server-btn { background: #161b22; color: #c9d1d9; border: 1px solid rgba(255,255,255,0.1); padding: 8px 18px; border-radius: 4px; cursor: pointer; font-weight: 700; font-size: 13px; transition: all 0.3s ease; }
 .server-btn:hover { border-color: var(--accent-gold); color: #fff; box-shadow: 0 0 10px rgba(241, 196, 15, 0.2); }
-.server-btn.active { background: rgba(229, 9, 20, 0.1); border-color: var(--accent-red); color: #fff; box-shadow: inset 0 0 10px rgba(229, 9, 20, 0.5), 0 0 15px rgba(229, 9, 20, 0.4); }
+.server-btn.active { background: rgba(229, 9, 20, 0.1); border-color: var(--accent-red); color: #fff; }
 
-/* النوافذ المنبثقة */
 .modal { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(5px); }
-.modal-content { background: var(--card-bg); border-radius: 6px; padding: 30px; text-align: center; width: 90%; max-width: 450px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
+.modal-content { background: var(--card-bg); border-radius: 6px; padding: 30px; text-align: center; width: 90%; max-width: 450px; border: 1px solid rgba(255,255,255,0.1); box-shadow: 0 20px 50px rgba(0,0,0,0.9); box-sizing: border-box; }
 .video-modal-content { max-width: 900px; padding: 25px; }
-.ad-placeholder { background: #000; height: 180px; display: flex; align-items: center; justify-content: center; border-radius: 4px; margin-bottom: 20px; color: var(--text-gray); border: 1px dashed rgba(255,255,255,0.1); }
-.close-ad { background: var(--accent-red); color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 15px; letter-spacing: 1px; transition: all 0.3s; }
-.close-ad:hover { background: #ff0f1a; box-shadow: 0 0 15px rgba(229, 9, 20, 0.6); }
+.close-video { background: transparent; border: none; color: var(--text-gray); cursor: pointer; font-size: 14px; font-weight: 700; float: left; margin-bottom: 15px; transition: all 0.3s ease; padding: 5px 10px; }
+.close-video:hover { color: var(--accent-red); background: rgba(229, 9, 20, 0.1); }
+.close-ad { background: var(--accent-red); color: white; border: none; padding: 12px; border-radius: 4px; cursor: pointer; font-weight: bold; width: 100%; margin-top: 15px; transition: all 0.3s; }
 
-/* زر الإغلاق الاحترافي */
-.close-video { background: transparent; border: none; color: var(--text-gray); cursor: pointer; font-size: 14px; font-weight: 700; float: left; margin-bottom: 15px; transition: all 0.3s ease; padding: 5px 10px; border: 1px solid transparent; border-radius: 4px; }
-.close-video:hover { color: var(--accent-red); border-color: var(--accent-red); background: rgba(229, 9, 20, 0.1); }
-
-/* التذييل */
 footer { text-align: center; padding: 30px; margin-top: 50px; border-top: 1px solid rgba(255,255,255,0.05); color: var(--text-gray); font-size: 0.9rem; }
 footer a { color: var(--text-gray); text-decoration: none; margin: 0 10px; transition: all 0.3s; }
-footer a:hover { color: var(--text-light); text-shadow: 0 0 8px rgba(255,255,255,0.5); }
+
+.course-hero { display: flex; flex-direction: column; justify-content: flex-end; height: 350px; background: linear-gradient(to top, var(--bg-dark) 10%, rgba(9,10,15,0.2)), url('https://images.unsplash.com/photo-1598751337485-0639d6ec3400?q=80&w=1200&auto=format&fit=crop') center/cover; border-radius: 12px; padding: 30px; margin-bottom: 30px; border: 1px solid rgba(255,255,255,0.05); }
+.course-hero h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; }
+.course-hero p { color: #d1d5db; max-width: 600px; font-size: 1.1rem; }
+
+.app-tabs { display: flex; gap: 20px; border-bottom: 2px solid rgba(255,255,255,0.05); margin-bottom: 25px; padding-bottom: 10px; }
+.app-tabs span { font-size: 1.1rem; color: var(--text-gray); font-weight: bold; cursor: pointer; padding: 5px 10px; }
+.app-tabs span.active { color: #fff; border-bottom: 3px solid var(--accent-red); }
+
 /* ==========================================
-   تصميم صفحة الدروس (مستوحى من تطبيقات الأنمي)
+   إصلاحات شاملة للهواتف المحمولة 100%
 ========================================== */
+.hero-container { text-align: center; min-height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center; }
+.hero-title { font-size: 3.5rem; margin-bottom: 20px; }
+.hero-desc { color: var(--text-gray); font-size: 1.2rem; margin-bottom: 40px; max-width: 650px; }
+.hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+.hero-buttons a { padding: 15px 40px; font-size: 15px; }
 
-/* الهيدر الخاص بالكورس (Hero Section) */
-.course-hero {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    height: 350px;
-    background: linear-gradient(to top, var(--bg-dark) 10%, rgba(9,10,15,0.2)), url('https://images.unsplash.com/photo-1598751337485-0639d6ec3400?q=80&w=1200&auto=format&fit=crop') center/cover;
-    border-radius: 12px;
-    padding: 30px;
-    margin-bottom: 30px;
-    border: 1px solid rgba(255,255,255,0.05);
-}
-.course-hero h1 { font-size: 2.5rem; color: #fff; margin-bottom: 10px; text-shadow: 0 4px 10px rgba(0,0,0,0.8); }
-.course-hero p { color: #d1d5db; max-width: 600px; font-size: 1.1rem; text-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+.legal-box { max-width: 800px; background: var(--card-bg); margin: 50px auto; border-radius: 12px; padding: 40px; border: 1px solid rgba(255,255,255,0.05); }
 
-/* تبويبات التطبيق (Details, Episodes) */
-.app-tabs {
-    display: flex; gap: 20px; border-bottom: 2px solid rgba(255,255,255,0.05); margin-bottom: 25px; padding-bottom: 10px;
-}
-.app-tabs span { font-size: 1.1rem; color: var(--text-gray); font-weight: bold; cursor: pointer; padding: 5px 10px; transition: var(--transition); }
-.app-tabs span.active { color: #fff; border-bottom: 3px solid var(--accent-red); border-radius: 2px; }
-
-/* بطاقة الدرس (Episode Card) - تصميم أفقي مثل الهاتف */
-.episode-card {
-    display: flex; align-items: center; background: rgba(21, 24, 33, 0.6);
-    border-radius: 10px; padding: 10px; margin-bottom: 15px;
-    border: 1px solid rgba(255,255,255,0.03); cursor: pointer; transition: all 0.3s ease;
-}
-.episode-card:hover { background: rgba(255,255,255,0.05); transform: translateX(-5px); border-color: rgba(229, 9, 20, 0.3); }
-
-/* صورة الدرس والوقت */
-.ep-thumbnail {
-    position: relative; width: 140px; height: 80px; border-radius: 6px; overflow: hidden; flex-shrink: 0;
-}
-.ep-thumbnail img { width: 100%; height: 100%; object-fit: cover; }
-.ep-time {
-    position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.8);
-    color: white; font-size: 11px; padding: 2px 6px; border-radius: 4px; font-weight: bold;
-}
-
-/* معلومات الدرس */
-.ep-info { flex-grow: 1; padding: 0 15px; }
-.ep-info h3 { font-size: 1.1rem; margin-bottom: 5px; color: #fff; }
-.ep-info p { font-size: 0.85rem; color: var(--text-gray); margin: 0; display: -webkit-box; -webkit-line-clamp: 1; line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
-
-/* شريط التقدم الوهمي */
-.progress-bar { width: 100%; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; margin-top: 8px; overflow: hidden; }
-.progress-fill { height: 100%; background: var(--accent-gold); }
-
-/* زر التشغيل */
-.ep-action { flex-shrink: 0; padding-right: 10px; }
-.play-btn {
-    background: var(--accent-red); color: white; border: none; padding: 8px 16px; border-radius: 6px;
-    font-weight: bold; font-size: 13px; cursor: pointer; transition: all 0.3s; box-shadow: 0 4px 15px rgba(229,9,20,0.3);
-}
-.play-btn:hover { background: #ff0f1a; transform: scale(1.05); }
-.play-btn.continue { background: rgba(241, 196, 15, 0.2); border: 1px solid var(--accent-gold); color: var(--accent-gold); box-shadow: none; }
-
-/* توافق الشاشات الصغيرة (الجوال) */
-@media (max-width: 600px) {
-    .episode-card { flex-direction: column; align-items: stretch; text-align: right; }
-    .ep-thumbnail { width: 100%; height: 150px; margin-bottom: 10px; }
-    .ep-info { padding: 0; margin-bottom: 10px; }
-    .ep-action { text-align: left; }
-    .play-btn { width: 100%; }
-}
-/* تنسيق الهيدر الأساسي */
-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px 20px;
-    background-color: #151a22;
-    border-bottom: 1px solid #252e3b;
-    position: relative;
-    z-index: 1000;
-}
-
-header h1 {
-    font-size: 24px;
-}
-
-header h1 span {
-    color: var(--highlight-color);
-}
-
-/* قائمة التنقل للشاشات الكبيرة */
-nav {
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: var(--highlight-color);
-}
-
-/* زر إغلاق القائمة (مخفي افتراضياً على الكمبيوتر) */
-.close-btn {
-    display: none;
-    font-size: 30px;
-    cursor: pointer;
-    color: var(--text-color);
-    align-self: flex-end;
-    margin-bottom: 20px;
-}
-
-/* أيقونة الثلاث خطوط (مخفية افتراضياً على الكمبيوتر) */
-.menu-icon {
-    display: none;
-    font-size: 28px;
-    cursor: pointer;
-    color: var(--text-color);
-}
-
-/* الهيدر الأساسي - توزيع مثالي للشاشات الكبيرة والصغيرة */
-.main-header {
-    display: flex !important;
-    justify-content: space-between !important; /* يدفع الشعار لليمين والأيقونة لليسار تماماً */
-    align-items: center !important;
-    width: 100% !important;
-    box-sizing: border-box !important;
-    padding: 15px 5% !important; /* مساحة أمان مريحة من الأطراف */
-    background-color: #151a22;
-    border-bottom: 1px solid #252e3b;
-    position: relative;
-    z-index: 1000;
-}
-
-.main-header h1 {
-    font-size: 22px;
-    margin: 0;
-    white-space: nowrap; /* يمنع نزول اسم الفريق لسطر جديد */
-}
-
-.main-header h1 span {
-    color: #ff3838; /* لون التميز الخاص بك */
-}
-
-/* قائمة التنقل الافتراضية (شاشات الكمبيوتر) */
-nav {
-    display: flex;
-    gap: 20px;
-}
-
-nav a {
-    color: #ffffff;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
-    transition: color 0.3s;
-}
-
-nav a:hover {
-    color: #ff3838;
-}
-
-/* زر الإغلاق داخل القائمة الجانبية */
-.close-btn {
-    display: none;
-    font-size: 35px;
-    cursor: pointer;
-    color: #ff3838;
-    align-self: flex-start;
-    margin-bottom: 20px;
-    user-select: none;
-}
-
-/* زر الثلاث خطوط المطور */
-.menu-icon {
-    display: none; /* مخفي تلقائياً على الكمبيوتر */
-    font-size: 30px;
-    cursor: pointer;
-    color: #ffffff;
-    padding: 5px 10px; /* مساحة ضغط مريحة دون الاقتراب من الشعار */
-    user-select: none;
-    z-index: 1001;
-}
-
-/* تحويل القائمة لجانبية منزلقة عند تخطي عرض الشاشة 768px (الهواتف) */
-/* تحويل القائمة لجانبية منزلقة من اليسار عند الشاشات الصغيرة (الهواتف) */
 @media (max-width: 768px) {
-    .menu-icon {
-        display: block !important; /* إظهار زر الثلاث خطوط */
-    }
-
+    /* إصلاح الهيدر واللوجو */
+    .menu-icon { display: block !important; }
     nav {
-        display: flex !important;
-        flex-direction: column !important;
-        position: fixed !important;
-        top: 0 !important;
-        
-        /* التعديل الجذري: نقل القائمة لليسار وإلغاء تأثير اليمين */
-        left: -300px !important; 
-        right: auto !important; 
-        
-        width: 260px !important;
-        height: 100vh !important;
-        background-color: #151a22 !important;
-        
-        /* تعديل اتجاه الظل ليظهر بشكل صحيح من اليسار لليمين */
-        box-shadow: 5px 0 15px rgba(217, 255, 0, 0.5) !important; 
-        
-        padding: 30px 20px !important;
-        
-        /* حركة انزلاق ناعمة تعتمد على المحور الأيسر */
-        transition: left 0.3s ease-in-out !important; 
-        z-index: 9999 !important;
+        display: flex !important; flex-direction: column !important; position: fixed !important;
+        top: 0 !important; left: -300px !important; right: auto !important; width: 260px !important;
+        height: 100vh !important; background-color: #151a22 !important; box-shadow: 5px 0 15px rgba(217, 255, 0, 0.5) !important;
+        padding: 30px 20px !important; transition: left 0.3s ease-in-out !important; z-index: 9999 !important;
     }
+    nav.active { left: 0 !important; }
+    nav a { font-size: 18px; padding: 15px 10px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); text-align: right; }
+    .close-btn { display: block !important; align-self: flex-end !important; }
+    .main-header { padding: 15px !important; }
+    .main-header h1 { font-size: 18px !important; white-space: normal !important; }
+    .logo { font-size: 20px !important; }
+    
+    /* إصلاح الشاشة الرئيسية */
+    .hero-container { min-height: auto; padding: 40px 15px; }
+    .hero-title { font-size: 2.2rem !important; }
+    .hero-desc { font-size: 1rem !important; margin-bottom: 25px; }
+    .hero-buttons { flex-direction: column; width: 100%; gap: 12px; }
+    .hero-buttons a { width: 100%; padding: 15px !important; box-sizing: border-box; }
 
-    /* القائمة عندما تصبح نشطة (تظهر بالكامل من اليسار) */
-    nav.active {
-        left: 0 !important; 
-    }
-
-    nav a {
-        font-size: 18px;
-        padding: 15px 10px;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        text-align: right; /* الحفاظ على محاذاة النص العربي لليمين لتظل القراءة مريحة */
-    }
-
-    .close-btn {
-        display: block !important; /* إظهار زر X */
-        align-self: flex-end !important; /* دفع زر الإغلاق لزاوية القائمة بشكل متناسق */
-    }
+    /* إصلاح المسافات (Padding) للبطاقات والمحتوى */
+    .section-padding { padding: 40px 15px !important; }
+    .section-title { font-size: 1.8rem !important; margin-bottom: 30px !important; line-height: 1.4; }
+    
+    /* إصلاح شبكة الفيديوهات (Grid) */
+    .video-grid { grid-template-columns: 1fr !important; gap: 15px !important; }
+    
+    /* إصلاح النوافذ المنبثقة (Modals) ومشغل الفيديو */
+    .modal-content { width: 95% !important; padding: 15px !important; margin: 10px !important; box-sizing: border-box; max-width: 100% !important; }
+    .video-modal-content { padding: 10px !important; }
+    
+    /* أزرار السيرفرات المتعددة لتلائم الشاشات الصغيرة */
+    .server-tabs-container { flex-direction: column; gap: 8px; }
+    .server-btn { width: 100%; text-align: center; padding: 12px; }
+    
+    /* إصلاح صفحة الكورسات */
+    .course-hero { height: auto !important; min-height: 250px; padding: 25px 15px !important; }
+    .course-hero h1 { font-size: 1.8rem !important; }
+    .course-hero p { font-size: 0.95rem !important; }
+    .app-tabs { overflow-x: auto; white-space: nowrap; }
+    
+    /* أزرار الإغلاق في الجوال لتكون بارزة وسهلة النقر */
+    .close-video, .close-ad { width: 100%; margin-bottom: 12px; text-align: center; float: none; padding: 12px; background: var(--accent-red); color: #fff; border-radius: 4px; box-sizing: border-box;}
+    
+    /* إصلاح صفحة السياسات (Legal) */
+    .legal-box { padding: 20px !important; margin: 20px 0 !important; }
+    .legal-box h1 { font-size: 1.6rem !important; margin-bottom: 20px !important; }
 }

@@ -1,65 +1,70 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-     <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Echo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
+    <meta name="theme-color" content="#111111">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>السياسات القانونية - Black Echo</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- أيقونة المتصفح (Favicon) -->
     <link rel="icon" type="image/png" href="../icon-192.png">
+    <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../css/style.css">
-</head><link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111111">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('تم تسجيل التطبيق بنجاح!', reg))
-        .catch(err => console.log('فشل تسجيل التطبيق:', err));
-    });
-  }
-</script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('../sw.js').catch(err => console.log('SW Error:', err));
+        });
+      }
+    </script>
 </head>
 <body class="animated-bg">
    <header class="main-header">
-    <div class="logo">
-        <div class="logo rgb-text">ArabDub Hub</div>    
-    </div>
-    
-    <!-- زر الثلاث خطوط المطور -->
-    <div class="menu-icon">☰</div>
-    
-    <!-- القائمة الجانبية -->
-    <nav id="navMenu">
-        <div class="close-btn">&times;</div>
-        <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
-        <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
-        <a href="women.html"><span class="rgb-text">الفتيات</span></a>
-        <a href="men.html"><span class="rgb-text">الشباب</span></a>
-        <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
-    </nav>
-</header>
+        <div class="logo">
+            <div class="logo rgb-text">ArabDub Hub</div>    
+        </div>
+        <div class="menu-icon">☰</div>
+        <nav id="navMenu">
+            <div class="close-btn">&times;</div>
+            <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
+            <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
+            <a href="women.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="men.html"><span class="rgb-text">الشباب</span></a>
+            <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
+        </nav>
+    </header>
 
-    <div class="container section-padding" style="max-width: 800px; background: var(--card-bg); margin-top: 50px; border-radius: 12px; padding: 40px; border: 1px solid rgba(255,255,255,0.05);">
-        <h1 class="rgb-text" style="margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 10px;">السياسات القانونية وشروط الاستخدام</h1>
-        
-        <h3 style="color: var(--accent-gold); margin-bottom: 10px;">1. سياسة الخصوصية</h3>
-        <p style="margin-bottom: 30px; color: var(--text-gray);">نحن في منصة Black Echo نحترم خصوصية جميع الزوار والمتدربين. المنصة لا تقوم بجمع أي بيانات شخصية حساسة. قد يتم استخدام ملفات تعريف الارتباط (Cookies) من قبل شركاء الإعلانات لتحسين تجربة المستخدم وعرض الإعلانات المناسبة.</p>
-        
-        <h3 style="color: var(--accent-gold); margin-bottom: 10px;">2. حقوق الملكية الفكرية وإخلاء المسؤولية</h3>
-        <p style="margin-bottom: 30px; color: var(--text-gray);">جميع المواد المرئية والصوتية المعروضة على هذه المنصة (بما في ذلك مشاهد الأنمي) تستخدم حصرياً للأغراض التعليمية والتدريبية ضمن نطاق "الاستخدام العادل". حقوق الملكية الأصلية تعود للشركات المنتجة. إذا كنت تمثل جهة إنتاج وترغب في إزالة محتوى معين، يرجى التواصل معنا عبر وسائل الاتصال المتاحة.</p>
-        
-        <h3 style="color: var(--accent-gold); margin-bottom: 10px;">3. الإعلانات</h3>
-        <p style="margin-bottom: 30px; color: var(--text-gray);">يتم عرض إعلانات مدعومة من جهات خارجية للمساعدة في تغطية تكاليف استضافة المنصة وإدارتها. المنصة غير مسؤولة بشكل مباشر عن محتوى المواقع الخارجية التي يتم التوجيه إليها عبر هذه الإعلانات.</p>
-    </div>
 
+    <div class="container section-padding">
+        <div class="legal-box">
+            <h1 class="rgb-text" style="margin-bottom: 30px; border-bottom: 1px solid #333; padding-bottom: 10px;">السياسات القانونية وشروط الاستخدام</h1>
+            
+            <h3 style="color: var(--accent-gold); margin-bottom: 10px;">1. سياسة الخصوصية</h3>
+            <p style="margin-bottom: 30px; color: var(--text-gray);">نحن في منصة Black Echo نحترم خصوصية جميع الزوار والمتدربين. المنصة لا تقوم بجمع أي بيانات شخصية حساسة. قد يتم استخدام ملفات تعريف الارتباط (Cookies) من قبل شركاء الإعلانات لتحسين تجربة المستخدم وعرض الإعلانات المناسبة.</p>
+            
+            <h3 style="color: var(--accent-gold); margin-bottom: 10px;">2. حقوق الملكية الفكرية وإخلاء المسؤولية</h3>
+            <p style="margin-bottom: 30px; color: var(--text-gray);">جميع المواد المرئية والصوتية المعروضة على هذه المنصة (بما في ذلك مشاهد الأنمي) تستخدم حصرياً للأغراض التعليمية والتدريبية ضمن نطاق "الاستخدام العادل". حقوق الملكية الأصلية تعود للشركات المنتجة. إذا كنت تمثل جهة إنتاج وترغب في إزالة محتوى معين، يرجى التواصل معنا عبر وسائل الاتصال المتاحة.</p>
+            
+            <h3 style="color: var(--accent-gold); margin-bottom: 10px;">3. الإعلانات</h3>
+            <p style="margin-bottom: 30px; color: var(--text-gray);">يتم عرض إعلانات مدعومة من جهات خارجية للمساعدة في تغطية تكاليف استضافة المنصة وإدارتها. المنصة غير مسؤولة بشكل مباشر عن محتوى المواقع الخارجية التي يتم التوجيه إليها عبر هذه الإعلانات.</p>
+        </div>
+    </div>
     <footer>
         <p>&copy; 2026 أكاديمية Black Echo.</p>
     </footer>
 
+
+    <script>
+        // سكريبت القائمة الجانبية للهاتف
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuIcon = document.querySelector('.menu-icon');
+            const navMenu = document.getElementById('navMenu');
+            const closeBtn = document.querySelector('.close-btn');
+            if(menuIcon && navMenu) menuIcon.addEventListener('click', () => navMenu.classList.add('active'));
+            if(closeBtn && navMenu) closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
+        });
+    </script>
 </body>
 </html>

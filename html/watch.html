@@ -1,71 +1,58 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-     <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Black Echo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
+    <meta name="theme-color" content="#111111">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>المشاهدة - Black Echo</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- أيقونة المتصفح (Favicon) -->
     <link rel="icon" type="image/png" href="../icon-192.png">
+    <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../css/style.css">
-</head><link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111111">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
-<script>
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('./sw.js')
-        .then(reg => console.log('تم تسجيل التطبيق بنجاح!', reg))
-        .catch(err => console.log('فشل تسجيل التطبيق:', err));
-    });
-  }
-</script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('../sw.js').catch(err => console.log('SW Error:', err));
+        });
+      }
+    </script>
 </head>
 <body class="animated-bg">
    <header class="main-header">
-    <div class="logo">
-        <div class="logo rgb-text">ArabDub Hub</div>    
-    </div>
-    
-    <!-- زر الثلاث خطوط المطور -->
-    <div class="menu-icon">☰</div>
-    
-    <!-- القائمة الجانبية -->
-    <nav id="navMenu">
-        <div class="close-btn">&times;</div>
-        <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
-        <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
-        <a href="women.html"><span class="rgb-text">الفتيات</span></a>
-        <a href="men.html"><span class="rgb-text">الشباب</span></a>
-        <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
-    </nav>
-</header>
+        <div class="logo">
+            <div class="logo rgb-text">ArabDub Hub</div>    
+        </div>
+        <div class="menu-icon">☰</div>
+        <nav id="navMenu">
+            <div class="close-btn">&times;</div>
+            <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
+            <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
+            <a href="women.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="men.html"><span class="rgb-text">الشباب</span></a>
+            <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
+        </nav>
+    </header>
 
 
     <div class="container section-padding">
-        
         <div class="main-player-section">
             <div class="player-wrapper">
-                <iframe id="activeVideoPlayer" src="" allow="autoplay; fullscreen" allowfullscreen></iframe>
+                <iframe id="activeVideoPlayer" src="" allow="autoplay; fullscreen" allowfullscreen style="width: 100%; height: 100%; border: none;"></iframe>
             </div>
             <h2 id="project-title" style="margin-top: 15px; color: #fff;">جاري التحميل...</h2>
             <p id="project-desc" style="color: var(--text-gray); font-size: 0.95rem;"></p>
         </div>
-
         <div id="episodes-section" class="episodes-section" style="display: none;">
             <h3 class="section-title">الحلقات المتوفرة</h3>
-            <div class="episodes-slider" id="episodesList">
-                </div>
+            <div class="episodes-slider" id="episodesList"></div>
         </div>
-
         <div class="control-panel">
             <div class="panel-section">
                 <div class="lang-tabs" id="langTabsContainer"></div>
             </div>
-
             <div class="panel-section toggle-wrapper">
                 <span class="toggle-label">الإصدار:</span>
                 <div class="sub-dub-toggle">
@@ -73,12 +60,22 @@
                     <button class="toggle-btn" id="btn-sub" onclick="setReleaseType('SUB')">SUB (مترجم)</button>
                 </div>
             </div>
-
             <div class="resolutions-container" id="resolutionsList"></div>
         </div>
     </div>
-
     <script src="../data/projects_db.js"></script>
     <script src="../data/watch_script.js"></script>
+
+
+    <script>
+        // سكريبت القائمة الجانبية للهاتف
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuIcon = document.querySelector('.menu-icon');
+            const navMenu = document.getElementById('navMenu');
+            const closeBtn = document.querySelector('.close-btn');
+            if(menuIcon && navMenu) menuIcon.addEventListener('click', () => navMenu.classList.add('active'));
+            if(closeBtn && navMenu) closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
+        });
+    </script>
 </body>
 </html>

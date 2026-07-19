@@ -1,102 +1,96 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-     <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
+    <meta name="theme-color" content="#111111">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>Black Echo</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- أيقونة المتصفح (Favicon) -->
     <link rel="icon" type="image/png" href="icon-192.png">
+    <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/style.css">
-</head><link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#111111">
-<meta name="mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then(registration => console.log('تم تشغيل Service Worker بنجاح'))
+                    .catch(error => console.log('فشل التسجيل:', error));
+            });
+        }
 
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            const installBtn = document.getElementById('installAppBtn');
+            if(installBtn) installBtn.style.display = 'block';
+        });
 
+        document.addEventListener('DOMContentLoaded', () => {
+            const installBtn = document.getElementById('installAppBtn');
+            if(installBtn) {
+                installBtn.addEventListener('click', async () => {
+                    if (deferredPrompt) {
+                        deferredPrompt.prompt();
+                        const { outcome } = await deferredPrompt.userChoice;
+                        deferredPrompt = null;
+                        installBtn.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
 </head>
 <body class="animated-bg">
    <header class="main-header">
-    <div class="logo">
-        <div class="logo rgb-text">ArabDub Hub</div>    
-    </div>
-    
-    <!-- زر الثلاث خطوط المطور -->
-    <div class="menu-icon">☰</div>
-    
-    <!-- القائمة الجانبية -->
-    <nav id="navMenu">
-        <div class="close-btn">&times;</div>
-        <a href="index.html"><span class="rgb-text">الرئيسية</span></a>
-        <a href="html/browse.html"><span class="rgb-text">الدوبلاج</span></a>
-        <a href="html/women.html"><span class="rgb-text">الفتيات</span></a>
-        <a href="html/men.html"><span class="rgb-text">الشباب</span></a>
-        <a href="html/competition.html"><span class="rgb-text">المسابقات</span></a>
-    </nav>
-</header>
+        <div class="logo">
+            <div class="logo rgb-text">ArabDub Hub</div>    
+        </div>
+        <div class="menu-icon">☰</div>
+        <nav id="navMenu">
+            <div class="close-btn">&times;</div>
+            <a href="index.html"><span class="rgb-text">الرئيسية</span></a>
+            <a href="html/browse.html"><span class="rgb-text">الدوبلاج</span></a>
+            <a href="html/women.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="html/men.html"><span class="rgb-text">الشباب</span></a>
+            <a href="html/competition.html"><span class="rgb-text">المسابقات</span></a>
+        </nav>
+    </header>
 
-
-    <div class="container section-padding" style="text-align: center; height: 75vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
-        <h1 style="font-size: 3.5rem; margin-bottom: 20px;">منصة <span class="rgb-text">ArabDub Hub</span></h1>
-        <p style="color: var(--text-gray); font-size: 1.2rem; margin-bottom: 40px; max-width: 650px;">مرحبا بكم في منصة ArabDub Hub
-هنا تم تعليم الدبلجه عرض الفيديوهات المدبلجه من مختلف الفرق والكثير فقط من اجل الدعم الفرق العربيه</p>
-        <div style="display: flex; gap: 15px; justify-content: center; flex-wrap: wrap;">
-            <a href="html/men.html" class="download-btn btn-subs" style="padding: 15px 40px; font-size: 15px;">مكتبة الشباب</a>
-            <a href="html/women.html" class="download-btn btn-no-subs" style="padding: 15px 40px; font-size: 15px;">مكتبة الفتيات</a>
-            <a href="html/competition.html" class="download-btn" style="padding: 15px 40px; font-size: 15px; background: rgba(241, 196, 15, 0.1); border: 1px solid var(--accent-gold); color: var(--accent-gold);">ساحة المنافسة</a>
-            <a href="html/browse.html" class="download-btn btn-no-subs" style="padding: 15px 40px; font-size: 15px;"> الأنيميات المدبلجة</a>
+    <!-- تم تحويل الأنماط المضمنة إلى كلاسات لضمان تجاوبها مع الهاتف -->
+    <div class="container hero-container">
+        <h1 class="hero-title">منصة <span class="rgb-text">ArabDub Hub</span></h1>
+        <p class="hero-desc">مرحبا بكم في منصة ArabDub Hub هنا تم تعليم الدبلجه عرض الفيديوهات المدبلجه من مختلف الفرق والكثير فقط من اجل الدعم الفرق العربيه</p>
+        <div class="hero-buttons">
+            <a href="html/men.html" class="download-btn btn-subs">مكتبة الشباب</a>
+            <a href="html/women.html" class="download-btn btn-no-subs">مكتبة الفتيات</a>
+            <a href="html/competition.html" class="download-btn comp-btn">ساحة المنافسة</a>
+            <a href="html/browse.html" class="download-btn btn-no-subs"> الأنيميات المدبلجة</a>
         </div>
     </div>
-<button id="installAppBtn" style="display: none; background: var(--accent-red); color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; margin: 10px auto;">
-    تثبيت التطبيق 📱
-</button>
- <footer>
+    
+    <button id="installAppBtn" style="display: none; background: var(--accent-red); color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; margin: 10px auto;">تثبيت التطبيق 📱</button>
+    
+    <footer>
         <a href="html/legal.html">سياسة الخصوصية</a> | <a href="#">تواصل معنا</a>
         <p>&copy; 2026 أكاديمية Black Echo.</p>
     </footer>
+
     <script src="data/data.js"></script>
     <script src="data/competition_data.js"></script>
     <script src="data/script.js"></script>
-
-<script>
-    // 1. تسجيل Service Worker (الكود الذي يعمل لديك مسبقاً)
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => console.log('تم تشغيل Service Worker بنجاح'))
-                .catch(error => console.log('فشل التسجيل:', error));
+    <script>
+        // سكريبت القائمة الجانبية للهاتف
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuIcon = document.querySelector('.menu-icon');
+            const navMenu = document.getElementById('navMenu');
+            const closeBtn = document.querySelector('.close-btn');
+            if(menuIcon && navMenu) menuIcon.addEventListener('click', () => navMenu.classList.add('active'));
+            if(closeBtn && navMenu) closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
         });
-    }
-
-    // 2. برمجة زر التثبيت اليدوي
-    let deferredPrompt;
-    const installBtn = document.getElementById('installAppBtn');
-
-    window.addEventListener('beforeinstallprompt', (e) => {
-        // منع المتصفح من إظهار النافذة التلقائية
-        e.preventDefault();
-        // حفظ الحدث لاستخدامه عند الضغط على الزر
-        deferredPrompt = e;
-        // إظهار زر التثبيت الذي صممناه
-        installBtn.style.display = 'block';
-    });
-
-    installBtn.addEventListener('click', async () => {
-        if (deferredPrompt) {
-            // إظهار نافذة التثبيت الرسمية الخاصة بالنظام
-            deferredPrompt.prompt();
-            // انتظار رد المستخدم (موافق أو رفض)
-            const { outcome } = await deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                console.log('المستخدم وافق على التثبيت');
-            }
-            // تفريغ الحدث
-            deferredPrompt = null;
-            // إخفاء الزر بعد التثبيت
-            installBtn.style.display = 'none';
-        }
-    });
-</script>
+    </script>
 </body>
 </html>

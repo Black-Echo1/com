@@ -3,170 +3,89 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
+    <meta name="theme-color" content="#111111">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <title>تصفح الأعمال - Black Echo</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/catalog_style.css">
     <link rel="icon" type="image/png" href="../icon-192.png">
-    <meta name="mobile-web-app-capable" content="yes">
-    <style>
-        .full-width-hero {
-            width: 100%;
-            height: 480px; /* طول البانر المناسب للشاشات الكبيرة */
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 30px;
-            background-color: #0e1016;
-        }
-
-        .hero-slide {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-size: cover;
-            background-position: center;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out;
-            display: flex;
-            align-items: flex-end;
-            padding: 50px 8%;
-            box-sizing: border-box;
-            cursor: pointer;
-        }
-
-        .hero-slide.active {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        /* تظليل أسود سينمائي لدمج البانر مع خلفية الموقع وإبراز النصوص */
-        .hero-overlay {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(to top, #0e1016 8%, rgba(14, 16, 22, 0.3) 50%, rgba(14, 16, 22, 0.7) 100%);
-            z-index: 1;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 650px;
-            text-align: right;
-        }
-
-        .hero-content h1 {
-            font-size: 2.8rem;
-            font-weight: 900;
-            color: #fff;
-            margin-bottom: 12px;
-            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
-            line-height: 1.3;
-        }
-
-        .hero-meta {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            margin-bottom: 18px;
-            font-size: 14px;
-        }
-
-        .hero-meta .rating {
-            color: #ffb800;
-            font-weight: bold;
-        }
-
-        .hero-meta .badge {
-            background: var(--accent-red, #ff3838);
-            color: white;
-            padding: 3px 8px;
-            border-radius: 4px;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .hero-meta .type {
-            color: #b2bec3;
-        }
-
-        .hero-btn {
-            background: var(--accent-red, #ff3838);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            font-size: 15px;
-            font-weight: bold;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 56, 56, 0.4);
-        }
-
-        .hero-btn:hover {
-            background: #ff1e1e;
-            transform: scale(1.05);
-        }
-
-        /* توافق تام مع شاشات الهواتف */
-        @media (max-width: 768px) {
-            .full-width-hero {
-                height: 340px;
-            }
-            .hero-content h1 {
-                font-size: 1.8rem;
-            }
-            .hero-slide {
-                padding: 30px 5%;
-            }
-        }
-    </style>
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('../sw.js').catch(err => console.log('SW Error:', err));
+        });
+      }
+    </script>
 </head>
 <body class="animated-bg">
-
-     <header class="main-header">
-    <div class="logo">
-        <div class="logo rgb-text">ArabDub Hub</div>    
-    </div>
-    
-    <div class="menu-icon">☰</div>
-    
-    <nav id="navMenu">
-        <div class="close-btn">&times;</div>
-        <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
-        <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
-        <a href="women.html"><span class="rgb-text">الفتيات</span></a>
-        <a href="men.html"><span class="rgb-text">الشباب</span></a>
-        <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
-    </nav>
-</header>
-
-    <div id="hero-slider" class="full-width-hero"></div>
-
-    <div class="container section-padding">
-        <div class="category-header">
-            <h2>أحدث الإصدارات</h2>
-            <a href="#" class="view-more">عرض الكل</a>
+   <header class="main-header">
+        <div class="logo">
+            <div class="logo rgb-text">ArabDub Hub</div>    
         </div>
-        
-        <div class="anime-grid" id="recent-releases-grid"></div>
+        <div class="menu-icon">☰</div>
+        <nav id="navMenu">
+            <div class="close-btn">&times;</div>
+            <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
+            <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
+            <a href="women.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="men.html"><span class="rgb-text">الشباب</span></a>
+            <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
+        </nav>
+    </header>
+
+
+    <style>
+        .full-width-hero { width: 100%; height: 480px; position: relative; overflow: hidden; margin-bottom: 30px; background-color: #0e1016; }
+        .hero-slide { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-size: cover; background-position: center; opacity: 0; visibility: hidden; transition: opacity 0.8s ease-in-out, visibility 0.8s ease-in-out; display: flex; align-items: flex-end; padding: 50px 8%; box-sizing: border-box; cursor: pointer; }
+        .hero-slide.active { opacity: 1; visibility: visible; }
+        .hero-overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to top, #0e1016 8%, rgba(14, 16, 22, 0.3) 50%, rgba(14, 16, 22, 0.7) 100%); z-index: 1; }
+        .hero-content { position: relative; z-index: 2; max-width: 650px; text-align: right; }
+        .hero-content h1 { font-size: 2.8rem; font-weight: 900; color: #fff; margin-bottom: 12px; text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9); line-height: 1.3; }
+        .hero-meta { display: flex; gap: 15px; align-items: center; margin-bottom: 18px; font-size: 14px; }
+        .hero-meta .rating { color: #ffb800; font-weight: bold; }
+        .hero-meta .badge { background: var(--accent-red, #ff3838); color: white; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
+        .hero-meta .type { color: #b2bec3; }
+        .hero-btn { background: var(--accent-red, #ff3838); color: white; border: none; padding: 12px 30px; font-size: 15px; font-weight: bold; border-radius: 6px; cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(255, 56, 56, 0.4); }
+        .hero-btn:hover { background: #ff1e1e; transform: scale(1.05); }
+        @media (max-width: 768px) {
+            .full-width-hero { height: 340px; }
+            .hero-content h1 { font-size: 1.8rem; }
+            .hero-slide { padding: 30px 5%; }
+        }
+    </style>
+    <div id="hero-slider" class="full-width-hero"></div>
+    <div class="container section-padding">
+        <div class="category-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+            <h2 style="font-size: 1.5rem;">أحدث الإصدارات</h2>
+            <a href="#" class="view-more" style="color: var(--accent-red); font-weight: bold;">عرض الكل</a>
+        </div>
+        <div class="anime-grid video-grid" id="recent-releases-grid"></div>
     </div>
-<!-- نافذة المشاهدة داخل الموقع -->
-    <div id="videoModal" class="modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); z-index: 2000; align-items: center; justify-content: center; backdrop-filter: blur(5px);">
-        <div class="modal-content" style="width: 90%; max-width: 900px; background: #11131a; padding: 20px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
-            <button onclick="closeVideo()" style="background: var(--accent-red); color: white; border: none; padding: 10px 15px; border-radius: 4px; cursor: pointer; float: left; margin-bottom: 15px; font-weight: bold;">إغلاق المشاهدة ✖</button>
+    <div id="videoModal" class="modal">
+        <div class="modal-content video-modal-content">
+            <button class="close-video" onclick="closeVideo()">إغلاق المشاهدة ✖</button>
             <div style="clear: both;"></div>
-            <div class="video-wrapper" style="position: relative; padding-top: 56.25%; width: 100%; background: #000; border-radius: 4px; overflow: hidden;">
-                <iframe id="mainVideoFrame" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen></iframe>
+            <div class="video-wrapper">
+                <iframe id="mainVideoFrame" src="" allowfullscreen></iframe>
             </div>
         </div>
     </div>
     <script src="../data/catalog_data.js"></script>
     <script src="../data/catalog_script.js"></script>
+
+
+    <script>
+        // سكريبت القائمة الجانبية للهاتف
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuIcon = document.querySelector('.menu-icon');
+            const navMenu = document.getElementById('navMenu');
+            const closeBtn = document.querySelector('.close-btn');
+            if(menuIcon && navMenu) menuIcon.addEventListener('click', () => navMenu.classList.add('active'));
+            if(closeBtn && navMenu) closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
+        });
+    </script>
 </body>
 </html>

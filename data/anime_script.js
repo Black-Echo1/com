@@ -108,7 +108,7 @@ window.closeInlinePlayer = function() {
 // الكود المدمج لتجهيز الصفحة عند التحميل (بدلاً من دالتين منفصلتين)
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
-    const animeId = urlParams.get('id') || 'death_note'; 
+    const animeId = urlParams.get('id') || 'wind_breaker'; 
     const localData = animeDetailsDatabase[animeId];
 
     if (!localData) {

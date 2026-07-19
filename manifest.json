@@ -1,7 +1,7 @@
 {
-  "name": "Black Echo Platform",
-  "short_name": "Black Echo",
-  "description": "منصة التدريب الاحترافية والمشاهدة لفريق Black Echo",
+  "name": "Anime hub",
+  "short_name": "Anime hub",
+  "description": "منصة للاستمتاع والمشاهدة  ِAnime hub",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#111111",
