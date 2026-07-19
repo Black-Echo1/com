@@ -19,6 +19,16 @@ const animeCatalog = [
         id: "Super Dragon Ball Heroes",
         malId: 37885,
         isHero: false // هذا الأنمي سيظهر في البانر الكبير بالأعلى
+    },
+    {
+        id: "Blue Lock",
+        malId: 49596,
+        isHero: false // هذا الأنمي سيظهر في البانر الكبير بالأعلى
+    },
+    {
+        id: "Blue Lock2",
+        malId: 54865,
+        isHero: false // هذا الأنمي سيظهر في البانر الكبير بالأعلى
     }
 ];
 
