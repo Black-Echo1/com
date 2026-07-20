@@ -1,4 +1,4 @@
-const CACHE_NAME = 'Anime-Hub-v2';
+const CACHE_NAME = 'Anime-Hub-v1';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',

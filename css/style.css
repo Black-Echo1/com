@@ -154,3 +154,62 @@ footer a { color: var(--text-gray); text-decoration: none; margin: 0 10px; trans
     .legal-box { padding: 20px !important; margin: 20px 0 !important; }
     .legal-box h1 { font-size: 1.6rem !important; margin-bottom: 20px !important; }
 }
+.search-container {
+    position: relative !important;
+    width: 250px;
+    display: inline-block;
+}
+
+#search-input {
+    width: 100%;
+    padding: 8px 12px;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    color: #fff;
+    border-radius: 4px;
+    outline: none;
+    font-size: 14px;
+}
+
+#search-input:focus {
+    border-color: var(--accent-red, #e50914);
+}
+
+.search-dropdown {
+    position: absolute !important;
+    top: 100% !important;
+    left: 0;
+    right: 0;
+    background: #1a1a1a;
+    border: 1px solid #333;
+    max-height: 250px;
+    overflow-y: auto;
+    z-index: 9999 !important; /* لضمان ظهورها فوق كل عناصر الصفحة */
+    display: none;
+    border-radius: 0 0 4px 4px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.7);
+}
+
+.search-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    cursor: pointer;
+    color: #fff;
+    font-size: 14px;
+    border-bottom: 1px solid #222;
+    transition: background 0.2s;
+}
+
+.search-item:hover {
+    background: var(--accent-red, #e50914);
+}
+
+.search-item img {
+    width: 30px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 3px;
+    flex-shrink: 0; /* منع الصورة من الانكماش أو التأثير على تخطيط السطر */
+}
