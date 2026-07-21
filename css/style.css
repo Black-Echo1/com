@@ -213,3 +213,9 @@ footer a { color: var(--text-gray); text-decoration: none; margin: 0 10px; trans
     border-radius: 3px;
     flex-shrink: 0; /* منع الصورة من الانكماش أو التأثير على تخطيط السطر */
 }
+/* توحيد جميع أزرار الـ Hero باللون الذهبي الشفاف */
+.hero-buttons .download-btn {
+    background: rgba(241, 196, 15, 0.1) !important;
+    border: 1px solid var(--accent-gold) !important;
+    color: var(--accent-gold) !important;
+}

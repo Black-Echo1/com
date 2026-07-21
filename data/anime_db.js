@@ -4,6 +4,11 @@ const animeDetailsDatabase = {
         malId: 54900, 
         dubbingTeam: "دبلجة: فريق Black Echo", // <-- أضف اسم الفريق هنا
         dubbedCharacters: {
+            "Sakura, Haruka": "عبد الرزاق",
+            "Suou, Hayato": "mohamed akram",
+            "Tachibana, Kotoha": " Makoto_san",
+            "Hiiragi, Touma": "احمد منصور",
+            
         },
         episodes: [
             {

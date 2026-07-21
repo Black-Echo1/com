@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
+    <meta name="theme-color" content="#111111">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>مكتبة الفرق</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../icon-192.png">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('../sw.js').catch(err => console.log('SW Error:', err));
+        });
+      }
+    </script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <title>استوديوهات وفرق الدبلجة</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #090a0f; color: #fff; margin: 0; padding: 0; }
+        .header-title { text-align: center; padding: 50px 20px; background: #12131a; border-bottom: 1px solid #222; }
+        .header-title h1 { color: #fff; margin: 0 0 10px 0; font-size: 2.2rem; }
+        .header-title p { color: #888; margin: 0; font-size: 1.1rem; }
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 30px; }
+        .team-card { background: #1a1b26; border: 1px solid #2f334d; border-radius: 12px; padding: 30px 20px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .team-card:hover { transform: translateY(-5px); border-color: #e50914; box-shadow: 0 8px 25px rgba(229, 9, 20, 0.15); }
+        .team-card img { width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 3px solid #e50914; margin-bottom: 15px; }
+        .team-card h3 { margin: 0 0 10px 0; font-size: 1.4rem; }
+        .team-card p { color: #a0a5c0; font-size: 0.95rem; line-height: 1.6; margin-bottom: 20px; }
+        .team-card .btn { display: inline-block; background: #e50914; color: #fff; padding: 10px 20px; border-radius: 6px; text-decoration: none; font-weight: bold; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+
+       <header class="main-header">
+        <div class="logo">
+            <div class="logo rgb-text">ArabDub Hub</div>    
+        </div>
+        <div class="menu-icon">☰</div>
+        <nav id="navMenu">
+            <div class="close-btn">&times;</div>
+            <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
+            <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
+            <a href="women.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="men.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
+            <a href="teams.html"><span class="rgb-text">قائمة المدبلجين</span></a>
+        </nav>
+    </header>
+    <div class="header-title">
+        <h1>الفرق واستوديوهات الدبلجة</h1>
+        <p>اكتشف الفرق المبدعة وتعرف على أعضائها وأعمالها</p>
+    </div>
+
+    <div class="container">
+        <div id="teams-grid" class="grid"></div>
+    </div>
+
+    <script src="../data/teams.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const grid = document.getElementById("teams-grid");
+            const teams = teamsDatabase;
+
+            for (const key in teams) {
+                const team = teams[key];
+                const card = document.createElement("div");
+                card.className = "team-card";
+                card.innerHTML = `
+                    <img src="${team.logo}" alt="${team.name}">
+                    <h3>${team.name}</h3>
+                    <p>${team.description}</p>
+                    <span class="btn">عرض تفاصيل الفريق</span>
+                `;
+                card.onclick = () => window.location.href = `team-details.html?id=${team.id}`;
+                grid.appendChild(card);
+            }
+        });
+    </script>
+</body>
+</html>

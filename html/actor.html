@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
+    <meta name="theme-color" content="#111111">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../icon-192.png">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('../sw.js').catch(err => console.log('SW Error:', err));
+        });
+      }
+    </script>
+    <title>بورتفوليو المؤدي</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #090a0f; color: #fff; margin: 0; }
+        
+        .actor-header { 
+            text-align: center; 
+            padding: 50px 20px; 
+            background: linear-gradient(135deg, #1a1b26, #090a0f); 
+            border-bottom: 2px solid #e50914; 
+        }
+
+        /* تنسيق اللوجو وجعله في المنتصف وفوق الاسم */
+        .actor-logo-img { 
+            width: 110px; 
+            height: 110px; 
+            border-radius: 50%; 
+            object-fit: cover; 
+            border: 3px solid #e50914; 
+            margin: 0 auto 15px auto; 
+            display: none; /* مخفي افتراضياً، وسيظهر برمجياً إذا وُجد لوجو */
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+        }
+
+        .actor-header h1 { margin: 0 0 10px 0; font-size: 2.5rem; color: #fff; }
+        .actor-header p { margin: 0; color: #e50914; font-size: 1.1rem; font-weight: bold; }
+        
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .section-title { font-size: 1.5rem; margin-bottom: 30px; text-align: center; color: #ccc; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; }
+        
+        .role-card { background: #1a1b26; border-radius: 10px; overflow: hidden; border: 1px solid #2f334d; transition: 0.3s; cursor: pointer; }
+        .role-card:hover { border-color: #e50914; transform: translateY(-5px); box-shadow: 0 5px 15px rgba(229, 9, 20, 0.2); }
+        .role-card img { width: 100%; height: 250px; object-fit: cover; border-bottom: 2px solid #333; }
+        .role-info { padding: 15px; text-align: center; }
+        .role-info h3 { margin: 0 0 5px 0; font-size: 1.1rem; color: #fff; }
+        .role-info span { color: #888; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+   <header class="main-header">
+        <div class="logo">
+            <div class="logo rgb-text">ArabDub Hub</div>    
+        </div>
+        <div class="menu-icon">☰</div>
+        <nav id="navMenu">
+            <div class="close-btn">&times;</div>
+            <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
+            <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
+            <a href="women.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="men.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
+            <a href="teams.html"><span class="rgb-text">قائمة المدبلجين</span></a>
+        </nav>
+    </header>
+    <div class="actor-header">
+        <!-- تم وضع اللوجو هنا في أعلى الهيدر وقبل الاسم مباشرة -->
+        <img id="actor-logo-img" src="" alt="Actor Logo" class="actor-logo-img">
+        <h1 id="actor-name">جاري التحميل...</h1>
+        <p id="actor-role">بورتفوليو الأعمال والشخصيات</p>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">الأدوار التي قام بتأديتها</h2>
+        <div id="roles-grid" class="grid"></div>
+    </div>
+
+    <!-- استدعاء ملف المدبلجين -->
+    <script src="../data/dubbers_data.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const actorId = urlParams.get("id"); 
+            
+            const rolesGrid = document.getElementById("roles-grid");
+
+            if (!actorId || typeof dubbersDatabase === 'undefined' || !dubbersDatabase[actorId]) {
+                document.getElementById("actor-name").innerText = "لا يوجد بيانات لهذا المؤدي";
+                rolesGrid.innerHTML = "<p style='text-align:center; color:#888; grid-column: 1/-1;'>تأكد من صحة الرابط أو اسم المؤدي.</p>";
+                return;
+            }
+
+            const actorData = dubbersDatabase[actorId];
+
+            // تعبئة الاسم والوظيفة
+            document.getElementById("actor-name").innerText = actorData.name;
+            if (actorData.role) {
+                document.getElementById("actor-role").innerText = actorData.role;
+            }
+
+            // إظهار اللوجو وتحديث مساره إذا كان موجوداً في قاعدة البيانات
+            const logoImg = document.getElementById("actor-logo-img");
+            if (actorData.logo) {
+                logoImg.src = actorData.logo;
+                logoImg.style.display = "block"; // يظهر فقط لو كان الـ logo معرفاً
+            }
+
+            // تعبئة الأدوار
+            const roles = actorData.roles || [];
+            if (roles.length === 0) {
+                rolesGrid.innerHTML = "<p style='text-align:center; color:#888; grid-column: 1/-1;'>لا توجد أدوار مسجلة بعد.</p>";
+                return;
+            }
+
+            roles.forEach(role => {
+                const card = document.createElement("div");
+                card.className = "role-card";
+                card.innerHTML = `
+                    <img src="${role.charImage}" alt="${role.charName}">
+                    <div class="role-info">
+                        <h3>الشخصية: ${role.charName}</h3>
+                        <span>الأنمي: ${role.animeTitle}</span>
+                    </div>
+                `;
+                card.onclick = () => {
+    // نستخدم encodeURIComponent لضمان عدم حدوث خطأ بسبب المسافات في أسماء الأنمي
+    window.location.href = `anime.html?id=${encodeURIComponent(role.animeId)}`;
+};
+                rolesGrid.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>

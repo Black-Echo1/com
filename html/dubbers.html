@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>قائمة المدبلجين العرب</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #090a0f; color: #fff; margin: 0; }
+        .page-header { text-align: center; padding: 40px 20px; background: linear-gradient(to bottom, #1a1a1a, #090a0f); border-bottom: 1px solid #333; margin-bottom: 30px; }
+        .page-header h1 { color: #fff; font-size: 2.2rem; margin-bottom: 10px; }
+        .dubbers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px 50px 20px; }
+        .dubber-card { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: transform 0.3s, border-color 0.3s; }
+        .dubber-card:hover { transform: translateY(-5px); border-color: var(--accent-red, #e50914); }
+        .dubber-card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 8px; }
+        .dubber-card p { color: #888; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+       <header class="main-header">
+        <div class="logo">
+            <div class="logo rgb-text">ArabDub Hub</div>    
+        </div>
+        <div class="menu-icon">☰</div>
+        <nav id="navMenu">
+            <div class="close-btn">&times;</div>
+            <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
+            <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
+            <a href="women.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="men.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
+            <a href="teams.html"><span class="rgb-text">قائمة المدبلجين</span></a>
+        </nav>
+    </header>
+
+    <div class="page-header">
+        <h1>فريق الدبلجة والمؤدون الصوتيون</h1>
+        <p>اختر أي مؤدي لاستعراض سجله والأعمال التي شارك فيها</p>
+    </div>
+
+    <div id="dubbers-container" class="dubbers-grid"></div>
+
+    <script src="../data/dubbers.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const container = document.getElementById("dubbers-container");
+            container.innerHTML = "";
+
+            if (typeof dubbersDatabase === 'undefined') {
+                container.innerHTML = `<p style="color: #888; grid-column: 1/-1; text-align: center;">لم يتم العثور على قاعدة بيانات المدبلجين.</p>`;
+                return;
+            }
+
+            for (const [actorId, data] of Object.entries(dubbersDatabase)) {
+                const card = document.createElement("div");
+                card.className = "dubber-card";
+                card.innerHTML = `
+                    <h3>${data.name}</h3>
+                    <p>${data.role || "مؤدي صوتي"}</p>
+                    <span style="display:inline-block; margin-top:15px; color:#e50914; font-size:0.85rem; font-weight:bold;">عرض البورتفوليو ←</span>
+                `;
+
+                card.onclick = () => {
+                    window.location.href = `actor.html?id=${actorId}`;
+                };
+
+                container.appendChild(card);
+            }
+        });
+    </script>
+</body>
+</html>

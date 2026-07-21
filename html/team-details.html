@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
+    <meta name="theme-color" content="#111111">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../icon-192.png">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('../sw.js').catch(err => console.log('SW Error:', err));
+        });
+      }
+    </script>
+
+    <title>تفاصيل الفريق</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #090a0f; color: #fff; margin: 0; }
+        .banner { width: 100%; height: 350px; background-size: cover; background-position: center; position: relative; display: flex; align-items: flex-end; }
+        .banner-overlay { position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(to top, #090a0f 5%, transparent); }
+        .banner-content { position: relative; z-index: 2; padding: 40px; }
+        .banner-content h1 { margin: 0 0 10px 0; font-size: 2.5rem; text-shadow: 2px 2px 4px #000; }
+        .banner-content p { margin: 0; color: #ddd; font-size: 1.1rem; max-width: 600px; text-shadow: 1px 1px 3px #000; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 40px 20px; }
+        .section-title { font-size: 1.6rem; border-right: 4px solid #e50914; padding-right: 15px; margin-bottom: 25px; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; margin-bottom: 50px; }
+        .member-card { background: #1a1b26; border: 1px solid #2f334d; border-radius: 10px; padding: 20px; text-align: center; cursor: pointer; transition: 0.3s; }
+        .member-card:hover { border-color: #e50914; transform: translateY(-5px); }
+        .member-card img { width: 80px; height: 80px; border-radius: 50%; margin-bottom: 15px; }
+        .member-card h4 { margin: 0 0 5px 0; font-size: 1.1rem; }
+        .member-card span { color: #888; font-size: 0.85rem; }
+        .anime-card { background: #1a1b26; border-radius: 10px; overflow: hidden; border: 1px solid #2f334d; }
+        .anime-card img { width: 100%; height: 280px; object-fit: cover; }
+        .anime-card h4 { margin: 0; padding: 15px; text-align: center; font-size: 1rem; }
+    </style>
+</head>
+<body>
+   <header class="main-header">
+        <div class="logo">
+            <div class="logo rgb-text">ArabDub Hub</div>    
+        </div>
+        <div class="menu-icon">☰</div>
+        <nav id="navMenu">
+            <div class="close-btn">&times;</div>
+            <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
+            <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
+            <a href="women.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="men.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
+            <a href="teams.html"><span class="rgb-text">قائمة المدبلجين</span></a>
+        </nav>
+    </header>
+    <div id="team-banner" class="banner">
+        <div class="banner-overlay"></div>
+        <div class="banner-content">
+            <h1 id="team-name">جاري التحميل...</h1>
+            <p id="team-desc"></p>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">أعضاء الفريق</h2>
+        <div id="members-grid" class="grid"></div>
+
+        <h2 class="section-title">إنتاجات الفريق</h2>
+        <div id="anime-grid" class="grid"></div>
+    </div>
+
+    <script src="../data/teams.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const teamId = urlParams.get("id");
+            const team = teamsDatabase[teamId];
+
+            if (!team) {
+                document.body.innerHTML = "<h2 style='text-align:center; padding:50px; color:#fff;'>الفريق غير موجود</h2>";
+                return;
+            }
+
+            document.getElementById("team-banner").style.backgroundImage = `url('${team.banner}')`;
+            document.getElementById("team-name").innerText = team.name;
+            document.getElementById("team-desc").innerText = team.description;
+
+            const membersGrid = document.getElementById("members-grid");
+            team.members.forEach(member => {
+                const card = document.createElement("div");
+                card.className = "member-card";
+                card.innerHTML = `
+                    <img src="${member.avatar}" alt="${member.name}">
+                    <h4>${member.name}</h4>
+                    <span>${member.role}</span>
+                `;
+                card.onclick = () => window.location.href = `actor.html?id=${member.id}`;
+                membersGrid.appendChild(card);
+            });
+
+            const animeGrid = document.getElementById("anime-grid");
+            team.producedAnime.forEach(anime => {
+                const card = document.createElement("div");
+                card.className = "anime-card";
+                card.innerHTML = `
+                    <img src="${anime.poster}" alt="${anime.title}">
+                    <h4>${anime.title}</h4>
+                `;
+                card.onclick = () => window.location.href = `anime.html?id=${anime.id}`;
+                animeGrid.appendChild(card);
+            });
+        });
+    </script>
+</body>
+</html>
