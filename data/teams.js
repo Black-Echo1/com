@@ -20,6 +20,7 @@ const teamsDatabase = {
             { id: "𝕾𝖆𝖓𝖋𝖔𝖗𝖆", name: "𝕾𝖆𝖓𝖋𝖔𝖗𝖆", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/e27jgf.jpeg" },
             { id: "makoto_san00", name: "ماكوتو_سان | Makoto_san", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/4neejs.webp" },
             { id: "ebra..:)", name: "ebra..:)", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/8ayfhm.webp" },
+            { id: "Jogo Satora", name: "Jogo Satora", role: "مؤدي أصوات", avatar: "https://files.catbox.moe/dy7nqb.jpeg" },
         ],
         producedAnime: [
             { id: "wind breaker", title: "Wind Breaker", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaPpMB6nk2ezw4Qk0HW6wPWdgIvpEySx54WC5easZgyE3rM0NaGMdGYU&s=10" },

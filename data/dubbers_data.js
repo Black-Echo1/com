@@ -77,6 +77,13 @@ const dubbersDatabase = {
         logo: "https://files.catbox.moe/8ayfhm.webp",
         roles: [{ charName: "Flagon Darlett", animeTitle: "Attack on Titan: No Regrets", animeId: "Attack on Titan: No Regrets", charImage: "https://cdn.myanimelist.net/images/characters/4/331901.jpg" }] // يمكنك لاحقاً أتمتة إضافة الأدوار هنا
     },
+    "Jogo Satora": {
+        name: "Jogo Satora",
+        role: "مؤدي أصوات",
+        logo: "https://files.catbox.moe/dy7nqb.jpeg",
+        roles: []
+    },
+
 
 
 
