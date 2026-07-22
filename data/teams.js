@@ -32,10 +32,22 @@ const teamsDatabase = {
         id: "team_shadow",
         name: "دوبلاج (اكاتسكي)",
         logo: "https://files.catbox.moe/bijb9i",
-        banner: "https://files.catbox.moe/bijb9i",
-        description: " شبابي مبدع يهتم بأنميات الغموض والإثاره",
+        banner: "https://i.ibb.co/nMB9Ddkh/image.png",
+        description: "فريق الأكنسكي هو فريق متخصص في الدوبلاج، يهدف إلى تقديم أعمال صوتية احترافية وخاصة في مجال الأنمي، مع أداء مميز يعكس مشاعر الشخصيات ويقدم تجربة ممتعة للجمهور العربي.",
         members: [
-            { id: "توكيتو", name: "توكيتو", role: "قائد", avatar: "https://files.catbox.moe/bijb9i" }
+            { id: "توكيتو", name: "توكيتو", role: "قائد", avatar: "https://files.catbox.moe/bijb9i" },
+                { id: "rororose2009", name: "Roro Rose🌺💐💖", role: "مؤدي أصوات/ المسؤولة عن البنات.", avatar: "https://i.ibb.co/3mwwkXjJ/image.webp" },
+    { id: "akaza3903", name: "Rakan san", role: "مؤدي أصوات", avatar: "https://i.ibb.co/350dTK7J/image.webp" },
+    { id: "sandyartist_1", name: "𝑆𝐴𝑁𝐷𝑌 𝐴𝑅𝑇", role: "مؤدي أصوات", avatar: "https://i.ibb.co/4wY4hkmD/image.webp" },
+    { id: "flipo_x0", name: "★ 𝖋l͢i͢p͢o͢o͢ ★", role: "مؤدي أصوات", avatar: "https://i.ibb.co/twTY6SsR/image.webp" },
+    { id: "orjwen0", name: "orjwen 🍓🩷", role: "مؤدي أصوات", avatar: "https://i.ibb.co/5hhNhvPG/image.webp" },
+    { id: "mashva1", name: "MashVA🎙🎧", role: "مؤدي أصوات", avatar: "https://i.ibb.co/CSzyd30/image.webp" },
+    { id: "retsu.voice7", name: "ʀᴇᴛsᴜ/🇲🇷", role: "مؤدي أصوات", avatar: "https://i.ibb.co/45c8ht9/image.webp" },
+    { id: "c.20yc", name: "محمد.🫀", role: "مؤدي أصوات / ممنتج ", avatar: "https://i.ibb.co/nMMzmh6Z/image.webp" },
+    { id: "mika_wow4", name: "꧁Mika ꧂  المدبلجه", role: "مؤدي أصوات", avatar: "https://i.ibb.co/VXfZfzw/image.webp" },
+    { id: "moaz.alyakob", name: "Moaz Alyakob", role: "مؤدي أصوات", avatar: "https://i.ibb.co/qMzjv8sk/image.webp" },
+    { id: "t_.y902", name: "11:11", role: "مؤدي أصوات", avatar: "https://i.ibb.co/k6cLP0ts/image.webp" },
+    { id: "rimas.waleed", name: "رِيـمَـاس", role: "مؤدي أصوات", avatar: "https://i.ibb.co/yn873wnj/image.webp" },
         ],
         producedAnime: [
             { id: "Super Dragon Ball Heroes", title: "Super Dragon Ball Heroes", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIswg7sJxsAVXHQ3EfvDZBw1txQkcl7GzwvvWb8Fi2ig&s=10" }

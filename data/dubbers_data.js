@@ -98,5 +98,77 @@ const dubbersDatabase = {
         logo: "https://files.catbox.moe/bijb9i",
         roles: [{ charName: "", animeTitle: "", animeId: "", charImage: "" }] // يمكنك لاحقاً أتمتة إضافة الأدوار هنا
     },
+        "Roro Rose🌺💐💖": {
+        name: "Roro Rose🌺💐💖",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/3mwwkXjJ/image.webp",
+        roles: []
+    },
+    "Rakan san": {
+        name: "Rakan san",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/350dTK7J/image.webp",
+        roles: []
+    },
+    "𝑆𝐴𝑁𝐷𝑌 𝐴𝑅𝑇": {
+        name: "𝑆𝐴𝑁𝐷𝑌 𝐴𝑅𝑇",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/4wY4hkmD/image.webp",
+        roles: []
+    },
+    "★ 𝖋l͢i͢p͢o͢o͢ ★": {
+        name: "★ 𝖋l͢i͢p͢o͢o͢ ★",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/twTY6SsR/image.webp",
+        roles: []
+    },
+    "orjwen 🍓🩷": {
+        name: "orjwen 🍓🩷",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/5hhNhvPG/image.webp",
+        roles: []
+    },
+    "MashVA🎙🎧": {
+        name: "MashVA🎙🎧",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/CSzyd30/image.webp",
+        roles: []
+    },
+    "ʀᴇᴛsᴜ/🇲🇷": {
+        name: "ʀᴇᴛsᴜ/🇲🇷",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/45c8ht9/image.webp",
+        roles: []
+    },
+    "محمد.🫀": {
+        name: "محمد.🫀",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/nMMzmh6Z/image.webp",
+        roles: []
+    },
+    "꧁Mika ꧂  المدبلجه": {
+        name: "꧁Mika ꧂  المدبلجه",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/VXfZfzw/image.webp",
+        roles: []
+    },
+    "Moaz Alyakob": {
+        name: "Moaz Alyakob",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/qMzjv8sk/image.webp",
+        roles: []
+    },
+    "11:11": {
+        name: "11:11",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/k6cLP0ts/image.webp",
+        roles: []
+    },
+    "رِيـمَـاس": {
+        name: "رِيـمَـاس",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/yn873wnj/image.webp",
+        roles: []
+    },
          
 };
