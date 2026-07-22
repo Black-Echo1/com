@@ -214,8 +214,60 @@ footer a { color: var(--text-gray); text-decoration: none; margin: 0 10px; trans
     flex-shrink: 0; /* منع الصورة من الانكماش أو التأثير على تخطيط السطر */
 }
 /* توحيد جميع أزرار الـ Hero باللون الذهبي الشفاف */
-.hero-buttons .download-btn {
+/* 🟢 زر الأنيميات المدبلجة - أخضر */
+.btn-browse {
+    background: rgba(46, 204, 113, 0.1) !important;
+    border: 1px solid #2ecc71 !important;
+    color: #2ecc71 !important;
+}
+.btn-browse:hover {
+    box-shadow: 0 0 15px rgba(46, 204, 113, 0.5) !important;
+}
+
+/* 🔴 زر مكتبة الشباب - أحمر */
+.btn-men {
+    background: rgba(229, 9, 20, 0.1) !important;
+    border: 1px solid #e50914 !important;
+    color: #e50914 !important;
+}
+.btn-men:hover {
+    box-shadow: 0 0 15px rgba(229, 9, 20, 0.5) !important;
+}
+
+/* 🌸 زر مكتبة الفتيات - وردي */
+.btn-women {
+    background: rgba(255, 105, 180, 0.1) !important;
+    border: 1px solid #ff69b4 !important;
+    color: #ff69b4 !important;
+}
+.btn-women:hover {
+    box-shadow: 0 0 15px rgba(255, 105, 180, 0.5) !important;
+}
+
+/* 🟡 زر ساحة المنافسة - ذهبي */
+.btn-comp {
     background: rgba(241, 196, 15, 0.1) !important;
-    border: 1px solid var(--accent-gold) !important;
-    color: var(--accent-gold) !important;
+    border: 1px solid #f1c40f !important;
+    color: #f1c40f !important;
+}
+.btn-comp:hover {
+    box-shadow: 0 0 15px rgba(241, 196, 15, 0.5) !important;
+}
+/* ترتيب الأيقونة مع النص جنبًا إلى جنب بشكل متناسق */
+.hero-buttons .download-btn {
+    display: inline-flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 10px !important; /* مسافة بين النص والأيقونة */
+}
+
+/* تنسيق حجم ومرحلة الانتقال للأيقونة */
+.hero-buttons .download-btn i {
+    font-size: 1.2rem;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* حركة تفاعلية احترافية: تكبير وبروز الأيقونة عند التمرير بالماوس */
+.hero-buttons .download-btn:hover i {
+    transform: scale(1.25) rotate(-8deg);
 }
