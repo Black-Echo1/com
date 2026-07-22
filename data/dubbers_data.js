@@ -93,7 +93,7 @@ const dubbersDatabase = {
 
     // لكلتسكي 
     "توكيتو": {
-        name: "توكيتو",
+        name: "توكيو",
         role: "مؤدي أصوات / قائد",
         logo: "https://files.catbox.moe/bijb9i",
         roles: [{ charName: "", animeTitle: "", animeId: "", charImage: "" }] // يمكنك لاحقاً أتمتة إضافة الأدوار هنا

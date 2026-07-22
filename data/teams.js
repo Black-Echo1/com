@@ -35,7 +35,7 @@ const teamsDatabase = {
         banner: "https://i.ibb.co/nMB9Ddkh/image.png",
         description: "فريق الأكنسكي هو فريق متخصص في الدوبلاج، يهدف إلى تقديم أعمال صوتية احترافية وخاصة في مجال الأنمي، مع أداء مميز يعكس مشاعر الشخصيات ويقدم تجربة ممتعة للجمهور العربي.",
         members: [
-            { id: "توكيتو", name: "توكيتو", role: "قائد", avatar: "https://files.catbox.moe/bijb9i" },
+            { id: "توكيو", name: "توكيتو", role: "قائد", avatar: "https://files.catbox.moe/bijb9i" },
                 { id: "rororose2009", name: "Roro Rose🌺💐💖", role: "مؤدي أصوات/ المسؤولة عن البنات.", avatar: "https://i.ibb.co/3mwwkXjJ/image.webp" },
     { id: "akaza3903", name: "Rakan san", role: "مؤدي أصوات", avatar: "https://i.ibb.co/350dTK7J/image.webp" },
     { id: "sandyartist_1", name: "𝑆𝐴𝑁𝐷𝑌 𝐴𝑅𝑇", role: "مؤدي أصوات", avatar: "https://i.ibb.co/4wY4hkmD/image.webp" },
