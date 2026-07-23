@@ -35,15 +35,14 @@ const animeCatalog = [
         title: "Blue Lock 2", // <-- أضف هذا السطر ليتعرف عليه البحث
         malId: 54865,
         isHero: false // هذا الأنمي سيظهر في البانر الكبير بالأعلى
-    } ,
+    },
     {
         id: "Jujutsu Kaisen",
         title: "Jujutsu Kaisen", // <-- أضف هذا السطر ليتعرف عليه البحث
         malId: 40748,
         isHero: false // هذا الأنمي سيظهر في البانر الكبير بالأعلى
     },
-    
- {
+    {
         id: "Jujutsu-Kaisen-2",
         title: "Jujutsu Kaisen 2", // <-- أضف هذا السطر ليتعرف عليه البحث
         malId: 51009,
@@ -54,9 +53,23 @@ const animeCatalog = [
         title: "Jujutsu Kaisen 3", // <-- أضف هذا السطر ليتعرف عليه البحث
         malId: 57658,
         isHero: false // هذا الأنمي سيظهر في البانر الكبير بالأعلى
-    }
-    
-    
+    },
+   {
+        id: "Yu☆Gi☆Oh! Sevens",
+        title: "Yu☆Gi☆Oh! Sevens", // <-- أضف هذا السطر ليتعرف عليه البحث
+        malId: 40145,
+        isHero: false // هذا الأنمي سيظهر في البانر الكبير بالأعلى
+    },{
+        id: "Ore dake Level Up na Ken Solo Leveling",
+        title: "Ore dake Level Up na Ken, Solo Leveling", // <-- أضف هذا السطر ليتعرف عليه البحث
+        malId: 52299,
+        isHero: false // هذا الأنمي سيظهر في البانر الكبير بالأعلى
+    },{
+        id: "Solo Leveling Season 2",
+        title: "Solo Leveling Season 2s", // <-- أضف هذا السطر ليتعرف عليه البحث
+        malId: 58567,
+        isHero: false // هذا الأنمي سيظهر في البانر الكبير بالأعلى
+    },
 ];
 
 function openAnime(animeId) {

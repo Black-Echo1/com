@@ -1505,5 +1505,282 @@ const animeDetailsDatabase = {
         ]
     }
     ]
-}
+},
+
+"Ore dake Level Up na Ken Solo Leveling": {
+        
+        malId: 52299, 
+        dubbingTeam: "دبلجة: فريق crunchyroll", // <-- أضف اسم الفريق هنا
+        dubbedCharacters: {
+        },
+        episodes: [   {
+                        "number": 1,
+                        "title": "الحلقة 1",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/EU5qr6"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/EU5qr6"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 2,
+                        "title": "الحلقة 2",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/8Lw7gIw"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/8Lw7gIw"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 3,
+                        "title": "الحلقة 3",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/wDxA7r"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/wDxA7r"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 4,
+                        "title": "الحلقة 4",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/U1vumK"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/U1vumK"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 5,
+                        "title": "الحلقة 5",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/fT4zMG"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/fT4zMG"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 6,
+                        "title": "الحلقة 6",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/7XyE4z"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/7XyE4z"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 7,
+                        "title": "الحلقة 7",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/lpcMkD8"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/lpcMkD8"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 8,
+                        "title": "الحلقة 8",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/49y0RM"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/49y0RM"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 9,
+                        "title": "الحلقة 9",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/fG8hOY"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/fG8hOY"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 10,
+                        "title": "الحلقة 10",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/jwUMdxC"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/jwUMdxC"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 11,
+                        "title": "الحلقة 11",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/qDz7KGz"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/qDz7KGz"
+                            }
+                        ]
+                    },
+                    {
+                        "number": 12,
+                        "title": "الحلقة 12",
+                        "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Feb-9-2026-10_20_54-PM-683x1024.png",
+                        "duration": "24:00",
+                        "date": "Jun 28, 2026",
+                        "servers": [
+                            {
+                                "name": "سيرفر رئيسي",
+                                "url": "https://ouo.io/vrLkwxn"
+                            },
+                            {
+                                "name": "سيرفر احتياطي 1",
+                                "url": "https://ouo.io/vrLkwxn"
+                            }
+                        ]
+                    }  ]
+
+},"Solo Leveling Season 2": {
+        
+        malId: 58567, 
+        dubbingTeam: "دبلجة: فريق crunchyroll", // <-- أضف اسم الفريق هنا
+        dubbedCharacters: {
+        },
+        episodes: [    ]
+
+},"Yu☆Gi☆Oh! Sevens": {
+        
+        malId: 57658, 
+        dubbingTeam: "دبلجة: فريق crunchyroll", // <-- أضف اسم الفريق هنا
+        dubbedCharacters: {
+        },
+        episodes: [    ]
+
+},"Yu☆Gi☆Oh! Sevens": {
+        
+        malId: 57658, 
+        dubbingTeam: "دبلجة: فريق crunchyroll", // <-- أضف اسم الفريق هنا
+        dubbedCharacters: {
+        },
+        episodes: [    ]
+
+},"Yu☆Gi☆Oh! Sevens": {
+        
+        malId: 57658, 
+        dubbingTeam: "دبلجة: فريق crunchyroll", // <-- أضف اسم الفريق هنا
+        dubbedCharacters: {
+        },
+        episodes: [    ]
+
+},"Yu☆Gi☆Oh! Sevens": {
+        
+        malId: 57658, 
+        dubbingTeam: "دبلجة: فريق crunchyroll", // <-- أضف اسم الفريق هنا
+        dubbedCharacters: {
+        },
+        episodes: [    ]
+
+},"Yu☆Gi☆Oh! Sevens": {
+        
+        malId: 57658, 
+        dubbingTeam: "دبلجة: فريق crunchyroll", // <-- أضف اسم الفريق هنا
+        dubbedCharacters: {
+        },
+        episodes: [    ]
+
+},"Yu☆Gi☆Oh! Sevens": {
+        
+        malId: 57658, 
+        dubbingTeam: "دبلجة: فريق crunchyroll", // <-- أضف اسم الفريق هنا
+        dubbedCharacters: {
+        },
+        episodes: [    ]
+
+},"Yu☆Gi☆Oh! Sevens": {
+        
+        malId: 57658, 
+        dubbingTeam: "دبلجة: فريق crunchyroll", // <-- أضف اسم الفريق هنا
+        dubbedCharacters: {
+        },
+        episodes: [    ]
+
+},
 }
