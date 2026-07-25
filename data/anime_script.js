@@ -94,6 +94,7 @@ function mapTypeToArabic(type) {
 }
 
 // دالة تشغيل الفيديو
+// دالة تشغيل الفيديو
 window.playEpisode = function(animeId, epIndex) {
     const epData = animeDetailsDatabase[animeId].episodes[epIndex];
     const playerContainer = document.getElementById("video-player-container");
@@ -102,10 +103,14 @@ window.playEpisode = function(animeId, epIndex) {
     const serversContainer = document.getElementById("servers-container");
 
     if (playerContainer && iframe && epData.servers && epData.servers.length > 0) {
-        changeServer(epData.servers[0].url);
+        // 1. تشغيل السيرفر الأول كافتراضي باستخدام الرابط المباشر للمشاهدة
+        const defaultPlayUrl = epData.servers[0].direct_url || epData.servers[0].url;
+        changeServer(defaultPlayUrl);
         titleElement.innerText = `جاري تشغيل: ${epData.title}`;
         
         serversContainer.innerHTML = "";
+        
+        // 2. إنشاء أزرار سيرفرات المشاهدة
         epData.servers.forEach((server, index) => {
             const btn = document.createElement("button");
             btn.className = `server-btn ${index === 0 ? 'active' : ''}`;
@@ -113,11 +118,32 @@ window.playEpisode = function(animeId, epIndex) {
             btn.onclick = (e) => {
                 document.querySelectorAll('.server-btn').forEach(b => b.classList.remove('active'));
                 e.target.classList.add('active');
-                changeServer(server.url);
+                // تحديث الـ iframe بالرابط المباشر عند تغيير السيرفر
+                changeServer(server.direct_url || server.url);
             };
             serversContainer.appendChild(btn);
         });
 
+        // 3. إضافة زر "تحميل الحلقة" وربطه بموقع ouo.io
+        // نأخذ رابط التحميل من السيرفر الأول (أو يمكنك تخصيصه كما تشاء)
+        const downloadUrl = epData.servers[0].ouo_url || epData.servers[0].url;
+        
+        const downloadBtn = document.createElement("a");
+        downloadBtn.href = downloadUrl;
+        downloadBtn.target = "_blank"; // لفتح الرابط في نافذة جديدة دون إغلاق الموقع
+        downloadBtn.className = "download-action-btn"; // كلاس لسهولة التعديل في الـ CSS
+        downloadBtn.innerHTML = "📥 تحميل الحلقة";
+        
+        // تنسيق برمجي للزر ليبرز عن باقي سيرفرات المشاهدة (يمكنك نقله لملف الـ CSS)
+        downloadBtn.style.cssText = "background-color: #2ea043; color: white; padding: 8px 16px; border-radius: 4px; text-decoration: none; font-weight: bold; margin-right: 15px; display: inline-block; cursor: pointer; transition: 0.3s;";
+        
+        // إضافة تأثير بسيط عند مرور الماوس
+        downloadBtn.onmouseover = () => downloadBtn.style.opacity = "0.8";
+        downloadBtn.onmouseout = () => downloadBtn.style.opacity = "1";
+
+        serversContainer.appendChild(downloadBtn);
+
+        // 4. إظهار المشغل والنزول إليه
         playerContainer.style.display = "block";
         playerContainer.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {

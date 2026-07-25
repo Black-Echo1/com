@@ -1,11 +1,15 @@
 const dubbersDatabase = {
-    "أحمد منصور": {
-        name: "أحمد منصور",
-        role: "مؤدي أصوات ",
-        logo: "https://files.catbox.moe/zxvbr4.jpeg", // <--- أضف هذا الرابط إن أردت
-        roles: [
-           { charName: "Hiiragi, Touma", animeTitle: "wind breaker", animeId: "wind breaker", charImage: "https://cdn.myanimelist.net/images/characters/7/467088.jpg" }
-        ]
+      "Youssef_مدبلج🎙️": {
+        name: "Youssef_مدبلج🎙️",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/qL54g9Yj/image.webp",
+        roles: []
+    },
+    "اكــــاي/𝕬ћ๓Σ𝕕☠": {
+        name: "اكــــاي/𝕬ћ๓Σ𝕕☠",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/4wGf5Q3V/image.webp",
+        roles: []
     },
 
     "mohamed.arata": {
@@ -33,7 +37,7 @@ const dubbersDatabase = {
 ,
     "asmaa9.esmael_adm6": { 
         name: "أسماء إسماعيل آدم",
-         role: "مؤدي أصوات ", logo: "",
+         role: "مؤدي أصوات ", logo: "https://i.ibb.co/YBFWPNYs/image.png",
           roles: [
          { charName: "", animeTitle: "", animeId: "", charImage: "" } ] },
     "sweet.angel8001": { 
@@ -81,6 +85,18 @@ const dubbersDatabase = {
         name: "Jogo Satora",
         role: "مؤدي أصوات",
         logo: "https://files.catbox.moe/dy7nqb.jpeg",
+        roles: []
+    },
+        "The fool": {
+        name: "The fool",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/8nXKRBtS/image.webp",
+        roles: []
+    },
+    "𝓐𝓶𝓶𝓪𝓻 𝓜𝓪𝔁(￢‸￢) ?": {
+        name: "𝓐𝓶𝓶𝓪𝓻 𝓜𝓪𝔁(￢‸￢) ?",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/XZvC8B7H/image.webp",
         roles: []
     },
 
@@ -170,5 +186,30 @@ const dubbersDatabase = {
         logo: "https://i.ibb.co/yn873wnj/image.webp",
         roles: []
     },
+        "alstor": {
+        name: "alstor",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/cXVwrdv6/image.webp",
+        roles: []
+        
+    },
+        "_elena.o_o": {
+        name: "_elena.o_o",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/sJbDp5Cy/photo-2026-07-23-15-12-52.jpg",
+        roles: []
+        
+    },
+    "★ 𝖋l͢i͢p͢o͢o͢ ★": {
+        name: "★ 𝖋l͢i͢p͢o͢o͢ ★",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/SD406Lwz/image.webp",
+        roles: []
+    },
+
+
+
          
 };
+
+

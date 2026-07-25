@@ -4,17 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>تفاصيل العمل - Black Echo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/anime_style.css">
     <link rel="icon" type="image/png" href="../icon-192.png">
     <meta name="mobile-web-app-capable" content="yes">
+
+    <style>
+        :root{
+            --he-bg:#07080c; --he-surface:#12141c; --he-surface-2:#181a24; --he-border:#262838;
+            --he-red:var(--accent-red, #e50914); --he-red-2:#ff3b3b; --he-gold:#ffb800; --he-muted:#93939f;
+        }
+        @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; } }
+        body{ font-family:'Cairo', sans-serif; background:var(--he-bg); color:#fff; }
+
+        .anime-cover-section{
+            position:relative; min-height:440px; background-size:cover; background-position:center top;
+            display:flex; align-items:flex-end;
+        }
+        .cover-overlay{ width:100%; background:linear-gradient(to top, var(--he-bg) 12%, rgba(7,8,12,0.55) 55%, rgba(7,8,12,0.25) 100%); padding-top:180px; }
+        .anime-details-content{ display:flex; gap:32px; align-items:flex-end; max-width:1200px; margin:0 auto; padding:0 20px 34px; flex-wrap:wrap; }
+        .anime-poster{ flex:0 0 190px; }
+        .anime-poster img{
+            width:190px; height:270px; object-fit:cover; border-radius:12px; border:3px solid var(--he-border);
+            box-shadow:0 20px 40px -10px rgba(0,0,0,0.7);
+        }
+        .anime-info{ flex:1; min-width:260px; }
+        .anime-info h1{ font-size:clamp(1.6rem,4vw,2.4rem); font-weight:900; margin:0 0 14px; text-shadow:2px 2px 8px #000; }
+        .anime-meta{ display:flex; gap:10px; flex-wrap:wrap; margin-bottom:16px; }
+        .meta-tag{ padding:5px 14px; border-radius:20px; font-size:0.8rem; font-weight:700; background:rgba(255,255,255,0.08); border:1px solid var(--he-border); }
+        .meta-tag.status{ color:#e8eee9; border-color:rgba(34, 168, 63, 0.4); }
+        .meta-tag.type{ color:#dbdcdf; border-color:rgba(122,167,255,0.4); }
+        .meta-tag.rating{ color:var(waite); border-color:rgb(221, 167, 17); }
+        .anime-story{ color:#1c828a; font-size:0.95rem; line-height:1.9; max-width:700px; margin:0 0 16px; }
+        .genres{ display:flex; gap:8px; flex-wrap:wrap; }
+        .genres span{ background:rgba(255,255,255,0.06); border:1px solid var(--he-border); color:#ddd; padding:5px 13px; border-radius:8px; font-size:0.78rem; }
+
+        .section-padding{ max-width:1200px; margin:0 auto; padding:50px 20px 70px; }
+
+        .episodes-header{ display:flex; justify-content:space-between; align-items:center; margin-bottom:24px; flex-wrap:wrap; gap:10px; }
+        .episodes-header h2{ font-size:1.4rem; font-weight:900; border-right:4px solid var(--he-red-2); padding-right:14px; margin:0; }
+        .ep-count{ color:var(--he-muted); font-size:0.85rem; background:var(--he-surface); border:1px solid var(--he-border); padding:6px 14px; border-radius:20px; }
+
+        .episodes-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:20px; }
+        .ep-card{
+            background:var(--he-surface); border:1px solid var(--he-border); border-radius:14px; overflow:hidden;
+            transition:transform .3s ease, border-color .3s ease;
+            opacity:0; transform:translateY(18px); animation:heFadeIn .5s ease forwards;
+        }
+        @keyframes heFadeIn{ to{ opacity:1; transform:translateY(0); } }
+        .ep-card:hover{ transform:translateY(-6px); border-color:var(--he-red-2); box-shadow:0 16px 30px -12px rgba(0,0,0,0.55); }
+        .ep-thumb-container{ position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; }
+        .ep-thumb-container img{ width:100%; height:100%; object-fit:cover; display:block; transition:transform .4s ease; }
+        .ep-card:hover .ep-thumb-container img{ transform:scale(1.08); }
+        .ep-duration{ position:absolute; bottom:8px; left:8px; background:rgba(0,0,0,0.75); color:#fff; font-size:0.72rem; padding:2px 8px; border-radius:5px; }
+        .ep-play-overlay{
+            position:absolute; inset:0; display:flex; align-items:center; justify-content:center; font-size:1.6rem; color:#fff;
+            background:rgba(7,8,12,0.35); opacity:0; transition:opacity .3s ease;
+        }
+        .ep-card:hover .ep-play-overlay{ opacity:1; }
+        .ep-card-info{ padding:12px 14px 14px; }
+        .ep-card-info h4{ margin:0 0 6px; font-size:0.92rem; }
+        .ep-card-info p{ margin:0; color:var(--he-muted); font-size:0.78rem; }
+
+        #video-player-container{ scroll-margin-top:20px; }
+        .server-btn{
+            background:rgba(255,255,255,0.06); color:#fff; border:1px solid var(--he-border);
+            padding:8px 18px; border-radius:8px; cursor:pointer; font-family:'Cairo',sans-serif; font-size:0.85rem; transition:.2s;
+        }
+        .server-btn.active, .server-btn:hover{ background:linear-gradient(135deg, var(--he-red-2), var(--he-red)); border-color:transparent; }
+
+        #anime-characters{ max-width:1200px; margin:0 auto; padding:0 20px 60px; }
+        .section-padding + h3{ max-width:1200px; margin:0 auto; padding:0 20px; font-size:1.3rem; font-weight:900; border-right:4px solid var(--he-red-2); padding-right:14px; }
+        .character-card{ transition:transform .3s ease; }
+        .character-card:hover{ transform:translateY(-5px); }
+        .character-card img{ transition:box-shadow .3s ease; }
+        .character-card:hover img{ box-shadow:0 10px 22px -6px rgba(229,9,20,0.5) !important; }
+
+        footer{ text-align:center; padding:34px 20px; color:var(--he-muted); font-size:0.85rem; border-top:1px solid var(--he-border); }
+        footer a{ color:var(--he-muted); text-decoration:none; }
+        footer a:hover{ color:var(--he-red-2); }
+    </style>
 </head>
 <body class="animated-bg">
 
 <header class="main-header">
     <div class="logo">
-        <div class="logo rgb-text">ArabDub Hub</div>    
+        <div class="logo rgb-text">AR Anime</div>    
     </div>
     
     <div class="menu-icon">☰</div>
@@ -56,15 +133,15 @@
     <div id="video-player-container" style="display: none; margin-bottom: 40px; max-width: 900px; margin-left: auto; margin-right: auto;">
         
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <h3 id="playing-episode-title" style="color: #fff; font-size: 1.2rem; border-right: 3px solid var(--accent-red); padding-right: 10px; margin: 0;">جاري التشغيل...</h3>
-            <button onclick="closeInlinePlayer()" style="background: #e50914; color: white; border: none; padding: 6px 15px; border-radius: 4px; cursor: pointer; font-weight: bold; transition: 0.3s;">إغلاق الحلقة ✖</button>
+            <h3 id="playing-episode-title" style="color: #fff; font-size: 1.2rem; border-right: 3px solid var(--he-red-2); padding-right: 10px; margin: 0;">جاري التشغيل...</h3>
+            <button onclick="closeInlinePlayer()" style="background: linear-gradient(135deg, #ff3b3b, #e50914); color: white; border: none; padding: 8px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; font-family:'Cairo',sans-serif; transition: 0.3s;">إغلاق الحلقة ✖</button>
         </div>
 
-        <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 2px solid var(--accent-red); box-shadow: 0 0 20px rgba(229, 9, 20, 0.4); background: #000;">
+        <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--he-border); box-shadow: 0 0 30px rgba(229, 9, 20, 0.25); background: #000;">
             <iframe id="video-iframe" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" allow="autoplay; fullscreen"></iframe>
         </div>
         <!-- حاوية أزرار السيرفرات المتعددة -->
-        <div id="servers-container" class="servers-list" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap;">
+        <div id="servers-container" class="servers-list" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; align-items:center;">
             <!-- يتم توليد الأزرار تلقائياً هنا -->
         </div>
     </div>
@@ -82,8 +159,23 @@
 <div id="anime-characters" style="display: flex; flex-wrap: wrap; gap: 10px;">
     <!-- سيتم حقن الشخصيات هنا بواسطة الجافاسكربت -->
 </div>
+
+<footer>
+    <a href="legal.html">سياسة الخصوصية</a> | <a href="tel:+905014770828">تواصل معنا</a>
+    <p>&copy; 2026 أكاديمية Black Echo.</p>
+</footer>
+
 <script src="../data/anime_db.js"></script>
 <script src="../data/anime_script.js"></script>
 <script src="../data/script.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const menuIcon = document.querySelector('.menu-icon');
+        const navMenu = document.getElementById('navMenu');
+        const closeBtn = document.querySelector('.close-btn');
+        if(menuIcon && navMenu) menuIcon.addEventListener('click', () => navMenu.classList.add('active'));
+        if(closeBtn && navMenu) closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
+    });
+</script>
 </body>
 </html>

@@ -3466,384 +3466,745 @@ const animeDetailsDatabase = {
     "tensei_shitara_slime_datta_ken_مدبلج_s1": {
         "malId": 37430,
         "dubbedCharacters": {},
-        "episodes":  [
+        "episodes": [
             {
                 "number": 1,
                 "title": "الحلقة 1",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/xyLSOXdriVDIQ",
-                        "ouo_url": "https://ouo.io/yzlhka"
+                        "url": "https://share4max.com/iframe/0CoC8xvp5uHiE",
+                        "ouo_url": "https://ouo.io/YEa7fU"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/xyLSOXdriVDIQ",
-                        "ouo_url": "https://ouo.io/yzlhka"
+                        "url": "https://share4max.com/iframe/0CoC8xvp5uHiE",
+                        "ouo_url": "https://ouo.io/YEa7fU"
                     }
                 ]
             },
             {
                 "number": 2,
                 "title": "الحلقة 2",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/Y76w1v41VWuHy",
-                        "ouo_url": "https://ouo.io/Gncp2p"
+                        "url": "https://share4max.com/iframe/XLjXuUqgnT0Xr",
+                        "ouo_url": "https://ouo.io/mosSWYw"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/Y76w1v41VWuHy",
-                        "ouo_url": "https://ouo.io/Gncp2p"
+                        "url": "https://share4max.com/iframe/XLjXuUqgnT0Xr",
+                        "ouo_url": "https://ouo.io/mosSWYw"
                     }
                 ]
             },
             {
                 "number": 3,
                 "title": "الحلقة 3",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/FblI2pQ2guVmk",
-                        "ouo_url": "https://ouo.io/yaix9P"
+                        "url": "https://share4max.com/iframe/xCQ94tk0fvRg5",
+                        "ouo_url": "https://ouo.io/Zf90gEB"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/FblI2pQ2guVmk",
-                        "ouo_url": "https://ouo.io/yaix9P"
+                        "url": "https://share4max.com/iframe/xCQ94tk0fvRg5",
+                        "ouo_url": "https://ouo.io/Zf90gEB"
                     }
                 ]
             },
             {
                 "number": 4,
                 "title": "الحلقة 4",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/7qReczmrEoRBv",
-                        "ouo_url": "https://ouo.io/0MvEVIu"
+                        "url": "https://share4max.com/iframe/UuHL6EOtd475E",
+                        "ouo_url": "https://ouo.io/zGFHer"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/7qReczmrEoRBv",
-                        "ouo_url": "https://ouo.io/0MvEVIu"
+                        "url": "https://share4max.com/iframe/UuHL6EOtd475E",
+                        "ouo_url": "https://ouo.io/zGFHer"
                     }
                 ]
             },
             {
                 "number": 5,
                 "title": "الحلقة 5",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/5qSi4ZvartFNf",
-                        "ouo_url": "https://ouo.io/0iwKaBD"
+                        "url": "https://share4max.com/iframe/ltFVtmoQUS8Rc",
+                        "ouo_url": "https://ouo.io/24Uvmf"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/5qSi4ZvartFNf",
-                        "ouo_url": "https://ouo.io/0iwKaBD"
+                        "url": "https://share4max.com/iframe/ltFVtmoQUS8Rc",
+                        "ouo_url": "https://ouo.io/24Uvmf"
                     }
                 ]
             },
             {
                 "number": 6,
                 "title": "الحلقة 6",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/ydheTUzxPzDN9",
-                        "ouo_url": "https://ouo.io/p2OKMJ"
+                        "url": "https://share4max.com/iframe/KycGdSLk8n8mn",
+                        "ouo_url": "https://ouo.io/ROcaYBi"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/ydheTUzxPzDN9",
-                        "ouo_url": "https://ouo.io/p2OKMJ"
+                        "url": "https://share4max.com/iframe/KycGdSLk8n8mn",
+                        "ouo_url": "https://ouo.io/ROcaYBi"
                     }
                 ]
             },
             {
                 "number": 7,
                 "title": "الحلقة 7",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/3oCMcZPr123FE",
-                        "ouo_url": "https://ouo.io/oOzVT6V"
+                        "url": "https://share4max.com/iframe/lKh6z0YNSmjNo",
+                        "ouo_url": "https://ouo.io/ktauv6"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/3oCMcZPr123FE",
-                        "ouo_url": "https://ouo.io/oOzVT6V"
+                        "url": "https://share4max.com/iframe/lKh6z0YNSmjNo",
+                        "ouo_url": "https://ouo.io/ktauv6"
                     }
                 ]
             },
             {
                 "number": 8,
                 "title": "الحلقة 8",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/U06FriKFSroO4",
-                        "ouo_url": "https://ouo.io/8i3h4g"
+                        "url": "https://share4max.com/iframe/GnowiZuaTT7U2",
+                        "ouo_url": "https://ouo.io/y0cN1G"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/U06FriKFSroO4",
-                        "ouo_url": "https://ouo.io/8i3h4g"
+                        "url": "https://share4max.com/iframe/GnowiZuaTT7U2",
+                        "ouo_url": "https://ouo.io/y0cN1G"
                     }
                 ]
             },
             {
                 "number": 9,
                 "title": "الحلقة 9",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/s73USKHw8ToNm",
-                        "ouo_url": "https://ouo.io/WqMvZHu"
+                        "url": "https://share4max.com/iframe/3QvcnQUbdk46U",
+                        "ouo_url": "https://ouo.io/RqFXWOo"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/s73USKHw8ToNm",
-                        "ouo_url": "https://ouo.io/WqMvZHu"
+                        "url": "https://share4max.com/iframe/3QvcnQUbdk46U",
+                        "ouo_url": "https://ouo.io/RqFXWOo"
                     }
                 ]
             },
             {
                 "number": 10,
                 "title": "الحلقة 10",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/3nLVtwkFB9YDt",
-                        "ouo_url": "https://ouo.io/R7sRPl"
+                        "url": "https://share4max.com/iframe/fZ4Z3n1ut8lO1",
+                        "ouo_url": "https://ouo.io/7VWbqJ"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/3nLVtwkFB9YDt",
-                        "ouo_url": "https://ouo.io/R7sRPl"
+                        "url": "https://share4max.com/iframe/fZ4Z3n1ut8lO1",
+                        "ouo_url": "https://ouo.io/7VWbqJ"
                     }
                 ]
             },
             {
                 "number": 11,
                 "title": "الحلقة 11",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/ZZIawtTBn4rcs",
-                        "ouo_url": "https://ouo.io/zGz007M"
+                        "url": "https://share4max.com/iframe/prVIWcMCILxAN",
+                        "ouo_url": "https://ouo.io/FaJL9R"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/ZZIawtTBn4rcs",
-                        "ouo_url": "https://ouo.io/zGz007M"
+                        "url": "https://share4max.com/iframe/prVIWcMCILxAN",
+                        "ouo_url": "https://ouo.io/FaJL9R"
                     }
                 ]
             },
             {
                 "number": 12,
                 "title": "الحلقة 12",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/ewxk8GTIEwJ1z",
-                        "ouo_url": "https://ouo.io/ovFHc6"
+                        "url": "https://share4max.com/iframe/D7x1HVSCdeOP0",
+                        "ouo_url": "https://ouo.io/0EAkWm"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/ewxk8GTIEwJ1z",
-                        "ouo_url": "https://ouo.io/ovFHc6"
+                        "url": "https://share4max.com/iframe/D7x1HVSCdeOP0",
+                        "ouo_url": "https://ouo.io/0EAkWm"
+                    }
+                ]
+            }
+        ]
+    },
+    "grendizer_u_جريندايزر_يو_مدبلج_s1": {
+        "malId": 56189,
+        "dubbedCharacters": {},
+        "episodes": [
+            {
+                "number": 1,
+                "title": "الحلقة 1",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/hfrxxxfTozrW7",
+                        "ouo_url": "https://ouo.io/P4eLsd"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/270jzr0dojau",
+                        "ouo_url": "https://ouo.io/0svhYTT"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/hfrxxxfTozrW7",
+                        "ouo_url": "https://ouo.io/P4eLsd"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/xs47fydq",
+                        "ouo_url": "https://ouo.io/Dbd0VO"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/Ht0P4Mppd5V8Faeu",
+                        "ouo_url": "https://ouo.io/TyEHgm"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7506848975464",
+                        "ouo_url": "https://ouo.io/aUuB0o"
+                    }
+                ]
+            },
+            {
+                "number": 2,
+                "title": "الحلقة 2",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/VW3NUwduta2l5",
+                        "ouo_url": "https://ouo.io/22GOf4T"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/mg52r0yxn7jj",
+                        "ouo_url": "https://ouo.io/I3CugLW"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/VW3NUwduta2l5",
+                        "ouo_url": "https://ouo.io/22GOf4T"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/96r3w8mz",
+                        "ouo_url": "https://ouo.io/gGX5Bs"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/Gz7ocHfcfD35i4Si",
+                        "ouo_url": "https://ouo.io/sPPWkW"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7506848909928",
+                        "ouo_url": "https://ouo.io/0eN3JE"
+                    }
+                ]
+            },
+            {
+                "number": 3,
+                "title": "الحلقة 3",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/YdRACug6z79Ji",
+                        "ouo_url": "https://ouo.io/pI0FHFr"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/ic39a1xamdik",
+                        "ouo_url": "https://ouo.io/VXPitNp"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/YdRACug6z79Ji",
+                        "ouo_url": "https://ouo.io/pI0FHFr"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/a45ccg6e",
+                        "ouo_url": "https://ouo.io/U8r6v7G"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/ZfjkQMY75TMK4b3e",
+                        "ouo_url": "https://ouo.io/18Mo3v"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7506848844392",
+                        "ouo_url": "https://ouo.io/tAE0B0"
+                    }
+                ]
+            },
+            {
+                "number": 4,
+                "title": "الحلقة 4",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/FbvislWLZz8wu",
+                        "ouo_url": "https://ouo.io/H7v8vov"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/s22bcxvyvygy",
+                        "ouo_url": "https://ouo.io/pdgvb7"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/FbvislWLZz8wu",
+                        "ouo_url": "https://ouo.io/H7v8vov"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/d38ky3vj",
+                        "ouo_url": "https://ouo.io/9JaxTJ"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/kVSxckPET0UmpHoH",
+                        "ouo_url": "https://ouo.io/E0UXkop"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7506848778856",
+                        "ouo_url": "https://ouo.io/gAyxwZK"
+                    }
+                ]
+            },
+            {
+                "number": 5,
+                "title": "الحلقة 5",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/Sbc0zOhB43Bc1",
+                        "ouo_url": "https://ouo.io/RTv4BC"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/itbkgzubrovt",
+                        "ouo_url": "https://ouo.io/9bdD1tY"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/Sbc0zOhB43Bc1",
+                        "ouo_url": "https://ouo.io/RTv4BC"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/p89qmtej",
+                        "ouo_url": "https://ouo.io/KzyP5L"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/T6HWBfKCdulVEf25",
+                        "ouo_url": "https://ouo.io/r86bwN"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7506848713320",
+                        "ouo_url": "https://ouo.io/ytbz06o"
+                    }
+                ]
+            },
+            {
+                "number": 6,
+                "title": "الحلقة 6",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/aVgJgdHZVQ1EK",
+                        "ouo_url": "https://ouo.io/jqJ9Z5"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/cjwoztcvincz",
+                        "ouo_url": "https://ouo.io/yg5Dshw"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/aVgJgdHZVQ1EK",
+                        "ouo_url": "https://ouo.io/jqJ9Z5"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/nqxlgeeg",
+                        "ouo_url": "https://ouo.io/xtijSOU"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/8KdjLkFWyl1tlkn0",
+                        "ouo_url": "https://ouo.io/3asG32"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7558280055400",
+                        "ouo_url": "https://ouo.io/LKMyQi"
+                    }
+                ]
+            },
+            {
+                "number": 7,
+                "title": "الحلقة 7",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/xZT1YrX4cgMpy",
+                        "ouo_url": "https://ouo.io/17UsTM"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/hupb9hsxfwxo",
+                        "ouo_url": "https://ouo.io/OFVH5yW"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/xZT1YrX4cgMpy",
+                        "ouo_url": "https://ouo.io/17UsTM"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/umwgl6w0",
+                        "ouo_url": "https://ouo.io/yxF9IAv"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/LlJneOT2XlgRA64c",
+                        "ouo_url": "https://ouo.io/Sh6TEN9"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7558280120936",
+                        "ouo_url": "https://ouo.io/6vzAuh"
+                    }
+                ]
+            },
+            {
+                "number": 8,
+                "title": "الحلقة 8",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/vWs6F0HFAlXKD",
+                        "ouo_url": "https://ouo.io/3OJHSu"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/aw2ownb4wncb",
+                        "ouo_url": "https://ouo.io/OU7rcT"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/vWs6F0HFAlXKD",
+                        "ouo_url": "https://ouo.io/3OJHSu"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/8ewn19t2",
+                        "ouo_url": "https://ouo.io/ZA4Wlj"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/lCNCkYakB59m51ba",
+                        "ouo_url": "https://ouo.io/8iT4qI"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7558427904616",
+                        "ouo_url": "https://ouo.io/IbLScc"
+                    }
+                ]
+            },
+            {
+                "number": 9,
+                "title": "الحلقة 9",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/WHBrVh3KCe5cJ",
+                        "ouo_url": "https://ouo.io/8JrXuD"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/9gvj1okoirzy",
+                        "ouo_url": "https://ouo.io/b2bVXN"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/WHBrVh3KCe5cJ",
+                        "ouo_url": "https://ouo.io/8JrXuD"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/eiozcseh",
+                        "ouo_url": "https://ouo.io/xUUErQ"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/5yYEWAfbL9oTFOc3",
+                        "ouo_url": "https://ouo.io/kvyIZ17"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7576862132840",
+                        "ouo_url": "https://ouo.io/qYHz6b"
+                    }
+                ]
+            },
+            {
+                "number": 10,
+                "title": "الحلقة 10",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/5gIL0np88GlNP",
+                        "ouo_url": "https://ouo.io/mTPNk3f"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/3ws8mkkevyqt",
+                        "ouo_url": "https://ouo.io/n6m9yt"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/5gIL0np88GlNP",
+                        "ouo_url": "https://ouo.io/mTPNk3f"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/vsx4hvha",
+                        "ouo_url": "https://ouo.io/Qr9AUE"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/FkxvMvWt2OGXFGV6",
+                        "ouo_url": "https://ouo.io/G3DPtLb"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7596450450024",
+                        "ouo_url": "https://ouo.io/Ral8AF"
+                    }
+                ]
+            },
+            {
+                "number": 11,
+                "title": "الحلقة 11",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/wMwNW6eqpPlNC",
+                        "ouo_url": "https://ouo.io/lZ7y7E"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/8fcqwtt041wc",
+                        "ouo_url": "https://ouo.io/L5j4pLQ"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/wMwNW6eqpPlNC",
+                        "ouo_url": "https://ouo.io/lZ7y7E"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/yl3uzbpt",
+                        "ouo_url": "https://ouo.io/EMnsxVq"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/Qjc8dGd5h7pcJzFE",
+                        "ouo_url": "https://ouo.io/x4IeE4"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7615173298792",
+                        "ouo_url": "https://ouo.io/PEI9X50"
+                    }
+                ]
+            },
+            {
+                "number": 12,
+                "title": "الحلقة 12",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/LKvcLsOowXSOp",
+                        "ouo_url": "https://ouo.io/WafGRr"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/1ahgrUSnvfFgA3IfJ7t6_xLNgOxwdbUr9",
+                        "ouo_url": "https://ouo.io/7LcQZD"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/LKvcLsOowXSOp",
+                        "ouo_url": "https://ouo.io/WafGRr"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/zowcxcyc",
+                        "ouo_url": "https://ouo.io/N9BGB4"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/yKTUH3A31n0Iuf0u",
+                        "ouo_url": "https://ouo.io/nEEQTTi"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7636494977640",
+                        "ouo_url": "https://ouo.io/G4XkSr"
                     }
                 ]
             },
             {
                 "number": 13,
                 "title": "الحلقة 13",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "thumbnail": "https://files.catbox.moe/c3xfsk.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/JxghVeTQwEmZJ",
-                        "ouo_url": "https://ouo.io/iJXWsOf"
+                        "url": "https://share4max.com/iframe/HEecwNUVPQrfr",
+                        "ouo_url": "https://ouo.io/dbtZaC"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/JxghVeTQwEmZJ",
-                        "ouo_url": "https://ouo.io/iJXWsOf"
-                    }
-                ]
-            },
-            {
-                "number": 14,
-                "title": "الحلقة 14",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/nOCZ4MZiwuDIh",
-                        "ouo_url": "https://ouo.io/2IJHPeu"
+                        "url": "https://share4max.com/iframe/77wtzliefdju",
+                        "ouo_url": "https://ouo.io/aJAFPMP"
                     },
                     {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/nOCZ4MZiwuDIh",
-                        "ouo_url": "https://ouo.io/2IJHPeu"
-                    }
-                ]
-            },
-            {
-                "number": 15,
-                "title": "الحلقة 15",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/RenIP94Wej2NL",
-                        "ouo_url": "https://ouo.io/YEVQLkM"
+                        "name": "سيرفر احتياطي 2",
+                        "url": "https://share4max.com/iframe/HEecwNUVPQrfr",
+                        "ouo_url": "https://ouo.io/dbtZaC"
                     },
                     {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/RenIP94Wej2NL",
-                        "ouo_url": "https://ouo.io/YEVQLkM"
-                    }
-                ]
-            },
-            {
-                "number": 16,
-                "title": "الحلقة 16",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/pz711rgTHPKP8",
-                        "ouo_url": "https://ouo.io/4BINmD"
+                        "name": "سيرفر احتياطي 3",
+                        "url": "https://share4max.com/iframe/0yaig7vk",
+                        "ouo_url": "https://ouo.io/0gKqyXR"
                     },
                     {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/pz711rgTHPKP8",
-                        "ouo_url": "https://ouo.io/4BINmD"
-                    }
-                ]
-            },
-            {
-                "number": 17,
-                "title": "الحلقة 17",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/rIME4Sln1Fykd",
-                        "ouo_url": "https://ouo.io/9ra1u5"
+                        "name": "سيرفر احتياطي 4",
+                        "url": "https://share4max.com/iframe/dFgn5YSgPyIAwtXK",
+                        "ouo_url": "https://ouo.io/6AI253"
                     },
                     {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/rIME4Sln1Fykd",
-                        "ouo_url": "https://ouo.io/9ra1u5"
-                    }
-                ]
-            },
-            {
-                "number": 18,
-                "title": "الحلقة 18",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/UtLqFRwMUKxaJ",
-                        "ouo_url": "https://ouo.io/qonbE29"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/UtLqFRwMUKxaJ",
-                        "ouo_url": "https://ouo.io/qonbE29"
-                    }
-                ]
-            },
-            {
-                "number": 19,
-                "title": "الحلقة 19",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/WHTiF8JNzRUoi",
-                        "ouo_url": "https://ouo.io/ShKS7k"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/WHTiF8JNzRUoi",
-                        "ouo_url": "https://ouo.io/ShKS7k"
-                    }
-                ]
-            },
-            {
-                "number": 20,
-                "title": "الحلقة 20",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/avpmlCFs3GuPe",
-                        "ouo_url": "https://ouo.io/cDpIXf"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/avpmlCFs3GuPe",
-                        "ouo_url": "https://ouo.io/cDpIXf"
+                        "name": "سيرفر احتياطي 5",
+                        "url": "https://share4max.com/iframe/7665360505448",
+                        "ouo_url": "https://ouo.io/jy2yPYn"
                     }
                 ]
             }
@@ -8103,7 +8464,7 @@ const animeDetailsDatabase = {
             {
                 "number": 2,
                 "title": "الحلقة 2",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8127,7 +8488,7 @@ const animeDetailsDatabase = {
             {
                 "number": 3,
                 "title": "الحلقة 3",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8151,7 +8512,7 @@ const animeDetailsDatabase = {
             {
                 "number": 4,
                 "title": "الحلقة 4",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8175,7 +8536,7 @@ const animeDetailsDatabase = {
             {
                 "number": 5,
                 "title": "الحلقة 5",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8199,7 +8560,7 @@ const animeDetailsDatabase = {
             {
                 "number": 6,
                 "title": "الحلقة 6",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8223,7 +8584,7 @@ const animeDetailsDatabase = {
             {
                 "number": 7,
                 "title": "الحلقة 7",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8247,7 +8608,7 @@ const animeDetailsDatabase = {
             {
                 "number": 8,
                 "title": "الحلقة 8",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8271,7 +8632,7 @@ const animeDetailsDatabase = {
             {
                 "number": 9,
                 "title": "الحلقة 9",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8295,7 +8656,7 @@ const animeDetailsDatabase = {
             {
                 "number": 10,
                 "title": "الحلقة 10",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8319,7 +8680,7 @@ const animeDetailsDatabase = {
             {
                 "number": 11,
                 "title": "الحلقة 11",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8343,7 +8704,7 @@ const animeDetailsDatabase = {
             {
                 "number": 12,
                 "title": "الحلقة 12",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1664/103275.jpg",
+                "thumbnail": "https://files.catbox.moe/kbqqiu.jpg",
                 "duration": "24:00",
                 "date": "Jun 28, 2026",
                 "servers": [
@@ -8753,7 +9114,7 @@ const animeDetailsDatabase = {
         ]
     },
     "enen_no_shouboutai_مدبلج_s3": {
-        "malId": 51818,
+        "malId": 38671,
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -16015,7 +16376,7 @@ const animeDetailsDatabase = {
         ]
     },
     "boku_no_hero_academia_أكاديمية_بطلي_مدبلج_s2": {
-        "malId": 33486,
+        "malId": 31964,
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -16382,7 +16743,7 @@ const animeDetailsDatabase = {
         ]
     },
     "boku_no_hero_academia_أكاديمية_بطلي_مدبلج_s3": {
-        "malId": 36456,
+        "malId": 31964,
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -16876,7 +17237,7 @@ const animeDetailsDatabase = {
         ]
     },
     "boku_no_hero_academia_أكاديمية_بطلي_مدبلج_s4": {
-        "malId": 38408,
+        "malId": 31964,
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -17303,7 +17664,7 @@ const animeDetailsDatabase = {
         ]
     },
     "boku_no_hero_academia_أكاديمية_بطلي_مدبلج_s5": {
-        "malId": 41587,
+        "malId": 31964,
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -19789,674 +20150,9 @@ const animeDetailsDatabase = {
         ]
     },
     "tensei_shitara_slime_datta_ken_مدبلج_s2": {
-        "malId": 39551,
+        "malId": 37430,
         "dubbedCharacters": {},
         "episodes": [
-            {
-                "number": 1,
-                "title": "الحلقة 1",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/0CoC8xvp5uHiE",
-                        "ouo_url": "https://ouo.io/YEa7fU"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/0CoC8xvp5uHiE",
-                        "ouo_url": "https://ouo.io/YEa7fU"
-                    }
-                ]
-            },
-            {
-                "number": 2,
-                "title": "الحلقة 2",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/XLjXuUqgnT0Xr",
-                        "ouo_url": "https://ouo.io/mosSWYw"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/XLjXuUqgnT0Xr",
-                        "ouo_url": "https://ouo.io/mosSWYw"
-                    }
-                ]
-            },
-            {
-                "number": 3,
-                "title": "الحلقة 3",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/xCQ94tk0fvRg5",
-                        "ouo_url": "https://ouo.io/Zf90gEB"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/xCQ94tk0fvRg5",
-                        "ouo_url": "https://ouo.io/Zf90gEB"
-                    }
-                ]
-            },
-            {
-                "number": 4,
-                "title": "الحلقة 4",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/UuHL6EOtd475E",
-                        "ouo_url": "https://ouo.io/zGFHer"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/UuHL6EOtd475E",
-                        "ouo_url": "https://ouo.io/zGFHer"
-                    }
-                ]
-            },
-            {
-                "number": 5,
-                "title": "الحلقة 5",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/ltFVtmoQUS8Rc",
-                        "ouo_url": "https://ouo.io/24Uvmf"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/ltFVtmoQUS8Rc",
-                        "ouo_url": "https://ouo.io/24Uvmf"
-                    }
-                ]
-            },
-            {
-                "number": 6,
-                "title": "الحلقة 6",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/KycGdSLk8n8mn",
-                        "ouo_url": "https://ouo.io/ROcaYBi"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/KycGdSLk8n8mn",
-                        "ouo_url": "https://ouo.io/ROcaYBi"
-                    }
-                ]
-            },
-            {
-                "number": 7,
-                "title": "الحلقة 7",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/lKh6z0YNSmjNo",
-                        "ouo_url": "https://ouo.io/ktauv6"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/lKh6z0YNSmjNo",
-                        "ouo_url": "https://ouo.io/ktauv6"
-                    }
-                ]
-            },
-            {
-                "number": 8,
-                "title": "الحلقة 8",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/GnowiZuaTT7U2",
-                        "ouo_url": "https://ouo.io/y0cN1G"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/GnowiZuaTT7U2",
-                        "ouo_url": "https://ouo.io/y0cN1G"
-                    }
-                ]
-            },
-            {
-                "number": 9,
-                "title": "الحلقة 9",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/3QvcnQUbdk46U",
-                        "ouo_url": "https://ouo.io/RqFXWOo"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/3QvcnQUbdk46U",
-                        "ouo_url": "https://ouo.io/RqFXWOo"
-                    }
-                ]
-            },
-            {
-                "number": 10,
-                "title": "الحلقة 10",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/fZ4Z3n1ut8lO1",
-                        "ouo_url": "https://ouo.io/7VWbqJ"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/fZ4Z3n1ut8lO1",
-                        "ouo_url": "https://ouo.io/7VWbqJ"
-                    }
-                ]
-            },
-            {
-                "number": 11,
-                "title": "الحلقة 11",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/prVIWcMCILxAN",
-                        "ouo_url": "https://ouo.io/FaJL9R"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/prVIWcMCILxAN",
-                        "ouo_url": "https://ouo.io/FaJL9R"
-                    }
-                ]
-            },
-            {
-                "number": 12,
-                "title": "الحلقة 12",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-06_23_34-PM-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/D7x1HVSCdeOP0",
-                        "ouo_url": "https://ouo.io/0EAkWm"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/D7x1HVSCdeOP0",
-                        "ouo_url": "https://ouo.io/0EAkWm"
-                    }
-                ]
-            }
-        ]
-
-    },
-    "tensei_shitara_slime_datta_ken_مدبلج_s3": {
-        "malId": 41487,
-        "dubbedCharacters": {},
-        "episodes":  [
-            {
-                "number": 2,
-                "title": "الحلقة 2",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/zinxVi3BSlgpI",
-                        "ouo_url": "https://ouo.io/ChKKcCw"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/zinxVi3BSlgpI",
-                        "ouo_url": "https://ouo.io/ChKKcCw"
-                    }
-                ]
-            },
-            {
-                "number": 3,
-                "title": "الحلقة 3",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/XwE2j9F4EkNkZ",
-                        "ouo_url": "https://ouo.io/XuI7QMa"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/XwE2j9F4EkNkZ",
-                        "ouo_url": "https://ouo.io/XuI7QMa"
-                    }
-                ]
-            },
-            {
-                "number": 4,
-                "title": "الحلقة 4",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/bFP9AKsCswoZ8",
-                        "ouo_url": "https://ouo.io/QJkEbsd"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/bFP9AKsCswoZ8",
-                        "ouo_url": "https://ouo.io/QJkEbsd"
-                    }
-                ]
-            },
-            {
-                "number": 5,
-                "title": "الحلقة 5",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/gyMTzpjtADw8h",
-                        "ouo_url": "https://ouo.io/8ztR0r"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/gyMTzpjtADw8h",
-                        "ouo_url": "https://ouo.io/8ztR0r"
-                    }
-                ]
-            },
-            {
-                "number": 6,
-                "title": "الحلقة 6",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/aB6FPndZwVaja",
-                        "ouo_url": "https://ouo.io/QscpdQ"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/aB6FPndZwVaja",
-                        "ouo_url": "https://ouo.io/QscpdQ"
-                    }
-                ]
-            },
-            {
-                "number": 7,
-                "title": "الحلقة 7",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/PlszGdAQwYhvI",
-                        "ouo_url": "https://ouo.io/6XvUu8"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/PlszGdAQwYhvI",
-                        "ouo_url": "https://ouo.io/6XvUu8"
-                    }
-                ]
-            },
-            {
-                "number": 8,
-                "title": "الحلقة 8",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/ypDqaJgfTp32X",
-                        "ouo_url": "https://ouo.io/i6tM1m"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/ypDqaJgfTp32X",
-                        "ouo_url": "https://ouo.io/i6tM1m"
-                    }
-                ]
-            },
-            {
-                "number": 9,
-                "title": "الحلقة 9",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/X1xWaXdJ8TofQ",
-                        "ouo_url": "https://ouo.io/2lkElH"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/X1xWaXdJ8TofQ",
-                        "ouo_url": "https://ouo.io/2lkElH"
-                    }
-                ]
-            },
-            {
-                "number": 10,
-                "title": "الحلقة 10",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/KdmsFowWK4k7N",
-                        "ouo_url": "https://ouo.io/OM5UZZ"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/KdmsFowWK4k7N",
-                        "ouo_url": "https://ouo.io/OM5UZZ"
-                    }
-                ]
-            },
-            {
-                "number": 11,
-                "title": "الحلقة 11",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/iSGfvnmbHlQgE",
-                        "ouo_url": "https://ouo.io/IGzmM0N"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/iSGfvnmbHlQgE",
-                        "ouo_url": "https://ouo.io/IGzmM0N"
-                    }
-                ]
-            },
-            {
-                "number": 12,
-                "title": "الحلقة 12",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/GVnTGgdeCoVXW",
-                        "ouo_url": "https://ouo.io/vqNZadX"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/GVnTGgdeCoVXW",
-                        "ouo_url": "https://ouo.io/vqNZadX"
-                    }
-                ]
-            }
-        ]
-    },
-    "shiguang_dailiren_مدبلج_s1": {
-        "malId": 44074,
-        "dubbedCharacters": {},
-        "episodes": [
-            {
-                "number": 1,
-                "title": "الحلقة 1",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/QPWKMXQ5LJBD4",
-                        "ouo_url": "https://ouo.io/E6A6RXB"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/QPWKMXQ5LJBD4",
-                        "ouo_url": "https://ouo.io/E6A6RXB"
-                    }
-                ]
-            },
-            {
-                "number": 2,
-                "title": "الحلقة 2",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/p21nmTWLMjCce",
-                        "ouo_url": "https://ouo.io/3J7ahMg"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/p21nmTWLMjCce",
-                        "ouo_url": "https://ouo.io/3J7ahMg"
-                    }
-                ]
-            },
-            {
-                "number": 3,
-                "title": "الحلقة 3",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/CBegUiAWjwjLp",
-                        "ouo_url": "https://ouo.io/GTp2GRB"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/CBegUiAWjwjLp",
-                        "ouo_url": "https://ouo.io/GTp2GRB"
-                    }
-                ]
-            },
-            {
-                "number": 4,
-                "title": "الحلقة 4",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/tUkue0eI4nUWD",
-                        "ouo_url": "https://ouo.io/PNeL0K"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/tUkue0eI4nUWD",
-                        "ouo_url": "https://ouo.io/PNeL0K"
-                    }
-                ]
-            },
-            {
-                "number": 5,
-                "title": "الحلقة 5",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/WdPGs9xjuWXDv",
-                        "ouo_url": "https://ouo.io/izvLPgI"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/WdPGs9xjuWXDv",
-                        "ouo_url": "https://ouo.io/izvLPgI"
-                    }
-                ]
-            },
-            {
-                "number": 6,
-                "title": "الحلقة 6",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/wDzGD6ajTngPN",
-                        "ouo_url": "https://ouo.io/amcsN6A"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/wDzGD6ajTngPN",
-                        "ouo_url": "https://ouo.io/amcsN6A"
-                    }
-                ]
-            },
-            {
-                "number": 7,
-                "title": "الحلقة 7",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/c1KalTEXcfjTs",
-                        "ouo_url": "https://ouo.io/mvWhwLe"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/c1KalTEXcfjTs",
-                        "ouo_url": "https://ouo.io/mvWhwLe"
-                    }
-                ]
-            },
-            {
-                "number": 8,
-                "title": "الحلقة 8",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/2rbpanfVnQSYp",
-                        "ouo_url": "https://ouo.io/Uhh5ap"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/2rbpanfVnQSYp",
-                        "ouo_url": "https://ouo.io/Uhh5ap"
-                    }
-                ]
-            },
-            {
-                "number": 9,
-                "title": "الحلقة 9",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/VuviYmjhDxqm9",
-                        "ouo_url": "https://ouo.io/XMy36N"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/VuviYmjhDxqm9",
-                        "ouo_url": "https://ouo.io/XMy36N"
-                    }
-                ]
-            },
-            {
-                "number": 10,
-                "title": "الحلقة 10",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/v6hAZslwUDLFB",
-                        "ouo_url": "https://ouo.io/RNCYXw"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/v6hAZslwUDLFB",
-                        "ouo_url": "https://ouo.io/RNCYXw"
-                    }
-                ]
-            },
-            {
-                "number": 11,
-                "title": "الحلقة 11",
-                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/114867.jpg",
-                "duration": "24:00",
-                "date": "Jun 28, 2026",
-                "servers": [
-                    {
-                        "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/0n83NlUvmxqsM",
-                        "ouo_url": "https://ouo.io/0knKrOZ"
-                    },
-                    {
-                        "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/0n83NlUvmxqsM",
-                        "ouo_url": "https://ouo.io/0knKrOZ"
-                    }
-                ]
-            }
-        ]
-    },
-    "tensei_shitara_slime_datta_ken_مدبلج_s4": {
-        "malId": 53580,
-        "dubbedCharacters": {},
-        "episodes":[
             {
                 "number": 1,
                 "title": "الحلقة 1",
@@ -20839,10 +20535,10 @@ const animeDetailsDatabase = {
             }
         ]
     },
-    "tensei_shitara_slime_datta_ken_مدبلج_s5": {
-        "malId": 59970,
+    "tensei_shitara_slime_datta_ken_مدبلج_s3": {
+        "malId": 37430,
         "dubbedCharacters": {},
-        "episodes":[
+        "episodes": [
             {
                 "number": 1,
                 "title": "الحلقة 1",
@@ -21199,6 +20895,607 @@ const animeDetailsDatabase = {
                         "name": "سيرفر احتياطي 4",
                         "url": "https://share4max.com/iframe/EWky9rGHcI9hcZJu",
                         "ouo_url": "https://ouo.io/LbiJEPW"
+                    }
+                ]
+            }
+        ]
+    },
+    "tensei_shitara_slime_datta_ken_مدبلج_s4": {
+        "malId": 37430,
+        "dubbedCharacters": {},
+        "episodes": [
+            {
+                "number": 1,
+                "title": "الحلقة 1",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/xyLSOXdriVDIQ",
+                        "ouo_url": "https://ouo.io/yzlhka"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/xyLSOXdriVDIQ",
+                        "ouo_url": "https://ouo.io/yzlhka"
+                    }
+                ]
+            },
+            {
+                "number": 2,
+                "title": "الحلقة 2",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/Y76w1v41VWuHy",
+                        "ouo_url": "https://ouo.io/Gncp2p"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/Y76w1v41VWuHy",
+                        "ouo_url": "https://ouo.io/Gncp2p"
+                    }
+                ]
+            },
+            {
+                "number": 3,
+                "title": "الحلقة 3",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/FblI2pQ2guVmk",
+                        "ouo_url": "https://ouo.io/yaix9P"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/FblI2pQ2guVmk",
+                        "ouo_url": "https://ouo.io/yaix9P"
+                    }
+                ]
+            },
+            {
+                "number": 4,
+                "title": "الحلقة 4",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/7qReczmrEoRBv",
+                        "ouo_url": "https://ouo.io/0MvEVIu"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/7qReczmrEoRBv",
+                        "ouo_url": "https://ouo.io/0MvEVIu"
+                    }
+                ]
+            },
+            {
+                "number": 5,
+                "title": "الحلقة 5",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/5qSi4ZvartFNf",
+                        "ouo_url": "https://ouo.io/0iwKaBD"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/5qSi4ZvartFNf",
+                        "ouo_url": "https://ouo.io/0iwKaBD"
+                    }
+                ]
+            },
+            {
+                "number": 6,
+                "title": "الحلقة 6",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/ydheTUzxPzDN9",
+                        "ouo_url": "https://ouo.io/p2OKMJ"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/ydheTUzxPzDN9",
+                        "ouo_url": "https://ouo.io/p2OKMJ"
+                    }
+                ]
+            },
+            {
+                "number": 7,
+                "title": "الحلقة 7",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/3oCMcZPr123FE",
+                        "ouo_url": "https://ouo.io/oOzVT6V"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/3oCMcZPr123FE",
+                        "ouo_url": "https://ouo.io/oOzVT6V"
+                    }
+                ]
+            },
+            {
+                "number": 8,
+                "title": "الحلقة 8",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/U06FriKFSroO4",
+                        "ouo_url": "https://ouo.io/8i3h4g"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/U06FriKFSroO4",
+                        "ouo_url": "https://ouo.io/8i3h4g"
+                    }
+                ]
+            },
+            {
+                "number": 9,
+                "title": "الحلقة 9",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/s73USKHw8ToNm",
+                        "ouo_url": "https://ouo.io/WqMvZHu"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/s73USKHw8ToNm",
+                        "ouo_url": "https://ouo.io/WqMvZHu"
+                    }
+                ]
+            },
+            {
+                "number": 10,
+                "title": "الحلقة 10",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/3nLVtwkFB9YDt",
+                        "ouo_url": "https://ouo.io/R7sRPl"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/3nLVtwkFB9YDt",
+                        "ouo_url": "https://ouo.io/R7sRPl"
+                    }
+                ]
+            },
+            {
+                "number": 11,
+                "title": "الحلقة 11",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/ZZIawtTBn4rcs",
+                        "ouo_url": "https://ouo.io/zGz007M"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/ZZIawtTBn4rcs",
+                        "ouo_url": "https://ouo.io/zGz007M"
+                    }
+                ]
+            },
+            {
+                "number": 12,
+                "title": "الحلقة 12",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/ewxk8GTIEwJ1z",
+                        "ouo_url": "https://ouo.io/ovFHc6"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/ewxk8GTIEwJ1z",
+                        "ouo_url": "https://ouo.io/ovFHc6"
+                    }
+                ]
+            },
+            {
+                "number": 13,
+                "title": "الحلقة 13",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/JxghVeTQwEmZJ",
+                        "ouo_url": "https://ouo.io/iJXWsOf"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/JxghVeTQwEmZJ",
+                        "ouo_url": "https://ouo.io/iJXWsOf"
+                    }
+                ]
+            },
+            {
+                "number": 14,
+                "title": "الحلقة 14",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/nOCZ4MZiwuDIh",
+                        "ouo_url": "https://ouo.io/2IJHPeu"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/nOCZ4MZiwuDIh",
+                        "ouo_url": "https://ouo.io/2IJHPeu"
+                    }
+                ]
+            },
+            {
+                "number": 15,
+                "title": "الحلقة 15",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/RenIP94Wej2NL",
+                        "ouo_url": "https://ouo.io/YEVQLkM"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/RenIP94Wej2NL",
+                        "ouo_url": "https://ouo.io/YEVQLkM"
+                    }
+                ]
+            },
+            {
+                "number": 16,
+                "title": "الحلقة 16",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/pz711rgTHPKP8",
+                        "ouo_url": "https://ouo.io/4BINmD"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/pz711rgTHPKP8",
+                        "ouo_url": "https://ouo.io/4BINmD"
+                    }
+                ]
+            },
+            {
+                "number": 17,
+                "title": "الحلقة 17",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/rIME4Sln1Fykd",
+                        "ouo_url": "https://ouo.io/9ra1u5"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/rIME4Sln1Fykd",
+                        "ouo_url": "https://ouo.io/9ra1u5"
+                    }
+                ]
+            },
+            {
+                "number": 18,
+                "title": "الحلقة 18",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/UtLqFRwMUKxaJ",
+                        "ouo_url": "https://ouo.io/qonbE29"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/UtLqFRwMUKxaJ",
+                        "ouo_url": "https://ouo.io/qonbE29"
+                    }
+                ]
+            },
+            {
+                "number": 19,
+                "title": "الحلقة 19",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/WHTiF8JNzRUoi",
+                        "ouo_url": "https://ouo.io/ShKS7k"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/WHTiF8JNzRUoi",
+                        "ouo_url": "https://ouo.io/ShKS7k"
+                    }
+                ]
+            },
+            {
+                "number": 20,
+                "title": "الحلقة 20",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/Image-Mar-25-2026-01_54_20-PM-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/avpmlCFs3GuPe",
+                        "ouo_url": "https://ouo.io/cDpIXf"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/avpmlCFs3GuPe",
+                        "ouo_url": "https://ouo.io/cDpIXf"
+                    }
+                ]
+            }
+        ]
+    },
+    "tensei_shitara_slime_datta_ken_مدبلج_s5": {
+        "malId": 37430,
+        "dubbedCharacters": {},
+        "episodes": [
+            {
+                "number": 2,
+                "title": "الحلقة 2",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/zinxVi3BSlgpI",
+                        "ouo_url": "https://ouo.io/ChKKcCw"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/zinxVi3BSlgpI",
+                        "ouo_url": "https://ouo.io/ChKKcCw"
+                    }
+                ]
+            },
+            {
+                "number": 3,
+                "title": "الحلقة 3",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/XwE2j9F4EkNkZ",
+                        "ouo_url": "https://ouo.io/XuI7QMa"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/XwE2j9F4EkNkZ",
+                        "ouo_url": "https://ouo.io/XuI7QMa"
+                    }
+                ]
+            },
+            {
+                "number": 4,
+                "title": "الحلقة 4",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/bFP9AKsCswoZ8",
+                        "ouo_url": "https://ouo.io/QJkEbsd"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/bFP9AKsCswoZ8",
+                        "ouo_url": "https://ouo.io/QJkEbsd"
+                    }
+                ]
+            },
+            {
+                "number": 5,
+                "title": "الحلقة 5",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/gyMTzpjtADw8h",
+                        "ouo_url": "https://ouo.io/8ztR0r"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/gyMTzpjtADw8h",
+                        "ouo_url": "https://ouo.io/8ztR0r"
+                    }
+                ]
+            },
+            {
+                "number": 6,
+                "title": "الحلقة 6",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/aB6FPndZwVaja",
+                        "ouo_url": "https://ouo.io/QscpdQ"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/aB6FPndZwVaja",
+                        "ouo_url": "https://ouo.io/QscpdQ"
+                    }
+                ]
+            },
+            {
+                "number": 7,
+                "title": "الحلقة 7",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/PlszGdAQwYhvI",
+                        "ouo_url": "https://ouo.io/6XvUu8"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/PlszGdAQwYhvI",
+                        "ouo_url": "https://ouo.io/6XvUu8"
+                    }
+                ]
+            },
+            {
+                "number": 8,
+                "title": "الحلقة 8",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/ypDqaJgfTp32X",
+                        "ouo_url": "https://ouo.io/i6tM1m"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/ypDqaJgfTp32X",
+                        "ouo_url": "https://ouo.io/i6tM1m"
+                    }
+                ]
+            },
+            {
+                "number": 9,
+                "title": "الحلقة 9",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/X1xWaXdJ8TofQ",
+                        "ouo_url": "https://ouo.io/2lkElH"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/X1xWaXdJ8TofQ",
+                        "ouo_url": "https://ouo.io/2lkElH"
+                    }
+                ]
+            },
+            {
+                "number": 10,
+                "title": "الحلقة 10",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/KdmsFowWK4k7N",
+                        "ouo_url": "https://ouo.io/OM5UZZ"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/KdmsFowWK4k7N",
+                        "ouo_url": "https://ouo.io/OM5UZZ"
+                    }
+                ]
+            },
+            {
+                "number": 11,
+                "title": "الحلقة 11",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/iSGfvnmbHlQgE",
+                        "ouo_url": "https://ouo.io/IGzmM0N"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/iSGfvnmbHlQgE",
+                        "ouo_url": "https://ouo.io/IGzmM0N"
+                    }
+                ]
+            },
+            {
+                "number": 12,
+                "title": "الحلقة 12",
+                "thumbnail": "https://shahiid-anime.net/wp-content/uploads/67e8f7d3-e444-4c4c-8ee6-f94956171e17-683x1024.png",
+                "duration": "24:00",
+                "date": "Jun 28, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://share4max.com/iframe/GVnTGgdeCoVXW",
+                        "ouo_url": "https://ouo.io/vqNZadX"
+                    },
+                    {
+                        "name": "سيرفر احتياطي 1",
+                        "url": "https://share4max.com/iframe/GVnTGgdeCoVXW",
+                        "ouo_url": "https://ouo.io/vqNZadX"
                     }
                 ]
             }
@@ -22694,7 +22991,7 @@ const animeDetailsDatabase = {
         ]
     },
     "baki-dou_مدبلج_s2": {
-        "malId": 63833,
+        "malId": 58573,
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -23971,7 +24268,6 @@ const animeDetailsDatabase = {
     },
     "megalo_box_مدبلج_s2": {
         "malId": 36563,
-        
         "dubbedCharacters": {},
         "episodes": [
             {

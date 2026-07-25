@@ -7,13 +7,535 @@
     <meta name="theme-color" content="#111111">
     <meta name="mobile-web-app-capable" content="yes">
     <!-- مكتبة Font Awesome للأيقونات الاحترافية -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Black Echo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <title>Black Echo | ArabDub Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="icon-192.png">
     <link rel="manifest" href="manifest.json">
     <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        /* =====================================================
+           ArabDub Hub — الصفحة الرئيسية
+           هوية بصرية: أصداء صوتية داكنة + أحمر Black Echo
+           ===================================================== */
+        :root{
+            --he-bg:#07080c;
+            --he-surface:#12141c;
+            --he-surface-2:#181a24;
+            --he-border:#262838;
+            --he-red:var(--accent-red, #e50914);
+            --he-red-2:#ff3b3b;
+            --he-gold:#ffb800;
+            --he-blue:#3d7bff;
+            --he-pink:#ff4fa0;
+            --he-text:#f2f2f5;
+            --he-muted:#93939f;
+        }
+
+        @media (prefers-reduced-motion: reduce){
+            *{ animation-duration:0.001ms !important; animation-iteration-count:1 !important; transition-duration:0.001ms !important; scroll-behavior:auto !important; }
+        }
+
+        html{ scroll-behavior:smooth; }
+
+        .he-section{
+            max-width:1240px;
+            margin:0 auto;
+            padding:70px 20px;
+        }
+        .he-section-head{
+            display:flex;
+            align-items:flex-end;
+            justify-content:space-between;
+            gap:16px;
+            margin-bottom:32px;
+            flex-wrap:wrap;
+        }
+        .he-eyebrow{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            font-size:0.78rem;
+            font-weight:700;
+            letter-spacing:0.5px;
+            color:var(--he-red-2);
+            text-transform:uppercase;
+            margin-bottom:8px;
+        }
+        .he-eyebrow::before{
+            content:"";
+            width:18px;
+            height:2px;
+            background:var(--he-red-2);
+            display:inline-block;
+        }
+        .he-title-lg{
+            font-family:'Cairo',sans-serif;
+            font-weight:900;
+            font-size:clamp(1.6rem, 3.2vw, 2.4rem);
+            color:var(--he-text);
+            margin:0;
+        }
+        .he-sub{
+            color:var(--he-muted);
+            font-size:0.95rem;
+            margin-top:6px;
+        }
+        .he-reveal{
+            opacity:0;
+            transform:translateY(24px);
+            transition:opacity .7s ease, transform .7s ease;
+        }
+        .he-reveal.is-visible{
+            opacity:1;
+            transform:translateY(0);
+        }
+
+        /* ---------- HERO ---------- */
+        .he-hero{
+            position:relative;
+            min-height:78vh;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            text-align:center;
+            overflow:hidden;
+            padding:120px 20px 80px;
+            isolation:isolate;
+        }
+        .he-hero-rings{
+            position:absolute;
+            inset:0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            z-index:-2;
+            pointer-events:none;
+        }
+        .he-hero-rings span{
+            position:absolute;
+            border-radius:50%;
+            border:1px solid rgba(229,9,20,0.35);
+            animation:heEcho 4.5s ease-out infinite;
+        }
+        .he-hero-rings span:nth-child(1){ width:180px; height:180px; animation-delay:0s; }
+        .he-hero-rings span:nth-child(2){ width:180px; height:180px; animation-delay:1.1s; }
+        .he-hero-rings span:nth-child(3){ width:180px; height:180px; animation-delay:2.2s; }
+        .he-hero-rings span:nth-child(4){ width:180px; height:180px; animation-delay:3.3s; }
+        @keyframes heEcho{
+            0%{ width:120px; height:120px; opacity:0.9; border-color:rgba(255,80,80,0.55); }
+            100%{ width:900px; height:900px; opacity:0; border-color:rgba(229,9,20,0); }
+        }
+        .he-hero-glow{
+            position:absolute;
+            inset:0;
+            z-index:-3;
+            background:
+                radial-gradient(ellipse 60% 45% at 50% 30%, rgba(229,9,20,0.22), transparent 70%),
+                radial-gradient(ellipse 45% 35% at 80% 75%, rgba(61,123,255,0.12), transparent 70%),
+                radial-gradient(ellipse 45% 35% at 15% 80%, rgba(255,79,160,0.10), transparent 70%);
+        }
+        .he-hero-noise{
+            position:absolute; inset:0; z-index:-1;
+            background-image:linear-gradient(180deg, transparent 0%, var(--he-bg) 100%);
+        }
+        .he-brandmark{
+            font-family:'Cairo',sans-serif;
+            font-weight:900;
+            font-size:0.85rem;
+            letter-spacing:3px;
+            color:var(--he-muted);
+            text-transform:uppercase;
+            margin-bottom:18px;
+            display:inline-block;
+        }
+        .he-hero h1{
+            font-family:'Cairo',sans-serif;
+            font-weight:900;
+            font-size:clamp(2.1rem, 6vw, 4.2rem);
+            line-height:1.15;
+            margin:0 0 18px;
+            color:#fff;
+        }
+        .he-hero-desc{
+            max-width:620px;
+            margin:0 auto 34px;
+            color:#c7c7d1;
+            font-size:clamp(0.95rem, 1.6vw, 1.1rem);
+            line-height:1.9;
+        }
+        .he-hero-cta{
+            display:flex;
+            gap:14px;
+            justify-content:center;
+            flex-wrap:wrap;
+        }
+        .he-btn{
+            display:inline-flex;
+            align-items:center;
+            gap:10px;
+            font-family:'Cairo',sans-serif;
+            font-weight:700;
+            font-size:0.95rem;
+            padding:14px 30px;
+            border-radius:10px;
+            text-decoration:none;
+            cursor:pointer;
+            border:1px solid transparent;
+            transition:transform .25s ease, box-shadow .25s ease, background .25s ease, border-color .25s ease;
+        }
+        .he-btn-primary{
+            background:linear-gradient(135deg, var(--he-red-2), var(--he-red));
+            color:#fff;
+            box-shadow:0 10px 30px -8px rgba(229,9,20,0.55);
+        }
+        .he-btn-primary:hover{ transform:translateY(-3px); box-shadow:0 16px 34px -8px rgba(229,9,20,0.7); }
+        .he-btn-ghost{
+            background:rgba(255,255,255,0.03);
+            border-color:var(--he-border);
+            color:var(--he-text);
+            backdrop-filter:blur(6px);
+        }
+        .he-btn-ghost:hover{ border-color:var(--he-red-2); transform:translateY(-3px); background:rgba(229,9,20,0.08); }
+
+        .he-scroll-cue{
+            position:absolute;
+            bottom:26px;
+            left:50%;
+            transform:translateX(-50%);
+            color:var(--he-muted);
+            font-size:1.3rem;
+            animation:heBounce 2.2s ease-in-out infinite;
+        }
+        @keyframes heBounce{ 0%,100%{ transform:translate(-50%,0); } 50%{ transform:translate(-50%,10px); } }
+
+        /* ---------- LATEST ANIME ---------- */
+        .he-view-all{
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            color:var(--he-red-2);
+            font-weight:700;
+            font-size:0.9rem;
+            text-decoration:none;
+            white-space:nowrap;
+            transition:gap .2s ease, color .2s ease;
+        }
+        .he-view-all:hover{ gap:12px; color:#fff; }
+
+        .he-latest-grid{
+            display:grid;
+            grid-template-columns:repeat(auto-fill, minmax(160px, 1fr));
+            gap:20px;
+        }
+        .he-card{
+            position:relative;
+            background:var(--he-surface);
+            border:1px solid var(--he-border);
+            border-radius:14px;
+            overflow:hidden;
+            cursor:pointer;
+            transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+        }
+        .he-card:hover{
+            transform:translateY(-8px);
+            border-color:rgba(229,9,20,0.55);
+            box-shadow:0 18px 34px -14px rgba(0,0,0,0.6);
+        }
+        .he-card-img-wrap{
+            position:relative;
+            width:100%;
+            aspect-ratio:2/3;
+            overflow:hidden;
+            background:linear-gradient(135deg, var(--he-surface-2), var(--he-surface));
+        }
+        .he-card-img-wrap img{
+            width:100%; height:100%;
+            object-fit:cover;
+            display:block;
+            transition:transform .5s ease;
+        }
+        .he-card:hover .he-card-img-wrap img{ transform:scale(1.08); }
+        .he-card-badge{
+            position:absolute;
+            top:10px;
+            right:10px;
+            font-size:0.68rem;
+            font-weight:700;
+            padding:4px 10px;
+            border-radius:5px;
+            color:#fff;
+            backdrop-filter:blur(4px);
+        }
+        .he-card-play{
+            position:absolute;
+            inset:0;
+            display:flex;
+            align-items:center;
+            justify-content:center;
+            background:linear-gradient(to top, rgba(7,8,12,0.85), transparent 55%);
+            opacity:0;
+            transition:opacity .3s ease;
+        }
+        .he-card:hover .he-card-play{ opacity:1; }
+        .he-card-play i{
+            font-size:1.6rem;
+            color:#fff;
+            background:rgba(229,9,20,0.9);
+            width:52px; height:52px;
+            border-radius:50%;
+            display:flex; align-items:center; justify-content:center;
+            transform:scale(0.7);
+            transition:transform .3s ease;
+        }
+        .he-card:hover .he-card-play i{ transform:scale(1); }
+        .he-card-body{ padding:12px 12px 14px; }
+        .he-card-body h3{
+            font-size:0.9rem;
+            font-weight:700;
+            color:var(--he-text);
+            margin:0 0 6px;
+            white-space:nowrap;
+            overflow:hidden;
+            text-overflow:ellipsis;
+        }
+        .he-card-meta{
+            display:flex;
+            justify-content:space-between;
+            font-size:0.75rem;
+            color:var(--he-muted);
+        }
+        .he-card-meta .rating{ color:var(--he-gold); font-weight:700; }
+
+        /* skeleton loading */
+        .he-skel{
+            background:linear-gradient(100deg, var(--he-surface) 30%, var(--he-surface-2) 45%, var(--he-surface) 60%);
+            background-size:300% 100%;
+            animation:heShimmer 1.6s ease-in-out infinite;
+        }
+        @keyframes heShimmer{ 0%{ background-position:120% 0; } 100%{ background-position:-20% 0; } }
+        .he-skel-line{ height:11px; border-radius:4px; margin:10px 12px; }
+        .he-skel-line.w60{ width:60%; }
+        .he-skel-line.w40{ width:40%; }
+
+        .he-empty-note{
+            grid-column:1/-1;
+            text-align:center;
+            color:var(--he-muted);
+            padding:30px;
+            border:1px dashed var(--he-border);
+            border-radius:12px;
+        }
+
+        /* ---------- CATEGORY SHOWCASE ---------- */
+        .he-cat-grid{
+            display:grid;
+            grid-template-columns:repeat(3, 1fr);
+            gap:22px;
+        }
+        @media (max-width:900px){
+            .he-cat-grid{ grid-template-columns:1fr; }
+        }
+        .he-cat-card{
+            --cat-color:var(--he-red-2);
+            position:relative;
+            display:block;
+            text-decoration:none;
+            padding:34px 26px;
+            border-radius:18px;
+            background:linear-gradient(160deg, var(--he-surface) 0%, var(--he-surface-2) 100%);
+            border:1px solid var(--he-border);
+            overflow:hidden;
+            transition:transform .35s ease, border-color .35s ease;
+            min-height:230px;
+        }
+        .he-cat-card::before{
+            content:"";
+            position:absolute;
+            top:-40%; left:-20%;
+            width:70%; height:140%;
+            background:radial-gradient(circle, color-mix(in srgb, var(--cat-color) 35%, transparent), transparent 70%);
+            opacity:0.5;
+            transition:opacity .35s ease, transform .5s ease;
+        }
+        .he-cat-card:hover{
+            transform:translateY(-10px);
+            border-color:color-mix(in srgb, var(--cat-color) 55%, var(--he-border));
+        }
+        .he-cat-card:hover::before{ opacity:0.9; transform:scale(1.15); }
+        .he-cat-icon{
+            position:relative;
+            z-index:1;
+            width:56px; height:56px;
+            border-radius:14px;
+            display:flex; align-items:center; justify-content:center;
+            font-size:1.5rem;
+            color:#fff;
+            background:color-mix(in srgb, var(--cat-color) 80%, #000 10%);
+            margin-bottom:22px;
+            box-shadow:0 10px 24px -8px color-mix(in srgb, var(--cat-color) 70%, transparent);
+        }
+        .he-cat-card h3{
+            position:relative; z-index:1;
+            font-size:1.3rem;
+            font-weight:900;
+            color:#fff;
+            margin:0 0 10px;
+        }
+        .he-cat-card p{
+            position:relative; z-index:1;
+            font-size:0.88rem;
+            color:var(--he-muted);
+            line-height:1.8;
+            margin:0 0 20px;
+        }
+        .he-cat-link{
+            position:relative; z-index:1;
+            display:inline-flex;
+            align-items:center;
+            gap:8px;
+            font-weight:700;
+            font-size:0.85rem;
+            color:var(--cat-color);
+            transition:gap .2s ease;
+        }
+        .he-cat-card:hover .he-cat-link{ gap:12px; }
+        .he-cat-men{ --cat-color:var(--he-blue); }
+        .he-cat-women{ --cat-color:var(--he-pink); }
+        .he-cat-comp{ --cat-color:var(--he-gold); }
+
+        /* ---------- STRIP STATS ---------- */
+        .he-stats{
+            display:flex;
+            justify-content:center;
+            gap:0;
+            flex-wrap:wrap;
+            border-top:1px solid var(--he-border);
+            border-bottom:1px solid var(--he-border);
+        }
+        .he-stat{
+            flex:1 1 160px;
+            text-align:center;
+            padding:26px 10px;
+            border-left:1px solid var(--he-border);
+        }
+        .he-stat:last-child{ border-left:none; }
+        .he-stat b{
+            display:block;
+            font-size:1.7rem;
+            font-weight:900;
+            color:#fff;
+            font-family:'Cairo',sans-serif;
+        }
+        .he-stat span{
+            font-size:0.78rem;
+            color:var(--he-muted);
+        }
+
+        /* ---------- أفضل 3 مؤدين ---------- */
+        .he-podium{
+            display:grid;
+            grid-template-columns:1fr 1fr 1fr;
+            gap:22px;
+            align-items:end;
+        }
+        @media (max-width:820px){
+            .he-podium{ grid-template-columns:1fr; align-items:stretch; }
+            .he-top-card.rank-1{ order:-1; }
+        }
+        .he-top-card{
+            position:relative;
+            background:linear-gradient(165deg, var(--he-surface) 0%, var(--he-surface-2) 100%);
+            border:1px solid var(--he-border);
+            border-radius:18px;
+            padding:30px 22px 26px;
+            text-align:center;
+            overflow:hidden;
+            cursor:pointer;
+            transition:transform .35s ease, border-color .35s ease, box-shadow .35s ease;
+        }
+        .he-top-card::before{
+            content:"";
+            position:absolute; top:-40%; left:-20%; width:70%; height:140%;
+            background:radial-gradient(circle, color-mix(in srgb, var(--rank-color) 30%, transparent), transparent 70%);
+            opacity:0.55;
+            transition:opacity .35s ease;
+        }
+        .he-top-card:hover{ transform:translateY(-10px); border-color:color-mix(in srgb, var(--rank-color) 55%, var(--he-border)); box-shadow:0 20px 40px -16px rgba(0,0,0,0.6); }
+        .he-top-card:hover::before{ opacity:0.95; }
+        .he-top-card.rank-1{ --rank-color:var(--he-gold); padding-top:38px; }
+        .he-top-card.rank-2{ --rank-color:#c9ccd6; }
+        .he-top-card.rank-3{ --rank-color:#e0995e; }
+
+        .he-rank-badge{
+            position:relative; z-index:1;
+            display:inline-flex; align-items:center; justify-content:center;
+            width:34px; height:34px;
+            border-radius:50%;
+            background:var(--rank-color);
+            color:#14151d;
+            font-weight:900;
+            font-family:'Cairo',sans-serif;
+            font-size:0.95rem;
+            margin-bottom:14px;
+            box-shadow:0 8px 18px -4px color-mix(in srgb, var(--rank-color) 70%, transparent);
+        }
+        .he-top-card.rank-1 .he-rank-badge{ width:40px; height:40px; font-size:1.1rem; }
+        .he-top-avatar{
+            position:relative; z-index:1;
+            width:96px; height:96px;
+            border-radius:50%;
+            object-fit:cover;
+            border:3px solid var(--rank-color);
+            margin:0 auto 16px;
+            box-shadow:0 10px 26px -6px color-mix(in srgb, var(--rank-color) 60%, transparent);
+        }
+        .he-top-card.rank-1 .he-top-avatar{ width:118px; height:118px; }
+        .he-top-avatar-fallback{
+            position:relative; z-index:1;
+            width:96px; height:96px;
+            border-radius:50%;
+            margin:0 auto 16px;
+            display:flex; align-items:center; justify-content:center;
+            background:var(--he-surface-2);
+            border:3px solid var(--rank-color);
+            color:var(--he-muted);
+            font-size:2rem;
+        }
+        .he-top-card h3{
+            position:relative; z-index:1;
+            font-size:1.1rem; font-weight:900; color:#fff; margin:0 0 6px;
+        }
+        .he-top-card .he-top-role{
+            position:relative; z-index:1;
+            font-size:0.8rem; color:var(--he-muted); margin-bottom:14px;
+        }
+        .he-top-count{
+            position:relative; z-index:1;
+            display:inline-flex; align-items:center; gap:6px;
+            background:color-mix(in srgb, var(--rank-color) 18%, transparent);
+            color:var(--rank-color);
+            font-weight:800; font-size:0.85rem;
+            padding:6px 16px;
+            border-radius:20px;
+        }
+
+        #installAppBtn{
+            display:none;
+            background:var(--he-red);
+            color:#fff;
+            border:none;
+            padding:10px 20px;
+            border-radius:8px;
+            font-weight:700;
+            font-family:'Cairo',sans-serif;
+            cursor:pointer;
+            margin:0 auto 40px;
+        }
+    </style>
+
     <script>
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -49,7 +571,7 @@
 <body class="animated-bg">
    <header class="main-header">
         <div class="logo">
-            <div class="logo rgb-text">ArabDub Hub</div>    
+            <div class="logo rgb-text">ArabDub Hub</div>
         </div>
         <div class="menu-icon">☰</div>
         <nav id="navMenu">
@@ -63,33 +585,113 @@
         </nav>
     </header>
 
-    <!-- تم تحويل الأنماط المضمنة إلى كلاسات لضمان تجاوبها مع الهاتف -->
-    <div class="container hero-container">
-        <h1 class="hero-title">منصة <span class="rgb-text">ArabDub Hub</span></h1>
-        <p class="hero-desc">مرحبا بكم في منصة ArabDub Hub هنا تم تعليم الدبلجه عرض الفيديوهات المدبلجه من مختلف الفرق والكثير فقط من اجل الدعم الفرق العربيه</p>
-        <div class="hero-buttons">
-    <a href="html/browse.html" class="download-btn btn-browse">
-        <i class="fa-solid fa-film"></i>
-        <span>الأنيميات المدبلجة</span>
-    </a>
-    <a href="html/men.html" class="download-btn btn-men">
-        <i class="fa-solid fa-mars"></i>
-        <span>مكتبة الشباب</span>
-    </a>
-    <a href="html/women.html" class="download-btn btn-women">
-        <i class="fa-solid fa-venus"></i>
-        <span>مكتبة الفتيات</span>
-    </a>
-    <a href="html/competition.html" class="download-btn btn-comp">
-        <i class="fa-solid fa-trophy"></i>
-        <span>ساحة المنافسة</span>
-    </a>
-</div>
+    <!-- ============ HERO ============ -->
+    <section class="he-hero">
+        <div class="he-hero-glow"></div>
+        <div class="he-hero-rings" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+        <div class="he-hero-noise"></div>
+
+        <div>
+            <span class="he-brandmark">أكاديمية الدبلجة العربية</span>
+            <h1>منصة <span class="rgb-text">ArabDub Hub</span></h1>
+            <p class="he-hero-desc">
+                بيت الدوبلاج العربي: نتابع أحدث الأنميات المدبلجة، ندرّب المواهب الصوتية، ونفتح الساحة أمام المنافسة بين الفرق. كل هذا في مكان واحد.
+            </p>
+            <div class="he-hero-cta">
+                <a href="#latest" class="he-btn he-btn-primary">
+                    <i class="fa-solid fa-play"></i>
+                    <span>ابدأ المشاهدة الآن</span>
+                </a>
+                <a href="html/teams.html" class="he-btn he-btn-ghost">
+                    <i class="fa-solid fa-users"></i>
+                    <span>تعرف على الفرق</span>
+                </a>
+            </div>
         </div>
+
+        <a href="#latest" class="he-scroll-cue" aria-label="انزل للأسفل"><i class="fa-solid fa-chevron-down"></i></a>
+    </section>
+
+    <button id="installAppBtn">تثبيت التطبيق 📱</button>
+
+    <!-- ============ أحدث الإصدارات ============ -->
+    <section class="he-section" id="latest">
+        <div class="he-section-head he-reveal">
+            <div>
+                <span class="he-eyebrow">جديد على المنصة</span>
+                <h2 class="he-title-lg">أحدث الأنميات المدبلجة</h2>
+                <p class="he-sub">آخر الحلقات والأعمال التي أضافتها الفرق مؤخراً</p>
+            </div>
+            <a href="html/browse.html" class="he-view-all">
+                <span>عرض جميع الأنميات</span>
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+        </div>
+
+        <div class="he-latest-grid he-reveal" id="latest-anime-grid">
+            <!-- بطاقات هيكلية (Skeleton) أثناء التحميل -->
+        </div>
+    </section>
+
+    <!-- ============ إحصائيات سريعة ============ -->
+    <div class="he-stats he-reveal">
+        <div class="he-stat"><b id="stat-anime">90+</b><span>عمل مدبلج</span></div>
+        <div class="he-stat"><b id="stat-teams">2</b><span>فريق دبلجة</span></div>
+        <div class="he-stat"><b id="stat-dubbers">30+</b><span>مؤدي صوتي</span></div>
+        <div class="he-stat"><b>مجاناً</b><span>مشاهدة وتحميل</span></div>
     </div>
-    
-    <button id="installAppBtn" style="display: none; background: var(--accent-red); color: white; border: none; padding: 10px 20px; border-radius: 5px; font-weight: bold; cursor: pointer; margin: 10px auto;">تثبيت التطبيق 📱</button>
-    
+
+    <!-- ============ أفضل 3 مؤدين ============ -->
+    <section class="he-section" id="top-dubbers">
+        <div class="he-section-head he-reveal">
+            <div>
+                <span class="he-eyebrow">نجوم المنصة</span>
+                <h2 class="he-title-lg">أفضل 3 مؤدين صوتيين</h2>
+                <p class="he-sub">الأكثر تأدية للشخصيات حتى الآن، بحسب عدد الأدوار المسجّلة</p>
+            </div>
+            <a href="html/dubbers.html" class="he-view-all">
+                <span>كل المؤدين</span>
+                <i class="fa-solid fa-arrow-left"></i>
+            </a>
+        </div>
+
+        <div class="he-podium he-reveal" id="top-dubbers-grid">
+            <!-- تُملأ تلقائياً بواسطة الجافاسكربت -->
+        </div>
+    </section>
+
+    <!-- ============ أقسام المكتبة ============ -->
+    <section class="he-section">
+        <div class="he-section-head he-reveal">
+            <div>
+                <span class="he-eyebrow">استكشف المنصة</span>
+                <h2 class="he-title-lg">اختر وجهتك</h2>
+                <p class="he-sub">مكتبات تدريب صوتي، وساحة لإثبات موهبتك</p>
+            </div>
+        </div>
+
+        <div class="he-cat-grid he-reveal">
+            <a href="html/men.html" class="he-cat-card he-cat-men">
+                <div class="he-cat-icon"><i class="fa-solid fa-mars"></i></div>
+                <h3>مكتبة الشباب</h3>
+                <p>مقاطع تدريب صوتي مخصصة للشباب، مع إمكانية تحميلها مترجمة أو خام للتدرب عليها بحرية.</p>
+                <span class="he-cat-link">ابدأ التدريب <i class="fa-solid fa-arrow-left"></i></span>
+            </a>
+            <a href="html/women.html" class="he-cat-card he-cat-women">
+                <div class="he-cat-icon"><i class="fa-solid fa-venus"></i></div>
+                <h3>مكتبة الفتيات</h3>
+                <p>مجموعة مختارة من مقاطع التدريب الصوتي للفتيات، لصقل الأداء قبل خوض أي دور حقيقي.</p>
+                <span class="he-cat-link">ابدأ التدريب <i class="fa-solid fa-arrow-left"></i></span>
+            </a>
+            <a href="html/competition.html" class="he-cat-card he-cat-comp">
+                <div class="he-cat-icon"><i class="fa-solid fa-trophy"></i></div>
+                <h3>ساحة المنافسة</h3>
+                <p>شارك بأدائك الأسبوعي، وصوّت لصوتك المفضل. المنافسة مفتوحة لكل الأصوات الطامحة.</p>
+                <span class="he-cat-link">شاهد وصوّت <i class="fa-solid fa-arrow-left"></i></span>
+            </a>
+        </div>
+    </section>
+
     <footer>
         <a href="html/legal.html">سياسة الخصوصية</a> | <a href="tel:+905014770828">تواصل معنا</a>
         <p>&copy; 2026 أكاديمية Black Echo.</p>
@@ -97,9 +699,14 @@
 
     <script src="data/data.js"></script>
     <script src="data/competition_data.js"></script>
+    <script src="data/catalog_data.js"></script>
+    <script src="data/dubbers_data.js"></script>
     <script src="data/script.js"></script>
+
     <script>
-        // سكريبت القائمة الجانبية للهاتف
+        // ==================================================
+        // القائمة الجانبية للهاتف
+        // ==================================================
         document.addEventListener('DOMContentLoaded', () => {
             const menuIcon = document.querySelector('.menu-icon');
             const navMenu = document.getElementById('navMenu');
@@ -107,6 +714,234 @@
             if(menuIcon && navMenu) menuIcon.addEventListener('click', () => navMenu.classList.add('active'));
             if(closeBtn && navMenu) closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
         });
+
+        // ==================================================
+        // كشف السكرول لإظهار العناصر بحركة سلسة
+        // ==================================================
+        document.addEventListener('DOMContentLoaded', () => {
+            const revealEls = document.querySelectorAll('.he-reveal');
+            if ('IntersectionObserver' in window) {
+                const io = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            io.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.12 });
+                revealEls.forEach(el => io.observe(el));
+            } else {
+                revealEls.forEach(el => el.classList.add('is-visible'));
+            }
+        });
+
+        // ==================================================
+        // أحدث الأنميات — جلب آخر الأعمال المضافة من الكتالوج
+        // (نتجاوز الأعمال التي لا تملك malId موثّق لعدم توفر غلاف)
+        // ==================================================
+        const LATEST_COUNT = 6;
+        const LATEST_LOOKBACK = 25; // أقصى عدد عناصر نرجع خلالها بحثاً عن أغلفة صالحة
+
+        function heMapStatus(status) {
+            if (!status) return "غير معروف";
+            status = status.toLowerCase();
+            if (status.includes("currently airing") || status.includes("ongoing")) return "مستمر";
+            if (status.includes("finished") || status.includes("completed")) return "مكتمل";
+            return "غير معروف";
+        }
+        function heMapType(type) {
+            if (!type) return "غير معروف";
+            type = type.toUpperCase();
+            if (type === "TV") return "مسلسل";
+            if (type === "MOVIE") return "فيلم";
+            if (type === "OVA" || type === "ONA") return "أوفا / أونا";
+            return type;
+        }
+
+        async function heFetchMal(malId) {
+            const cacheKey = `anime_mal_${malId}`;
+            const cached = localStorage.getItem(cacheKey);
+            if (cached) {
+                try {
+                    const parsed = JSON.parse(cached);
+                    if (new Date().getTime() - parsed.timestamp < 24 * 60 * 60 * 1000) {
+                        return { data: parsed.data, fromCache: true };
+                    }
+                } catch (e) { localStorage.removeItem(cacheKey); }
+            }
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 6000);
+                const res = await fetch(`https://api.jikan.moe/v4/anime/${malId}`, { signal: controller.signal });
+                clearTimeout(timeoutId);
+                if (!res.ok) throw new Error("network");
+                const json = await res.json();
+                if (json.data) {
+                    localStorage.setItem(cacheKey, JSON.stringify({ timestamp: new Date().getTime(), data: json.data }));
+                    return { data: json.data, fromCache: false };
+                }
+            } catch (e) {
+                console.error("تعذر جلب بيانات MAL للرئيسية:", e);
+            }
+            return null;
+        }
+
+        function heRenderSkeletons(grid, count) {
+            grid.innerHTML = "";
+            for (let i = 0; i < count; i++) {
+                const sk = document.createElement("div");
+                sk.className = "he-card";
+                sk.innerHTML = `
+                    <div class="he-card-img-wrap he-skel"></div>
+                    <div class="he-skel-line w60 he-skel"></div>
+                    <div class="he-skel-line w40 he-skel"></div>
+                `;
+                grid.appendChild(sk);
+            }
+        }
+
+        function heRenderCard(grid, entry, index) {
+            const badgeColor = entry.status === "مكتمل" ? "#2ea043" : "#ff6b35";
+            const card = document.createElement("div");
+            card.className = "he-card he-reveal";
+            card.style.transitionDelay = `${index * 60}ms`;
+            card.innerHTML = `
+                <div class="he-card-img-wrap">
+                    <img src="${entry.poster}" alt="${entry.title}" loading="lazy">
+                    <span class="he-card-badge" style="background:${badgeColor};">${entry.status}</span>
+                    <div class="he-card-play"><i class="fa-solid fa-play"></i></div>
+                </div>
+                <div class="he-card-body">
+                    <h3>${entry.title}</h3>
+                    <div class="he-card-meta">
+                        <span>${entry.type}</span>
+                        <span class="rating">⭐ ${entry.rating}</span>
+                    </div>
+                </div>
+            `;
+            card.addEventListener("click", () => {
+                window.location.href = `html/anime.html?id=${encodeURIComponent(entry.id)}`;
+            });
+            grid.appendChild(card);
+
+            requestAnimationFrame(() => {
+                requestAnimationFrame(() => card.classList.add("is-visible"));
+            });
+        }
+
+        async function heLoadLatestAnime() {
+            const grid = document.getElementById("latest-anime-grid");
+            if (!grid) return;
+
+            if (typeof animeCatalog === 'undefined' || !animeCatalog.length) {
+                grid.innerHTML = `<div class="he-empty-note">لا توجد بيانات كتالوج متاحة حالياً.</div>`;
+                return;
+            }
+
+            heRenderSkeletons(grid, LATEST_COUNT);
+
+            // نأخذ من آخر الكتالوج (الأحدث إضافة) ونتجاوز ما لا يملك malId
+            const reversed = [...animeCatalog].reverse();
+            const candidates = reversed.slice(0, LATEST_LOOKBACK).filter(a => a.malId);
+
+            const results = [];
+            for (const anime of candidates) {
+                if (results.length >= LATEST_COUNT) break;
+                const cacheKey = `anime_mal_${anime.malId}`;
+                const hadCache = localStorage.getItem(cacheKey) !== null;
+                const malResult = await heFetchMal(anime.malId);
+
+                if (malResult && malResult.data) {
+                    const apiData = malResult.data;
+                    results.push({
+                        id: anime.id,
+                        title: anime.title || apiData.title_english || apiData.title,
+                        type: heMapType(apiData.type),
+                        status: heMapStatus(apiData.status),
+                        rating: apiData.score ? apiData.score : "N/A",
+                        poster: apiData.images?.jpg?.large_image_url || ""
+                    });
+                }
+                if (!hadCache) {
+                    await new Promise(r => setTimeout(r, 300));
+                }
+            }
+
+            grid.innerHTML = "";
+            if (!results.length) {
+                grid.innerHTML = `<div class="he-empty-note">تعذر تحميل الأعمال الأخيرة، حاول تحديث الصفحة.</div>`;
+                return;
+            }
+            results.forEach((entry, i) => heRenderCard(grid, entry, i));
+        }
+
+        document.addEventListener("DOMContentLoaded", heLoadLatestAnime);
+
+        // ==================================================
+        // أفضل 3 مؤدين — الأكثر عدداً في تأدية الشخصيات
+        // ==================================================
+        function heLoadTopDubbers() {
+            const grid = document.getElementById("top-dubbers-grid");
+            if (!grid) return;
+
+            if (typeof dubbersDatabase === 'undefined') {
+                grid.innerHTML = `<div class="he-empty-note">لا توجد بيانات مؤدين متاحة حالياً.</div>`;
+                return;
+            }
+
+            const list = Object.entries(dubbersDatabase).map(([actorId, data]) => {
+                const validRoles = (data.roles || []).filter(r => r.charName && r.charName.trim() !== "");
+                return {
+                    id: actorId,
+                    name: data.name,
+                    role: data.role || "مؤدي أصوات",
+                    logo: data.logo || "",
+                    rolesCount: validRoles.length
+                };
+            });
+
+            const top3 = list
+                .filter(d => d.rolesCount > 0)
+                .sort((a, b) => b.rolesCount - a.rolesCount)
+                .slice(0, 3);
+
+            if (!top3.length) {
+                grid.innerHTML = `<div class="he-empty-note">لا توجد أدوار مسجّلة بعد لاحتساب الترتيب.</div>`;
+                return;
+            }
+
+            // ترتيب العرض بشكل منصة تتويج: الثاني - الأول - الثالث
+            const order = [];
+            if (top3[1]) order.push({ data: top3[1], rank: 2 });
+            order.push({ data: top3[0], rank: 1 });
+            if (top3[2]) order.push({ data: top3[2], rank: 3 });
+
+            const medalIcon = { 1: "fa-crown", 2: "fa-medal", 3: "fa-medal" };
+
+            grid.innerHTML = "";
+            order.forEach((item) => {
+                const d = item.data;
+                const avatarHtml = d.logo
+                    ? `<img class="he-top-avatar" src="${d.logo}" alt="${d.name}">`
+                    : `<div class="he-top-avatar-fallback"><i class="fa-solid fa-user"></i></div>`;
+
+                const card = document.createElement("div");
+                card.className = `he-top-card rank-${item.rank}`;
+                card.innerHTML = `
+                    <span class="he-rank-badge"><i class="fa-solid ${medalIcon[item.rank]}"></i></span>
+                    ${avatarHtml}
+                    <h3>${d.name}</h3>
+                    <div class="he-top-role">${d.role}</div>
+                    <span class="he-top-count"><i class="fa-solid fa-masks-theater"></i> ${d.rolesCount} شخصية</span>
+                `;
+                card.addEventListener("click", () => {
+                    window.location.href = `html/actor.html?id=${encodeURIComponent(d.id)}`;
+                });
+                grid.appendChild(card);
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", heLoadTopDubbers);
     </script>
 </body>
 </html>

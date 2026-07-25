@@ -2,22 +2,73 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <title>قائمة المدبلجين العرب</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#111111">
+    <meta name="mobile-web-app-capable" content="yes">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <title>قائمة المدبلجين العرب - Black Echo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../icon-192.png">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="../css/style.css">
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('../sw.js').catch(err => console.log('SW Error:', err));
+        });
+      }
+    </script>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #090a0f; color: #fff; margin: 0; }
-        .page-header { text-align: center; padding: 40px 20px; background: linear-gradient(to bottom, #1a1a1a, #090a0f); border-bottom: 1px solid #333; margin-bottom: 30px; }
-        .page-header h1 { color: #fff; font-size: 2.2rem; margin-bottom: 10px; }
-        .dubbers-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; max-width: 1200px; margin: 0 auto; padding: 0 20px 50px 20px; }
-        .dubber-card { background: #1a1a1a; border: 1px solid #333; border-radius: 8px; padding: 20px; text-align: center; cursor: pointer; transition: transform 0.3s, border-color 0.3s; }
-        .dubber-card:hover { transform: translateY(-5px); border-color: var(--accent-red, #e50914); }
-        .dubber-card h3 { color: #fff; font-size: 1.2rem; margin-bottom: 8px; }
-        .dubber-card p { color: #888; font-size: 0.9rem; }
+        :root{
+            --he-bg:#07080c; --he-surface:#12141c; --he-surface-2:#181a24; --he-border:#262838;
+            --he-red:var(--accent-red, #e50914); --he-red-2:#ff3b3b; --he-gold:#ffb800; --he-muted:#93939f;
+        }
+        @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; } }
+        body{ font-family:'Cairo', sans-serif; background:var(--he-bg); color:#fff; margin:0; }
+
+        .he-page-hero{ position:relative; text-align:center; padding:80px 20px 50px; overflow:hidden; isolation:isolate; }
+        .he-page-hero::before{
+            content:""; position:absolute; inset:0; z-index:-1;
+            background:radial-gradient(ellipse 55% 60% at 50% 0%, rgba(229,9,20,0.22), transparent 70%);
+        }
+        .he-page-icon{
+            width:64px; height:64px; border-radius:16px; margin:0 auto 18px; display:flex; align-items:center; justify-content:center;
+            font-size:1.7rem; color:#fff; background:linear-gradient(135deg, var(--he-red-2), var(--he-red));
+            box-shadow:0 14px 30px -8px rgba(229,9,20,0.6);
+        }
+        .he-page-hero h1{ font-weight:900; font-size:clamp(1.7rem,3.6vw,2.4rem); margin:0 0 10px; }
+        .he-page-hero p{ color:var(--he-muted); font-size:0.95rem; max-width:520px; margin:0 auto; }
+
+        .dubbers-grid{ display:grid; grid-template-columns:repeat(auto-fill, minmax(220px, 1fr)); gap:20px; max-width:1200px; margin:0 auto; padding:10px 20px 60px 20px; }
+        .dubber-card{
+            position:relative; background:var(--he-surface); border:1px solid var(--he-border); border-radius:14px;
+            padding:26px 20px; text-align:center; cursor:pointer; transition:transform 0.3s ease, border-color 0.3s ease;
+            opacity:0; transform:translateY(18px); animation:heFadeIn .6s ease forwards;
+        }
+        @keyframes heFadeIn{ to{ opacity:1; transform:translateY(0); } }
+        .dubber-card:hover{ transform:translateY(-7px); border-color:rgba(229,9,20,0.55); box-shadow:0 16px 30px -12px rgba(0,0,0,0.6); }
+        .dubber-avatar{
+            width:78px; height:78px; border-radius:50%; object-fit:cover; margin:0 auto 14px;
+            border:2px solid var(--he-border); transition:border-color .3s ease;
+        }
+        .dubber-card:hover .dubber-avatar{ border-color:var(--he-red-2); }
+        .dubber-avatar-fallback{
+            width:78px; height:78px; border-radius:50%; margin:0 auto 14px; display:flex; align-items:center; justify-content:center;
+            background:linear-gradient(135deg, var(--he-surface-2), var(--he-border)); color:var(--he-muted); font-size:1.5rem;
+        }
+        .dubber-card h3{ color:#fff; font-size:1.1rem; margin-bottom:6px; }
+        .dubber-card p{ color:var(--he-muted); font-size:0.85rem; margin:0; }
+        .dubber-cta{ display:inline-block; margin-top:15px; color:var(--he-red-2); font-size:0.85rem; font-weight:bold; }
+
+        footer{ text-align:center; padding:34px 20px; color:var(--he-muted); font-size:0.85rem; border-top:1px solid var(--he-border); }
+        footer a{ color:var(--he-muted); text-decoration:none; }
+        footer a:hover{ color:var(--he-red-2); }
     </style>
 </head>
 <body>
        <header class="main-header">
         <div class="logo">
-            <div class="logo rgb-text">ArabDub Hub</div>    
+            <div class="logo rgb-text">AR Anime</div>    
         </div>
         <div class="menu-icon">☰</div>
         <nav id="navMenu">
@@ -25,23 +76,34 @@
             <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
             <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
             <a href="women.html"><span class="rgb-text">الفتيات</span></a>
-            <a href="men.html"><span class="rgb-text">الفتيات</span></a>
+            <a href="men.html"><span class="rgb-text">الشباب</span></a>
             <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
             <a href="teams.html"><span class="rgb-text">قائمة المدبلجين</span></a>
         </nav>
     </header>
 
-    <div class="page-header">
+    <div class="he-page-hero">
+        <div class="he-page-icon"><i class="fa-solid fa-microphone-lines"></i></div>
         <h1>فريق الدبلجة والمؤدون الصوتيون</h1>
         <p>اختر أي مؤدي لاستعراض سجله والأعمال التي شارك فيها</p>
     </div>
 
     <div id="dubbers-container" class="dubbers-grid"></div>
 
-    <script src="../data/dubbers.js"></script>
-    <script src="../data/script.js"></script>
+    <footer>
+        <a href="legal.html">سياسة الخصوصية</a> | <a href="tel:+905014770828">تواصل معنا</a>
+        <p>&copy; 2026 أكاديمية Black Echo.</p>
+    </footer>
+
+    <script src="../data/dubbers_data.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
+            const menuIcon = document.querySelector('.menu-icon');
+            const navMenu = document.getElementById('navMenu');
+            const closeBtn = document.querySelector('.close-btn');
+            if(menuIcon && navMenu) menuIcon.addEventListener('click', () => navMenu.classList.add('active'));
+            if(closeBtn && navMenu) closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
+
             const container = document.getElementById("dubbers-container");
             container.innerHTML = "";
 
@@ -50,17 +112,26 @@
                 return;
             }
 
+            let i = 0;
             for (const [actorId, data] of Object.entries(dubbersDatabase)) {
                 const card = document.createElement("div");
                 card.className = "dubber-card";
+                card.style.animationDelay = `${(i % 12) * 45}ms`;
+                i++;
+
+                const avatarHtml = data.logo
+                    ? `<img class="dubber-avatar" src="${data.logo}" alt="${data.name}">`
+                    : `<div class="dubber-avatar-fallback"><i class="fa-solid fa-user"></i></div>`;
+
                 card.innerHTML = `
+                    ${avatarHtml}
                     <h3>${data.name}</h3>
                     <p>${data.role || "مؤدي صوتي"}</p>
-                    <span style="display:inline-block; margin-top:15px; color:#e50914; font-size:0.85rem; font-weight:bold;">عرض البورتفوليو ←</span>
+                    <span class="dubber-cta">عرض البورتفوليو ←</span>
                 `;
 
                 card.onclick = () => {
-                    window.location.href = `actor.html?id=${actorId}`;
+                    window.location.href = `actor.html?id=${encodeURIComponent(actorId)}`;
                 };
 
                 container.appendChild(card);
