@@ -52,7 +52,7 @@ const teamsDatabase = {
     { id: "rimas.waleed", name: "رِيـمَـاس", role: "مؤدي أصوات", avatar: "https://i.ibb.co/yn873wnj/image.webp" },
     { id: "kingofgames855", name: "alstor", role: "مؤدي أصوات", avatar: "https://i.ibb.co/cXVwrdv6/image.webp" },
     { id: "_elena.o_o", name: "_elena.o_o", role: "مؤدي أصوات", avatar: "https://i.ibb.co/sJbDp5Cy/photo-2026-07-23-15-12-52.jpg" },
-    { id: "flipo_x0", name: "★ 𝖋l͢i͢p͢o͢o͢ ★", role: "مؤدي أصوات", avatar: "https://i.ibb.co/SD406Lwz/image.webp" },
+    
         ],
         producedAnime: [
             { id: "Super Dragon Ball Heroes", title: "Super Dragon Ball Heroes", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIswg7sJxsAVXHQ3EfvDZBw1txQkcl7GzwvvWb8Fi2ig&s=10" }
