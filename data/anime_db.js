@@ -118,7 +118,12 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "#"
+                        "url": "https://mixdrop.top/e/4dn94xowb66663"
+                    },
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://mixdrop.top/e/4dn94xowb66663",
+                        "ouo_url": "https://ouo.io/DMeZmR"
                     }
                 ]
             }
