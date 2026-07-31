@@ -104,7 +104,9 @@
         <p>&copy; 2026 أكاديمية Black Echo.</p>
     </footer>
 
+    <script src="../data/anime_db.js"></script>
     <script src="../data/teams.js"></script>
+    <script src="../data/teams_engine.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const menuIcon = document.querySelector('.menu-icon');
@@ -141,12 +143,21 @@
             });
 
             const animeGrid = document.getElementById("anime-grid");
-            team.producedAnime.forEach((anime, i) => {
+            // producedAnime هنا = القائمة اليدوية (لو موجودة) + أي أنميات جديدة
+            // في anime_db.js اللي dubbingTeam بتاعها اتربط تلقائياً بهذا الفريق
+            const aggregate = (typeof window.TeamsEngine !== "undefined")
+                ? window.TeamsEngine.getTeamAggregate(teamId)
+                : { producedAnime: team.producedAnime || [] };
+
+            aggregate.producedAnime.forEach((anime, i) => {
                 const card = document.createElement("div");
                 card.className = "anime-card";
                 card.style.animationDelay = `${i * 60}ms`;
+                const imgHtml = anime.poster
+                    ? `<img src="${anime.poster}" alt="${anime.title}">`
+                    : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:var(--he-surface-2,#181a24);"><i class="fa-solid fa-clapperboard" style="font-size:2rem;color:var(--he-muted,#93939f);"></i></div>`;
                 card.innerHTML = `
-                    <div class="img-wrap"><img src="${anime.poster}" alt="${anime.title}"></div>
+                    <div class="img-wrap">${imgHtml}</div>
                     <h4>${anime.title}</h4>
                 `;
                 card.onclick = () => window.location.href = `anime.html?id=${encodeURIComponent(anime.id)}`;

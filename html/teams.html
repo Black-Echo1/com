@@ -130,7 +130,7 @@
 
        <header class="main-header">
         <div class="logo">
-            <div class="logo rgb-text">AR Anime</div>    
+            <div class="logo rgb-text">ArabDub Hub</div>    
         </div>
         <div class="menu-icon">☰</div>
         <nav id="navMenu">
@@ -169,7 +169,9 @@
         <p>&copy; 2026 أكاديمية Black Echo.</p>
     </footer>
 
+    <script src="../data/anime_db.js"></script>
     <script src="../data/teams.js"></script>
+    <script src="../data/teams_engine.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const menuIcon = document.querySelector('.menu-icon');
@@ -196,7 +198,9 @@
             for (const key in teams) {
                 const team = teams[key];
                 const membersCount = (team.members || []).length;
-                const worksCount = (team.producedAnime || []).length;
+                const worksCount = (typeof window.TeamsEngine !== "undefined")
+                    ? window.TeamsEngine.getTeamAggregate(key).productionCount
+                    : (team.producedAnime || []).length;
                 totalMembers += membersCount;
                 totalWorks += worksCount;
 

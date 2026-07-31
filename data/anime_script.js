@@ -299,14 +299,28 @@ document.addEventListener("DOMContentLoaded", async () => {
             topCharacters.forEach(charData => {
                 const charNameMAL = charData.character.name;
                 const charImage = charData.character.images.jpg.image_url;
-                
+
                 const dubbedNamesDict = localData.dubbedCharacters || {};
-                const finalName = dubbedNamesDict[charNameMAL] || charNameMAL; 
-                
+                const rawOverride = dubbedNamesDict[charNameMAL];
+
+                // نحاول ربط النص الموجود في dubbedCharacters بمؤدٍ مسجَّل فعلياً في dubbers_data.js
+                // (يعمل بدون أي تعديل هدّام: لو ماقدرش يربطها، تتعرض كترجمة نص عادية زي الأول تماماً)
+                const resolved = (typeof window.ActorsEngine !== "undefined")
+                    ? window.ActorsEngine.resolveCharacterDisplay(rawOverride, charNameMAL)
+                    : { displayName: rawOverride || charNameMAL, actorId: null, linked: false };
+
+                const finalName = resolved.displayName;
+                const linkOpen = resolved.linked ? `<a href="actor.html?id=${encodeURIComponent(resolved.actorId)}" style="text-decoration:none; color:inherit;">` : "";
+                const linkClose = resolved.linked ? `</a>` : "";
+                const dubberBadge = resolved.linked ? `<span style="display:block; font-size:10px; color:var(--he-red-2,#ff3b3b); margin-top:2px;">🎙️ صفحة المؤدي</span>` : "";
+
                 const charCard = `
                     <div class="character-card" style="display: inline-block; width: 120px; margin: 10px; text-align: center;">
+                        ${linkOpen}
                         <img src="${charImage}" alt="${finalName}" style="width: 100px; height: 150px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
                         <h5 style="margin-top: 8px; font-size: 13px; word-wrap: break-word;">${finalName}</h5>
+                        ${dubberBadge}
+                        ${linkClose}
                     </div>
                 `;
                 charactersContainer.innerHTML += charCard;

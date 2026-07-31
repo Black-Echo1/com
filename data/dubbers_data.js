@@ -26,8 +26,7 @@ const dubbersDatabase = {
         logo: "https://files.catbox.moe/0t13u4.jpeg",
         roles: [
             { charName: "Church, Farlan", animeTitle: "Attack on Titan: No Regrets", animeId: "Attack on Titan: No Regrets", charImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRviOTfgvVONHd5v1WgvKE5_Wh_j2jWec4ik0j6zBvPrQ&s=10" },
-             { charName: "sakuraSakura, Haruka", animeTitle: "wind breaker", animeId: "wind breaker", charImage: "https://cdn.myanimelist.net/images/characters/9/458760.jpg" }
-        ]
+           ]
     },
     "fatomadub1": { 
         name: "fatomadub1",
@@ -51,22 +50,30 @@ const dubbersDatabase = {
          role: "مؤدي أصوات ",
           logo: "https://files.catbox.moe/xbqcrg.jpeg",
           roles: [
-         { charName: "Suou, Hayato", animeTitle: "Wind breaker", animeId: "wind breaker", charImage: "https://cdn.myanimelist.net/images/characters/2/458759.jpg" } ] },
+         ] },
 
     "makoto_san00": {
         name: "ماكوتو_سان | Makoto_san",
         role: "مؤدي أصوات",
         logo: "https://files.catbox.moe/4neejs.webp",
         roles: [
-           { charName: "كوتوها", animeTitle: "wind breaker", animeId: "wind breaker", charImage: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTYLXNlGGMuSXSHv9a1P59-wxOxq64PnIC395rrnmjNmZWyYcuzuByPrMo&s=10" }
+          
         ]
     },
-    "كنجي": { 
+    "كانجي": { 
         name: "كنجي",
          role: "مؤدي أصوات ",
           logo: "https://files.catbox.moe/91wlmm.jpeg",
           roles: [
         ] },
+
+    "شيرو":{  
+        name: "شيرو", 
+       role: "مؤدية أصوات", 
+       logo: "https://files.catbox.moe/v43eck.jpeg",
+        roles: [
+        ] },
+
 
 
     "𝕾𝖆𝖓𝖋𝖔𝖗𝖆": { 
@@ -97,6 +104,12 @@ const dubbersDatabase = {
         name: "𝓐𝓶𝓶𝓪𝓻 𝓜𝓪𝔁(￢‸￢) ?",
         role: "مؤدي أصوات",
         logo: "https://i.ibb.co/XZvC8B7H/image.webp",
+        roles: []
+    },
+        "virnox": {
+        name: "virnox",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/XrZj51JG/image.webp",
         roles: []
     },
 

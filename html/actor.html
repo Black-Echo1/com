@@ -94,6 +94,7 @@
         <img id="actor-logo-img" src="" alt="Actor Logo" class="actor-logo-img">
         <h1 id="actor-name">جاري التحميل...</h1>
         <p id="actor-role">بورتفوليو الأعمال والشخصيات</p>
+        <p id="actor-stats" style="margin-top:12px; color:var(--he-muted); font-size:0.9rem;"></p>
     </div>
 
     <div class="container">
@@ -106,7 +107,9 @@
         <p>&copy; 2026 أكاديمية Black Echo.</p>
     </footer>
 
+    <script src="../data/anime_db.js"></script>
     <script src="../data/dubbers_data.js"></script>
+    <script src="../data/actors_engine.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const menuIcon = document.querySelector('.menu-icon');
@@ -144,18 +147,36 @@
                 logoImg.replaceWith(fallback);
             }
 
-            const roles = (actorData.roles || []).filter(r => r.charName && r.animeTitle);
-            if (roles.length === 0) {
+            // الأدوار هنا = roles[] اليدوية (لو موجودة) + أي أدوار جديدة اتضافت في dubbedCharacters
+            // داخل anime_db.js واتربطت تلقائياً بهذا المؤدي — بدون أي تكرار
+            const aggregate = (typeof window.ActorsEngine !== "undefined")
+                ? window.ActorsEngine.getActorAggregate(actorId)
+                : { roles: (actorData.roles || []).filter(r => r.charName && r.animeTitle) };
+
+            const statsEl = document.getElementById("actor-stats");
+            if (statsEl && typeof aggregate.workCount !== "undefined") {
+                statsEl.innerText = `${aggregate.workCount} عمل • ${aggregate.characterCount} شخصية`;
+            }
+
+            const roles = aggregate.roles;
+            if (!roles || roles.length === 0) {
                 rolesGrid.innerHTML = "<p class='empty-note'>لا توجد أدوار مسجلة بعد.</p>";
                 return;
+            }
+
+            function imgWrapHtml(role) {
+                return role.charImage
+                    ? `<div class="img-wrap"><img src="${role.charImage}" alt="${role.charName}"></div>`
+                    : `<div class="img-wrap" style="display:flex;align-items:center;justify-content:center;background:var(--he-surface-2,#181a24);"><i class="fa-solid fa-masks-theater" style="font-size:2rem;color:var(--he-muted,#93939f);"></i></div>`;
             }
 
             roles.forEach((role, i) => {
                 const card = document.createElement("div");
                 card.className = "role-card";
+                card.dataset.roleIndex = i;
                 card.style.animationDelay = `${i * 60}ms`;
                 card.innerHTML = `
-                    <div class="img-wrap"><img src="${role.charImage}" alt="${role.charName}"></div>
+                    ${imgWrapHtml(role)}
                     <div class="role-info">
                         <h3>الشخصية: ${role.charName}</h3>
                         <span>الأنمي: ${role.animeTitle}</span>
@@ -166,6 +187,17 @@
                 };
                 rolesGrid.appendChild(card);
             });
+
+            // بتجيب صور الشخصيات من MyAnimeList (Jikan API) للأدوار اللي مالهاش
+            // صورة يدوية، وبتحدّث الكارت في الصفحة فور ما الصورة توصل (بدون إعادة تحميل)
+            if (typeof window.ActorsEngine !== "undefined" && window.ActorsEngine.hydrateRoleImages) {
+                window.ActorsEngine.hydrateRoleImages(roles, (role, i) => {
+                    const card = rolesGrid.querySelector(`[data-role-index="${i}"]`);
+                    if (!card) return;
+                    const wrap = card.querySelector(".img-wrap");
+                    if (wrap) wrap.outerHTML = imgWrapHtml(role);
+                });
+            }
         });
     </script>
 </body>

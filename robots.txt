@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://black-echo1.github.io/com/sitemap.xml

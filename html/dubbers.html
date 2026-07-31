@@ -95,7 +95,9 @@
         <p>&copy; 2026 أكاديمية Black Echo.</p>
     </footer>
 
+    <script src="../data/anime_db.js"></script>
     <script src="../data/dubbers_data.js"></script>
+    <script src="../data/actors_engine.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const menuIcon = document.querySelector('.menu-icon');
@@ -123,10 +125,18 @@
                     ? `<img class="dubber-avatar" src="${data.logo}" alt="${data.name}">`
                     : `<div class="dubber-avatar-fallback"><i class="fa-solid fa-user"></i></div>`;
 
+                const aggregate = (typeof window.ActorsEngine !== "undefined")
+                    ? window.ActorsEngine.getActorAggregate(actorId)
+                    : null;
+                const countLine = aggregate
+                    ? `<span class="dubber-count" style="display:block; color:var(--he-gold,#ffb800); font-size:0.78rem; margin-top:6px;">${aggregate.workCount} عمل • ${aggregate.characterCount} شخصية</span>`
+                    : "";
+
                 card.innerHTML = `
                     ${avatarHtml}
                     <h3>${data.name}</h3>
                     <p>${data.role || "مؤدي صوتي"}</p>
+                    ${countLine}
                     <span class="dubber-cta">عرض البورتفوليو ←</span>
                 `;
 

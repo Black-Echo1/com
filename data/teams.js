@@ -14,7 +14,7 @@ const teamsDatabase = {
             { id: "asmaa9.esmael_adm6", name: "أسماء إسماعيل آدم", role: "مؤدية أصوات", avatar: "https://i.ibb.co/YBFWPNYs/image.png" },
             { id: "sweet.angel8001", name: "sweet.angel", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/54vbm7.jpeg" },
             { id: "شيرو", name: "شيرو", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/v43eck.jpeg" },
-            { id: "كنجي", name: "كنجي", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/91wlmm.jpeg" },
+            { id: "كانجي", name: "كنجي", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/91wlmm.jpeg" },
             { id: "someone", name: "someone", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/yrf6ar.jpeg" },
             { id: "mohamed akram", name: "mohamed akram", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/xbqcrg.jpeg" },
             { id: "𝕾𝖆𝖓𝖋𝖔𝖗𝖆", name: "𝕾𝖆𝖓𝖋𝖔𝖗𝖆", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/e27jgf.jpeg" },
@@ -23,10 +23,12 @@ const teamsDatabase = {
             { id: "Jogo Satora", name: "Jogo Satora", role: "مؤدي أصوات", avatar: "https://files.catbox.moe/dy7nqb.jpeg" },
              { id: "thedeceitfuldevil", name: "The fool", role: "مؤدي أصوات", avatar: "https://i.ibb.co/8nXKRBtS/image.webp" },
     { id: "ammarmax24", name: "𝓐𝓶𝓶𝓪𝓻 𝓜𝓪𝔁(￢‸￢) ?", role: "مؤدي أصوات", avatar: "https://i.ibb.co/XZvC8B7H/image.webp" },
+     { id: "virnox1", name: "virnox", role: "مؤدي أصوات", avatar: "https://i.ibb.co/XrZj51JG/image.webp" },
         ],
         producedAnime: [
             { id: "wind breaker", title: "Wind Breaker", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaPpMB6nk2ezw4Qk0HW6wPWdgIvpEySx54WC5easZgyE3rM0NaGMdGYU&s=10" },
             { id: "Attack on Titan: No Regrets", title: "Attack on Titan: No Regrets", poster: "https://cdn.myanimelist.net/images/anime/8/69497.jpg" },
+            
             
         ]
     },
@@ -52,7 +54,7 @@ const teamsDatabase = {
     { id: "rimas.waleed", name: "رِيـمَـاس", role: "مؤدي أصوات", avatar: "https://i.ibb.co/yn873wnj/image.webp" },
     { id: "kingofgames855", name: "alstor", role: "مؤدي أصوات", avatar: "https://i.ibb.co/cXVwrdv6/image.webp" },
     { id: "_elena.o_o", name: "_elena.o_o", role: "مؤدي أصوات", avatar: "https://i.ibb.co/sJbDp5Cy/photo-2026-07-23-15-12-52.jpg" },
-    
+    { id: "flipo_x0", name: "★ 𝖋l͢i͢p͢o͢o͢ ★", role: "مؤدي أصوات", avatar: "https://i.ibb.co/SD406Lwz/image.webp" },
         ],
         producedAnime: [
             { id: "Super Dragon Ball Heroes", title: "Super Dragon Ball Heroes", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIswg7sJxsAVXHQ3EfvDZBw1txQkcl7GzwvvWb8Fi2ig&s=10" }

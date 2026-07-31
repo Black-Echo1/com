@@ -1,7 +1,7 @@
 const animeDetailsDatabase = {
     "wind breaker": {
         "malId": 54900,
-        "dubbingTeam": "دبلجة: فريق Black Echo",
+        "dubbingTeam": "team_alpha",
         "dubbedCharacters": {
             "Sakura, Haruka": "عبد الرزاق",
             "Suou, Hayato": "mohamed akram",
@@ -32,7 +32,7 @@ const animeDetailsDatabase = {
     },
     "Attack on Titan: No Regrets": {
         "malId": 25781,
-        "dubbingTeam": "دبلجة: فريق Black Echo",
+        "dubbingTeam": "team_alpha",
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -107,7 +107,16 @@ const animeDetailsDatabase = {
     },
     "jaadugar": {
         "malId": 61483,
-        "dubbedCharacters": {},
+        "dubbingTeam": "team_alpha",
+        "dubbedCharacters": {
+            "Shira": "عبد الرزاق",
+            "Tolui": "عبد الرزاق",
+            "Uncle": "mohamed.arata",
+            "Sitara": "شيرو",
+            "Muhammad": "حاتم",
+            "Zumuld": "كنجي",
+            
+        },
         "episodes": [
             {
                 "number": 1,
