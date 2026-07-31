@@ -115,6 +115,7 @@ const animeDetailsDatabase = {
             "Sitara": "شيرو",
             "Muhammad": "حاتم",
             "Zumuld": "كنجي",
+            "Fatima": "makoto_san00",
             
         },
         "episodes": [
