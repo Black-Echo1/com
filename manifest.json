@@ -1,7 +1,7 @@
 {
-  "name": "Anime dub",
-  "short_name": "Anime dub",
-  "description": "منصة للاستمتاع والمشاهدة  ِAnime hub",
+  "name": "AR anime",
+  "short_name": "AR anime",
+  "description": "منصة للاستمتاع والمشاهدة  ِAR anime",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#111111",
