@@ -44,7 +44,7 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/4uYXXKwQgro0T",
+                        "url": "https://861134102.tapecontent.net/radosgw/QbjVd9mjKah8ld/WKYNEYFbZ7D2dMAJmlHqTWmBVwUItHCW2SlA7QBJXoKx-TPoQJTw7JDkUO0Vq5LuB7kg__zmD9Vm1H4XK0VCZHowPLDOrbVGx0QxrG4rTrt4E1YsZVpy1jVM0r95QwBoIUW3EM9iyW7wcTDDwZXozKemK0RAqESDuJMlDDa2m4SxCuNv4qGfQBiYUCx04yhapL-kzYF58rgp0KUqKqxBGyg04p4XRShLcSzG9A2Q4HP_8PXMSQuwaFjOPBbqn2c8kJpuUPX_KrMdCxgZ7lx0WM5gBhJ04ToktMFLUslSTa-V7zOppIdrr837TZzLS_n22XQW557EoNhN2EX8h689AuGfRLKCWznMQTGu6A/%5BShahiid-anime.net%5D+Shingeki+no+Kyojin+Kuinaki+Sentaku+OVA-+01+%281080p%29+%5Bsource%5D.mp4?stream=1",
                         "ouo_url": "https://ouo.io/AhG1Wag"
                     },
                     {
@@ -124,15 +124,15 @@ const animeDetailsDatabase = {
                 "title": "الحلقة 1: كل ما في السماوات وكل ما في الأرض",
                 "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRML5iZVQPxL5ZdRdQAHmYDlFNW-SMGsF_YAzXYhbyNoOq4fgKhUbI4WDc&s=10",
                 "duration": "23:45",
-                "date": "قريباً",
+                "date": "Black Echo",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://mixdrop.top/e/4dn94xowb66663"
+                        "url": "https://streamtape.com/e/ab8j03YZLvTxg9O/"
                     },
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://mixdrop.top/e/4dn94xowb66663",
+                        "url": "https://streamtape.com/e/ab8j03YZLvTxg9O/",
                         "ouo_url": "https://ouo.io/DMeZmR"
                     }
                 ]
@@ -155,7 +155,7 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://playmogo.com/e/mlq51a79h84f",
+                        "url": "https://www.youtube.com/embed/1NWah1QPqLw?si=qJIdNIa38xmraCTF",
                         "ouo_url": "https://ouo.io/43n8hQ"
                     },
                     {
@@ -174,7 +174,7 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://playmogo.com/e/uiegtkpz72w5",
+                        "url": "https://www.youtube.com/embed/zMnaqwIsFFU?si=OenuAsp9KsWZaJjq",
                         "ouo_url": "https://ouo.io/YNsNFq"
                     },
                     {
@@ -192,8 +192,8 @@ const animeDetailsDatabase = {
                 "date": "Jun 21, 2026",
                 "servers": [
                     {
-                        "name": "قريباً",
-                        "url": "#"
+                        "name": "سيرفر رئيسي",
+                        "url": "https://www.youtube.com/embed/u25-tK89bhs?si=SwxC7eBC053LZSSa"
                     }
                 ]
             },
@@ -205,8 +205,34 @@ const animeDetailsDatabase = {
                 "date": "Jun 18, 2026",
                 "servers": [
                     {
-                        "name": "قريباً",
-                        "url": "#"
+                        "name": "سيرفر رئيسي",
+                        "url": "https://www.youtube.com/embed/DSMya3jVkDs?si=Ytcm5d7cKnNsl_lq"
+                    }
+                ]
+            },
+            {
+                "number": 5,
+                "title": "الحلقة 5: غضب! ظهور فو الخارق!",
+                "thumbnail": "https://cdn.myanimelist.net/images/anime/1480/92990l.jpg",
+                "duration": "23:45",
+                "date": "Jun 18, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://www.youtube.com/embed/e4N_w9O21nY?si=nwM8Un12Cb3TlzAr"
+                    }
+                ]
+            },
+            {
+                "number": 6,
+                "title": "الحلقة 6: غضب! ظهور فو الخارق!",
+                "thumbnail": "https://cdn.myanimelist.net/images/anime/1480/92990l.jpg",
+                "duration": "23:45",
+                "date": "Jun 18, 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://www.youtube.com/embed/ZwGgWAmuP3E?si=qFNZEqRkZZx7s-wi"
                     }
                 ]
             }

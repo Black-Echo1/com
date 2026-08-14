@@ -129,7 +129,7 @@
 
 <div class="container section-padding">
 
-    <!-- قسم مشغل الفيديو المحدث مع السيرفرات -->
+    <!-- قسم مشغل الفيديو المحدث لمنع الإعلانات المنبثقة -->
     <div id="video-player-container" style="display: none; margin-bottom: 40px; max-width: 900px; margin-left: auto; margin-right: auto;">
         
         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
@@ -138,8 +138,10 @@
         </div>
 
         <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--he-border); box-shadow: 0 0 30px rgba(229, 9, 20, 0.25); background: #000;">
-            <iframe id="video-iframe" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" allow="autoplay; fullscreen"></iframe>
+            <!-- تم تفعيل خاصية sandbox لحظر النوافذ المنبثقة الإعلانية -->
+            <iframe id="video-iframe" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" allow="autoplay; fullscreen" sandbox="allow-scripts allow-same-origin allow-presentation"></iframe>
         </div>
+        
         <!-- حاوية أزرار السيرفرات المتعددة -->
         <div id="servers-container" class="servers-list" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; align-items:center;">
             <!-- يتم توليد الأزرار تلقائياً هنا -->
@@ -154,6 +156,7 @@
     <div class="episodes-grid" id="episodes-grid">
     </div>
 </div>
+
 <h3>شخصيات الأنمي (الأسماء المدبلجة):</h3>
 
 <div id="anime-characters" style="display: flex; flex-wrap: wrap; gap: 10px;">
