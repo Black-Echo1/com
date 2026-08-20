@@ -111,6 +111,11 @@ const dubbersDatabase = {
         role: "مؤدي أصوات",
         logo: "https://i.ibb.co/XrZj51JG/image.webp",
         roles: []
+    },       "المدبلج || Rayon": {
+        name: "المدبلج || Rayon",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/1YwbwPqS/image.png",
+        roles: []
     },
 
 

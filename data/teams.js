@@ -24,6 +24,7 @@ const teamsDatabase = {
              { id: "thedeceitfuldevil", name: "The fool", role: "مؤدي أصوات", avatar: "https://i.ibb.co/8nXKRBtS/image.webp" },
     { id: "ammarmax24", name: "𝓐𝓶𝓶𝓪𝓻 𝓜𝓪𝔁(￢‸￢) ?", role: "مؤدي أصوات", avatar: "https://i.ibb.co/XZvC8B7H/image.webp" },
      { id: "virnox1", name: "virnox", role: "مؤدي أصوات", avatar: "https://i.ibb.co/XrZj51JG/image.webp" },
+      { id: "المدبلج || Rayon", name: "المدبلج || Rayon", role: "مؤدي أصوات", avatar: "https://i.ibb.co/1YwbwPqS/image.png" },
         ],
         producedAnime: [
             { id: "wind breaker", title: "Wind Breaker", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaPpMB6nk2ezw4Qk0HW6wPWdgIvpEySx54WC5easZgyE3rM0NaGMdGYU&s=10" },
