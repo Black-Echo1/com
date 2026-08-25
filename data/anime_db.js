@@ -18,7 +18,7 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://playmogo.com/e/t01folzr84qp",
+                        "url": "https://archive.org/embed/sungjinwoo-sololeveling-sungjinwooedit-sungjinwoosololeveling-sololevelingedit-mp-4",
                         "ouo_url": "https://ouo.io/FdNE1P"
                     },
                     {
@@ -44,7 +44,7 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://861134102.tapecontent.net/radosgw/QbjVd9mjKah8ld/WKYNEYFbZ7D2dMAJmlHqTWmBVwUItHCW2SlA7QBJXoKx-TPoQJTw7JDkUO0Vq5LuB7kg__zmD9Vm1H4XK0VCZHowPLDOrbVGx0QxrG4rTrt4E1YsZVpy1jVM0r95QwBoIUW3EM9iyW7wcTDDwZXozKemK0RAqESDuJMlDDa2m4SxCuNv4qGfQBiYUCx04yhapL-kzYF58rgp0KUqKqxBGyg04p4XRShLcSzG9A2Q4HP_8PXMSQuwaFjOPBbqn2c8kJpuUPX_KrMdCxgZ7lx0WM5gBhJ04ToktMFLUslSTa-V7zOppIdrr837TZzLS_n22XQW557EoNhN2EX8h689AuGfRLKCWznMQTGu6A/%5BShahiid-anime.net%5D+Shingeki+no+Kyojin+Kuinaki+Sentaku+OVA-+01+%281080p%29+%5Bsource%5D.mp4?stream=1",
+                        "url": "//ok.ru/videoembed/15253377976970",
                         "ouo_url": "https://ouo.io/AhG1Wag"
                     },
                     {
@@ -128,11 +128,11 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://streamtape.com/e/ab8j03YZLvTxg9O/"
+                        "url": "https://archive.org/embed/video_2026-07-30_19-36-13"
                     },
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://streamtape.com/e/ab8j03YZLvTxg9O/",
+                        "url": "https://archive.org/embed/video_2026-07-30_19-36-13",
                         "ouo_url": "https://ouo.io/DMeZmR"
                     }
                 ]
@@ -255,7 +255,7 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/emGWUe9yuss0A",
+                        "url": "https://streamtape.com/e/ZjrMVaMlqLTBGq/",
                         "ouo_url": "https://ouo.io/g4mSjc"
                     },
                     {
