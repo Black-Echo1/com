@@ -28,6 +28,17 @@ const animeCatalog = [
         title: "Blue Lock",
         malId: 49596,
         isHero: false
+    },    {
+        id: "Blue Lock",
+        title: "Blue Lock",
+        malId: 49596,
+        isHero: false
+    },
+        {
+        id: "One Punch Man",
+        title: "One Punch Man",
+        malId: 31772,
+        isHero: false
     },
     {
         id: "Blue Lock2",

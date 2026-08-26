@@ -147,7 +147,7 @@ const animeDetailsDatabase = {
             {
                 "number": 1,
                 "title": "الحلقة 1: كل ما في السماوات وكل ما في الأرض",
-                "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRML5iZVQPxL5ZdRdQAHmYDlFNW-SMGsF_YAzXYhbyNoOq4fgKhUbI4WDc&s=10",
+                "thumbnail": "https://cdn.myanimelist.net/images/anime/1452/97840.jpg",
                 "duration": "23:45",
                 "date": "Black Echo",
                 "servers": [
