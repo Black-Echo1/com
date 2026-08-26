@@ -132,13 +132,39 @@ const animeDetailsDatabase = {
                     },
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://archive.org/embed/video_2026-07-30_19-36-13",
+                        "url": "archiveorg video_2026-07-30_19-36-13 width=560 height=384 frameborder=0 webkitallowfullscreen=true mozallowfullscreen=true",
                         "ouo_url": "https://ouo.io/DMeZmR"
                     }
                 ]
             }
         ]
     },
+    "One Punch Man": {
+        "malId": 31772,
+        "dubbingTeam": "team_alpha",
+        "dubbedCharacters": {},
+        "episodes": [
+            {
+                "number": 1,
+                "title": "الحلقة 1: كل ما في السماوات وكل ما في الأرض",
+                "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRML5iZVQPxL5ZdRdQAHmYDlFNW-SMGsF_YAzXYhbyNoOq4fgKhUbI4WDc&s=10",
+                "duration": "23:45",
+                "date": "Black Echo",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://archive.org/embed/video_2026-08-25_23-38-33"
+                    },
+                    {
+                        "name": "سيرفر احتياطي",
+                        "url": "https://archive.org/embed/video_2026-08-25_23-38-33",
+                        "ouo_url": "https://ouo.io/DMeZmR"
+                    }
+                ]
+            }
+        ]
+    },
+
     "Super Dragon Ball Heroes": {
         "malId": 37885,
         "dubbingTeam": "دبلجة: فريق اكاتسكي",
