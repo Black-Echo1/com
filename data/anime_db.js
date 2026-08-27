@@ -1,7 +1,7 @@
 const animeDetailsDatabase = {
     "wind breaker": {
         "malId": 54900,
-        "dubbingTeam": "team_alpha",
+        "dubbingTeam": "black_echo",
         "dubbedCharacters": {
             "Sakura, Haruka": "عبد الرزاق",
             "Suou, Hayato": "mohamed akram",
@@ -32,7 +32,7 @@ const animeDetailsDatabase = {
     },
     "Attack on Titan: No Regrets": {
         "malId": 25781,
-        "dubbingTeam": "team_alpha",
+        "dubbingTeam": "black_echo",
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -107,7 +107,8 @@ const animeDetailsDatabase = {
     },
     "jaadugar": {
         "malId": 61483,
-        "dubbingTeam": "team_alpha",
+        "dubbingTeam": "black_echo",
+        
         "dubbedCharacters": {
             "Shira": "عبد الرزاق",
             "Tolui": "عبد الرزاق",
@@ -124,15 +125,35 @@ const animeDetailsDatabase = {
                 "title": "الحلقة 1: كل ما في السماوات وكل ما في الأرض",
                 "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRML5iZVQPxL5ZdRdQAHmYDlFNW-SMGsF_YAzXYhbyNoOq4fgKhUbI4WDc&s=10",
                 "duration": "23:45",
-                "date": "Black Echo",
+                "dubbingTeam": "Black Echo",
+                "date": "Jun 28, 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://ia801605.us.archive.org/2/items/video_2026-07-30_19-36-13/video_2026-07-30_19-36-13.ia.mp4"
+                        "url": "https://archive.org/embed/video_2026-07-30_19-36-13"
                     },
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://archive.org/embed/video_2026-07-30_19-36-13",
+                        "url": "https://ia801605.us.archive.org/2/items/video_2026-07-30_19-36-13/video_2026-07-30_19-36-13.ia.mp4",
+                        "ouo_url": "https://ouo.io/DMeZmR"
+                    }
+                ]
+            },
+                        {
+                "number": 2,
+                "title": "الحلقة 2: كل ما في السماوات وكل ما في الأرض",
+                "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRML5iZVQPxL5ZdRdQAHmYDlFNW-SMGsF_YAzXYhbyNoOq4fgKhUbI4WDc&s=10",
+                "duration": "23:45",
+                "dubbingTeam": "Black Echo",
+                "date": "Thu, 27 Aug 2026",
+                "servers": [
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://ia601802.us.archive.org/35/items/video_2026-08-27_18-24-40/video_2026-08-27_18-24-40.mp4"
+                    },
+                    {
+                        "name": "سيرفر رئيسي",
+                        "url": "https://ia601802.us.archive.org/35/items/video_2026-08-27_18-24-40/video_2026-08-27_18-24-40.mp4",
                         "ouo_url": "https://ouo.io/DMeZmR"
                     }
                 ]
@@ -141,23 +162,23 @@ const animeDetailsDatabase = {
     },
     "One Punch Man": {
         "malId": 31772,
-        "dubbingTeam": "team_alpha",
+        "dubbingTeam": "noor shadow",
         "dubbedCharacters": {},
         "episodes": [
             {
                 "number": 1,
                 "title": "الحلقة 1: كل ما في السماوات وكل ما في الأرض",
-                "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRML5iZVQPxL5ZdRdQAHmYDlFNW-SMGsF_YAzXYhbyNoOq4fgKhUbI4WDc&s=10",
+                "thumbnail": "https://cdn.myanimelist.net/images/anime/13/76519.jpg",
                 "duration": "23:45",
-                "date": "Black Echo",
+                "date": "Thu, 27 Aug 2026",
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://archive.org/embed/video_2026-08-25_23-38-33"
+                        "url": "https://ia800506.us.archive.org/29/items/video_2026-08-25_23-38-33/video_2026-08-25_23-38-33.ia.mp4"
                     },
                     {
                         "name": "سيرفر احتياطي",
-                        "url": "https://archive.org/embed/video_2026-08-25_23-38-33",
+                        "url": "https://ia800506.us.archive.org/29/items/video_2026-08-25_23-38-33/video_2026-08-25_23-38-33.ia.mp4",
                         "ouo_url": "https://ouo.io/DMeZmR"
                     }
                 ]
