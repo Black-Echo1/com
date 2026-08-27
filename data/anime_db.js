@@ -109,7 +109,7 @@ const animeDetailsDatabase = {
         "malId": 61483,
         "dubbingTeam": "team_alpha",
         "dubbedCharacters": {
-            "Shira": "ebra..:)",
+            "Shira": "عبد الرزاق",
             "Tolui": "عبد الرزاق",
             "Uncle": "mohamed.arata",
             "Sitara": "شيرو",
@@ -128,11 +128,11 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://archive.org/embed/video_2026-07-30_19-36-13"
+                        "url": "https://ia801605.us.archive.org/2/items/video_2026-07-30_19-36-13/video_2026-07-30_19-36-13.ia.mp4"
                     },
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "archiveorg video_2026-07-30_19-36-13 width=560 height=384 frameborder=0 webkitallowfullscreen=true mozallowfullscreen=true",
+                        "url": "https://archive.org/embed/video_2026-07-30_19-36-13",
                         "ouo_url": "https://ouo.io/DMeZmR"
                     }
                 ]
@@ -147,7 +147,7 @@ const animeDetailsDatabase = {
             {
                 "number": 1,
                 "title": "الحلقة 1: كل ما في السماوات وكل ما في الأرض",
-                "thumbnail": "https://cdn.myanimelist.net/images/anime/1452/97840.jpg",
+                "thumbnail": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRML5iZVQPxL5ZdRdQAHmYDlFNW-SMGsF_YAzXYhbyNoOq4fgKhUbI4WDc&s=10",
                 "duration": "23:45",
                 "date": "Black Echo",
                 "servers": [
