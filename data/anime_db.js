@@ -109,7 +109,7 @@ const animeDetailsDatabase = {
         "malId": 61483,
         "dubbingTeam": "team_alpha",
         "dubbedCharacters": {
-            "Shira": "عبد الرزاق",
+            "Shira": "ebra..:)",
             "Tolui": "عبد الرزاق",
             "Uncle": "mohamed.arata",
             "Sitara": "شيرو",
