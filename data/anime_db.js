@@ -130,7 +130,7 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://archive.org/embed/video_2026-07-30_19-36-13"
+                        "url": "https://ia801605.us.archive.org/2/items/video_2026-07-30_19-36-13/video_2026-07-30_19-36-13.ia.mp4"
                     },
                     {
                         "name": "سيرفر رئيسي",
