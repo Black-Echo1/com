@@ -44,17 +44,17 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "//ok.ru/videoembed/15253377976970",
+                        "url": "https://ia601508.us.archive.org/29/items/video_2026-07-15_19-27-02/video_2026-07-15_19-26-47.mp4",
                         "ouo_url": "https://ouo.io/AhG1Wag"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/16787862850119",
+                        "url": "https://ia601508.us.archive.org/29/items/video_2026-07-15_19-27-02/video_2026-07-15_19-26-47.mp4",
                         "ouo_url": "https://ouo.io/WJBpH3"
                     },
                     {
                         "name": "سيرفر احتياطي 2",
-                        "url": "https://share4max.com/iframe/vy1t18pm5mlr",
+                        "url": "https://ia601508.us.archive.org/29/items/video_2026-07-15_19-27-02/video_2026-07-15_19-26-47.mp4",
                         "ouo_url": "https://ouo.io/uAjRT7D"
                     },
                     {
@@ -64,7 +64,7 @@ const animeDetailsDatabase = {
                     },
                     {
                         "name": "سيرفر احتياطي 4",
-                        "url": "https://share4max.com/iframe/BOJ6mzlw8V9KulpC",
+                        "url": "https://ia601508.us.archive.org/29/items/video_2026-07-15_19-27-02/video_2026-07-15_19-26-47.mp4",
                         "ouo_url": "https://ouo.io/9ML4yBc"
                     }
                 ]
@@ -78,27 +78,27 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://share4max.com/iframe/VONGoijT7YGBC",
+                        "url": "https://ia601508.us.archive.org/29/items/video_2026-07-15_19-27-02/video_2026-07-15_19-27-02.mp4",
                         "ouo_url": "https://ouo.io/G0P7AHA"
                     },
                     {
                         "name": "سيرفر احتياطي 1",
-                        "url": "https://share4max.com/iframe/16787863046727",
+                        "url": "https://ia601508.us.archive.org/29/items/video_2026-07-15_19-27-02/video_2026-07-15_19-27-02.mp4",
                         "ouo_url": "https://ouo.io/n74MAG"
                     },
                     {
                         "name": "سيرفر احتياطي 2",
-                        "url": "https://share4max.com/iframe/1xe3ze2owo0u",
+                        "url": "https://ia601508.us.archive.org/29/items/video_2026-07-15_19-27-02/video_2026-07-15_19-27-02.mp4",
                         "ouo_url": "https://ouo.io/83iYFQ"
                     },
                     {
                         "name": "سيرفر احتياطي 3",
-                        "url": "https://share4max.com/iframe/VONGoijT7YGBC",
+                        "url": "https://ia601508.us.archive.org/29/items/video_2026-07-15_19-27-02/video_2026-07-15_19-27-02.mp4",
                         "ouo_url": "https://ouo.io/G0P7AHA"
                     },
                     {
                         "name": "سيرفر احتياطي 4",
-                        "url": "https://share4max.com/iframe/Q5EbXcHu3BatOlb3",
+                        "url": "https://ia601508.us.archive.org/29/items/video_2026-07-15_19-27-02/video_2026-07-15_19-27-02.mp4",
                         "ouo_url": "https://ouo.io/2tcjcT"
                     }
                 ]
