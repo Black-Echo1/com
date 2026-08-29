@@ -18,12 +18,12 @@ const animeDetailsDatabase = {
                 "servers": [
                     {
                         "name": "سيرفر رئيسي",
-                        "url": "https://archive.org/embed/sungjinwoo-sololeveling-sungjinwooedit-sungjinwoosololeveling-sololevelingedit-mp-4",
+                        "url": "https://ia601609.us.archive.org/11/items/video_2026-08-29_12-47-39/video_2026-08-29_12-47-39.mp4",
                         "ouo_url": "https://ouo.io/FdNE1P"
                     },
                     {
                         "name": "سيرفر احتياطي",
-                        "url": "https://luluvdo.com/e/d4f4gfzbfh9r",
+                        "url": "https://ia601609.us.archive.org/11/items/video_2026-08-29_12-47-39/video_2026-08-29_12-47-39.mp4",
                         "ouo_url": "https://ouo.io/Lc3Qcsc"
                     }
                 ]
