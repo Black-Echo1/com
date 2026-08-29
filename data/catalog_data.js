@@ -359,12 +359,7 @@ const animeCatalog = [
         malId: 58567,
         isHero: false
     },
-    {
-        id: "shingeki_no_kyojin:_kuinaki_sentaku_مدبلج_s1",
-        title: "SHINGEKI NO KYOJIN: KUINAKI SENTAKU مدبلج - الموسم 1",
-        malId: 25781,
-        isHero: false
-    },
+
     {
         id: "tensei_shitara_slime_datta_ken_مدبلج_s1",
         title: "TENSEI SHITARA SLIME DATTA KEN مدبلج - الموسم 1",
