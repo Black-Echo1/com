@@ -1,19 +1,19 @@
 const competitionData = {
-    weekTitle: "مسابقة الأسبوع: أفضل أداء درامي",
+    weekTitle: "مسابقة الأسبوع: اي انمي تريدون تجديد سيرفراته",
     participants: [
         {
             id: "comp_01",
-            name: "لم تبدأ المسابقة بعد، يرجى الانتظار حتى الوقت المحدد.",
-            thumbnail: "https://images.unsplash.com/photo-1542204165-65bf26472b9b?q=80&w=600&auto=format&fit=crop",
-            videoUrl: "https://dood.to/e/رابط_مقطع_المتسابق_الاول",
-            initialVotes: 15
+            name: "جوجوتسو كايسن",
+            thumbnail: "https://cdn.myanimelist.net/images/anime/1171/109222.jpg",
+            videoUrl: "",
+            initialVotes: 0
         },
         {
             id: "comp_02",
-            name: "لم تبدأ المسابقة بعد، يرجى الانتظار حتى الوقت المحدد.",
-            thumbnail: "https://images.unsplash.com/photo-1578632767115-351597cf2477?q=80&w=600&auto=format&fit=crop",
-            videoUrl: "https://dood.to/e/رابط_مقطع_المتسابق_الثاني",
-            initialVotes: 12
+            name: "بلو لوك",
+            thumbnail: "https://cdn.myanimelist.net/images/anime/1258/126929.jpg",
+            videoUrl: "",
+            initialVotes: 0
         }
     ]
 };
