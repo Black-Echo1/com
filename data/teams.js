@@ -7,7 +7,7 @@ const teamsDatabase = {
         description: "Black Echo فريق عربي يسعى إلى إعادة تقديم الأنمي بدبلجة عربية احترافية، مع الاهتمام بالجودة، وتطوير المواهب، وصناعة أعمال تليق بالجمهور العربي.",
         members: [
             { id: "zinkomah", name: "عبد الرزاق/zinko", role: "قائد الفريق", avatar: "https://files.catbox.moe/0t13u4.jpeg" },
-            { id: "youssef_7729", name: "Youssef_مدبلج🎙️", role: "مؤدي أصوات", avatar: "https://i.ibb.co/qL54g9Yj/image.webp" },
+           
             { id: "akai_vx", name: "اكــــاي/𝕬ћ๓Σ𝕕☠", role: "مؤدي أصوات", avatar: "https://i.ibb.co/4wGf5Q3V/image.webp" },
             { id: "mohamed.arata", name: "mohamed.arata", role: "مؤدي أصوات", avatar: "https://files.catbox.moe/90nptg.jpeg" },
             { id: "fatomadub1", name: "fatomadub1", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/v0zt14.jpeg" },
@@ -20,13 +20,15 @@ const teamsDatabase = {
             { id: "𝕾𝖆𝖓𝖋𝖔𝖗𝖆", name: "𝕾𝖆𝖓𝖋𝖔𝖗𝖆", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/e27jgf.jpeg" },
             { id: "makoto_san00", name: "ماكوتو_سان | Makoto_san", role: "مؤدية أصوات", avatar: "https://files.catbox.moe/4neejs.webp" },
             { id: "ebra..:)", name: "ebra..:)", role: "مؤدي أصوات", avatar: "https://files.catbox.moe/8ayfhm.webp" },
-            { id: "Jogo Satora", name: "Jogo Satora", role: "مؤدي أصوات", avatar: "https://files.catbox.moe/dy7nqb.jpeg" },
+            
              { id: "thedeceitfuldevil", name: "The fool", role: "مؤدي أصوات", avatar: "https://i.ibb.co/8nXKRBtS/image.webp" },
     { id: "ammarmax24", name: "𝓐𝓶𝓶𝓪𝓻 𝓜𝓪𝔁(￢‸￢) ?", role: "مؤدي أصوات", avatar: "https://i.ibb.co/XZvC8B7H/image.webp" },
      { id: "virnox1", name: "virnox", role: "مؤدي أصوات", avatar: "https://i.ibb.co/XrZj51JG/image.webp" },
       { id: "المدبلج || Rayon", name: "المدبلج || Rayon", role: "مؤدي أصوات", avatar: "https://i.ibb.co/1YwbwPqS/image.png" },
       { id: "veyyrron", name: "ᴠᴇʏʀᴏɴ على TikTok", role: "مؤدي أصوات", avatar: "https://i.ibb.co/d00ZWHvF/image.jpg" },
-       { id: "adamsalah240", name: "𝑵𝑬𝒁𝑼𝑲𝑶⃝🌸𝑺𝑨𝑵❥્᭄͜͜͡ على TikTok", role: "مؤدي أصوات", avatar: "https://i.ibb.co/DgLFjr4w/image.jpg" },
+       { id: "adamsalah240", name: "𝑵𝑬𝒁𝑼𝑲𝑶⃝🌸𝑺𝑨𝑵❥્᭄͜͜͡ على TikTok", role: "مؤدي أصوات", avatar: "https://i.ibb.co/DgLFjr4w/image.jpg" }, 
+       { id: "al3m091", name: "al3m091", role: "مؤدي أصوات", avatar: "https://i.ibb.co/LX3FfzxG/image.jpg" },
+    { id: "aea.anime", name: "AEA Anime", role: "مؤدية أصوات", avatar: "https://i.ibb.co/3yt4mZVH/image.jpg" },
         ],
         producedAnime: [
             { id: "wind breaker", title: "Wind Breaker", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSXaPpMB6nk2ezw4Qk0HW6wPWdgIvpEySx54WC5easZgyE3rM0NaGMdGYU&s=10" },
@@ -61,6 +63,21 @@ const teamsDatabase = {
         ],
         producedAnime: [
             { id: "Super Dragon Ball Heroes", title: "Super Dragon Ball Heroes", poster: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSIswg7sJxsAVXHQ3EfvDZBw1txQkcl7GzwvvWb8Fi2ig&s=10" }
+        ]
+    },
+
+
+    "noor_shadow": {
+        id: "noor_shadow",
+        name: "دوبلاج (نور شادو)",
+        logo: "https://i.ibb.co/99dTkJ6X/image.jpg",
+        banner: "https://i.ibb.co/99dTkJ6X/image.jpg",
+        description: "فريق نور شادو هو فريق متخصص في الدوبلاج، يهدف إلى تقديم أعمال صوتية احترافية وخاصة في مجال الأنمي، مع أداء مميز يعكس مشاعر الشخصيات ويقدم تجربة ممتعة للجمهور العربي.",
+        members: [
+           
+        ],
+        producedAnime: [
+            
         ]
     }
 };
