@@ -26644,7 +26644,7 @@ const animeDetailsDatabase = {
         ]
     },
     "re:zero_kara_hajimeru_isekai_seikatsu:_shin_henshuu-ban_مدبلج_s1": {
-        "malId": null,
+        "malId": 31240,
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -26897,12 +26897,12 @@ const animeDetailsDatabase = {
         ]
     },
     "re:zero_kara_hajimeru_isekai_seikatsu:_shin_henshuu-ban_مدبلج_s2": {
-        "malId": null,
+        "malId": 39587,
         "dubbedCharacters": {},
         "episodes": []
     },
     "re:zero_kara_hajimeru_isekai_seikatsu:_shin_henshuu-ban_مدبلج_s3": {
-        "malId": null,
+        "malId": 42203,
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -27136,7 +27136,7 @@ const animeDetailsDatabase = {
         ]
     },
     "re:zero_kara_hajimeru_isekai_seikatsu:_shin_henshuu-ban_مدبلج_s4": {
-        "malId": null,
+        "malId": 54857,
         "dubbedCharacters": {},
         "episodes": [
             {
@@ -27446,7 +27446,7 @@ const animeDetailsDatabase = {
         ]
     },
     "re:zero_kara_hajimeru_isekai_seikatsu:_shin_henshuu-ban_مدبلج_s5": {
-        "malId": null,
+        "malId": 61316,
         "dubbedCharacters": {},
         "episodes": [
             {

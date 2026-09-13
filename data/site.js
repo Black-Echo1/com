@@ -247,7 +247,7 @@
         if (!nav.querySelector('[data-support-link]')) {
             const prefix = pageIsInsideHtml ? '' : 'html/';
             const anchor = nav.querySelector('a[href*="teams.html"]');
-            anchor?.insertAdjacentHTML('afterend', `<a data-support-link="true" href="${prefix}support.html"><i class="fa-solid fa-hand-holding-heart"></i> ادعمنا</a>`);
+            anchor?.insertAdjacentHTML('afterend', `<a data-community-link="true" href="${prefix}community.html"><i class="fa-solid fa-users-gear"></i> مركز المواهب</a><a data-support-link="true" href="${prefix}support.html"><i class="fa-solid fa-hand-holding-heart"></i> ادعمنا</a>`);
         }
         menuButton.dataset.beMenuBound = 'true';
         const closeButton = nav.querySelector('.close-btn');

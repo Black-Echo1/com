@@ -1,3 +1,42 @@
+// AniList's GraphQL API allows 90 requests/minute (vs Jikan's much stricter,
+// often-overloaded limit) and looks up anime directly by MAL id (idMal), so the
+// malId values already stored in the catalog need no changes. AniList is tried
+// first; Jikan stays only as a fallback for the rare anime AniList lacks. This
+// adapter reshapes AniList's response into Jikan's field layout so the rest of
+// this file (genres, synopsis, images.jpg.large_image_url, etc.) needs no changes.
+const ANILIST_QUERY = `query ($malId: Int) { Media(idMal: $malId, type: ANIME) {
+    idMal title { romaji english } type status episodes score: averageScore
+    description(asHtml: false) genres coverImage { extraLarge large } bannerImage }
+}`;
+
+function adaptAniListToJikanShape(media) {
+    if (!media) return null;
+    const poster = media.coverImage?.extraLarge || media.coverImage?.large || null;
+    return {
+        title: media.title?.romaji || media.title?.english,
+        title_english: media.title?.english,
+        type: media.type,
+        status: media.status === 'RELEASING' ? 'Currently Airing' : media.status === 'FINISHED' ? 'Finished Airing' : media.status,
+        score: typeof media.score === 'number' ? media.score / 10 : null,
+        episodes: media.episodes,
+        synopsis: media.description ? media.description.replace(/<[^>]+>/g, '') : null,
+        genres: Array.isArray(media.genres) ? media.genres.map((name) => ({ name })) : [],
+        images: { jpg: { large_image_url: poster, image_url: poster } },
+    };
+}
+
+async function fetchFromAniList(malId, signal) {
+    const response = await fetch('https://graphql.anilist.co', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ query: ANILIST_QUERY, variables: { malId: Number(malId) } }),
+        signal,
+    });
+    if (!response.ok) return null;
+    const json = await response.json();
+    return adaptAniListToJikanShape(json?.data?.Media);
+}
+
 // طلب واحد بس لكل أنمي بهذه الصفحة (لا طابور معقد، لا إعادة محاولة متكررة) — Jikan
 // سيرفر عام مشترك، وإعادة المحاولة بقوة وقت الضغط عليه بتزيد المشكلة سوءاً بدل حلها.
 async function fetchJikan(url) {
@@ -30,13 +69,24 @@ async function getAnimeDataFromMAL(malId) {
         } catch (e) { localStorage.removeItem(cacheKey); }
     }
 
-    const json = await fetchJikan(`https://api.jikan.moe/v4/anime/${malId}`);
-    if (json?.data) {
+    let data = null;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    try {
+        data = await fetchFromAniList(malId, controller.signal);
+    } catch (_) { /* fall through to Jikan */ }
+    clearTimeout(timeoutId);
+
+    if (!data) {
+        const json = await fetchJikan(`https://api.jikan.moe/v4/anime/${malId}`);
+        data = json?.data || null;
+    }
+    if (data) {
         localStorage.setItem(cacheKey, JSON.stringify({
             timestamp: new Date().getTime(),
-            data: json.data
+            data
         }));
-        return json.data;
+        return data;
     }
     return null;
 }
