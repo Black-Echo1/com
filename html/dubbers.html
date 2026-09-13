@@ -11,17 +11,10 @@
     <link rel="icon" type="image/png" href="../icon-192.png">
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../css/style.css">
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('../sw.js').catch(err => console.log('SW Error:', err));
-        });
-      }
-    </script>
     <style>
         :root{
             --he-bg:#07080c; --he-surface:#12141c; --he-surface-2:#181a24; --he-border:#262838;
-            --he-red:var(--accent-red, #e50914); --he-red-2:#ff3b3b; --he-gold:#ffb800; --he-muted:#93939f;
+            --he-red:#e50914; --he-red-2:#ff3b3b; --he-gold:#ffb800; --he-muted:#93939f;
         }
         @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; } }
         body{ font-family:'Cairo', sans-serif; background:var(--he-bg); color:#fff; margin:0; }
@@ -64,13 +57,14 @@
         footer a{ color:var(--he-muted); text-decoration:none; }
         footer a:hover{ color:var(--he-red-2); }
     </style>
+    <link rel="stylesheet" href="../css/finish.css">
 </head>
 <body>
        <header class="main-header">
         <div class="logo">
             <div class="logo rgb-text">AR Anime</div>    
         </div>
-        <div class="menu-icon">☰</div>
+        <button type="button" class="menu-icon" aria-label="فتح القائمة" aria-controls="navMenu" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
         <nav id="navMenu">
             <div class="close-btn">&times;</div>
             <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
@@ -100,11 +94,6 @@
     <script src="../data/actors_engine.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const menuIcon = document.querySelector('.menu-icon');
-            const navMenu = document.getElementById('navMenu');
-            const closeBtn = document.querySelector('.close-btn');
-            if(menuIcon && navMenu) menuIcon.addEventListener('click', () => navMenu.classList.add('active'));
-            if(closeBtn && navMenu) closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
 
             const container = document.getElementById("dubbers-container");
             container.innerHTML = "";
@@ -122,22 +111,25 @@
                 i++;
 
                 const avatarHtml = data.logo
-                    ? `<img class="dubber-avatar" src="${data.logo}" alt="${data.name}">`
+                    ? `<img loading="lazy" class="dubber-avatar" src="${data.logo}" alt="${data.name}">`
                     : `<div class="dubber-avatar-fallback"><i class="fa-solid fa-user"></i></div>`;
 
                 const aggregate = (typeof window.ActorsEngine !== "undefined")
                     ? window.ActorsEngine.getActorAggregate(actorId)
                     : null;
+                const profile = (window.ActorsEngine && window.ActorsEngine.getActorProfile(actorId)) || { name: data.name || actorId, role: data.role || 'مؤدي أصوات', description: 'صوت شغوف يضيف احتراماً وصدقاً لكل شخصية يؤديها.', tier: 'متوسط' };
                 const countLine = aggregate
                     ? `<span class="dubber-count" style="display:block; color:var(--he-gold,#ffb800); font-size:0.78rem; margin-top:6px;">${aggregate.workCount} عمل • ${aggregate.characterCount} شخصية</span>`
                     : "";
 
                 card.innerHTML = `
                     ${avatarHtml}
-                    <h3>${data.name}</h3>
-                    <p>${data.role || "مؤدي صوتي"}</p>
+                    <h3>${profile.name}</h3>
+                    <p>${profile.role}</p>
+                    <div class="dubber-description">${profile.description}</div>
+                    <span class="dubber-tier"><i class="fa-solid fa-award"></i> ${profile.tier}</span>
                     ${countLine}
-                    <span class="dubber-cta">عرض البورتفوليو ←</span>
+                    <span class="dubber-cta">عرض الشخصيات والبورتفوليو ←</span>
                 `;
 
                 card.onclick = () => {
@@ -148,5 +140,6 @@
             }
         });
     </script>
+    <script src="../data/site.js"></script>
 </body>
 </html>

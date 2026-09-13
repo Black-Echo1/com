@@ -40,7 +40,7 @@ function buildEpisodesSlider() {
         let epCard = `
             <div class="ep-slide-card ${activeClass}" id="ep-card-${index}" onclick="loadEpisodeData(${index})">
                 <div class="ep-thumb">
-                    <img src="${ep.thumbnail}" alt="حلقة ${ep.epNumber}">
+                    <img loading="lazy" decoding="async" src="${ep.thumbnail}" alt="حلقة ${ep.epNumber}">
                     <span class="ep-num">${ep.epNumber}</span>
                 </div>
                 <h4>${ep.title}</h4>

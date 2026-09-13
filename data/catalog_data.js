@@ -28,12 +28,7 @@ const animeCatalog = [
         title: "Blue Lock",
         malId: 49596,
         isHero: false
-    },    {
-        id: "Blue Lock",
-        title: "Blue Lock",
-        malId: 49596,
-        isHero: false
-    },
+    }, 
         {
         id: "One Punch Man",
         title: "One Punch Man",
@@ -344,7 +339,7 @@ const animeCatalog = [
     {
         id: "sakamoto_days_مدبلج_s2",
         title: "SAKAMOTO DAYS مدبلج - الموسم 2",
-        malId: 58939,
+        malId: 60285,
         isHero: false
     },
     {
@@ -359,12 +354,7 @@ const animeCatalog = [
         malId: 58567,
         isHero: false
     },
-    {
-        id: "shingeki_no_kyojin:_kuinaki_sentaku_مدبلج_s1",
-        title: "SHINGEKI NO KYOJIN: KUINAKI SENTAKU مدبلج - الموسم 1",
-        malId: 25781,
-        isHero: false
-    },
+
     {
         id: "tensei_shitara_slime_datta_ken_مدبلج_s1",
         title: "TENSEI SHITARA SLIME DATTA KEN مدبلج - الموسم 1",
@@ -404,7 +394,7 @@ const animeCatalog = [
     {
         id: "shiguang_dailiren_مدبلج_s2",
         title: "SHIGUANG DAILIREN مدبلج - الموسم 2",
-        malId: 44074,
+        malId: 49413,
         isHero: false
     },
     {
@@ -452,7 +442,7 @@ const animeCatalog = [
     {
         id: "megalo_box_مدبلج_s2",
         title: "MEGALO BOX مدبلج - الموسم 2",
-        malId: 36563,
+        malId: 40729,
         isHero: false
     },
     {
@@ -506,31 +496,31 @@ const animeCatalog = [
     {
         id: "re:zero_kara_hajimeru_isekai_seikatsu:_shin_henshuu-ban_مدبلج_s1",
         title: "RE:ZERO KARA HAJIMERU ISEKAI SEIKATSU: SHIN HENSHUU-BAN مدبلج - الموسم 1",
-        malId: null,
+        malId: 31240,
         isHero: false
     },
     {
         id: "re:zero_kara_hajimeru_isekai_seikatsu:_shin_henshuu-ban_مدبلج_s2",
         title: "RE:ZERO KARA HAJIMERU ISEKAI SEIKATSU: SHIN HENSHUU-BAN مدبلج - الموسم 2",
-        malId: null,
+        malId: 39587,
         isHero: false
     },
     {
         id: "re:zero_kara_hajimeru_isekai_seikatsu:_shin_henshuu-ban_مدبلج_s3",
         title: "RE:ZERO KARA HAJIMERU ISEKAI SEIKATSU: SHIN HENSHUU-BAN مدبلج - الموسم 3",
-        malId: null,
+        malId: 42203,
         isHero: false
     },
     {
         id: "re:zero_kara_hajimeru_isekai_seikatsu:_shin_henshuu-ban_مدبلج_s4",
         title: "RE:ZERO KARA HAJIMERU ISEKAI SEIKATSU: SHIN HENSHUU-BAN مدبلج - الموسم 4",
-        malId: null,
+        malId: 54857,
         isHero: false
     },
     {
         id: "re:zero_kara_hajimeru_isekai_seikatsu:_shin_henshuu-ban_مدبلج_s5",
         title: "RE:ZERO KARA HAJIMERU ISEKAI SEIKATSU: SHIN HENSHUU-BAN مدبلج - الموسم 5",
-        malId: null,
+        malId: 61316,
         isHero: false
     }
 ];

@@ -12,20 +12,15 @@
     <link rel="icon" type="image/png" href="../icon-192.png">
     <link rel="manifest" href="../manifest.json">
     <link rel="stylesheet" href="../css/style.css">
-    <script>
-      if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-          navigator.serviceWorker.register('../sw.js').catch(err => console.log('SW Error:', err));
-        });
-      }
-    </script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/finish.css">
 </head>
 <body class="animated-bg">
    <header class="main-header">
         <div class="logo">
             <div class="logo rgb-text">AR Anime</div>    
         </div>
-        <div class="menu-icon">☰</div>
+        <button type="button" class="menu-icon" aria-label="فتح القائمة" aria-controls="navMenu" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
         <nav id="navMenu">
             <div class="close-btn">&times;</div>
             <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
@@ -64,13 +59,7 @@
 
     <script>
         // سكريبت القائمة الجانبية للهاتف
-        document.addEventListener('DOMContentLoaded', () => {
-            const menuIcon = document.querySelector('.menu-icon');
-            const navMenu = document.getElementById('navMenu');
-            const closeBtn = document.querySelector('.close-btn');
-            if(menuIcon && navMenu) menuIcon.addEventListener('click', () => navMenu.classList.add('active'));
-            if(closeBtn && navMenu) closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
-        });
     </script>
+    <script src="../data/site.js"></script>
 </body>
 </html>

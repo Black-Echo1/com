@@ -22,7 +22,15 @@
     "use strict";
 
     function normalize(s) {
-        return (s || "").toString().trim().toLowerCase();
+        return (s || "").toString().trim().toLocaleLowerCase('ar');
+    }
+
+    function compact(s) {
+        return normalize(s).replace(/[|،,;:/\\()[\]{}]+/g, ' ').replace(/\s+/g, ' ').trim();
+    }
+
+    function identityKey(s) {
+        return compact(s).replace(/[^\p{L}\p{N}]+/gu, '');
     }
 
     // يجعل معرّف الأنمي (المفتاح) صالحاً كعنوان عرض إن لم يوجد عنوان آخر
@@ -36,8 +44,12 @@
         if (typeof dubbersDatabase === "undefined") return index;
         Object.keys(dubbersDatabase).forEach((handle) => {
             const profile = dubbersDatabase[handle];
-            index.set(normalize(handle), handle);
-            if (profile && profile.name) index.set(normalize(profile.name), handle);
+            const values = [handle, profile && profile.name].filter(Boolean);
+            values.forEach((value) => {
+                index.set(normalize(value), handle);
+                index.set(compact(value), handle);
+                index.set(identityKey(value), handle);
+            });
         });
         return index;
     }
@@ -55,11 +67,14 @@
         if (text.length < 2) return null;
 
         const index = getHandleIndex();
-        if (index.has(text)) return index.get(text);
+        const candidates = [text, compact(text), identityKey(text)].filter(Boolean);
+        for (const candidate of candidates) {
+            if (index.has(candidate)) return index.get(candidate);
+        }
 
-        // مطابقة جزئية (احتياطية) لحالات زي " Makoto_san" مقابل "ماكوتو_سان | Makoto_san"
+        // مطابقة مرنة للأسماء المختصرة، مع إزالة الفواصل والشرطات والمسافات الزائدة.
         for (const [key, handle] of index.entries()) {
-            if (key.length >= 3 && (key.includes(text) || text.includes(key))) {
+            if (key.length >= 3 && candidates.some((candidate) => key.includes(candidate) || candidate.includes(key))) {
                 return handle;
             }
         }
@@ -146,19 +161,30 @@
     // كل الأدوار المُستنتَجة تلقائياً من anime_db.js لمؤدٍ معيّن
     // ملاحظة: charImage بترجع فاضية فوراً (مزامنة) وبتتملى لاحقاً عن طريق
     // hydrateRoleImages بعد استدعاء Jikan (لأن الجلب async)
+    function getAliasHandles(handle) {
+        if (typeof dubbersDatabase === 'undefined') return [handle];
+        const profile = dubbersDatabase[handle] || {};
+        const key = identityKey(profile.name || handle);
+        return Object.keys(dubbersDatabase).filter((candidate) => {
+            const item = dubbersDatabase[candidate] || {};
+            return identityKey(item.name || candidate) === key;
+        });
+    }
+
     function getDerivedRoles(handle) {
         const roles = [];
         if (typeof animeDetailsDatabase === "undefined") return roles;
-
+        const aliases = new Set(getAliasHandles(handle));
         Object.keys(animeDetailsDatabase).forEach((animeId) => {
             const anime = animeDetailsDatabase[animeId];
             const dc = anime.dubbedCharacters || {};
             Object.keys(dc).forEach((charName) => {
-                if (resolveHandle(dc[charName]) === handle) {
+                const resolved = resolveHandle(dc[charName]);
+                if (resolved && aliases.has(resolved)) {
                     roles.push({
                         charName: charName,
                         animeId: animeId,
-                        animeTitle: prettifyTitle(animeId),
+                        animeTitle: anime.title || prettifyTitle(animeId),
                         malId: anime.malId || null,
                         charImage: "",
                         source: "dubbedCharacters"
@@ -166,7 +192,9 @@
                 }
             });
         });
-        return roles;
+        const unique = new Map();
+        roles.forEach((role) => unique.set(`${normalize(role.animeId)}::${normalize(role.charName)}`, role));
+        return [...unique.values()];
     }
 
     // بتاخد مصفوفة roles (زي اللي بترجع من getActorAggregate) وبتملى charImage
@@ -187,10 +215,10 @@
     // يدمج roles[] اليدوية الموجودة فعلاً مع أي أدوار جديدة مُستنتَجة من anime_db.js، بدون تكرار
     function getActorAggregate(handle) {
         const profile = (typeof dubbersDatabase !== "undefined" && dubbersDatabase[handle]) || null;
-        const manualRoles = ((profile && profile.roles) || [])
+        const manualRoles = getAliasHandles(handle).flatMap((alias) => ((dubbersDatabase && dubbersDatabase[alias] && dubbersDatabase[alias].roles) || []))
             .filter((r) => r.charName && r.animeTitle)
             .map((r) => ({
-                charName: r.charName,
+                charName: r.charName.trim(),
                 animeId: r.animeId || r.animeTitle,
                 animeTitle: r.animeTitle,
                 charImage: r.charImage || "",
@@ -213,13 +241,32 @@
         };
     }
 
+    const profileDescriptions = [
+        'صوت شغوف يضيف احتراماً وصدقاً لكل شخصية يؤديها.',
+        'مؤدٍ محترف يوازن بين الإحساس، وضوح النطق، وروح المشهد.',
+        'موهبة واعدة تتطور بثبات وتتعامل مع الدبلجة كفن مسؤول.',
+        'حضور صوتي مميز يشارك بحماس في بناء تجربة عربية أصيلة.',
+        'أداء متزن يدل على تقدير كبير للعمل الجماعي وثقافة الدبلجة.',
+        'صوت مجتهد يثبت أن التفاصيل الصغيرة تصنع شخصية لا تُنسى.'
+    ];
+
+    function profileDescription(handle, name) {
+        const seed = Array.from(`${handle}:${name}`).reduce((sum, char) => sum + char.charCodeAt(0), 0);
+        return profileDescriptions[seed % profileDescriptions.length];
+    }
+
     function getActorProfile(handle) {
         const stored = (typeof dubbersDatabase !== "undefined" && dubbersDatabase[handle]) || null;
+        const aggregate = getActorAggregate(handle);
+        const tier = aggregate.characterCount >= 3 || /مخرج|قائد|مكساج/.test((stored && stored.role) || '') ? 'محترف' : 'متوسط';
+        const name = (stored && stored.name) || handle;
         return {
             id: handle,
-            name: (stored && stored.name) || handle,
+            name,
             role: (stored && stored.role) || "مؤدي أصوات",
             logo: (stored && stored.logo) || "",
+            description: profileDescription(handle, name),
+            tier,
             isAutoGenerated: !stored
         };
     }
@@ -244,6 +291,7 @@
         getDerivedRoles,
         getActorAggregate,
         getActorProfile,
+        getAliasHandles,
         getAllActorIds,
         resolveCharacterDisplay,
         fetchCharImage,

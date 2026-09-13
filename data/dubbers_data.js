@@ -1,10 +1,6 @@
 const dubbersDatabase = {
-      "Youssef_مدبلج🎙️": {
-        name: "Youssef_مدبلج🎙️",
-        role: "مؤدي أصوات",
-        logo: "https://i.ibb.co/qL54g9Yj/image.webp",
-        roles: []
-    },
+
+    
     "اكــــاي/𝕬ћ๓Σ𝕕☠": {
         name: "اكــــاي/𝕬ћ๓Σ𝕕☠",
         role: "مؤدي أصوات",
@@ -117,8 +113,30 @@ const dubbersDatabase = {
         logo: "https://i.ibb.co/1YwbwPqS/image.png",
         roles: []
     },
-
-
+    "𝑵𝑬𝒁𝑼𝑲𝑶⃝🌸𝑺𝑨𝑵❥્᭄͜͜͡ على TikTok": {
+        name: "𝑵𝑬𝒁𝑼𝑲𝑶⃝🌸𝑺𝑨𝑵❥્᭄͜͜͡ على TikTok",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/DgLFjr4w/image.jpg",
+        roles: []
+    },
+    "ᴠᴇʏʀᴏɴ على TikTok": {
+        name: "ᴠᴇʏʀᴏɴ على TikTok",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/d00ZWHvF/image.jpg",
+        roles: []
+    },
+    "al3m091": {
+        name: "al3m091",
+        role: "مؤدي أصوات",
+        logo: "https://i.ibb.co/LX3FfzxG/image.jpg",
+        roles: []
+    },
+    "AEA Anime": {
+        name: "AEA Anime",
+        role: "مؤدية أصوات",
+        logo: "https://i.ibb.co/3yt4mZVH/image.jpg",
+        roles: []
+    },
 
 
 

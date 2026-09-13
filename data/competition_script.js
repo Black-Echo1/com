@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
             compGrid.innerHTML += `
                 <div class="video-card comp-card" style="border-color: rgba(241, 196, 15, 0.3);">
                     <div class="smart-thumbnail" onclick="playCompVideo('${p.videoUrl}')">
-                        <img src="${p.thumbnail}" alt="${p.name}">
+                        <img loading="lazy" decoding="async" src="${p.thumbnail}" alt="${p.name}">
                         <div class="play-overlay">مشاهدة الأداء</div>
                     </div>
                     <h3>${p.name}</h3>

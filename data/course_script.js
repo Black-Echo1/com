@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const lessonHTML = `
                 <div class="episode-card" onclick="playLesson('${lesson.id}', '${lesson.videoUrl}')">
                     <div class="ep-thumbnail">
-                        <img src="${lesson.thumbnail}" alt="${lesson.title}">
+                        <img loading="lazy" decoding="async" src="${lesson.thumbnail}" alt="${lesson.title}">
                         <span class="ep-time">${lesson.duration}</span>
                     </div>
                     <div class="ep-info">

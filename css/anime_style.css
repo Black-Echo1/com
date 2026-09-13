@@ -210,3 +210,50 @@
     border-color: var(--accent-red);
     box-shadow: 0 0 10px rgba(229, 9, 20, 0.4);
 }
+
+/* تخطيط المشاهدة الاحترافي: مشغل واسع وقائمة حلقات جانبية */
+.watch-layout { display: grid; grid-template-columns: minmax(0, 1.55fr) minmax(290px, .75fr); gap: 24px; align-items: start; }
+.watch-player-panel, .episodes-sidebar { min-width: 0; background: linear-gradient(145deg, rgba(18,20,28,.98), rgba(11,12,18,.98)); border: 1px solid var(--he-border, #262838); border-radius: 18px; box-shadow: 0 18px 50px rgba(0,0,0,.28); }
+.watch-player-panel[hidden] { display: none; }
+.watch-player-panel { padding: 18px; position: sticky; top: 82px; }
+.watch-player-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
+.watch-player-head h2 { margin: 3px 0 0; font-size: clamp(1rem, 2vw, 1.35rem); color: #fff; }
+.watch-kicker { color: var(--he-red-2, #ff3b3b); font-size: .72rem; font-weight: 800; letter-spacing: .04em; }
+.watch-kicker i { margin-left: 5px; }
+.watch-close { border: 1px solid rgba(255,255,255,.12); border-radius: 9px; padding: 8px 12px; color: #ddd; background: rgba(255,255,255,.06); cursor: pointer; font: inherit; white-space: nowrap; transition: .2s ease; }
+.watch-close:hover { background: rgba(229,9,20,.18); border-color: var(--he-red-2, #ff3b3b); color: #fff; }
+.video-wrapper { position: relative; width: 100%; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 12px; border: 1px solid var(--he-border, #262838); background: #000; box-shadow: 0 0 34px rgba(229,9,20,.2); }
+.video-wrapper iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video-wrapper video { position: absolute; inset: 0; width: 100%; height: 100%; background: #000; }
+.watch-progress-row { display: flex; justify-content: space-between; gap: 12px; padding: 10px 2px 0; color: var(--he-muted, #93939f); font-size: .73rem; }
+.watch-progress-row #watch-progress-value { color: var(--he-gold, #ffb800); font-weight: 700; }
+.episode-navigation { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 14px; }
+.episode-navigation button { min-height: 44px; display: inline-flex; align-items: center; justify-content: center; gap: 9px; border: 1px solid rgba(255,255,255,.12); border-radius: 11px; padding: 10px 14px; color: #f4f4f6; background: linear-gradient(145deg, rgba(255,255,255,.09), rgba(255,255,255,.035)); cursor: pointer; font: inherit; font-size: .78rem; font-weight: 800; box-shadow: 0 7px 18px rgba(0,0,0,.18); transition: transform .2s ease, border-color .2s ease, background .2s ease, opacity .2s ease; }
+.episode-navigation button:hover:not(:disabled) { transform: translateY(-2px); border-color: var(--he-red-2, #ff3b3b); background: linear-gradient(135deg, rgba(255,59,59,.9), rgba(229,9,20,.8)); }
+.episode-navigation button:active:not(:disabled) { transform: translateY(0) scale(.98); }
+.episode-navigation button:disabled { cursor: not-allowed; opacity: .3; box-shadow: none; }
+.season-tabs { display: flex; gap: 8px; overflow-x: auto; padding: 0 0 13px; margin-bottom: 2px; scrollbar-width: thin; scrollbar-color: var(--he-red, #e50914) transparent; }
+.season-tab { flex: 0 0 auto; border: 1px solid var(--he-border, #262838); border-radius: 8px; padding: 7px 11px; color: var(--he-muted, #93939f); background: rgba(255,255,255,.035); cursor: pointer; font: inherit; font-size: .75rem; transition: .2s ease; }
+.season-tab:hover, .season-tab.active { color: #fff; border-color: var(--he-red-2, #ff3b3b); background: linear-gradient(135deg, rgba(255,59,59,.82), rgba(229,9,20,.82)); }
+.season-tab i { margin-left: 4px; }
+.servers-list { display: flex; align-items: center; gap: 9px; flex-wrap: wrap; margin-top: 14px; padding: 12px; border-radius: 10px; background: rgba(255,255,255,.035); }
+.servers-list::before { content: 'سيرفرات المشاهدة'; color: var(--he-muted, #93939f); font-size: .76rem; margin-left: 4px; }
+.download-action-btn { background: #218739 !important; color: #fff !important; padding: 8px 13px; border-radius: 8px; text-decoration: none; font-size: .8rem; font-weight: 700; margin-right: auto !important; }
+.episodes-sidebar { padding: 18px; max-height: min(720px, calc(100vh - 110px)); overflow: hidden; }
+.episodes-sidebar .episodes-header { border: 0; padding: 0 0 14px; margin: 0; align-items: flex-end; }
+.episodes-sidebar .episodes-header h2 { margin: 3px 0 0; font-size: 1.15rem; border: 0; padding: 0; }
+.episodes-sidebar .ep-count { font-size: .72rem; padding: 5px 9px; }
+.episodes-sidebar .episodes-grid { display: flex; flex-direction: column; gap: 10px; height: min(560px, calc(100vh - 250px)); min-height: 420px; max-height: none; overflow-y: auto; padding: 0 3px 4px 0; scrollbar-width: thin; scrollbar-color: var(--he-red, #e50914) transparent; }
+.episodes-sidebar .ep-card { display: grid; flex: 0 0 88px; min-height: 88px; grid-template-columns: 108px minmax(0,1fr); align-items: stretch; border-radius: 11px; opacity: 1; transform: none; }
+.episodes-sidebar .ep-card:hover { transform: translateX(-3px); }
+.episodes-sidebar .ep-thumb-container { aspect-ratio: auto; height: 88px; min-height: 88px; }
+.episodes-sidebar .ep-card-info { padding: 8px 10px; min-width: 0; }
+.episodes-sidebar .ep-card-info h4, .episodes-sidebar .ep-card-info p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.episodes-sidebar .ep-card-info h4 { font-size: .82rem; }
+.episodes-sidebar .ep-card-info p { font-size: .7rem; }
+.episodes-sidebar .ep-card.is-playing { border-color: var(--he-red-2, #ff3b3b); background: linear-gradient(90deg, rgba(229,9,20,.2), rgba(255,255,255,.04)); box-shadow: inset -3px 0 var(--he-red-2, #ff3b3b); }
+.episodes-sidebar .ep-card.is-playing .ep-play-overlay { opacity: 1; background: rgba(229,9,20,.28); }
+.episodes-sidebar .ep-card.is-playing .ep-card-info h4::before { content: 'يُعرض الآن · '; color: var(--he-red-2, #ff3b3b); font-size: .68rem; }
+
+@media (max-width: 900px) { .watch-layout { grid-template-columns: 1fr; } .watch-player-panel { position: relative; top: 0; } .episodes-sidebar { max-height: none; } .episodes-sidebar .episodes-grid { height: 520px; min-height: 420px; } }
+@media (max-width: 560px) { .watch-player-panel, .episodes-sidebar { padding: 12px; border-radius: 14px; } .watch-player-head { align-items: flex-start; } .watch-close { padding: 7px 9px; font-size: .75rem; } .episodes-sidebar .ep-card { flex-basis: 82px; min-height: 82px; grid-template-columns: 106px minmax(0,1fr); } .episodes-sidebar .ep-thumb-container { height: 82px; min-height: 82px; } .episodes-sidebar .episodes-grid { height: 480px; min-height: 380px; } .download-action-btn { margin-right: 0 !important; } .episode-navigation button { font-size: .7rem; padding: 8px 6px; } }

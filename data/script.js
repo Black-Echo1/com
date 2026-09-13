@@ -1,245 +1,172 @@
-const ENABLE_ADS = false; 
+(() => {
+    'use strict';
 
-document.addEventListener("DOMContentLoaded", () => {
-    // 1. تحميل مقاطع التدريب (لصفحات الشباب والفتيات)
-    const grid = document.getElementById("video-grid");
-    if (grid) {
-        const category = grid.getAttribute("data-category");
-        const videos = videosData[category] || [];
-        
-        videos.forEach((video, index) => {
-            const linkWithSubs = `https://drive.google.com/uc?export=download&id=${video.downloadWithSubsId}`;
-            const linkNoSubs = `https://drive.google.com/uc?export=download&id=${video.downloadNoSubsId}`;
-            
-            grid.innerHTML += `
-                <div class="video-card">
-                    <div class="smart-thumbnail" onclick="triggerAdAndPlay('${category}', ${index}, 'training')">
-                        <img src="${video.thumbnail}" alt="${video.title}">
-                        <div class="play-overlay">تشغيل المشهد</div>
-                    </div>
-                    <h3>${video.title}</h3>
-                    <div class="download-buttons-holder">
-                        <a href="${linkWithSubs}" class="download-btn btn-subs">تحميل (مترجم)</a>
-                        <a href="${linkNoSubs}" class="download-btn btn-no-subs">تحميل (خام)</a>
-                    </div>
-                </div>
-            `;
-        });
-    }
+    const ENABLE_ADS = false;
+    const invalidLink = (value) => {
+        if (!value || typeof value !== 'string') return true;
+        const normalized = value.trim();
+        return !normalized || normalized.includes('ضع_هنا') || normalized.includes('رابط_التضمين_هنا') || normalized.startsWith('/https://');
+    };
+    const escapeHtml = (value) => String(value ?? '').replace(/[&<>'"]/g, (char) => ({
+        '&': '&amp;', '<': '&lt;', '>': '&gt;', "'": '&#39;', '"': '&quot;'
+    }[char]));
+    const lazyImage = (url, alt) => `<img src="${escapeHtml(url || 'icon-512.png')}" alt="${escapeHtml(alt)}" loading="lazy" decoding="async">`;
+    const driveLink = (value) => {
+        if (invalidLink(value)) return '';
+        return /^https?:\/\//i.test(value) ? value : `https://drive.google.com/uc?export=download&id=${encodeURIComponent(value)}`;
+    };
 
-    // 2. تحميل مقاطع المسابقة (لصفحة المسابقات)
-    const compGrid = document.getElementById("competition-grid");
-    if (compGrid) {
-        document.getElementById("comp-week-title").innerText = competitionData.weekTitle;
-        const participants = competitionData.participants;
+    document.addEventListener('DOMContentLoaded', () => {
+        const grid = document.getElementById('video-grid');
+        if (grid && typeof videosData !== 'undefined') {
+            const category = grid.getAttribute('data-category');
+            const videos = videosData[category] || [];
+            grid.innerHTML = videos.map((video, index) => {
+                const withSubs = driveLink(video.downloadWithSubsId || video.downloadWithSubsid);
+                const noSubs = driveLink(video.downloadNoSubsId || video.downloadNoSubsid);
+                const buttons = [
+                    withSubs ? `<a href="${escapeHtml(withSubs)}" class="download-btn btn-subs" target="_blank" rel="noopener noreferrer">تحميل (مترجم)</a>` : '',
+                    noSubs ? `<a href="${escapeHtml(noSubs)}" class="download-btn btn-no-subs" target="_blank" rel="noopener noreferrer">تحميل (خام)</a>` : ''
+                ].filter(Boolean).join('');
+                return `
+                    <article class="video-card">
+                        <div class="smart-thumbnail" role="button" tabindex="0" onclick="triggerAdAndPlay('${escapeHtml(category)}', ${index}, 'training')" onkeydown="if(event.key==='Enter') triggerAdAndPlay('${escapeHtml(category)}', ${index}, 'training')">
+                            ${lazyImage(video.thumbnail, video.title)}
+                            <div class="play-overlay"><i class="fa-solid fa-play"></i><span>تشغيل المشهد</span></div>
+                        </div>
+                        <h3>${escapeHtml(video.title)}</h3>
+                        <div class="download-buttons-holder">${buttons || '<span class="no-source-msg">لا توجد روابط تحميل متاحة حالياً</span>'}</div>
+                    </article>`;
+            }).join('');
+        }
 
-        participants.forEach((p, index) => {
-            // التحقق من التصويت المحلي لتهيئة الزر
-            let hasVoted = localStorage.getItem(`voted_for_${p.id}`) ? true : false;
-            let btnClass = hasVoted ? "vote-btn voted" : "vote-btn";
-            let btnText = hasVoted ? "تم التصويت ✔" : "صوّت الآن";
-            
-            // قراءة عدد الأصوات الوهمي/الابتدائي من الداتا (سيتغير لاحقاً بربط فايربيس)
-            let currentVotes = p.initialVotes + (hasVoted ? 1 : 0);
+        const compGrid = document.getElementById('competition-grid');
+        if (compGrid && typeof competitionData !== 'undefined') {
+            const title = document.getElementById('comp-week-title');
+            if (title) title.textContent = competitionData.weekTitle || 'مسابقة هذا الأسبوع';
+            compGrid.innerHTML = (competitionData.participants || []).map((participant, index) => {
+                const hasVoted = Boolean(localStorage.getItem(`voted_for_${participant.id}`));
+                const currentVotes = Number(participant.initialVotes || 0) + (hasVoted ? 1 : 0);
+                return `
+                    <article class="video-card comp-card">
+                        <div class="smart-thumbnail" role="button" tabindex="0" onclick="playCompVideo(${index})">
+                            ${lazyImage(participant.thumbnail, participant.name)}
+                            <div class="play-overlay"><i class="fa-solid fa-play"></i><span>مشاهدة الأداء</span></div>
+                        </div>
+                        <h3>${escapeHtml(participant.name)}</h3>
+                        <div class="vote-section">
+                            <span class="vote-count" id="count_${escapeHtml(participant.id)}">${currentVotes} صوت</span>
+                            <button class="${hasVoted ? 'vote-btn voted' : 'vote-btn'}" id="btn_${escapeHtml(participant.id)}" onclick="castVote('${escapeHtml(participant.id)}', ${currentVotes})">${hasVoted ? 'تم التصويت ✔' : 'صوّت الآن'}</button>
+                        </div>
+                    </article>`;
+            }).join('');
+        }
 
-            compGrid.innerHTML += `
-                <div class="video-card comp-card">
-                    <div class="smart-thumbnail" onclick="playCompVideo(${index})">
-                        <img src="${p.thumbnail}" alt="${p.name}">
-                        <div class="play-overlay">مشاهدة الأداء</div>
-                    </div>
-                    <h3>${p.name}</h3>
-                    <div class="vote-section">
-                        <span class="vote-count" id="count_${p.id}">${currentVotes} صوت</span>
-                        <button class="${btnClass}" id="btn_${p.id}" onclick="castVote('${p.id}', ${currentVotes})">${btnText}</button>
-                    </div>
-                </div>
-            `;
-        });
-    }
-});
-
-// دوال المسابقة
-function playCompVideo(index) {
-    let videoModal = document.getElementById("videoModal");
-    let videoFrame = document.getElementById("mainVideoFrame");
-    let serverTabs = document.getElementById("server-tabs");
-    
-    if (serverTabs) serverTabs.style.display = "none"; // لا نحتاج لسيرفرات متعددة في المسابقة
-    
-    const participant = competitionData.participants[index];
-    if(videoModal && videoFrame) {
-        videoFrame.src = participant.videoUrl;
-        videoFrame.setAttribute("allow", "autoplay; fullscreen; picture-in-picture");
-        videoFrame.setAttribute("allowfullscreen", "true");
-        videoModal.style.display = "flex";
-    }
-}
-
-function castVote(participantId, currentVotes) {
-    // التحقق مما إذا كان العضو قد صوّت لأي شخص في هذه المسابقة
-    let hasVotedAny = localStorage.getItem("voted_this_week");
-    let btn = document.getElementById(`btn_${participantId}`);
-    let countSpan = document.getElementById(`count_${participantId}`);
-
-    if (hasVotedAny) {
-        alert("لقد قمت بالتصويت بالفعل في مسابقة هذا الأسبوع! لا يمكن التصويت مرتين.");
-        return;
-    }
-
-    // تسجيل التصويت
-    localStorage.setItem("voted_this_week", "true");
-    localStorage.setItem(`voted_for_${participantId}`, "true");
-    
-    // تحديث الواجهة
-    btn.classList.add("voted");
-    btn.innerText = "تم التصويت ✔";
-    countSpan.innerText = `${currentVotes + 1} صوت`;
-    
-    alert("تم تسجيل صوتك بنجاح! شكراً لمشاركتك.");
-}
-
-// دوال التدريب (المكتبة)
-let currentCategory = "", currentIndex = null;
-
-function triggerAdAndPlay(category, index, type) {
-    currentCategory = category; currentIndex = index;
-    if (ENABLE_ADS) { /* كود الإعلانات المجمد */ } else { openVideo(); }
-}
-
-function openVideo() {
-    let videoModal = document.getElementById("videoModal");
-    let serverContainer = document.getElementById("server-tabs");
-    let videoFrame = document.getElementById("mainVideoFrame");
-    serverContainer.style.display = "flex";
-    
-    const video = videosData[currentCategory][currentIndex];
-    serverContainer.innerHTML = "";
-    
-    let firstServerUrl = "";
-    Object.keys(video.servers).forEach((serverName, idx) => {
-        const serverUrl = video.servers[serverName];
-        if(idx === 0) firstServerUrl = serverUrl;
-        
-        const btn = document.createElement("button");
-        btn.innerText = serverName;
-        btn.className = `server-btn ${idx === 0 ? 'active' : ''}`;
-        btn.onclick = () => {
-            videoFrame.src = serverUrl;
-            document.querySelectorAll(".server-btn").forEach(b => b.classList.remove("active"));
-            btn.classList.add("active");
-        };
-        serverContainer.appendChild(btn);
+        const courseList = document.getElementById('course-list');
+        if (courseList && typeof courseData !== 'undefined') {
+            const title = document.getElementById('course-main-title');
+            const description = document.getElementById('course-main-desc');
+            if (title) title.textContent = courseData.courseTitle || '';
+            if (description) description.textContent = courseData.courseDescription || '';
+            courseList.innerHTML = (courseData.lessons || []).map((lesson, index) => {
+                const hasStarted = Boolean(localStorage.getItem(`started_${lesson.id}`));
+                return `<article class="episode-card" onclick="playLesson('${escapeHtml(lesson.id)}', '${escapeHtml(lesson.videoUrl)}', ${index})">
+                    <div class="ep-thumbnail">${lazyImage(lesson.thumbnail, lesson.title)}<span class="ep-time">${escapeHtml(lesson.duration)}</span></div>
+                    <div class="ep-info"><h3>${escapeHtml(lesson.title)}</h3><p>${escapeHtml(lesson.description)}</p>${hasStarted ? '<div class="progress-bar"><div class="progress-fill" style="width:45%"></div></div>' : ''}</div>
+                    <div class="ep-action"><button class="play-btn${hasStarted ? ' continue' : ''}" id="btn_${escapeHtml(lesson.id)}">${hasStarted ? 'أكمل المشاهدة ⏸' : 'شاهد الآن ▶'}</button></div>
+                </article>`;
+            }).join('');
+        }
     });
 
-    if(videoModal && videoFrame) {
-        videoFrame.src = firstServerUrl;
-        videoFrame.setAttribute("allow", "autoplay; fullscreen");
-        videoModal.style.display = "flex";
-    }
-}
+    window.playCompVideo = function (index) {
+        const modal = document.getElementById('videoModal');
+        const frame = document.getElementById('mainVideoFrame');
+        const tabs = document.getElementById('server-tabs');
+        const participant = typeof competitionData !== 'undefined' ? competitionData.participants?.[index] : null;
+        if (tabs) tabs.style.display = 'none';
+        if (modal && frame && participant && !invalidLink(participant.videoUrl)) {
+            frame.src = participant.videoUrl;
+            frame.setAttribute('allow', 'autoplay; fullscreen; picture-in-picture');
+            frame.setAttribute('allowfullscreen', 'true');
+            modal.style.display = 'flex';
+        }
+    };
 
-function closeVideo() {
-    let videoModal = document.getElementById("videoModal");
-    let videoFrame = document.getElementById("mainVideoFrame");
-    if(videoModal && videoFrame) {
-        videoModal.style.display = "none";
-        videoFrame.src = "";
-    }
-}// ==========================================
-// نظام كورس الدبلجة (توليد قائمة الدروس العمودية)
-// ==========================================
-document.addEventListener("DOMContentLoaded", () => {
-    const courseList = document.getElementById("course-list");
-    
-    if (courseList) {
-        // تحديث عنوان ووصف الكورس في الواجهة
-        document.getElementById("course-main-title").innerText = courseData.courseTitle;
-        document.getElementById("course-main-desc").innerText = courseData.courseDescription;
-        
-        const lessons = courseData.lessons;
-        
-        lessons.forEach((lesson, index) => {
-            // التحقق مما إذا كان المستخدم قد فتح الدرس سابقاً (لتحويل الزر إلى "أكمل")
-            let hasStarted = localStorage.getItem(`started_${lesson.id}`);
-            let btnClass = hasStarted ? "play-btn continue" : "play-btn";
-            let btnText = hasStarted ? "أكمل المشاهدة ⏸" : "شاهد الآن ▶";
-            let progressHtml = hasStarted ? `<div class="progress-bar"><div class="progress-fill" style="width: 45%;"></div></div>` : "";
+    window.castVote = function (participantId, currentVotes) {
+        if (localStorage.getItem('voted_this_week')) {
+            alert('لقد قمت بالتصويت بالفعل في مسابقة هذا الأسبوع! لا يمكن التصويت مرتين.');
+            return;
+        }
+        localStorage.setItem('voted_this_week', 'true');
+        localStorage.setItem(`voted_for_${participantId}`, 'true');
+        const button = document.getElementById(`btn_${participantId}`);
+        const count = document.getElementById(`count_${participantId}`);
+        if (button) { button.classList.add('voted'); button.textContent = 'تم التصويت ✔'; }
+        if (count) count.textContent = `${Number(currentVotes) + 1} صوت`;
+        alert('تم تسجيل صوتك بنجاح! شكراً لمشاركتك.');
+    };
 
-            const lessonHTML = `
-                <div class="episode-card" onclick="playLesson('${lesson.id}', '${lesson.videoUrl}', ${index})">
-                    <div class="ep-thumbnail">
-                        <img src="${lesson.thumbnail}" alt="${lesson.title}">
-                        <span class="ep-time">${lesson.duration}</span>
-                    </div>
-                    <div class="ep-info">
-                        <h3>${lesson.title}</h3>
-                        <p>${lesson.description}</p>
-                        ${progressHtml}
-                    </div>
-                    <div class="ep-action">
-                        <button class="${btnClass}" id="btn_${lesson.id}">${btnText}</button>
-                    </div>
-                </div>
-            `;
-            courseList.innerHTML += lessonHTML;
+    let currentCategory = '';
+    let currentIndex = null;
+    window.triggerAdAndPlay = function (category, index) {
+        currentCategory = category;
+        currentIndex = index;
+        if (ENABLE_ADS) return;
+        window.openVideo();
+    };
+
+    window.openVideo = function () {
+        const modal = document.getElementById('videoModal');
+        const serverContainer = document.getElementById('server-tabs');
+        const frame = document.getElementById('mainVideoFrame');
+        const video = typeof videosData !== 'undefined' ? videosData[currentCategory]?.[currentIndex] : null;
+        if (!modal || !serverContainer || !frame || !video) return;
+        serverContainer.innerHTML = '';
+        serverContainer.style.display = 'flex';
+        const servers = Object.entries(video.servers || {}).filter(([, url]) => !invalidLink(url));
+        if (!servers.length) {
+            serverContainer.innerHTML = '<span class="no-source-msg">لا توجد خوادم تشغيل متاحة حالياً.</span>';
+            return;
+        }
+        let firstUrl = '';
+        servers.forEach(([name, url], index) => {
+            if (!firstUrl) firstUrl = url;
+            const button = document.createElement('button');
+            button.type = 'button';
+            button.className = `server-btn${index === 0 ? ' active' : ''}`;
+            button.textContent = name;
+            button.addEventListener('click', () => {
+                frame.src = url;
+                serverContainer.querySelectorAll('.server-btn').forEach((node) => node.classList.remove('active'));
+                button.classList.add('active');
+            });
+            serverContainer.appendChild(button);
         });
-    }
-});
+        frame.src = firstUrl;
+        frame.setAttribute('allow', 'autoplay; fullscreen');
+        modal.style.display = 'flex';
+    };
 
-// دالة تشغيل الدرس
-function playLesson(lessonId, videoUrl, index) {
-    // تسجيل أن المستخدم بدأ بمشاهدة هذا الدرس
-    localStorage.setItem(`started_${lessonId}`, "true");
-    
-    // تحديث شكل الزر فوراً في الواجهة
-    let btn = document.getElementById(`btn_${lessonId}`);
-    if(btn) {
-        btn.classList.add("continue");
-        btn.innerText = "أكمل المشاهدة ⏸";
-    }
+    window.closeVideo = function () {
+        const modal = document.getElementById('videoModal');
+        const frame = document.getElementById('mainVideoFrame');
+        if (modal) modal.style.display = 'none';
+        if (frame) frame.src = '';
+    };
 
-    // فتح نافذة الفيديو
-    let videoModal = document.getElementById("videoModal");
-    let videoFrame = document.getElementById("mainVideoFrame");
-    
-    // إخفاء تبويبات السيرفرات لأن الدروس غالباً لها مصدر واحد مباشر
-    let serverTabs = document.getElementById("server-tabs");
-    if (serverTabs) serverTabs.style.display = "none";
-
-    if(videoModal && videoFrame) {
-        videoFrame.src = videoUrl;
-        videoFrame.setAttribute("allow", "autoplay; fullscreen");
-        videoModal.style.display = "flex";
-    }
-}// دالة لفتح وإغلاق القائمة الجانبية عند الضغط على الأزرار
-
-document.addEventListener("DOMContentLoaded", function() {
-    const menuIcon = document.querySelector('.menu-icon');
-    const closeBtn = document.querySelector('.close-btn');
-    const navMenu = document.getElementById('navMenu');
-// أضف هذا الجزء في ملف الجافاسكريبت
-const navLinks = document.querySelectorAll('#navMenu a'); 
-
-navLinks.forEach(link => {
-    link.addEventListener('click', () => {
-        navMenu.classList.remove('active'); // إغلاق القائمة فور الضغط
-    });
-});
-    // تفعيل الفتح عند الضغط على الثلاث خطوط
-    if (menuIcon && navMenu) {
-        menuIcon.addEventListener('click', function(e) {
-             e.stopPropagation();
-            navMenu.classList.toggle('active');
-        });
-    }
-
-    // تفعيل الإغلاق عند الضغط على زر X
-    if (closeBtn && navMenu) {
-        closeBtn.addEventListener('click', function(e) {
-            e.stopPropagation();
-            navMenu.classList.remove('active');
-        });
-    }
-});
-
+    window.playLesson = function (lessonId, videoUrl) {
+        localStorage.setItem(`started_${lessonId}`, 'true');
+        const button = document.getElementById(`btn_${lessonId}`);
+        if (button) { button.classList.add('continue'); button.textContent = 'أكمل المشاهدة ⏸'; }
+        const modal = document.getElementById('videoModal');
+        const frame = document.getElementById('mainVideoFrame');
+        const tabs = document.getElementById('server-tabs');
+        if (tabs) tabs.style.display = 'none';
+        if (modal && frame && !invalidLink(videoUrl)) {
+            frame.src = videoUrl;
+            frame.setAttribute('allow', 'autoplay; fullscreen');
+            modal.style.display = 'flex';
+        }
+    };
+})();

@@ -96,14 +96,17 @@
 }
 
 /* معلومات البطاقة السفلية */
-.card-info { padding: 12px; }
+.card-info { padding: 12px; width: 100%; box-sizing: border-box; }
 .card-info h3 {
     font-size: 1rem;
     color: #fff;
     margin-bottom: 8px;
+    width: 100%;
+    max-width: 100%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    display: block;
 }
 .card-stats {
     display: flex;

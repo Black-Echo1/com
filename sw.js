@@ -1,58 +1,74 @@
-const CACHE_NAME = 'Anime-Hub-v1';
-const ASSETS_TO_CACHE = [
-  './',
-  './index.html',
-  './style.css',
-  './script.js',
-  './manifest.json'
+const CACHE_NAME = 'black-echo-v5';
+const PRECACHE_URLS = [
+    './',
+    './index.html',
+    './css/style.css',
+    './data/site.js',
+    './manifest.json',
+    './offline.html'
 ];
 
-// تثبيت التطبيق وتخزين الملفات الأساسية في الكاش لتسريع الفتح
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => {
-      return cache.addAll(ASSETS_TO_CACHE);
-    })
-  );
-  self.skipWaiting();
+self.addEventListener('install', (event) => {
+    event.waitUntil(
+        caches.open(CACHE_NAME)
+            .then((cache) => Promise.allSettled(PRECACHE_URLS.map((url) => cache.add(url))))
+            .then(() => self.skipWaiting())
+    );
 });
 
-// تفعيل وتحديث الكاش عند وجود نسخة جديدة من التصميم
-self.addEventListener('activate', event => {
-  event.waitUntil(
-    caches.keys().then(keys => {
-      return Promise.all(
-        keys.map(key => {
-          if (key !== CACHE_NAME) {
-            return caches.delete(key);
-          }
-        })
-      );
-    })
-  );
-  self.clients.claim();
+self.addEventListener('activate', (event) => {
+    event.waitUntil(
+        caches.keys()
+            .then((keys) => Promise.all(keys.filter((key) => key !== CACHE_NAME).map((key) => caches.delete(key))))
+            .then(() => self.clients.claim())
+    );
 });
 
-// إدارة الطلبات (Fetch Events)
-self.addEventListener('fetch', event => {
-  // هام جداً: استثناء ملف البيانات data.js من الكاش تماماً لضمان جلب التحديثات فوراً
-  if (event.request.url.includes('data.js')) {
-    event.respondWith(fetch(event.request));
-    return;
-  }
+const isSameOrigin = (request) => new URL(request.url).origin === self.location.origin;
+const isDataFile = (request) => /\/data\/(?:anime_db|catalog_data|data)\.js(?:$|\?)/.test(new URL(request.url).pathname);
+const isStaticAsset = (request) => /\.(?:css|js|png|jpe?g|webp|svg|ico|woff2?|json|xml|txt)$/i.test(new URL(request.url).pathname);
 
-  event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      if (cachedResponse) {
-        // نرجع النسخة المخزنة ونحدث الكاش في الخلفية للمرة القادمة
-        fetch(event.request).then(networkResponse => {
-          if (networkResponse.status === 200) {
-            caches.open(CACHE_NAME).then(cache => cache.put(event.request, networkResponse));
-          }
-        }).catch(() => {});
-        return cachedResponse;
-      }
-      return fetch(event.request);
-    })
-  );
+async function networkFirst(request) {
+    try {
+        const response = await fetch(request);
+        if (response.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            await cache.put(request, response.clone());
+        }
+        return response;
+    } catch (_) {
+        return caches.match(request) || caches.match('./offline.html');
+    }
+}
+
+async function staleWhileRevalidate(request) {
+    const cached = await caches.match(request);
+    const update = fetch(request).then(async (response) => {
+        if (response.ok) {
+            const cache = await caches.open(CACHE_NAME);
+            await cache.put(request, response.clone());
+        }
+        return response;
+    }).catch(() => null);
+    return cached || (await update) || Response.error();
+}
+
+self.addEventListener('fetch', (event) => {
+    const request = event.request;
+    if (request.method !== 'GET' || !isSameOrigin(request)) return;
+
+    // قاعدة الحلقات الكبيرة والبيانات المتغيرة لا تُخزّن بنسخة قديمة.
+    if (isDataFile(request)) {
+        event.respondWith(fetch(request));
+        return;
+    }
+
+    if (request.mode === 'navigate' || request.destination === 'document') {
+        event.respondWith(networkFirst(request));
+        return;
+    }
+
+    if (isStaticAsset(request)) {
+        event.respondWith(staleWhileRevalidate(request));
+    }
 });

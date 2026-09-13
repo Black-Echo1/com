@@ -14,7 +14,7 @@
     <style>
         :root{
             --he-bg:#07080c; --he-surface:#12141c; --he-surface-2:#181a24; --he-border:#262838;
-            --he-red:var(--accent-red, #e50914); --he-red-2:#ff3b3b; --he-gold:#ffb800; --he-muted:#93939f;
+            --he-red:#e50914; --he-red-2:#ff3b3b; --he-gold:#ffb800; --he-muted:#93939f;
         }
         @media (prefers-reduced-motion: reduce){ *{ animation-duration:0.001ms !important; transition-duration:0.001ms !important; } }
         body{ font-family:'Cairo', sans-serif; background:var(--he-bg); color:#fff; }
@@ -36,7 +36,7 @@
         .meta-tag{ padding:5px 14px; border-radius:20px; font-size:0.8rem; font-weight:700; background:rgba(255,255,255,0.08); border:1px solid var(--he-border); }
         .meta-tag.status{ color:#e8eee9; border-color:rgba(34, 168, 63, 0.4); }
         .meta-tag.type{ color:#dbdcdf; border-color:rgba(122,167,255,0.4); }
-        .meta-tag.rating{ color:var(waite); border-color:rgb(221, 167, 17); }
+        .meta-tag.rating{ color:var(--he-gold); border-color:rgb(221, 167, 17); }
         .anime-story{ color:#1c828a; font-size:0.95rem; line-height:1.9; max-width:700px; margin:0 0 16px; }
         .genres{ display:flex; gap:8px; flex-wrap:wrap; }
         .genres span{ background:rgba(255,255,255,0.06); border:1px solid var(--he-border); color:#ddd; padding:5px 13px; border-radius:8px; font-size:0.78rem; }
@@ -86,6 +86,7 @@
         footer a{ color:var(--he-muted); text-decoration:none; }
         footer a:hover{ color:var(--he-red-2); }
     </style>
+    <link rel="stylesheet" href="../css/finish.css">
 </head>
 <body class="animated-bg">
 
@@ -94,7 +95,7 @@
         <div class="logo rgb-text">AR Anime</div>    
     </div>
     
-    <div class="menu-icon">☰</div>
+    <button type="button" class="menu-icon" aria-label="فتح القائمة" aria-controls="navMenu" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
     
     <nav id="navMenu">
         <div class="close-btn">&times;</div>
@@ -111,7 +112,7 @@
     <div class="cover-overlay">
         <div class="container anime-details-content">
             <div class="anime-poster">
-                <img id="anime-poster-img" src="" alt="Poster">
+                <img loading="lazy" id="anime-poster-img" src="" alt="Poster">
             </div>
             <div class="anime-info">
                 <h1 id="anime-title">جاري التحميل...</h1>
@@ -128,32 +129,32 @@
 </div>
 
 <div class="container section-padding">
+    <div class="watch-layout">
+        <section id="video-player-container" class="watch-player-panel" hidden tabindex="-1" aria-label="مشغل الحلقة">
+            <div class="watch-player-head">
+                <div><span class="watch-kicker"><i class="fa-solid fa-circle-play"></i> المشاهدة الآن</span><h2 id="playing-episode-title">اختر حلقة للبدء</h2></div>
+                <button type="button" class="watch-close" onclick="closeInlinePlayer()"><i class="fa-solid fa-xmark"></i> إغلاق</button>
+            </div>
+            <div class="video-wrapper">
+                <video id="video-element" controls playsinline preload="metadata" hidden></video>
+                <iframe id="video-iframe" src="" title="مشغل الحلقة" hidden allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" allow="autoplay; fullscreen" sandbox="allow-scripts allow-same-origin allow-presentation"></iframe>
+            </div>
+            <div class="watch-progress-row"><span id="watch-progress-label">سيتم حفظ تقدم المشاهدة تلقائياً</span><span id="watch-progress-value"></span></div>
+            <div class="episode-navigation" aria-label="التنقل بين الحلقات">
+                <button type="button" id="prev-episode-btn" onclick="playAdjacentEpisode(-1)"><i class="fa-solid fa-forward-step fa-flip-horizontal"></i> الحلقة السابقة</button>
+                <button type="button" id="next-episode-btn" onclick="playAdjacentEpisode(1)">الحلقة التالية <i class="fa-solid fa-forward-step"></i></button>
+            </div>
+            <div id="servers-container" class="servers-list"></div>
+        </section>
 
-    <!-- قسم مشغل الفيديو المحدث لمنع الإعلانات المنبثقة -->
-    <div id="video-player-container" style="display: none; margin-bottom: 40px; max-width: 900px; margin-left: auto; margin-right: auto;">
-        
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-            <h3 id="playing-episode-title" style="color: #fff; font-size: 1.2rem; border-right: 3px solid var(--he-red-2); padding-right: 10px; margin: 0;">جاري التشغيل...</h3>
-            <button onclick="closeInlinePlayer()" style="background: linear-gradient(135deg, #ff3b3b, #e50914); color: white; border: none; padding: 8px 18px; border-radius: 8px; cursor: pointer; font-weight: bold; font-family:'Cairo',sans-serif; transition: 0.3s;">إغلاق الحلقة ✖</button>
-        </div>
-
-        <div class="video-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 12px; border: 1px solid var(--he-border); box-shadow: 0 0 30px rgba(229, 9, 20, 0.25); background: #000;">
-            <!-- تم تفعيل خاصية sandbox لحظر النوافذ المنبثقة الإعلانية -->
-            <iframe id="video-iframe" src="" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;" allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" scrolling="no" allow="autoplay; fullscreen" sandbox="allow-scripts allow-same-origin allow-presentation"></iframe>
-        </div>
-        
-        <!-- حاوية أزرار السيرفرات المتعددة -->
-        <div id="servers-container" class="servers-list" style="margin-top: 15px; display: flex; gap: 10px; flex-wrap: wrap; align-items:center;">
-            <!-- يتم توليد الأزرار تلقائياً هنا -->
-        </div>
-    </div>
-
-    <div class="episodes-header">
-        <h2>الحلقات المدبلجة</h2>
-        <span class="ep-count" id="ep-count">0 حلقة</span>
-    </div>
-    
-    <div class="episodes-grid" id="episodes-grid">
+        <aside class="episodes-sidebar" aria-label="قائمة الحلقات">
+            <div class="episodes-header">
+                <div><span class="watch-kicker">الموسم الحالي</span><h2>الحلقات المدبلجة</h2></div>
+                <span class="ep-count" id="ep-count">0 حلقة</span>
+            </div>
+            <nav id="season-tabs" class="season-tabs" aria-label="اختيار الموسم"></nav>
+            <div class="episodes-grid" id="episodes-grid"></div>
+        </aside>
     </div>
 </div>
 
@@ -174,13 +175,7 @@
 <script src="../data/anime_script.js"></script>
 <script src="../data/script.js"></script>
 <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const menuIcon = document.querySelector('.menu-icon');
-        const navMenu = document.getElementById('navMenu');
-        const closeBtn = document.querySelector('.close-btn');
-        if(menuIcon && navMenu) menuIcon.addEventListener('click', () => navMenu.classList.add('active'));
-        if(closeBtn && navMenu) closeBtn.addEventListener('click', () => navMenu.classList.remove('active'));
-    });
 </script>
+    <script src="../data/site.js"></script>
 </body>
 </html>

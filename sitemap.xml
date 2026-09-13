@@ -512,4 +512,8 @@
     <loc>https://black-echo1.github.io/com/html/actor.html?id=_elena.o_o</loc>
     <priority>0.7</priority>
   </url>
+  <url>
+    <loc>https://black-echo1.github.io/com/html/favorites.html</loc>
+    <priority>0.6</priority>
+  </url>
 </urlset>
