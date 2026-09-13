@@ -57,25 +57,33 @@
         };
     }
 
-    async function fetchFromAniList(malId, signal) {
-        const response = await fetch('https://graphql.anilist.co', {
+    // AniList allows 90 requests/minute (~one every 667ms), so a lighter queue gap
+    // is safe here — this keeps fresh (non-cached) anime loading noticeably faster
+    // than under Jikan's much stricter limit, without risking 429s.
+    let _aniListQueue = Promise.resolve();
+    const queueAniListFetch = (malId, signal) => {
+        const run = () => fetch('https://graphql.anilist.co', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
             body: JSON.stringify({ query: ANILIST_QUERY, variables: { malId: Number(malId) } }),
             signal,
         });
+        const p = _aniListQueue.then(() => new Promise((resolve) => setTimeout(resolve, 500)));
+        _aniListQueue = p.catch(() => {});
+        return p.then(run);
+    };
+
+    async function fetchFromAniList(malId, signal) {
+        const response = await queueAniListFetch(malId, signal);
         if (!response.ok) return null;
         const json = await response.json();
         return adaptAniListToJikanShape(json?.data?.Media);
     }
 
     // Jikan's free public API is shared by everyone and gets overloaded (429/504)
-    // independent of how careful this site is. Retrying aggressively on an already
-    // overloaded server just makes things slower for everyone, including this page.
-    // So: one request per anime, a wide gap between requests, and on failure the
-    // card still renders immediately with its known title (no spinner, no retry
-    // loop) — a later successful fetch (e.g. from cache on a repeat visit) will
-    // fill in the poster/rating without the user ever seeing a delay.
+    // independent of how careful this site is — kept only as a fallback when
+    // AniList doesn't have a title, so its stricter, wider gap barely matters
+    // in practice.
     let _jikanQueue = Promise.resolve();
     const queueJikanFetch = (malId, signal) => {
         const run = () => fetch(`https://api.jikan.moe/v4/anime/${encodeURIComponent(malId)}`, { signal });
@@ -177,7 +185,6 @@
     }
 
     async function processEntry(source, grid, hero, state) {
-        const hasCache = Boolean(localStorage.getItem(`anime_mal_${source.malId}`));
         const apiData = await getAnimeDataFromMAL(source.malId);
         const entry = normalizeEntry(source, apiData);
         window.fullCatalog.push(entry);
@@ -187,7 +194,6 @@
             renderHero(hero, entry);
             state.heroRendered = true;
         }
-        if (!hasCache) await delay(240);
     }
 
     async function loadCatalogInBatches() {
@@ -204,9 +210,7 @@
 
         // Real lazy loading: only the anime actually visible on screen get requested.
         // A "sentinel" element sits after the grid; a new batch loads only once the
-        // user scrolls it into view — never automatically in the background. This is
-        // what keeps the number of Jikan requests proportional to what the visitor
-        // actually scrolls through, instead of fetching the whole catalog regardless.
+        // user scrolls it into view — never automatically in the background.
         const sentinel = document.createElement('div');
         sentinel.setAttribute('aria-hidden', 'true');
         sentinel.style.cssText = 'height:1px;width:100%;grid-column:1/-1;';
@@ -217,7 +221,18 @@
             state.busy = true;
             const batch = sources.slice(state.next, state.next + count);
             state.next += batch.length;
-            for (const source of batch) await processEntry(source, grid, hero, state);
+
+            // Cached anime (already fetched in a previous visit, still within the
+            // 24h TTL) need no network request at all, so they render immediately
+            // and in parallel — no reason to make a visitor wait through a queue
+            // for data that's already sitting in localStorage.
+            const cached = batch.filter((source) => Boolean(localStorage.getItem(`anime_mal_${source.malId}`)));
+            const fresh = batch.filter((source) => !cached.includes(source));
+            await Promise.all(cached.map((source) => processEntry(source, grid, hero, state)));
+            // Only anime with no cached data go through the rate-limited queue,
+            // one at a time, since only these actually hit the network.
+            for (const source of fresh) await processEntry(source, grid, hero, state);
+
             if (loader) { loader.classList.add('loaded'); loader.hidden = true; }
             state.busy = false;
             if (state.next >= sources.length) observer.disconnect();
