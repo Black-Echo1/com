@@ -1,4 +1,4 @@
-const CACHE_NAME = 'black-echo-v5';
+const CACHE_NAME = 'black-echo-v6';
 const PRECACHE_URLS = [
     './',
     './index.html',

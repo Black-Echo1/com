@@ -9,7 +9,7 @@
  * يمكنك إضافة فريق هنا حتى لو ما عنده صفحة عرض بعد.
  */
 window.TEAM_CONTACTS = [
-    { id: 'team_alpha', name: 'فريق BLACK ECHO', email: 'black.echore@gmail.com' },
+    { id: 'team_alpha', name: 'فريق BLACK ECHO', email: 'blackecho.applications@example.com' },
     { id: 'nour_shadow', name: 'نور شادو', email: 'nourshadow.applications@example.com' },
     { id: 'akatsuki', name: 'الأكاتسكي', email: 'akatsuki.applications@example.com' },
 ];

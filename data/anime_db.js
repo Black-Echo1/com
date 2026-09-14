@@ -2581,7 +2581,6 @@ const animeDetailsDatabase = {
     "yu☆gi☆oh!_sevens_مدبلج_s1": {
         "malId": 40145,
         "dubbedCharacters": {},
-        "poster": "https://files.catbox.moe/rqfqtr.jpg",
         "episodes": [
             {
                 "number": 1,
