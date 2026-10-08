@@ -892,12 +892,22 @@
                     poster: data?.images?.jpg?.large_image_url || data?.images?.jpg?.image_url || `${root}icon-512.png`,
                     episodes: data?.episodes || 0
                 });
+                // بيانات الكتالوج المحلية (poster/type/status/rating/episodes) بتتعبّى مرة وحدة بسكريبت enrich_catalog.js
+                const fromCatalog = (source) => source.poster ? {
+                    id: String(source.id),
+                    title: source.title || source.id,
+                    type: source.type || 'أنمي',
+                    status: source.status || 'متاح الآن',
+                    rating: source.rating || '—',
+                    poster: source.poster,
+                    episodes: source.episodes || 0
+                } : null;
                 const live = new Map();       // آخر بيانات معروفة لكل أنمي
                 const cardsById = new Map();  // البطاقات الظاهرة لكل أنمي
                 const paint = (container, sources) => {
                     container.innerHTML = '';
                     sources.forEach((source, index) => {
-                        const entry = toEntry(source, cachedMal(source.malId));
+                        const entry = fromCatalog(source) || toEntry(source, cachedMal(source.malId));
                         const id = String(source.id);
                         live.set(id, entry);
                         const card = renderCard(container, entry, index);
@@ -925,7 +935,7 @@
                 updateHero(live.get(heroId));
 
                 // 2) حمّل الصور والتقييمات في الخلفية وحدّث البطاقات مكانها
-                const hydrate = (source) => getMal(source.malId).then((data) => {
+                const hydrate = (source) => source.poster ? Promise.resolve() : getMal(source.malId).then((data) => {
                     if (!data) return;
                     const entry = toEntry(source, data);
                     const id = String(source.id);
@@ -937,6 +947,12 @@
                 renderContinueWatching(latestSources.map((source) => live.get(String(source.id))));
 
                 // 3) "الأكثر شعبية": بعد ما يخلص الباقي، بعينة أصغر (12 بدل 20)
+                const rated = eligible.filter((source) => source.poster && Number(source.rating) > 0);
+                if (rated.length >= 4) {
+                    const top = [...rated].sort((a, b) => Number(b.rating) - Number(a.rating)).slice(0, 8).map(fromCatalog);
+                    renderRail(document.getElementById('popular-anime-rail'), top);
+                    return;
+                }
                 const popularSample = pickRandom(eligible, Math.min(12, eligible.length));
                 const results = await Promise.all(popularSample.map(async (source) => {
                     const data = await getMal(source.malId);
