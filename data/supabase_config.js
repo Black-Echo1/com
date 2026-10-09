@@ -12,6 +12,6 @@
  * (catalog_data.js / anime_db.js) — لا شيء بينكسر.
  */
 window.SUPABASE_CONFIG = {
-    url: '', // مثال: 'https://abcdefghijk.supabase.co'
-    anonKey: '', // مثال: 'sb_publishable_xxxxxxxxxxxxxxxxxxxxxx'
+ url: 'https://yvvqatjknwiorvrqjiwg.supabase.co',
+anonKey: 'sb_publishable_P_Eaffznt8OBXIl4t_iFjw_dn34nXjn',
 };
