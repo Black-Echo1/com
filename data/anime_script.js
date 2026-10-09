@@ -350,7 +350,8 @@ async function translateToArabic(text) {
 document.addEventListener("DOMContentLoaded", async () => {
     const urlParams = new URLSearchParams(window.location.search);
     const animeId = urlParams.get('id') || 'wind_breaker'; 
-    const localData = animeDetailsDatabase[animeId];
+    await DB.installSlim(); // يجهّز بيانات المؤدين للمحرك
+    const localData = await DB.getAnime(animeId);
 
     if (!localData) {
         document.getElementById("anime-title").innerText = "الأنمي غير موجود في قاعدة بياناتنا";

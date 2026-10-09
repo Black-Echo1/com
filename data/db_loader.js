@@ -74,5 +74,48 @@
         return typeof animeDetailsDatabase !== 'undefined' ? animeDetailsDatabase : {};
     }
 
-    window.DB = { enabled, getCatalog, getAnime, getAllAnime };
+    // نسخة خفيفة (بدون حلقات): كافية لمحرك المؤدين والفرق اللي يقرأ الأدوار والشخصيات فقط
+    async function getAnimeSlim() {
+        const rows = await rest('anime?select=id,mal_id,dubbing_team,dubbed_characters&limit=1000');
+        const out = {};
+        rows.forEach((a) => { out[a.id] = { malId: a.mal_id, dubbingTeam: a.dubbing_team, dubbedCharacters: a.dubbed_characters || {}, episodes: [] }; });
+        return out;
+    }
+
+    // مسار الملفات الثابتة القديمة (للرجوع الاحتياطي)
+    const loaderSrc = (document.currentScript && document.currentScript.src) || '';
+    const dataBase = loaderSrc.replace(/db_loader\.js.*$/, '');
+    function loadStatic(file) {
+        return new Promise((resolve) => {
+            if (!dataBase) return resolve();
+            const el = document.createElement('script');
+            el.src = dataBase + file;
+            el.onload = el.onerror = () => resolve();
+            document.head.appendChild(el);
+        });
+    }
+
+    let installed = null;
+    // يجهّز المتغيرات العامة اللي تعتمد عليها بقية سكربتات الموقع.
+    // لو Supabase شغّال: يعبّي animeDetailsDatabase (خفيفة) ويحدّث animeCatalog من القاعدة.
+    // لو لا: يحمّل anime_db.js القديم كالسابق.
+    function installSlim() {
+        if (installed) return installed;
+        installed = (async () => {
+            if (enabled) {
+                try {
+                    const [slim, cat] = await Promise.all([getAnimeSlim(), getCatalog()]);
+                    window.animeDetailsDatabase = slim;
+                    if (typeof animeCatalog !== 'undefined' && Array.isArray(animeCatalog) && cat.length) {
+                        animeCatalog.splice(0, animeCatalog.length, ...cat);
+                    }
+                    return;
+                } catch (e) { console.warn('DB.installSlim fallback:', e); }
+            }
+            if (typeof animeDetailsDatabase === 'undefined') await loadStatic('anime_db.js');
+        })();
+        return installed;
+    }
+
+    window.DB = { enabled, getCatalog, getAnime, getAllAnime, getAnimeSlim, installSlim };
 })();

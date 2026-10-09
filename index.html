@@ -731,7 +731,8 @@
     <script src="data/catalog_data.js"></script>
     <script src="data/script.js"></script>
     <script src="data/dubbers_data.js"></script>
-    <script src="data/anime_db.js"></script>
+    <script src="data/supabase_config.js"></script>
+    <script src="data/db_loader.js"></script>
     <script src="data/actors_engine.js"></script>
     <script>
         (() => {
@@ -881,7 +882,7 @@
                 grid.innerHTML = list.map((item, index) => `<div class="he-top-card rank-${index + 1}" data-id="${esc(item.id)}"><span class="he-rank-badge">${index + 1}</span>${item.logo ? `<img loading="lazy" class="he-top-avatar" src="${esc(item.logo)}" alt="${esc(item.name)}">` : '<div class="he-top-avatar-fallback"><i class="fa-solid fa-user"></i></div>'}<h3>${esc(item.name)}</h3><div class="he-top-role">${esc(item.role)}</div><div class="dubber-description">${esc(item.description)}</div><div class="he-top-characters"><i class="fa-solid fa-masks-theater"></i> ${esc(item.characters.join(' • '))}</div><span class="dubber-tier"><i class="fa-solid fa-award"></i> ${esc(item.tier)}</span><span class="he-top-count"><i class="fa-solid fa-masks-theater"></i> ${item.count} ${item.count === 1 ? 'شخصية' : 'شخصيات'}</span></div>`).join('');
                 grid.querySelectorAll('[data-id]').forEach((card) => card.addEventListener('click', () => { window.location.href = `html/actor.html?id=${encodeURIComponent(card.dataset.id)}`; }));
             };
-            document.addEventListener('DOMContentLoaded', () => { reveal(); loadLatest(); loadTopDubbers(); }, { once: true });
+            document.addEventListener('DOMContentLoaded', async () => { reveal(); await DB.installSlim(); loadLatest(); loadTopDubbers(); }, { once: true });
         })();
     </script>
     <script src="data/site.js"></script>
