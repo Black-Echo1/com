@@ -261,6 +261,7 @@ window.playEpisode = function(animeId, epIndex, seasonIndex = 0, keepScroll = fa
         downloadBtn.className = "download-action-btn";
         downloadBtn.innerHTML = "📥 تحميل الحلقة";
         serversContainer.appendChild(downloadBtn);
+        serversContainer.appendChild(buildServerHelp());
         playerContainer.hidden = false;
         playerContainer.style.display = "block";
         updateNavigationButtons();
@@ -275,9 +276,39 @@ window.playEpisode = function(animeId, epIndex, seasonIndex = 0, keepScroll = fa
     } else alert("لا توجد سيرفرات متاحة لهذه الحلقة حالياً.");
 };
 
+// سيرفرات كثيرة تحتاج تفتح نافذة (إعلان/تفعيل) عشان يشتغل المشغّل؛ وضعنا الافتراضي يمنع النوافذ للأمان.
+// "وضع التوافق" يسمح بها لهذا الجهاز فقط، و"فتح في صفحة مستقلة" يفتح السيرفر كصفحة كاملة.
+const BE_SANDBOX_STRICT = "allow-scripts allow-same-origin allow-presentation";
+const BE_SANDBOX_COMPAT = BE_SANDBOX_STRICT + " allow-popups allow-forms";
+function beCompatOn() { try { return sessionStorage.getItem("be-compat") === "1"; } catch (_) { return false; } }
+
+function buildServerHelp() {
+    const box = document.createElement("div");
+    box.className = "server-help";
+    const msg = document.createElement("p");
+    msg.textContent = "السيرفر ما اشتغل؟ جرّب:";
+    const compat = document.createElement("button");
+    compat.type = "button";
+    compat.textContent = beCompatOn() ? "وضع التوافق: مفعّل ✓" : "وضع التوافق";
+    compat.addEventListener("click", () => {
+        try { sessionStorage.setItem("be-compat", "1"); } catch (_) {}
+        compat.textContent = "وضع التوافق: مفعّل ✓";
+        if (window.__beServerUrl) changeServer(window.__beServerUrl);
+    });
+    const open = document.createElement("button");
+    open.type = "button";
+    open.textContent = "فتح في صفحة مستقلة";
+    open.addEventListener("click", () => { if (window.__beServerUrl) window.open(window.__beServerUrl, "_blank", "noopener,noreferrer"); });
+    const tip = document.createElement("small");
+    tip.textContent = "وإذا استمرت المشكلة: عطّل مانع الإعلانات (أو دروع المتصفح) لهذا الموقع، أو جرّب سيرفر ثاني.";
+    box.append(msg, compat, open, tip);
+    return box;
+}
+
 function changeServer(url) {
     const iframe = document.getElementById("video-iframe");
     const video = document.getElementById("video-element");
+    window.__beServerUrl = url;
     const isDirectVideo = /\.(mp4|webm|ogg)(\?|$)/i.test(url);
     if (isDirectVideo && video) {
         iframe.hidden = true;
@@ -289,6 +320,7 @@ function changeServer(url) {
         video.pause();
         video.removeAttribute("src");
         iframe.hidden = false;
+        iframe.setAttribute("sandbox", beCompatOn() ? BE_SANDBOX_COMPAT : BE_SANDBOX_STRICT);
         iframe.src = url;
     }
 }

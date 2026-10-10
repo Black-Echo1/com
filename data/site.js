@@ -227,7 +227,7 @@
             const mobileNav = document.createElement('nav');
             mobileNav.className = 'be-mobile-nav';
             const prefix = pageIsInsideHtml ? '' : 'html/';
-            mobileNav.innerHTML = `<a href="${prefix}../index.html" class="is-current"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a><a href="${prefix}browse.html"><i class="fa-solid fa-compass"></i><span>تصفح</span></a><a href="${prefix}favorites.html"><i class="fa-solid fa-bookmark"></i><span>قائمتي</span></a><a href="${prefix}dubbers.html"><i class="fa-solid fa-microphone-lines"></i><span>المدبلجون</span></a>`;
+            mobileNav.innerHTML = `<a href="${prefix}../index.html" class="is-current"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a><a href="${prefix}browse.html"><i class="fa-solid fa-compass"></i><span>الأنميات</span></a><a href="${prefix}teams.html"><i class="fa-solid fa-people-group"></i><span>الفرق</span></a><a href="${prefix}dubbers.html"><i class="fa-solid fa-microphone-lines"></i><span>المدبلجون</span></a><a href="${prefix}account.html"><i class="fa-solid fa-user"></i><span>حسابي</span></a>`;
             document.body.appendChild(mobileNav);
         }
         if (!header.querySelector('[data-favorites-link]')) {
@@ -246,8 +246,8 @@
         if (!menuButton || !nav || menuButton.dataset.beMenuBound === 'true') return;
         if (!nav.querySelector('[data-support-link]')) {
             const prefix = pageIsInsideHtml ? '' : 'html/';
-            const anchor = nav.querySelector('a[href*="teams.html"]');
-            anchor?.insertAdjacentHTML('afterend', `<a data-support-link="true" href="${prefix}support.html"><i class="fa-solid fa-hand-holding-heart"></i> ادعمنا</a>`);
+            // آخر عنصر في القائمة
+            nav.insertAdjacentHTML('beforeend', `<a data-support-link="true" href="${prefix}support.html"><i class="fa-solid fa-hand-holding-heart"></i> ادعمنا</a>`);
         }
         menuButton.dataset.beMenuBound = 'true';
         const closeButton = nav.querySelector('.close-btn');

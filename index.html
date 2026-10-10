@@ -563,6 +563,20 @@
         });
     </script>
     <link rel="stylesheet" href="css/finish.css">
+    <style>
+        .be-cta{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:1200px; margin:-34px auto 8px; padding:0 20px; position:relative; z-index:5; }
+        .be-cta-card{ display:flex; align-items:center; gap:14px; padding:18px 20px; border-radius:20px; text-decoration:none; color:#fff; border:1px solid #2a2f40;
+            background:linear-gradient(180deg,#171a25,#10131a); box-shadow:0 18px 40px -22px rgba(0,0,0,.9); transition:transform .18s, border-color .18s; }
+        .be-cta-card:hover{ transform:translateY(-3px); border-color:#e50914; }
+        .be-cta-watch{ background:linear-gradient(135deg,#e50914,#a30610); border-color:transparent; }
+        .be-cta-ico{ flex:none; width:50px; height:50px; border-radius:16px; display:grid; place-items:center; font-size:1.2rem; background:rgba(255,255,255,.14); }
+        .be-cta-join .be-cta-ico{ background:rgba(229,9,20,.16); color:#ff4d57; }
+        .be-cta-txt{ display:flex; flex-direction:column; flex:1; min-width:0; }
+        .be-cta-txt b{ font-size:1.1rem; font-weight:900; } .be-cta-txt small{ color:rgba(255,255,255,.78); font-size:.82rem; margin-top:2px; }
+        .be-cta-go{ opacity:.8; }
+        @media (max-width:640px){ .be-cta{ grid-template-columns:1fr; margin-top:-20px; padding:0 14px; } .be-cta-card{ padding:16px; } }
+    </style>
+    <link rel="stylesheet" href="css/mobile.css">
 </head>
 <body class="animated-bg">
    <header class="main-header">
@@ -573,12 +587,11 @@
         <nav id="navMenu">
             <div class="close-btn">&times;</div>
             <a href="index.html"><span class="rgb-text">الرئيسية</span></a>
-            <a href="html/browse.html"><span class="rgb-text">الدوبلاج</span></a>
+            <a href="html/browse.html"><span class="rgb-text">الأنميات</span></a>
+            <a href="html/teams.html"><span class="rgb-text">الفرق</span></a>
+            <a href="html/dubbers.html"><span class="rgb-text">المدبلجون</span></a>
             <a href="html/women.html"><span class="rgb-text">الفتيات</span></a>
             <a href="html/men.html"><span class="rgb-text">الشباب</span></a>
-            <a href="html/dubbers.html"><span class="rgb-text">المدبلجون</span></a>
-            <a href="html/teams.html"><span class="rgb-text">الفرق</span></a>
-            <a href="html/course.html"><span class="rgb-text">الكورسات</span></a>
             <a href="html/account.html"><span class="rgb-text">حسابي</span></a>
         </nav>
     </header>
@@ -600,7 +613,7 @@
                     بيت الدوبلاج العربي: نتابع أحدث الأنميات المدبلجة، ندرّب المواهب الصوتية، ونفتح الساحة أمام المنافسة بين الفرق. كل هذا في مكان واحد.
                 </p>
             <div class="he-hero-cta">
-                <a href="#latest" id="hero-watch" class="he-btn he-btn-primary">
+                <a href="html/browse.html" id="hero-watch" class="he-btn he-btn-primary">
                     <i class="fa-solid fa-play"></i>
                     <span>ابدأ المشاهدة الآن</span>
                 </a>
@@ -617,6 +630,20 @@
             <div class="he-hero-rail" id="hero-rail" aria-label="مختارات مميزة"></div>
         </div>
         <a href="#latest" class="he-scroll-cue" aria-label="انزل للأسفل"><i class="fa-solid fa-chevron-down"></i></a>
+    </section>
+
+    <!-- ============ ابدأ الآن ============ -->
+    <section class="be-cta" aria-label="ابدأ الآن">
+        <a class="be-cta-card be-cta-watch" href="html/browse.html">
+            <span class="be-cta-ico"><i class="fa-solid fa-play"></i></span>
+            <span class="be-cta-txt"><b>شاهد الأنميات</b><small>أحدث الحلقات بدبلجة عربية</small></span>
+            <i class="fa-solid fa-arrow-left be-cta-go"></i>
+        </a>
+        <a class="be-cta-card be-cta-join" href="html/account.html">
+            <span class="be-cta-ico"><i class="fa-solid fa-user-plus"></i></span>
+            <span class="be-cta-txt"><b>انضم إلينا</b><small>مدبلج أو قائد فريق؟ قدّم طلبك</small></span>
+            <i class="fa-solid fa-arrow-left be-cta-go"></i>
+        </a>
     </section>
 
     <button id="installAppBtn">تثبيت التطبيق 📱</button>

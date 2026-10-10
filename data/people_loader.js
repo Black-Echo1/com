@@ -6,6 +6,8 @@
  * أمان: كل النصوص تتحوّل لرموز HTML آمنة، وأي رابط صورة لازم يبدأ بـ https://
  */
 var dubbersDatabase = {};
+    // صورة افتراضية (شعار الموقع) لمن ما حط صورة
+    var DEFAULT_AVATAR = (function () { try { return new URL('../icon-192.png', document.currentScript.src).href; } catch (e) { return ''; } })();
 var teamsDatabase = {};
 (function () {
     var cfg = window.SUPABASE_CONFIG || {};
@@ -23,7 +25,7 @@ var teamsDatabase = {};
         (dubbers || []).forEach(function (d) {
             byId[d.id] = d;
             dubbersDatabase[d.id] = {
-                name: esc(d.name), role: esc(d.role || 'مؤدي أصوات'), logo: safeUrl(d.logo), banner: safeUrl(d.banner),
+                name: esc(d.name), role: esc(d.role || 'مؤدي أصوات'), logo: safeUrl(d.logo) || DEFAULT_AVATAR, banner: safeUrl(d.banner),
                 bio: esc(d.bio || ''), social_url: safeUrl(d.social_url), roles: []
             };
         });
@@ -36,7 +38,7 @@ var teamsDatabase = {};
         (members || []).forEach(function (m) {
             var team = teamsDatabase[m.team_id], d = byId[m.dubber_id];
             if (!team || !d) return;
-            team.members.push({ id: d.id, name: esc(d.name), role: esc(m.role || d.role || 'مؤدي أصوات'), avatar: safeUrl(d.logo) });
+            team.members.push({ id: d.id, name: esc(d.name), role: esc(m.role || d.role || 'مؤدي أصوات'), avatar: safeUrl(d.logo) || DEFAULT_AVATAR });
         });
     }
 
