@@ -1,8 +1,8 @@
 (() => {
     'use strict';
 
-    const BATCH_SIZE = 8;
-    const INITIAL_ITEMS = 12;
+    const BATCH_SIZE = 16;
+    const INITIAL_ITEMS = 24;
     const MAL_CACHE_TTL = 24 * 60 * 60 * 1000;
     const rootPrefix = /\/html(?:\/|$)/.test(window.location.pathname) ? '../' : './';
     const fallbackPoster = `${rootPrefix}icon-512.png`;
@@ -185,7 +185,10 @@
     }
 
     async function processEntry(source, grid, hero, state) {
-        const apiData = await getAnimeDataFromMAL(source.malId);
+        // لو بيانات الأنمي محفوظة بالقاعدة (صورة/نوع/حالة/تقييم) ما نحتاج أي طلب خارجي
+        const apiData = source.poster
+            ? { type: source.malType, status: source.malStatus, score: source.score, episodes: source.episodes, images: { jpg: { large_image_url: source.poster, image_url: source.poster } } }
+            : await getAnimeDataFromMAL(source.malId);
         const entry = normalizeEntry(source, apiData);
         window.fullCatalog.push(entry);
         window.BlackEcho?.rememberAnime(entry);
@@ -226,7 +229,7 @@
             // 24h TTL) need no network request at all, so they render immediately
             // and in parallel — no reason to make a visitor wait through a queue
             // for data that's already sitting in localStorage.
-            const cached = batch.filter((source) => Boolean(localStorage.getItem(`anime_mal_${source.malId}`)));
+            const cached = batch.filter((source) => Boolean(source.poster) || Boolean(localStorage.getItem(`anime_mal_${source.malId}`)));
             const fresh = batch.filter((source) => !cached.includes(source));
             await Promise.all(cached.map((source) => processEntry(source, grid, hero, state)));
             // Only anime with no cached data go through the rate-limited queue,
@@ -247,5 +250,8 @@
         if (!state.heroRendered && window.fullCatalog[0]) renderHero(hero, window.fullCatalog[0]);
     }
 
-    document.addEventListener('DOMContentLoaded', loadCatalogInBatches, { once: true });
+    document.addEventListener('DOMContentLoaded', async () => {
+        if (window.DB) await window.DB.installSlim(); // يحدّث الكتالوج من Supabase قبل العرض
+        loadCatalogInBatches();
+    }, { once: true });
 })();

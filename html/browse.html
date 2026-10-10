@@ -176,7 +176,8 @@
     </footer>
  
     <script src="../data/catalog_data.js"></script>
-    <script src="../data/anime_db.js"></script>
+    <script src="../data/supabase_config.js"></script>
+    <script src="../data/db_loader.js"></script>
     <script src="../data/catalog_script.js"></script>
  
     <script>
@@ -198,6 +199,7 @@
             let activeAccessFilter = 'all';
             const isDirectVideoUrl = (url) => /\.(mp4|webm|ogg)(?:[?#]|$)/i.test(String(url || '')) || /archive\.org\/download\//i.test(String(url || ''));
             const getAnimeAccess = (id) => {
+                if (window.animeAccessMap && id in window.animeAccessMap) return window.animeAccessMap[id] ? 'free' : 'ads';
                 const anime = typeof animeDetailsDatabase !== 'undefined' ? animeDetailsDatabase[id] : null;
                 if (!anime) return 'ads';
                 const seasons = Array.isArray(anime.seasons) && anime.seasons.length ? anime.seasons : [{ episodes: anime.episodes || [] }];

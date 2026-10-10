@@ -35,10 +35,23 @@
     async function getCatalog() {
         if (cache.catalog) return cache.catalog;
         if (enabled) {
-            try {
-                const rows = await rest('anime?select=id,title,mal_id,is_hero&in_catalog=eq.true&order=sort_order.asc');
-                return (cache.catalog = rows.map((r) => ({ id: r.id, title: r.title, malId: r.mal_id, isHero: r.is_hero })));
-            } catch (e) { console.warn('DB.getCatalog fallback:', e); }
+            const base = 'id,title,mal_id,is_hero';
+            const filter = '&in_catalog=eq.true&order=sort_order.asc';
+            let rows;
+            try { rows = await rest('anime?select=' + base + ',poster,mal_type,mal_status,mal_score,mal_episodes' + filter); }
+            catch (e) {
+                // الأعمدة الجديدة ما انضافت بعد (patch_mal_columns.sql): نكمل بالأساسي
+                try { rows = await rest('anime?select=' + base + filter); }
+                catch (e2) { console.warn('DB.getCatalog fallback:', e2); }
+            }
+            if (rows) {
+                return (cache.catalog = rows.map((r) => ({
+                    id: r.id, title: r.title, malId: r.mal_id, isHero: r.is_hero,
+                    poster: r.poster || undefined, malType: r.mal_type || undefined,
+                    malStatus: r.mal_status || undefined, score: r.mal_score ? Number(r.mal_score) : undefined,
+                    episodes: r.mal_episodes || undefined
+                })));
+            }
         }
         return typeof animeCatalog !== 'undefined' ? animeCatalog : [];
     }
@@ -106,6 +119,12 @@
                 try {
                     const [slim, cat] = await Promise.all([getAnimeSlim(), getCatalog()]);
                     window.animeDetailsDatabase = slim;
+                    // خريطة (مجاني / بإعلانات) لكل أنمي — من الـ view، بدون تحميل الحلقات
+                    try {
+                        const acc = await rest('anime_access?select=id,is_free&limit=1000');
+                        window.animeAccessMap = {};
+                        acc.forEach((r) => { window.animeAccessMap[r.id] = !!r.is_free; });
+                    } catch (_) { /* patch_catalog_speed.sql ما انشغل بعد */ }
                     if (typeof animeCatalog !== 'undefined' && Array.isArray(animeCatalog) && cat.length) {
                         animeCatalog.splice(0, animeCatalog.length, ...cat);
                     }

@@ -824,49 +824,50 @@
                 }
                 return picked;
             };
+            /* سرعة الرئيسية: البيانات (الصورة/النوع/الحالة/التقييم) تجي جاهزة من القاعدة بدون أي طلب خارجي.
+               الأنميات اللي ما لها بيانات بعد تُجلب من Jikan بالتوازي (3 طلبات بنفس الوقت كحد أقصى)
+               وكل قسم يظهر أول ما يجهز بدون انتظار الباقي. */
+            let malActive = 0; const malWaiting = [];
+            const malLimited = (fn) => new Promise((resolve) => {
+                const run = async () => { malActive++; try { resolve(await fn()); } finally { malActive--; if (malWaiting.length) malWaiting.shift()(); } };
+                malActive < 3 ? run() : malWaiting.push(run);
+            });
+            const entryFromDb = (s) => s.poster ? { id: String(s.id), title: s.title || s.id, type: mapType(s.malType), status: mapStatus(s.malStatus), rating: s.score || '—', poster: s.poster, episodes: 0 } : null;
+            const entryFromMal = async (s) => {
+                const data = await malLimited(() => getMal(s.malId));
+                const poster = data?.images?.jpg?.large_image_url || data?.images?.jpg?.image_url || `${root}icon-512.png`;
+                return { id: String(s.id), title: s.title || data?.title || s.id, type: mapType(data?.type), status: mapStatus(data?.status), rating: data?.score || '—', poster, episodes: data?.episodes || 0 };
+            };
+            const toEntries = (list) => Promise.all(list.map((s) => entryFromDb(s) || entryFromMal(s)));
             const loadLatest = async () => {
                 const grid = document.getElementById('latest-anime-grid');
                 if (!grid || typeof animeCatalog === 'undefined') return;
                 grid.innerHTML = '';
-                const eligible = animeCatalog.filter((item) => item?.malId);
+                const catalog = animeCatalog.filter((item) => item?.malId);
+                const eligible = catalog;
 
-                // "الإصدارات الأخيرة": actual latest additions to the catalog (last-added
-                // first) — not randomized, so it reflects real recency.
-                const latestSources = [...eligible].reverse().slice(0, 6);
-                const latestEntries = [];
-                for (const source of latestSources) {
-                    const data = await getMal(source.malId);
-                    const poster = data?.images?.jpg?.large_image_url || data?.images?.jpg?.image_url || `${root}icon-512.png`;
-                    latestEntries.push({ id: String(source.id), title: source.title || data?.title || source.id, type: mapType(data?.type), status: mapStatus(data?.status), rating: data?.score || '—', poster, episodes: data?.episodes || 0 });
-                }
-                if (!latestEntries.length) { grid.innerHTML = '<div class="he-empty-note">لا توجد بيانات متاحة حالياً.</div>'; return; }
-                latestEntries.forEach((entry, index) => renderCard(grid, entry, index));
-                renderContinueWatching(latestEntries);
+                // الإصدارات الأخيرة: آخر ما انضاف للكتالوج (الأحدث أول)
+                const latestTask = toEntries([...eligible].reverse().slice(0, 6)).then((latestEntries) => {
+                    if (!latestEntries.length) { grid.innerHTML = '<div class="he-empty-note">لا توجد بيانات متاحة حالياً.</div>'; return; }
+                    latestEntries.forEach((entry, index) => renderCard(grid, entry, index));
+                    renderContinueWatching(latestEntries);
+                });
 
-                // "الأكثر شعبية": ranked by real MAL score, independent of the catalog's
-                // add order — a separate, larger sample so the ranking is meaningful.
-                const popularSample = pickRandom(eligible, Math.min(20, eligible.length));
-                const popularEntries = [];
-                for (const source of popularSample) {
-                    const data = await getMal(source.malId);
-                    if (!data?.score) continue;
-                    const poster = data?.images?.jpg?.large_image_url || data?.images?.jpg?.image_url || `${root}icon-512.png`;
-                    popularEntries.push({ id: String(source.id), title: source.title || data?.title || source.id, type: mapType(data?.type), status: mapStatus(data?.status), rating: data.score, poster, episodes: data?.episodes || 0 });
-                }
-                popularEntries.sort((a, b) => b.rating - a.rating);
-                renderRail(document.getElementById('popular-anime-rail'), popularEntries.slice(0, 8));
+                // الأكثر شعبية: من التقييمات المخزنة بالقاعدة؛ ولو ما انملت بعد نرجع لعينة عشوائية صغيرة
+                const scored = eligible.filter((s) => s.score).sort((a, b) => b.score - a.score);
+                const popularSources = scored.length >= 8 ? scored.slice(0, 8) : pickRandom(eligible, Math.min(10, eligible.length));
+                const popularTask = toEntries(popularSources).then((entries) => {
+                    const ranked = entries.filter((e) => Number(e.rating)).sort((a, b) => b.rating - a.rating);
+                    renderRail(document.getElementById('popular-anime-rail'), ranked.slice(0, 8));
+                });
 
-                // Hero + hero rail: a fresh random taste of the catalog on every load.
-                const heroSources = pickRandom(eligible, 5);
-                const heroEntries = [];
-                for (const source of heroSources) {
-                    const data = await getMal(source.malId);
-                    const poster = data?.images?.jpg?.large_image_url || data?.images?.jpg?.image_url || `${root}icon-512.png`;
-                    heroEntries.push({ id: String(source.id), title: source.title || data?.title || source.id, type: mapType(data?.type), status: mapStatus(data?.status), rating: data?.score || '—', poster, episodes: data?.episodes || 0 });
-                }
-                updateHero(heroEntries.find((entry) => animeCatalog.find((source) => String(source.id) === entry.id)?.isHero) || heroEntries[0]);
-                const heroRail = document.getElementById('hero-rail');
-                if (heroRail) { renderRail(heroRail, heroEntries); heroRail.querySelectorAll('[data-anime-id]').forEach((card) => card.addEventListener('mouseenter', () => { const match = heroEntries.find((entry) => entry.id === card.dataset.animeId); if (match) updateHero(match); })); }
+                // الواجهة الرئيسية (Hero): تشكيلة عشوائية جديدة كل مرة
+                const heroTask = toEntries(pickRandom(eligible, 5)).then((heroEntries) => {
+                    updateHero(heroEntries.find((entry) => eligible.find((source) => String(source.id) === entry.id)?.isHero) || heroEntries[0]);
+                    const heroRail = document.getElementById('hero-rail');
+                    if (heroRail) { renderRail(heroRail, heroEntries); heroRail.querySelectorAll('[data-anime-id]').forEach((card) => card.addEventListener('mouseenter', () => { const match = heroEntries.find((entry) => entry.id === card.dataset.animeId); if (match) updateHero(match); })); }
+                });
+                await Promise.all([latestTask, popularTask, heroTask]);
             };
             const reveal = () => {
                 const elements = document.querySelectorAll('.he-reveal');
