@@ -13,5 +13,5 @@
  */
 window.SUPABASE_CONFIG = {
     url: 'https://yvvqatjknwiorvrqjiwg.supabase.co',
-    anonKey: 'sb_publishable_P_Eaffznt8OBXIl4t_iFjw_dn34nXjn', // مثال: 'sb_publishable_xxxxxxxxxxxxxxxxxxxxxx'
+    anonKey: 'sb_publishable_P_Eaffznt8OBXIl4t_iFjw_dn34nXjn'
 };

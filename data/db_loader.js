@@ -57,15 +57,6 @@
         return typeof animeCatalog !== 'undefined' ? animeCatalog : [];
     }
 
-    // الشخصيات المؤكَّدة من الإدارة (شخصية → مدبلج). لو الجدول ما انشأ بعد نتجاهله.
-    let rolesCache = null;
-    async function getRoles() {
-        if (rolesCache) return rolesCache;
-        try { rolesCache = await rest('character_roles?select=anime_id,character_name,dubber_id&limit=5000'); }
-        catch (_) { rolesCache = []; }
-        return rolesCache;
-    }
-
     async function getAnime(id) {
         if (enabled) {
             try {
@@ -73,9 +64,7 @@
                 const [a] = await rest('anime?select=*&id=eq.' + k);
                 if (a) {
                     const eps = await rest('episodes?select=*&anime_id=eq.' + k + '&order=number.asc');
-                    const anime = toAnime(a, eps.map((x) => toEpisode(x, a.poster)));
-                    (await getRoles()).filter((r) => r.anime_id === id).forEach((r) => { anime.dubbedCharacters[r.character_name] = r.dubber_id; });
-                    return anime;
+                    return toAnime(a, eps.map((x) => toEpisode(x, a.poster)));
                 }
             } catch (e) { console.warn('DB.getAnime fallback:', e); }
         }
@@ -129,8 +118,7 @@
         installed = (async () => {
             if (enabled) {
                 try {
-                    const [slim, cat, roles] = await Promise.all([getAnimeSlim(), getCatalog(), getRoles()]);
-                    roles.forEach((r) => { if (slim[r.anime_id]) slim[r.anime_id].dubbedCharacters[r.character_name] = r.dubber_id; });
+                    const [slim, cat] = await Promise.all([getAnimeSlim(), getCatalog()]);
                     window.animeDetailsDatabase = slim;
                     // خريطة (مجاني / بإعلانات) لكل أنمي — من الـ view، بدون تحميل الحلقات
                     try {
