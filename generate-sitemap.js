@@ -46,7 +46,6 @@ function main() {
         ["/html/browse.html", "0.8"],
         ["/html/dubbers.html", "0.8"],
         ["/html/teams.html", "0.6"],
-        ["/html/competition.html", "0.6"],
         ["/html/men.html", "0.5"],
         ["/html/women.html", "0.5"]
     ].forEach(([p, prio]) => entries.push(urlEntry(SITE_URL + p, prio)));

@@ -91,30 +91,54 @@ async function getAnimeDataFromMAL(malId) {
     return null;
 }
 
-// دالة جلب شخصيات الأنمي
+// شخصيات الأنمي: AniList أول (أسرع وأثبت من Jikan)، وJikan احتياطي لو فشل.
+// نحوّل الشكل لنفس شكل Jikan عشان بقية الكود ما يتغير.
+const ANILIST_CHARS_QUERY = `query ($malId: Int) { Media(idMal: $malId, type: ANIME) {
+    characters(sort: FAVOURITES_DESC, perPage: 20) { edges { node { name { full } image { large medium } favourites } } } } }`;
+
+async function fetchCharactersFromAniList(malId, signal) {
+    const response = await fetch('https://graphql.anilist.co', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ query: ANILIST_CHARS_QUERY, variables: { malId: Number(malId) } }),
+        signal,
+    });
+    if (!response.ok) return null;
+    const json = await response.json();
+    const edges = json?.data?.Media?.characters?.edges;
+    if (!Array.isArray(edges)) return null;
+    return edges
+        .filter((edge) => edge?.node?.name?.full)
+        .map((edge) => {
+            const img = edge.node.image?.large || edge.node.image?.medium || '';
+            return { favorites: edge.node.favourites || 0, character: { name: edge.node.name.full, images: { jpg: { image_url: img } } } };
+        });
+}
+
 async function getAnimeCharactersFromMAL(malId) {
-    const cacheKey = `anime_chars_${malId}`;
+    const cacheKey = `anime_chars_v2_${malId}`;
     const cachedData = localStorage.getItem(cacheKey);
-    
     if (cachedData) {
         try {
             const parsed = JSON.parse(cachedData);
-            const now = new Date().getTime();
-            if (now - parsed.timestamp < 24 * 60 * 60 * 1000) {
-                return parsed.data;
-            }
+            if (new Date().getTime() - parsed.timestamp < 24 * 60 * 60 * 1000) return parsed.data;
         } catch (e) { localStorage.removeItem(cacheKey); }
     }
-    
-    // ننتظر لحظة قبل طلب الشخصيات حتى لا يتزامن مع طلب بيانات الأنمي الأساسية
-    await new Promise((resolve) => setTimeout(resolve, 500));
-    const json = await fetchJikan(`https://api.jikan.moe/v4/anime/${malId}/characters`);
-    if (json?.data) {
-        localStorage.setItem(cacheKey, JSON.stringify({
-            timestamp: new Date().getTime(),
-            data: json.data
-        }));
-        return json.data;
+
+    let data = null;
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 8000);
+    try { data = await fetchCharactersFromAniList(malId, controller.signal); } catch (_) { /* نرجع لـ Jikan */ }
+    clearTimeout(timeoutId);
+
+    if (!data || !data.length) {
+        await new Promise((resolve) => setTimeout(resolve, 500));
+        const json = await fetchJikan(`https://api.jikan.moe/v4/anime/${malId}/characters`);
+        data = json?.data || null;
+    }
+    if (data && data.length) {
+        localStorage.setItem(cacheKey, JSON.stringify({ timestamp: new Date().getTime(), data }));
+        return data;
     }
     return null;
 }
@@ -439,45 +463,87 @@ document.addEventListener("DOMContentLoaded", async () => {
     const charactersContainer = document.getElementById("anime-characters"); 
     
     if (charactersContainer) {
-        charactersContainer.innerHTML = "جاري تحميل الشخصيات...";
-        const charsApiData = await getAnimeCharactersFromMAL(localData.malId);
-        
+        const dubbed = localData.dubbedCharacters || {};
+        const normName = (n) => String(n).toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(' ').sort().join(' ');
+        const dubbedByNorm = new Map(Object.keys(dubbed).map((k) => [normName(k), dubbed[k]]));
+        const cards = new Map(); // اسم الشخصية (مطبَّع) -> { slot, hasImg }
+        charactersContainer.innerHTML = "";
+
+        const setImage = (charName, url) => {
+            const c = cards.get(normName(charName));
+            if (!c || c.hasImg || !url) return;
+            const img = document.createElement("img");
+            img.loading = "lazy"; img.decoding = "async"; img.src = url; img.alt = charName;
+            img.style.cssText = "width:100px;height:150px;object-fit:cover;display:block;";
+            c.slot.textContent = ""; c.slot.appendChild(img); c.hasImg = true;
+        };
+
+        const makeCard = (charName, charImage) => {
+            const raw = dubbed[charName] !== undefined ? dubbed[charName] : dubbedByNorm.get(normName(charName));
+            const resolved = (typeof window.ActorsEngine !== "undefined")
+                ? window.ActorsEngine.resolveCharacterDisplay(raw, charName)
+                : { displayName: raw || charName, actorId: null, linked: false };
+
+            const card = document.createElement("div");
+            card.className = "character-card";
+            card.style.cssText = "display:inline-block;width:120px;margin:10px;text-align:center;vertical-align:top;";
+            const slot = document.createElement("div");
+            slot.textContent = "🎭";
+            slot.style.cssText = "width:100px;height:150px;margin:0 auto;border-radius:8px;overflow:hidden;background:#15151b;display:flex;align-items:center;justify-content:center;font-size:28px;box-shadow:0 4px 8px rgba(0,0,0,0.2);";
+            const title = document.createElement("h5");
+            title.style.cssText = "margin-top:8px;font-size:13px;word-wrap:break-word;";
+            title.textContent = charName;
+            card.append(slot, title);
+
+            if (resolved.linked) {
+                // مدبلج مسجّل ومؤكَّد: اسمه تحت الشخصية برابط صفحته
+                const link = document.createElement("a");
+                link.href = "actor.html?id=" + encodeURIComponent(resolved.actorId);
+                link.style.cssText = "display:block;font-size:11px;color:var(--he-red-2,#ff3b3b);margin-top:2px;text-decoration:none;";
+                link.textContent = "🎙️ " + resolved.displayName;
+                card.appendChild(link);
+            } else {
+                // اسم قديم مكتوب بالبيانات (غير مسجّل بالموقع): نعرضه نصاً تحت الشخصية بدون رابط
+                if (raw) {
+                    const label = document.createElement("span");
+                    label.style.cssText = "display:block;font-size:11px;color:#a0a0ad;margin-top:2px;";
+                    label.textContent = "🎙️ " + raw;
+                    card.appendChild(label);
+                }
+                if (window.RoleClaims) {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.textContent = "🎙️ دبلجتها؟";
+                    btn.style.cssText = "margin-top:6px;font-size:11px;padding:4px 8px;border-radius:8px;border:1px solid #2a2a33;background:#15151b;color:#c9c9d3;cursor:pointer;font-family:inherit;";
+                    btn.addEventListener("click", () => window.RoleClaims.open({ animeId, animeTitle: localData.title || animeId, characterName: charName, characterImage: charImage }));
+                    card.appendChild(btn);
+                }
+            }
+            charactersContainer.appendChild(card);
+            cards.set(normName(charName), { slot, hasImg: false });
+            if (charImage) setImage(charName, charImage);
+        };
+
+        // 1) الشخصيات المعروفة من بياناتنا تظهر فوراً مع أسماء مؤديها، بدون انتظار MAL
+        Object.keys(dubbed).forEach((charName) => makeCard(charName, null));
+
+        // 2) بقية الشخصيات (وصور كل الشخصيات) تجي من MAL لما تجهز
+        const note = document.createElement("p");
+        note.textContent = "جاري تحميل بقية الشخصيات...";
+        note.style.cssText = "width:100%;color:#7d7d8a;font-size:13px;margin:6px 10px;";
+        charactersContainer.appendChild(note);
+        let charsApiData = null;
+        try { charsApiData = await getAnimeCharactersFromMAL(localData.malId); } catch (e) { console.warn("characters:", e); }
+        note.remove();
+
         if (charsApiData && charsApiData.length > 0) {
-            charactersContainer.innerHTML = ""; 
-            
-            const topCharacters = charsApiData.sort((a, b) => b.favorites - a.favorites).slice(0, 20);
-            
-            topCharacters.forEach(charData => {
-                const charNameMAL = charData.character.name;
-                const charImage = charData.character.images.jpg.image_url;
-
-                const dubbedNamesDict = localData.dubbedCharacters || {};
-                const rawOverride = dubbedNamesDict[charNameMAL];
-
-                // نحاول ربط النص الموجود في dubbedCharacters بمؤدٍ مسجَّل فعلياً في dubbers_data.js
-                // (يعمل بدون أي تعديل هدّام: لو ماقدرش يربطها، تتعرض كترجمة نص عادية زي الأول تماماً)
-                const resolved = (typeof window.ActorsEngine !== "undefined")
-                    ? window.ActorsEngine.resolveCharacterDisplay(rawOverride, charNameMAL)
-                    : { displayName: rawOverride || charNameMAL, actorId: null, linked: false };
-
-                const finalName = resolved.displayName;
-                const linkOpen = resolved.linked ? `<a href="actor.html?id=${encodeURIComponent(resolved.actorId)}" style="text-decoration:none; color:inherit;">` : "";
-                const linkClose = resolved.linked ? `</a>` : "";
-                const dubberBadge = resolved.linked ? `<span style="display:block; font-size:10px; color:var(--he-red-2,#ff3b3b); margin-top:2px;">🎙️ صفحة المؤدي</span>` : "";
-
-                const charCard = `
-                    <div class="character-card" style="display: inline-block; width: 120px; margin: 10px; text-align: center;">
-                        ${linkOpen}
-                        <img loading="lazy" decoding="async" src="${charImage}" alt="${finalName}" style="width: 100px; height: 150px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                        <h5 style="margin-top: 8px; font-size: 13px; word-wrap: break-word;">${finalName}</h5>
-                        ${dubberBadge}
-                        ${linkClose}
-                    </div>
-                `;
-                charactersContainer.innerHTML += charCard;
+            charsApiData.sort((a, b) => b.favorites - a.favorites).slice(0, 20).forEach((charData) => {
+                const name = charData.character.name;
+                const image = charData.character.images.jpg.image_url;
+                if (cards.has(normName(name))) setImage(name, image); else makeCard(name, image);
             });
-        } else {
-            charactersContainer.innerHTML = "لا توجد بيانات للشخصيات.";
+        } else if (!cards.size) {
+            charactersContainer.textContent = "لا توجد بيانات للشخصيات حالياً.";
         }
     }
 });

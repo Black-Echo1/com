@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex">
+    <title>لوحة الإدارة - Black Echo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        body{ font-family:'Cairo',sans-serif; background:#0b0b0f; color:#fff; margin:0; }
+        .wrap{ max-width:760px; margin:0 auto; padding:30px 16px 60px; }
+        h1{ font-size:1.4rem; margin:0 0 4px; font-weight:900; }
+        h2{ font-size:1.05rem; margin:28px 0 10px; color:#ffd666; }
+        .sub{ color:#a0a0ad; font-size:.9rem; margin:0 0 10px; }
+        .card{ background:#15151b; border:1px solid #2a2a33; border-radius:14px; padding:16px; margin:10px 0; display:flex; gap:14px; }
+        .card img{ width:64px; height:64px; border-radius:50%; object-fit:cover; background:#0f0f14; flex:none; }
+        .info{ flex:1; min-width:0; line-height:1.8; font-size:.9rem; overflow-wrap:anywhere; }
+        .info b{ font-size:1rem; }
+        .meta{ color:#a0a0ad; font-size:.82rem; }
+        .info a{ color:#8ab4ff; }
+        .acts{ display:flex; gap:8px; margin-top:10px; }
+        button{ font:inherit; font-weight:700; padding:8px 16px; border:0; border-radius:10px; cursor:pointer; color:#fff; }
+        .ok{ background:#1f9d55; } .no{ background:#b42318; } .link{ background:#0f0f14; border:1px solid #2a2a33; color:#c9c9d3; }
+        button:disabled{ opacity:.5; cursor:wait; }
+        .empty{ color:#7d7d8a; font-size:.9rem; padding:8px 0; }
+        .err{ color:#ff6b6b; }
+        [hidden]{ display:none !important; }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <h1>لوحة الإدارة</h1>
+        <p class="sub"><a href="account.html" style="color:#8ab4ff;">حسابي</a> · <a href="../index.html" style="color:#8ab4ff;">الرئيسية</a></p>
+        <div id="status" class="sub">جاري التحميل...</div>
+        <section id="panel" hidden>
+            <h2>طلبات الانضمام</h2><div id="joins"></div>
+            <h2>طلبات الشخصيات</h2><div id="claims"></div>
+        </section>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+    <script src="../data/supabase_config.js"></script>
+    <script>
+    (function () {
+        'use strict';
+        var $ = function (id) { return document.getElementById(id); };
+        var cfg = window.SUPABASE_CONFIG || {};
+        function fail(t) { $('status').textContent = t; $('status').className = 'sub err'; }
+        if (!cfg.url || !cfg.anonKey || !window.supabase) { fail('الخدمة غير مضبوطة (supabase_config.js).'); return; }
+        var client = window.supabase.createClient(cfg.url, cfg.anonKey);
+        var teams = {}, animes = {};
+
+        function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+        function safeLink(url, label) {
+            if (!url || !/^https:\/\/[^\s<>"']+$/i.test(url)) return null;
+            var a = el('a', '', label); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a;
+        }
+
+        async function decide(table, id, status, btns) {
+            var note = null;
+            if (status === 'rejected') { note = window.prompt('سبب الرفض (يظهر له، اختياري):', ''); if (note === null) return; }
+            btns.forEach(function (b) { b.disabled = true; });
+            var r = await client.from(table).update({ status: status, admin_note: note || null }).eq('id', id);
+            if (r.error) { alert('ما انحفظ القرار: ' + r.error.message); btns.forEach(function (b) { b.disabled = false; }); return; }
+            await load();
+        }
+
+        function actions(table, id) {
+            var box = el('div', 'acts');
+            var ok = el('button', 'ok', 'قبول'), no = el('button', 'no', 'رفض');
+            ok.onclick = function () { decide(table, id, 'approved', [ok, no]); };
+            no.onclick = function () { decide(table, id, 'rejected', [ok, no]); };
+            box.appendChild(ok); box.appendChild(no); return box;
+        }
+
+        async function load() {
+            var j = await client.from('join_requests').select('id,display_name,role,team_id,bio,social_url,avatar_url,created_at').eq('status', 'pending').order('created_at');
+            var c = await client.from('role_claims').select('id,anime_id,character_name,proof_url,created_at,dubbers(name)').eq('status', 'pending').order('created_at');
+            var jb = $('joins'); jb.innerHTML = '';
+            if (j.error) { jb.appendChild(el('div', 'empty err', j.error.message)); }
+            else if (!j.data.length) { jb.appendChild(el('div', 'empty', 'ما فيه طلبات انضمام جديدة.')); }
+            else j.data.forEach(function (r) {
+                var card = el('div', 'card');
+                var img = el('img'); img.alt = ''; if (/^https:\/\//i.test(r.avatar_url || '')) img.src = r.avatar_url; card.appendChild(img);
+                var info = el('div', 'info');
+                info.appendChild(el('b', '', r.display_name));
+                info.appendChild(el('div', 'meta', r.role + ' — ' + (teams[r.team_id] || r.team_id)));
+                if (r.bio) info.appendChild(el('div', '', r.bio));
+                var l = safeLink(r.social_url, 'حسابه'); if (l) { var w = el('div'); w.appendChild(l); info.appendChild(w); }
+                info.appendChild(actions('join_requests', r.id));
+                card.appendChild(info); jb.appendChild(card);
+            });
+            var cb = $('claims'); cb.innerHTML = '';
+            if (c.error) { cb.appendChild(el('div', 'empty err', c.error.message)); }
+            else if (!c.data.length) { cb.appendChild(el('div', 'empty', 'ما فيه طلبات شخصيات جديدة.')); }
+            else c.data.forEach(function (r) {
+                var card = el('div', 'card'); var info = el('div', 'info');
+                info.appendChild(el('b', '', (r.dubbers && r.dubbers.name || '—') + ' ← ' + r.character_name));
+                info.appendChild(el('div', 'meta', 'الأنمي: ' + (animes[r.anime_id] || r.anime_id)));
+                var l = safeLink(r.proof_url, 'رابط الإثبات'); if (l) { var w = el('div'); w.appendChild(l); info.appendChild(w); }
+                info.appendChild(actions('role_claims', r.id));
+                card.appendChild(info); cb.appendChild(card);
+            });
+        }
+
+        (async function () {
+            try {
+                var sess = (await client.auth.getSession()).data.session;
+                if (!sess) { location.href = 'account.html?next=' + encodeURIComponent('admin.html'); return; }
+                var adm = await client.rpc('is_admin');
+                if (adm.error || adm.data !== true) { fail('ما عندك صلاحية الدخول لهذي الصفحة.'); return; }
+                var t = await client.from('teams').select('id,name'); (t.data || []).forEach(function (x) { teams[x.id] = x.name; });
+                var a = await client.from('anime').select('id,title').limit(1000); (a.data || []).forEach(function (x) { animes[x.id] = x.title || x.id; });
+                $('status').hidden = true; $('panel').hidden = false;
+                await load();
+            } catch (e) { fail('تعذّر الاتصال: ' + (e && e.message || e)); }
+        })();
+    })();
+    </script>
+</body>
+</html>

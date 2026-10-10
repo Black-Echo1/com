@@ -71,8 +71,10 @@
             <a href="browse.html"><span class="rgb-text">الدوبلاج</span></a>
             <a href="women.html"><span class="rgb-text">الفتيات</span></a>
             <a href="men.html"><span class="rgb-text">الشباب</span></a>
-            <a href="competition.html"><span class="rgb-text">المسابقات</span></a>
-            <a href="teams.html"><span class="rgb-text">قائمة المدبلجين</span></a>
+            <a href="dubbers.html"><span class="rgb-text">المدبلجون</span></a>
+            <a href="teams.html"><span class="rgb-text">الفرق</span></a>
+            <a href="course.html"><span class="rgb-text">الكورسات</span></a>
+            <a href="account.html"><span class="rgb-text">حسابي</span></a>
         </nav>
     </header>
 
@@ -80,6 +82,7 @@
         <div class="he-page-icon"><i class="fa-solid fa-microphone-lines"></i></div>
         <h1>فريق الدبلجة والمؤدون الصوتيون</h1>
         <p>اختر أي مؤدي لاستعراض سجله والأعمال التي شارك فيها</p>
+        <p style="margin-top:14px;"><a href="account.html" style="display:inline-block;padding:10px 22px;border-radius:10px;background:linear-gradient(135deg,#ff2b36,#e50914);color:#fff;font-weight:900;text-decoration:none;">انضم كمدبلج مع فريقك</a></p>
     </div>
 
     <div id="dubbers-container" class="dubbers-grid"></div>
@@ -89,11 +92,14 @@
         <p>&copy; 2026 أكاديمية Black Echo.</p>
     </footer>
 
-    <script src="../data/anime_db.js"></script>
-    <script src="../data/dubbers_data.js"></script>
+    <script src="../data/supabase_config.js"></script>
+    <script src="../data/db_loader.js"></script>
+    <script src="../data/supabase_config.js"></script>
+    <script src="../data/people_loader.js"></script>
     <script src="../data/actors_engine.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", async () => {
+            await DB.installSlim(); // بيانات الأنميات والشخصيات المؤكَّدة من القاعدة
 
             const container = document.getElementById("dubbers-container");
             container.innerHTML = "";
