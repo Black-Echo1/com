@@ -1,11 +1,11 @@
 {
   "name": "AR anime",
   "short_name": "AR anime",
-  "description": "منصة للاستمتاع والمشاهدة  ِAR anime",
+  "description": "منصة الأنمي والدبلجة العربية AR anime",
   "start_url": "./index.html",
   "display": "standalone",
-  "background_color": "#111111",
-  "theme_color": "#111111",
+  "background_color": "#080a10",
+  "theme_color": "#080a10",
   "orientation": "portrait",
   "icons": [
     {

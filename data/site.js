@@ -219,17 +219,100 @@
         });
     };
 
+    const readAuthSession = () => {
+        try {
+            for (let i = 0; i < localStorage.length; i += 1) {
+                const key = localStorage.key(i);
+                if (!key || !/^sb-.+-auth-token$/.test(key)) continue;
+                const saved = safeParse(localStorage.getItem(key), null);
+                const session = saved?.currentSession || saved;
+                if (session?.access_token && session?.user?.id) return session;
+            }
+        } catch (_) {}
+        return null;
+    };
+
+    const loadSupabaseConfig = () => {
+        if (window.SUPABASE_CONFIG?.url && window.SUPABASE_CONFIG?.anonKey) return Promise.resolve(window.SUPABASE_CONFIG);
+        if (window.__arAnimeConfigPromise) return window.__arAnimeConfigPromise;
+        window.__arAnimeConfigPromise = new Promise((resolve) => {
+            const script = document.createElement('script');
+            script.src = assetPath('data/supabase_config.js');
+            script.onload = () => resolve(window.SUPABASE_CONFIG || null);
+            script.onerror = () => resolve(null);
+            document.head.appendChild(script);
+        });
+        return window.__arAnimeConfigPromise;
+    };
+
+    const getNavRole = async (session) => {
+        if (!session) return { signedIn: false, isAdmin: false, isStaff: false };
+        const cacheKey = `arAnimeNavRole:${session.user.id}`;
+        try {
+            const cached = safeParse(sessionStorage.getItem(cacheKey), null);
+            if (cached && cached.expiresAt > Date.now()) return { signedIn: true, isAdmin: !!cached.isAdmin, isStaff: !!cached.isStaff };
+        } catch (_) {}
+        try {
+            const cfg = await loadSupabaseConfig();
+            if (!cfg?.url || !cfg?.anonKey) return { signedIn: true, isAdmin: false, isStaff: false };
+            const base = String(cfg.url).replace(/\/+$/, '');
+            const headers = { apikey: cfg.anonKey, Authorization: `Bearer ${session.access_token}`, 'Content-Type': 'application/json' };
+            const check = async (name) => {
+                const response = await fetch(`${base}/rest/v1/rpc/${name}`, { method: 'POST', headers, body: '{}', cache: 'no-store' });
+                if (!response.ok) return false;
+                return (await response.json()) === true;
+            };
+            const [isAdmin, isStaff] = await Promise.all([check('is_admin'), check('is_staff')]);
+            const role = { signedIn: true, isAdmin, isStaff: isStaff || isAdmin };
+            try { sessionStorage.setItem(cacheKey, JSON.stringify({ isAdmin: role.isAdmin, isStaff: role.isStaff, expiresAt: Date.now() + 30000 })); } catch (_) {}
+            return role;
+        } catch (_) { return { signedIn: true, isAdmin: false, isStaff: false }; }
+    };
+
+    const renderMobileNav = (nav, role) => {
+        const prefix = pageIsInsideHtml ? '' : 'html/';
+        const route = window.location.pathname.split('/').pop() || 'index.html';
+        const items = [
+            { id: 'home', href: pageIsInsideHtml ? '../index.html' : './index.html', icon: 'fa-house', label: 'الرئيسية', active: route === '' || route === 'index.html' },
+            { id: 'browse', href: `${prefix}browse.html`, icon: 'fa-compass', label: 'الأنميات', active: ['browse.html','anime.html','watch.html','details.html','free.html','ads.html'].includes(route) },
+            { id: 'teams', href: `${prefix}teams.html`, icon: 'fa-people-group', label: 'الفرق', active: ['teams.html','team-details.html'].includes(route) },
+            { id: 'dubbers', href: `${prefix}dubbers.html`, icon: 'fa-microphone-lines', label: 'المدبلجون', active: ['dubbers.html','actor.html'].includes(route) },
+            { id: 'account', href: `${prefix}account.html`, icon: 'fa-user', label: role.signedIn ? 'حسابي' : 'دخول', active: route === 'account.html' }
+        ];
+        if (role.isStaff) {
+            items.splice(3, 1); // استبدال المدبلجين بلوحة الإدارة مع إبقاء مكتبة الأنمي وخمسة أزرار.
+            items.push({ id: 'admin', href: `${prefix}admin.html`, icon: role.isAdmin ? 'fa-shield-halved' : 'fa-gauge-high', label: role.isAdmin ? 'الإدارة' : 'لوحتي', active: route === 'admin.html' });
+        }
+        nav.className = `be-mobile-nav${role.isStaff ? ' has-staff' : ''}`;
+        nav.setAttribute('aria-label', 'التنقل الرئيسي');
+        nav.replaceChildren();
+        items.forEach((item) => {
+            const link = document.createElement('a');
+            link.href = item.href;
+            link.setAttribute('aria-label', item.label);
+            if (item.active) { link.classList.add('is-current'); link.setAttribute('aria-current', 'page'); }
+            const icon = document.createElement('i'); icon.className = `fa-solid ${item.icon}`; icon.setAttribute('aria-hidden', 'true');
+            const text = document.createElement('span'); text.textContent = item.label;
+            link.append(icon, text); nav.appendChild(link);
+        });
+    };
+
+    let mobileNavRefreshId = 0;
+    const setupMobileNav = () => {
+        document.querySelectorAll('.admin-mobile-nav').forEach((node) => node.remove());
+        let nav = document.querySelector('.be-mobile-nav');
+        if (!nav) nav = document.createElement('nav');
+        if (!nav.isConnected) document.body.appendChild(nav);
+        const session = readAuthSession();
+        const refreshId = ++mobileNavRefreshId;
+        renderMobileNav(nav, { signedIn: !!session, isAdmin: false, isStaff: false });
+        if (session) getNavRole(session).then((role) => { if (refreshId === mobileNavRefreshId) renderMobileNav(nav, role); });
+    };
+
     const setupHeader = () => {
         const header = document.querySelector('.main-header');
         if (!header) return;
         setupSearch();
-        if (!document.querySelector('.be-mobile-nav')) {
-            const mobileNav = document.createElement('nav');
-            mobileNav.className = 'be-mobile-nav';
-            const prefix = pageIsInsideHtml ? '' : 'html/';
-            mobileNav.innerHTML = `<a href="${prefix}../index.html" class="is-current"><i class="fa-solid fa-house"></i><span>الرئيسية</span></a><a href="${prefix}browse.html"><i class="fa-solid fa-compass"></i><span>الأنميات</span></a><a href="${prefix}teams.html"><i class="fa-solid fa-people-group"></i><span>الفرق</span></a><a href="${prefix}dubbers.html"><i class="fa-solid fa-microphone-lines"></i><span>المدبلجون</span></a><a href="${prefix}account.html"><i class="fa-solid fa-user"></i><span>حسابي</span></a>`;
-            document.body.appendChild(mobileNav);
-        }
         if (!header.querySelector('[data-favorites-link]')) {
             const link = document.createElement('a');
             link.href = pageIsInsideHtml ? 'favorites.html' : 'html/favorites.html';
@@ -354,8 +437,22 @@
         window.addEventListener('load', () => navigator.serviceWorker.register(`${rootPrefix}sw.js`).catch(() => {}), { once: true });
     };
 
+    const lockMobileZoom = () => {
+        if (!window.matchMedia('(max-width: 768px)').matches) return;
+        ['gesturestart', 'gesturechange', 'gestureend'].forEach((type) => {
+            document.addEventListener(type, (event) => event.preventDefault(), { passive: false });
+        });
+        document.addEventListener('touchmove', (event) => {
+            if (event.touches && event.touches.length > 1) event.preventDefault();
+        }, { passive: false });
+    };
+
     const boot = () => {
+        lockMobileZoom();
         setupHeader();
+        setupMobileNav();
+        window.addEventListener('ar-anime:auth-changed', setupMobileNav);
+        window.addEventListener('focus', setupMobileNav);
         setupScrollHeader();
         setupDetailActions();
         enhanceAllCards();

@@ -2,31 +2,80 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="robots" content="noindex">
-    <title>لوحة الإدارة - Black Echo</title>
+    <title>لوحة الإدارة - AR anime</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../css/ui.css">
     <link rel="stylesheet" href="../css/mobile.css">
+    <link rel="stylesheet" href="../css/modern.css">
+    <link rel="stylesheet" href="../css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body class="ui-page">
-<header class="ui-top"><a href="../index.html" class="brand"><img src="../icon-192.png" alt=""><span>Black Echo</span></a><nav><a href="account.html">حسابي</a><a href="../index.html">الرئيسية</a></nav></header>
-<div class="wrap">
-    <h1>لوحة الإدارة <span class="badge" id="role-badge" hidden></span></h1>
-    <p class="sub"><a href="account.html" style="color:#8ab4ff;">حسابي</a> · <a href="../index.html" style="color:#8ab4ff;">الرئيسية</a></p>
-    <div id="status" class="sub">جاري التحميل...</div>
+<header class="ui-top"><a href="../index.html" class="brand"><img src="../icon-192.png" alt=""><span>AR anime</span></a><nav><a href="account.html">حسابي</a><a href="../index.html">الرئيسية</a></nav></header>
+<main class="admin-workspace">
+    <section class="workspace-hero" aria-labelledby="workspace-title">
+        <div class="workspace-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
+        <div class="workspace-copy">
+            <p class="workspace-eyebrow">AR ANIME · WORKSPACE</p>
+            <h1 id="workspace-title">مساحة الإدارة</h1>
+            <p class="workspace-description" id="workspace-description">كل أدوات إدارة الفريق والطلبات في مكان واحد.</p>
+        </div>
+        <span class="badge" id="role-badge" hidden></span>
+    </section>
 
-    <section id="panel" hidden>
-        <h2>طلبات الانضمام</h2><div id="joins"></div>
-        <h2>طلبات الشخصيات</h2><div id="claims"></div>
-        <h2 id="teams-title">الفرق</h2><div id="teams"></div>
+    <div id="status" class="sub" role="status" aria-live="polite">جاري تحميل لوحة التحكم...</div>
+
+    <section id="panel" hidden aria-label="أدوات إدارة الموقع والفريق">
+        <nav class="admin-nav" aria-label="التنقل في لوحة التحكم">
+            <a href="#join-section"><i class="fa-solid fa-user-plus" aria-hidden="true"></i> طلبات الانضمام <span class="admin-count" id="join-nav-count">0</span></a>
+            <a href="#claims-section"><i class="fa-solid fa-masks-theater" aria-hidden="true"></i> طلبات الشخصيات <span class="admin-count" id="claim-nav-count">0</span></a>
+            <a id="teams-nav-label" href="#teams-title"><i class="fa-solid fa-people-group" aria-hidden="true"></i> فريقي</a>
+            <span id="admin-nav-only" hidden>
+                <a href="#tar-section"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i> طلبات الأنميات <span class="admin-count" id="tar-nav-count">0</span></a>
+                <a href="#leaders-section"><i class="fa-solid fa-user-shield" aria-hidden="true"></i> القادة</a>
+                <a href="#dubbers-section"><i class="fa-solid fa-microphone-lines" aria-hidden="true"></i> المدبلجون</a>
+            </span>
+        </nav>
+
+        <div class="admin-overview" aria-label="ملخص لوحة التحكم">
+            <div class="admin-stat"><span class="admin-stat-icon"><i class="fa-solid fa-inbox" aria-hidden="true"></i></span><div><span class="admin-stat-label">طلبات بانتظارك</span><strong id="stat-pending">0</strong></div></div>
+            <div class="admin-stat"><span class="admin-stat-icon"><i class="fa-solid fa-people-group" aria-hidden="true"></i></span><div><span class="admin-stat-label" id="stat-teams-label">الفرق التي تديرها</span><strong id="stat-teams">0</strong></div></div>
+            <div class="admin-stat"><span class="admin-stat-icon"><i class="fa-solid fa-users" aria-hidden="true"></i></span><div><span class="admin-stat-label">الأعضاء الظاهرون لك</span><strong id="stat-members">0</strong></div></div>
+        </div>
+
+        <section class="admin-section" id="join-section" aria-labelledby="join-title">
+            <div class="admin-section-head"><span class="admin-section-icon"><i class="fa-solid fa-user-plus" aria-hidden="true"></i></span><div class="admin-section-heading"><h2 id="join-title">طلبات الانضمام</h2><p>راجع بيانات المتقدمين واتخذ قرار القبول أو الرفض.</p></div><span class="admin-count" id="join-count">0</span></div>
+            <div id="joins" class="admin-section-list"></div>
+        </section>
+
+        <section class="admin-section" id="claims-section" aria-labelledby="claims-title">
+            <div class="admin-section-head"><span class="admin-section-icon"><i class="fa-solid fa-masks-theater" aria-hidden="true"></i></span><div class="admin-section-heading"><h2 id="claims-title">طلبات الشخصيات</h2><p>تحقق من إثبات الدور ثم اعتمده أو ارفضه.</p></div><span class="admin-count" id="claim-count">0</span></div>
+            <div id="claims" class="admin-section-list"></div>
+        </section>
+
+        <section class="admin-section" id="teams-section" aria-labelledby="teams-title">
+            <div class="admin-section-head"><span class="admin-section-icon"><i class="fa-solid fa-people-group" aria-hidden="true"></i></span><div class="admin-section-heading"><h2 id="teams-title">الفرق</h2><p id="teams-description">حدّث بيانات الفريق وراجع أعضائه وطلباته.</p></div><span class="admin-count" id="team-count">0</span></div>
+            <div id="teams" class="admin-section-list"></div>
+        </section>
+
         <div id="admin-only" hidden>
-            <h2>طلبات أنميات الفرق</h2><div id="tar"></div>
-            <h2>قادة الفرق</h2><div id="leaders"></div>
-            <h2>المدبلجون</h2><div id="dubbers"></div>
+            <section class="admin-section" id="tar-section" aria-labelledby="tar-title">
+                <div class="admin-section-head"><span class="admin-section-icon"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></span><div class="admin-section-heading"><h2 id="tar-title">طلبات أنميات الفرق</h2><p>اعتمد ربط العمل بالفريق أو راجع الطلب الجديد.</p></div><span class="admin-count" id="tar-count">0</span></div>
+                <div id="tar" class="admin-section-list"></div>
+            </section>
+            <section class="admin-section" id="leaders-section" aria-labelledby="leaders-title">
+                <div class="admin-section-head"><span class="admin-section-icon"><i class="fa-solid fa-user-shield" aria-hidden="true"></i></span><div class="admin-section-heading"><h2 id="leaders-title">قادة الفرق</h2><p>عيّن قائداً للفريق أو راجع صلاحيات القادة الحاليين.</p></div><span class="admin-count" id="leader-count">0</span></div>
+                <div id="leaders" class="admin-section-list"></div>
+            </section>
+            <section class="admin-section" id="dubbers-section" aria-labelledby="dubbers-title">
+                <div class="admin-section-head"><span class="admin-section-icon"><i class="fa-solid fa-microphone-lines" aria-hidden="true"></i></span><div class="admin-section-heading"><h2 id="dubbers-title">المدبلجون</h2><p>إدارة ملفات المدبلجين وإضافة ملف جديد.</p></div><span class="admin-count" id="dubber-count">0</span></div>
+                <div id="dubbers" class="admin-section-list"></div>
+            </section>
         </div>
     </section>
-</div>
+</main>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="../data/supabase_config.js"></script>
@@ -61,8 +110,9 @@
         if (/duplicate/i.test(m)) return 'موجود من قبل.';
         return m;
     }
-    function link(url, label) { if (!url || !HTTPS.test(url)) return null; var a = el('a', '', label); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
+    function link(url, label) { if (!url || !HTTPS.test(url)) return null; var a = el('a', 'admin-text-link', label); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
     function urlOrNull(v, name) { v = v.trim(); if (!v) return { v: null }; if (!HTTPS.test(v)) { toast(name + ' لازم يبدأ بـ https://', true); return null; } return { v: v }; }
+    function count(id, n) { var node = $(id); if (node) node.textContent = String(n || 0); }
 
     /* ---------- الطلبات ---------- */
     async function decide(table, id, status, btns) {
@@ -81,6 +131,9 @@
     async function renderRequests() {
         var j = await client.from('join_requests').select('id,display_name,role,team_id,bio,social_url,avatar_url,created_at').eq('status', 'pending').order('created_at');
         var c = await client.from('role_claims').select('id,anime_id,character_name,proof_url,created_at,dubber_id').eq('status', 'pending').order('created_at');
+        count('join-count', j.data ? j.data.length : 0); count('join-nav-count', j.data ? j.data.length : 0);
+        count('claim-count', c.data ? c.data.length : 0); count('claim-nav-count', c.data ? c.data.length : 0);
+        count('stat-pending', (j.data ? j.data.length : 0) + (c.data ? c.data.length : 0));
         var jb = $('joins'); jb.innerHTML = '';
         if (j.error) jb.appendChild(el('div', 'empty err', j.error.message));
         else if (!j.data.length) jb.appendChild(el('div', 'empty', 'ما فيه طلبات انضمام جديدة.'));
@@ -107,7 +160,13 @@
 
     /* ---------- الفرق ---------- */
     function teamCard(t) {
-        var d = el('details'); d.appendChild(el('summary', '', t.name));
+        var d = el('details', 'team-management-card');
+        var teamMembersCount = S.members.filter(function (m) { return m.team_id === t.id; }).length;
+        var summary = el('summary', 'team-summary'); var summaryCopy = el('span', 'team-summary-copy');
+        summaryCopy.appendChild(el('span', 'team-summary-title', t.name));
+        summaryCopy.appendChild(el('span', 'team-summary-hint', teamMembersCount + ' عضو · إدارة البيانات والطلبات والأعضاء'));
+        var summaryCta = el('span', 'team-summary-cta'); summaryCta.appendChild(el('i', 'fa-solid fa-gear')); summaryCta.appendChild(document.createTextNode('إدارة الفريق'));
+        summary.appendChild(summaryCopy); summary.appendChild(summaryCta); d.appendChild(summary);
         var name = input(t.name), logo = input(t.logo, 'https://...'), banner = input(t.banner, 'https://...');
         var desc = el('textarea'); desc.value = t.description || '';
         d.appendChild(field('اسم الفريق', name)); d.appendChild(field('الشعار (رابط)', logo));
@@ -167,6 +226,7 @@
     function renderTeams() {
         var box = $('teams'); box.innerHTML = '';
         var list = S.teams.filter(function (t) { return canTeam(t.id); });
+        count('team-count', list.length); count('stat-teams', list.length);
         if (!list.length) box.appendChild(el('div', 'empty', 'ما عندك فرق تديرها.'));
         list.forEach(function (t) { box.appendChild(teamCard(t)); });
         if (S.admin) {
@@ -185,6 +245,7 @@
     function renderTar() {
         var box = $('tar'); box.innerHTML = '';
         var pend = S.tar.filter(function (q) { return q.status === 'pending'; });
+        count('tar-count', pend.length); count('tar-nav-count', pend.length);
         if (!pend.length) { box.appendChild(el('div', 'empty', 'ما فيه طلبات جديدة.')); return; }
         pend.forEach(function (q) {
             var card = el('div', 'card'), info = el('div', 'info');
@@ -199,7 +260,8 @@
     /* ---------- أدمن فقط: القادة والمدبلجون ---------- */
     function renderLeaders() {
         var box = $('leaders'); box.innerHTML = '';
-        if (!S.leaders.length) box.appendChild(el('div', 'empty', 'ما عيّنت أي قائد بعد.'));
+        count('leader-count', S.leaders.length);
+        if (!S.leaders.length) box.appendChild(el('div', 'empty', 'ما عيّنت أي قائد بعد.')); 
         S.leaders.forEach(function (l) {
             var r = el('div', 'member'); r.appendChild(el('span', '', l.name + ' ← قائد ' + tname(l.team_id)));
             var b = el('button', 'no', 'إزالة القيادة');
@@ -214,7 +276,7 @@
         box.appendChild(line);
     }
     function renderDubbers() {
-        var box = $('dubbers'); box.innerHTML = '';
+        var box = $('dubbers'); box.innerHTML = ''; count('dubber-count', S.dubbers.length);
         if (!S.dubbers.length) box.appendChild(el('div', 'empty', 'ما فيه مدبلجين.'));
         S.dubbers.forEach(function (d) {
             var r = el('div', 'member'); r.appendChild(el('span', '', d.name + ' — ' + (d.role || '')));
@@ -253,6 +315,7 @@
         var m = await client.from('team_members').select('team_id,dubber_id,role');
         var q = await client.from('team_anime_requests').select('id,team_id,anime_id,new_title,mal_url,note,status,admin_note,created_at').order('created_at', { ascending: false });
         S.teams = t.data || []; S.dubbers = d.data || []; S.members = m.data || []; S.tar = q.data || [];
+        count('stat-members', S.members.length);
         if (S.admin) { var l = await client.rpc('admin_list_leaders'); S.leaders = l.data || []; }
         await renderRequests(); renderTeams();
         if (S.admin) { renderTar(); renderLeaders(); renderDubbers(); }
@@ -266,6 +329,12 @@
             var st = await client.rpc('is_staff');
             if (st.error || st.data !== true) { fail('ما عندك صلاحية الدخول لهذي الصفحة.'); return; }
             var ad = await client.rpc('is_admin'); S.admin = ad.data === true;
+            $('workspace-title').textContent = S.admin ? 'لوحة إدارة AR anime' : 'لوحة تحكم الفريق';
+            $('workspace-description').textContent = S.admin ? 'إدارة المنصة والفرق والطلبات من مساحة واحدة.' : 'إدارة فريقك وأعضائه وطلبات الانضمام والأنميات.';
+            $('stat-teams-label').textContent = S.admin ? 'إجمالي الفرق' : 'الفرق التي تديرها';
+            $('teams-nav-label').lastChild.textContent = S.admin ? ' الفرق' : ' فريقي';
+            $('teams-description').textContent = S.admin ? 'إدارة الفرق وأعضائها وصفحاتها.' : 'عدّل بيانات فريقك، وأدر الأعضاء وطلبات الأنميات.';
+            $('admin-nav-only').hidden = !S.admin;
             if (!S.admin) {
                 var tl = await client.from('team_leaders').select('team_id'); S.myTeams = (tl.data || []).map(function (x) { return x.team_id; });
                 $('teams-title').textContent = 'فريقك';
@@ -278,5 +347,6 @@
     })();
 })();
 </script>
+<script src="../data/site.js"></script>
 </body>
 </html>

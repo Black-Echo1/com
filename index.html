@@ -2,14 +2,14 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="google-site-verification" content="V5K4gME715mhjvvhA7y2I6dHxR_x2pxBjrQPpJE_d04" />
     <meta name="theme-color" content="#111111">
     <meta name="mobile-web-app-capable" content="yes">
     <!-- مكتبة Font Awesome للأيقونات الاحترافية -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>Black Echo | AR anime</title>
+    <title>AR anime | AR anime</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="icon-192.png">
     <link rel="manifest" href="manifest.json">
@@ -18,7 +18,7 @@
     <style>
         /* =====================================================
            AR anime — الصفحة الرئيسية
-           هوية بصرية: أصداء صوتية داكنة + أحمر Black Echo
+           هوية بصرية: أصداء صوتية داكنة + أحمر AR anime
            ===================================================== */
         :root{
             --he-bg:#07080c;
@@ -577,6 +577,7 @@
         @media (max-width:640px){ .be-cta{ grid-template-columns:1fr; margin-top:-20px; padding:0 14px; } .be-cta-card{ padding:16px; } }
     </style>
     <link rel="stylesheet" href="css/mobile.css">
+    <link rel="stylesheet" href="css/modern.css">
 </head>
 <body class="animated-bg">
    <header class="main-header">
@@ -605,7 +606,7 @@
         <div class="he-hero-backdrop" id="hero-backdrop" aria-hidden="true"></div>
         <div class="he-hero-content">
             <div class="he-hero-copy">
-                <span class="he-brandmark" id="hero-kicker">BLACK ECHO • دبلجة عربية</span>
+                <span class="he-brandmark" id="hero-kicker">AR anime • دبلجة عربية</span>
                 <p class="he-hero-overline">مختارات اليوم</p>
                 <h1 id="hero-title">منصة <span class="rgb-text">AR anime</span></h1>
                 <div class="he-hero-meta" id="hero-meta"><span>مشاهدة مجانية</span><span>دبلجة عربية</span><span><i class="fa-solid fa-star"></i> 4.8</span></div>
@@ -746,7 +747,7 @@
 
     <footer>
         <a href="html/legal.html">سياسة الخصوصية</a> | <a href="tel:+905014770828">تواصل معنا</a>
-        <p>&copy; 2026 أكاديمية Black Echo.</p>
+        <p>&copy; 2026 أكاديمية AR anime.</p>
     </footer>
 
     <script src="data/data.js"></script>
@@ -815,7 +816,7 @@
                 const favorite = document.getElementById('hero-favorite');
                 if (backdrop) backdrop.style.backgroundImage = `url("${esc(entry.poster)}")`;
                 if (title) title.textContent = entry.title;
-                if (description) description.textContent = `شاهد ${entry.title} بالدبلجة العربية، مع حلقات متاحة للمشاهدة وتجربة صوتية صنعتها فرق Black Echo.`;
+                if (description) description.textContent = `شاهد ${entry.title} بالدبلجة العربية، مع حلقات متاحة للمشاهدة وتجربة صوتية صنعتها فرق AR anime.`;
                 if (meta) meta.innerHTML = `<span>${esc(entry.status || 'متاح الآن')}</span><span>${esc(entry.type || 'أنمي')}</span><span><i class="fa-solid fa-star"></i> ${esc(entry.rating || '—')}</span>`;
                 if (watch) watch.href = `html/anime.html?id=${encodeURIComponent(entry.id)}`;
                 if (favorite) {

@@ -175,7 +175,7 @@
         hero.innerHTML = `
             <div class="hero-slide active" style="background-image:linear-gradient(0deg, rgba(7,8,12,.94), rgba(7,8,12,.18)), url('${escapeHtml(anime.banner)}')">
                 <div class="hero-content">
-                    <span class="hero-kicker">مختارات Black Echo</span>
+                    <span class="hero-kicker">مختارات AR anime</span>
                     <h1>${escapeHtml(anime.title)}</h1>
                     <div class="hero-meta"><span class="badge">${escapeHtml(anime.status)}</span><span class="type">${escapeHtml(anime.type)}</span><span class="rating"><i class="fa-solid fa-star"></i> ${escapeHtml(anime.rating)}</span></div>
                     <button class="hero-btn" type="button"><i class="fa-solid fa-play"></i> شاهد التفاصيل والحلقات</button>

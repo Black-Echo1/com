@@ -96,3 +96,8 @@ details[open] > summary::after{ transform:rotate(90deg); }
   .ui-top{ padding:10px 12px; }
 }
 [hidden]{ display:none !important; }
+
+/* Keep controls inside their cards on every viewport. */
+.ui-page input,.ui-page select,.ui-page textarea{box-sizing:border-box;width:100%;max-width:100%;min-width:0}
+.ui-page .inline>*{min-width:0;max-width:100%}
+.ui-page .team-management-card,.ui-page .team-management-card>*{min-width:0}

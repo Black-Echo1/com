@@ -1,8 +1,12 @@
-const CACHE_NAME = 'black-echo-v6';
+const CACHE_NAME = 'ar-anime-v8';
 const PRECACHE_URLS = [
     './',
     './index.html',
     './css/style.css',
+    './css/mobile.css',
+    './css/modern.css',
+    './css/ui.css',
+    './css/admin.css',
     './data/site.js',
     './manifest.json',
     './offline.html'

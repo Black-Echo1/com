@@ -2,9 +2,9 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#111111">
-    <title>حسابي وطلب الانضمام - Black Echo</title>
+    <title>حسابي وطلب الانضمام - AR anime</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="../icon-192.png">
     <link rel="manifest" href="../manifest.json">
@@ -12,10 +12,12 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="../css/ui.css">
     <link rel="stylesheet" href="../css/mobile.css">
+    <link rel="stylesheet" href="../css/modern.css">
+    <link rel="stylesheet" href="../css/profile.css">
 </head>
 <body class="ui-page">
     <header class="main-header">
-        <div class="logo"><div class="logo rgb-text">AR Anime</div></div>
+        <div class="logo"><div class="logo rgb-text">AR anime</div></div>
         <button type="button" class="menu-icon" aria-label="فتح القائمة" aria-controls="navMenu" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
         <nav id="navMenu">
             <div class="close-btn">&times;</div>
@@ -32,8 +34,8 @@
     <main class="acc-wrap">
         <!-- 1) غير مسجّل -->
         <section class="acc-card" id="auth-box" hidden>
-            <img class="auth-logo" src="../icon-192.png" alt="Black Echo">
-            <h1>أهلاً بك في Black Echo</h1>
+            <img class="auth-logo" src="../icon-192.png" alt="AR anime">
+            <h1>أهلاً بك في AR anime</h1>
             <p class="sub">سجّل دخولك أو أنشئ حساباً، وبعدها تقدر تقدّم طلب انضمام كمدبلج مع فريقك. ما ينضاف أحد للموقع إلا بعد موافقة الإدارة.</p>
             <div class="acc-tabs">
                 <button type="button" id="tab-login" class="on">دخول</button>
@@ -46,53 +48,74 @@
             <div class="hint" id="pw-hint" hidden>6 أحرف على الأقل.</div>
             <button type="button" class="btn" id="auth-submit">دخول</button>
             <button type="button" class="btn ghost" id="google-btn"><svg width="18" height="18" viewBox="0 0 48 48" aria-hidden="true"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.2-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 19 12 24 12c3.1 0 5.8 1.2 8 3l5.7-5.7C34 6.1 29.3 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.2-2.2 4.2-4.1 5.6l6.2 5.2C37 39.2 44 34 44 24c0-1.2-.1-2.3-.4-3.5z"/></svg> المتابعة بحساب Google</button>
-            <div style="text-align:center;color:#7d7d8a;font-size:.8rem;margin:16px 0 4px;">أو</div>
-            <button type="button" class="btn ghost" id="google-btn" style="margin-top:6px;"><i class="fa-brands fa-google" aria-hidden="true"></i> المتابعة بحساب Google</button>
             <div class="msg" id="auth-msg" role="status"></div>
         </section>
 
-        <!-- 2) مسجّل -->
-        <section class="acc-card" id="member-box" hidden>
-            <h1>طلب الانضمام كمدبلج</h1>
-            <p class="sub" id="who"></p>
-            <p id="admin-link" hidden style="margin:0 0 12px;"><a href="admin.html" style="color:#8ab4ff;font-weight:700;">لوحة الإدارة / قائد الفريق ←</a></p>
-            <div id="status-box"></div>
+        <!-- مساحة الحساب: ملخص شخصي وإجراءات بحسب الصلاحية -->
+        <section class="acc-card account-dashboard" id="member-box" hidden>
+            <section class="account-profile" id="profile-overview" hidden aria-labelledby="account-display-name">
+                <div class="account-identity">
+                    <div class="account-avatar" id="account-avatar" aria-hidden="true">A</div>
+                    <div class="account-identity-copy">
+                        <p class="account-kicker"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><span id="account-role-label">عضو AR anime</span></p>
+                        <h1 id="account-display-name">حسابي</h1>
+                        <p class="account-email" id="who"></p>
+                        <p class="account-joined"><i class="fa-regular fa-calendar" aria-hidden="true"></i><span id="account-joined">عضو في AR anime</span><span id="account-team-name" hidden></span></p>
+                    </div>
+                    <button type="button" class="btn ghost account-logout" id="logout" aria-label="تسجيل الخروج"><i class="fa-solid fa-arrow-right-from-bracket" aria-hidden="true"></i> تسجيل الخروج</button>
+                </div>
+                <div class="account-actions" aria-label="إجراءات الحساب">
+                    <a id="my-page-link" href="#" class="account-action primary" hidden><i class="fa-solid fa-eye" aria-hidden="true"></i> مشاهدة بروفايلي العام</a>
+                    <button type="button" id="edit-profile-trigger" class="account-action" hidden><i class="fa-solid fa-pen-to-square" aria-hidden="true"></i> تعديل البروفايل</button>
+                    <a id="admin-link" href="admin.html" class="account-action staff-action" hidden><i class="fa-solid fa-gauge-high" aria-hidden="true"></i> لوحة إدارة AR anime</a>
+                    <a id="team-edit-link" href="admin.html#teams-title" class="account-action staff-action" hidden><i class="fa-solid fa-people-group" aria-hidden="true"></i> إدارة فريقي وتعديل بياناته</a>
+                    <a id="team-requests-link" href="admin.html#joins" class="account-action staff-secondary" hidden><i class="fa-solid fa-inbox" aria-hidden="true"></i> مراجعة طلبات الانضمام</a>
+                    <button type="button" id="share-profile" class="account-action"><i class="fa-solid fa-share-nodes" aria-hidden="true"></i> مشاركة</button>
+                </div>
+                <p id="share-message" class="account-share-message" role="status" aria-live="polite"></p>
+                <div class="account-stats" aria-label="إحصاءات الملف الشخصي">
+                    <div class="account-stat"><span class="account-stat-label"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i> الأعمال</span><strong id="account-works">0</strong></div>
+                    <div class="account-stat"><span class="account-stat-label"><i class="fa-solid fa-masks-theater" aria-hidden="true"></i> الشخصيات</span><strong id="account-roles">0</strong></div>
+                    <div class="account-stat"><span class="account-stat-label"><i class="fa-solid fa-people-group" aria-hidden="true"></i> الفرق</span><strong id="account-teams">0</strong></div>
+                </div>
+            </section>
 
-            <div id="profile-box" hidden>
-                <h2 style="font-size:1.05rem;margin:6px 0 4px;">صفحتي كمدبلج</h2>
-                <p class="sub" style="margin-bottom:6px;">تقدر تعدّل بياناتك مباشرة. شخصياتك المؤكَّدة ما تنشال إلا من الإدارة أو قائد فريقك.</p>
-                <p style="margin:0 0 6px;"><a id="my-page-link" href="#" style="color:#8ab4ff;font-weight:700;">افتح صفحتي ←</a></p>
-                <label for="p-name">الاسم</label><input id="p-name" maxlength="60">
-                <label for="p-role">الدور</label><input id="p-role" maxlength="40">
-                <label for="p-bio">الوصف</label><textarea id="p-bio" maxlength="600"></textarea>
-                <label for="p-social">رابط حسابك</label><input id="p-social" type="url" dir="ltr" placeholder="https://...">
-                <label for="p-logo">رابط صورتك</label><input id="p-logo" type="url" dir="ltr" placeholder="https://...">
-                <label for="p-banner">رابط خلفية الصفحة</label><input id="p-banner" type="url" dir="ltr" placeholder="https://...">
-                <button type="button" class="btn" id="p-save">حفظ صفحتي</button>
-                <div class="msg" id="p-msg" role="status"></div>
-                <div id="my-roles"></div>
-            </div>
-            <div id="claims-box"></div>
-            <form id="apply-form" onsubmit="return false;" hidden>
-                <label for="f-name">اسمك الذي يظهر في الموقع</label>
-                <input id="f-name" maxlength="60" autocomplete="off">
-                <label for="f-team">فريقك</label>
-                <select id="f-team"></select>
-                <label for="f-role">دورك</label>
-                <select id="f-role">
-                    <option>مؤدي أصوات</option><option>مهندس صوت</option><option>مخرج دبلجة</option><option>مترجم</option><option>كاتب نصوص</option>
-                </select>
-                <label for="f-bio">نبذة عنك (اختياري)</label>
-                <textarea id="f-bio" maxlength="600"></textarea>
-                <label for="f-social">رابط حسابك (اختياري)</label>
-                <input id="f-social" type="url" dir="ltr" placeholder="https://...">
-                <label for="f-avatar">رابط صورتك (اختياري)</label>
-                <input id="f-avatar" type="url" dir="ltr" placeholder="https://...">
-                <div class="hint">الروابط لازم تبدأ بـ https://</div>
-                <button type="button" class="btn" id="apply-submit">إرسال الطلب</button>
-                <div class="msg" id="apply-msg" role="status"></div>
-            </form>
-            <button type="button" class="btn ghost" id="logout">تسجيل الخروج</button>
+            <section class="account-content" aria-labelledby="join-heading">
+                <div class="account-section-head">
+                    <i class="fa-solid fa-microphone-lines" aria-hidden="true"></i>
+                    <div><h2 id="join-heading">العضوية وطلبات الانضمام</h2><p>تابع حالة طلبك أو قدّم للانضمام إلى أحد فرق الدبلجة.</p></div>
+                </div>
+                <div id="status-box" class="account-status"></div>
+                <div id="claims-box" class="account-claims"></div>
+                <form id="apply-form" class="account-join-form" onsubmit="return false;" hidden>
+                    <div class="account-section-head"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i><div><h2>قدّم طلب انضمام</h2><p>املأ بياناتك واختر الفريق والدور المناسبين لك.</p></div></div>
+                    <label for="f-name">اسمك الذي يظهر في الموقع</label><input id="f-name" maxlength="60" autocomplete="name">
+                    <label for="f-team">الفريق</label><select id="f-team"></select>
+                    <label for="f-role">الدور</label><select id="f-role"><option>مؤدي أصوات</option><option>مهندس صوت</option><option>مخرج دبلجة</option><option>مترجم</option><option>كاتب نصوص</option></select>
+                    <label for="f-bio">نبذة عنك (اختياري)</label><textarea id="f-bio" maxlength="600" placeholder="عرّفنا على خبرتك واهتماماتك"></textarea>
+                    <label for="f-social">رابط حسابك (اختياري)</label><input id="f-social" type="url" dir="ltr" placeholder="https://...">
+                    <label for="f-avatar">رابط صورتك (اختياري)</label><input id="f-avatar" type="url" dir="ltr" placeholder="https://...">
+                    <div class="hint">الروابط لازم تبدأ بـ https://</div>
+                    <button type="button" class="btn" id="apply-submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> إرسال طلب الانضمام</button>
+                    <div class="msg" id="apply-msg" role="status"></div>
+                </form>
+            </section>
+
+            <details id="profile-box" class="account-settings" hidden>
+                <summary><i class="fa-solid fa-gear" aria-hidden="true"></i> إعدادات البروفايل</summary>
+                <div class="account-settings-body">
+                    <p class="sub">عدّل الاسم والوصف والصورة وروابطك. الشخصيات المؤكدة لا تُزال إلا من الإدارة أو قائد الفريق.</p>
+                    <label for="p-name">الاسم الظاهر</label><input id="p-name" maxlength="60" autocomplete="name">
+                    <label for="p-role">الدور</label><input id="p-role" maxlength="40">
+                    <label for="p-bio">نبذة البروفايل</label><textarea id="p-bio" maxlength="600" placeholder="اكتب نبذة قصيرة عنك وعن أعمالك"></textarea>
+                    <label for="p-social">رابط حسابك</label><input id="p-social" type="url" dir="ltr" placeholder="https://...">
+                    <label for="p-logo">رابط صورتك</label><input id="p-logo" type="url" dir="ltr" placeholder="https://...">
+                    <label for="p-banner">رابط غلاف البروفايل</label><input id="p-banner" type="url" dir="ltr" placeholder="https://...">
+                    <button type="button" class="btn" id="p-save"><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> حفظ التعديلات</button>
+                    <div class="msg" id="p-msg" role="status"></div>
+                    <div id="my-roles"></div>
+                </div>
+            </details>
         </section>
 
         <div class="msg err" id="fatal" hidden></div>
@@ -100,7 +123,7 @@
 
     <footer style="text-align:center;padding:30px 20px;color:#7d7d8a;font-size:.85rem;border-top:1px solid #2a2a33;">
         <a href="legal.html" style="color:inherit;text-decoration:none;">سياسة الخصوصية</a>
-        <p>&copy; 2026 أكاديمية Black Echo.</p>
+        <p>&copy; 2026 أكاديمية AR anime.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
@@ -122,6 +145,10 @@
         }
         var client = window.supabase.createClient(cfg.url, cfg.anonKey);
         var mode = 'login';
+        var activeSession = null;
+        var isAdminSession = false;
+        var isStaffSession = false;
+        $('email').setAttribute('aria-label', 'البريد الإلكتروني');
 
         function setMode(m) {
             mode = m;
@@ -149,6 +176,7 @@
                     if (!s.data.session) { say($('auth-msg'), 'أرسلنا لك رابط تأكيد على إيميلك. افتحه ثم ارجع وسجّل دخولك.', 'ok'); btn.disabled = false; return; }
                 }
                 await render();
+                window.dispatchEvent(new Event('ar-anime:auth-changed'));
             } catch (e) {
                 var m = String(e && e.message || e);
                 if (/signups are disabled/i.test(m)) m = 'التسجيل بالإيميل متوقف من إعدادات الموقع.';
@@ -167,13 +195,9 @@
             if (r.error) say($('auth-msg'), /provider is not enabled/i.test(r.error.message) ? 'الدخول بـ Google غير مفعّل بعد في Supabase.' : r.error.message, 'err');
         };
 
-        $('google-btn').onclick = async function () {
-            say($('auth-msg'), '');
-            var r = await client.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: location.origin + location.pathname + location.search } });
-            if (r.error) say($('auth-msg'), /provider is not enabled/i.test(r.error.message) ? 'دخول Google غير مفعّل بعد من إعدادات Supabase.' : r.error.message, 'err');
-        };
-
-        $('logout').onclick = async function () { await client.auth.signOut(); await render(); };
+        $('logout').onclick = async function () { await client.auth.signOut(); window.dispatchEvent(new Event('ar-anime:auth-changed')); await render(); };
+        $('edit-profile-trigger').onclick = function () { $('profile-box').open = true; $('profile-box').scrollIntoView({behavior:'smooth',block:'start'}); };
+        $('share-profile').onclick = async function () { var url = $('my-page-link').hidden ? location.href : new URL($('my-page-link').href, location.href).href; try { if (navigator.share) await navigator.share({title:'بروفايلي على AR anime',url:url}); else if (navigator.clipboard) { await navigator.clipboard.writeText(url); $('share-message').textContent = 'تم نسخ رابط البروفايل إلى الحافظة.'; } } catch (_) {} };
 
         var teamsLoaded = false;
         async function loadTeams() {
@@ -198,9 +222,33 @@
             var sess = (await client.auth.getSession()).data.session;
             show($('auth-box'), !sess); show($('member-box'), !!sess);
             if (!sess) return;
-            $('who').textContent = 'مسجّل بإيميل: ' + sess.user.email;
-            var adm = await client.rpc('is_staff');
-            show($('admin-link'), !adm.error && adm.data === true);
+            activeSession = sess;
+            show($('profile-overview'), true);
+            $('who').textContent = sess.user.email || '';
+            var displayName = (sess.user.user_metadata && (sess.user.user_metadata.full_name || sess.user.user_metadata.name)) || (sess.user.email || '').split('@')[0] || 'عضو AR anime';
+            $('account-display-name').textContent = displayName;
+            $('account-role-label').textContent = 'عضو AR anime';
+            $('account-joined').textContent = sess.user.created_at ? 'انضم في ' + new Date(sess.user.created_at).toLocaleDateString('ar', {year:'numeric',month:'long',day:'numeric'}) : 'عضو في AR anime';
+            var initial = displayName.trim().charAt(0) || 'A';
+            var avatar = $('account-avatar'); avatar.textContent = initial;
+            var userAvatar = sess.user.user_metadata && (sess.user.user_metadata.avatar_url || sess.user.user_metadata.picture);
+            if (userAvatar && /^https:\/\//i.test(userAvatar)) { avatar.style.backgroundImage = 'url("' + userAvatar.replace(/["\\]/g, '') + '")'; avatar.style.backgroundSize = 'cover'; avatar.style.backgroundPosition = 'center'; avatar.textContent = ''; }
+            var checks = await Promise.all([client.rpc('is_admin'), client.rpc('is_staff')]);
+            var isAdmin = !checks[0].error && checks[0].data === true;
+            var isStaff = !checks[1].error && checks[1].data === true;
+            isAdminSession = isAdmin; isStaffSession = isStaff || isAdmin;
+            var leadersResult = await client.from('team_leaders').select('team_id').eq('user_id', sess.user.id);
+            var leaderIds = !leadersResult.error && Array.isArray(leadersResult.data) ? [...new Set(leadersResult.data.map(function (row) { return row.team_id; }))] : [];
+            show($('admin-link'), isAdmin);
+            show($('team-edit-link'), isAdmin || isStaff);
+            show($('team-requests-link'), isAdmin || isStaff);
+            if (isAdmin) { $('account-role-label').textContent = 'مسؤول المنصة'; $('team-edit-link').innerHTML = '<i class="fa-solid fa-people-group" aria-hidden="true"></i> إدارة الفرق'; }
+            else if (isStaff) {
+                $('account-role-label').textContent = leaderIds.length > 1 ? 'قائد فرق' : 'قائد فريق';
+                $('team-edit-link').innerHTML = '<i class="fa-solid fa-people-group" aria-hidden="true"></i> إدارة فريقي وتعديل بياناته';
+                var teamNames = await client.from('teams').select('name').in('id', leaderIds);
+                if (!teamNames.error && teamNames.data && teamNames.data.length) { $('account-team-name').hidden = false; $('account-team-name').textContent = '· ' + teamNames.data.map(function (t) { return t.name; }).join('، '); }
+            }
             var r = await client.from('join_requests').select('status,admin_note,created_at').order('created_at', { ascending: false }).limit(1);
             var req = r.data && r.data[0];
             var nx = new URLSearchParams(location.search).get('next');
@@ -211,6 +259,7 @@
             if (canApply) await loadTeams();
             await renderClaims();
             await renderProfile();
+            if (myDubberId) { show($('apply-form'), false); if (!req) statusBox({status:'approved'}); }
         }
 
         var myDubberId = null;
@@ -222,15 +271,25 @@
             if (!myDubberId) return;
             var r = await client.from('dubbers').select('id,name,role,logo,banner,bio,social_url').eq('id', myDubberId).maybeSingle();
             var d = r.data; if (!d) return;
+            $('account-display-name').textContent = d.name || $('account-display-name').textContent;
+            $('account-role-label').textContent = isAdminSession ? 'مسؤول المنصة · ' + (d.role || 'مدبلج') : isStaffSession ? ($('account-role-label').textContent.includes('قائد') ? $('account-role-label').textContent : 'قائد فريق') + ' · ' + (d.role || 'مدبلج') : (d.role || 'مدبلج');
+            var avatar = $('account-avatar'), safeLogo = /^https:\/\//i.test(d.logo || '') ? d.logo : '';
+            if (safeLogo) { avatar.style.backgroundImage = 'url("' + safeLogo.replace(/["\\]/g, '') + '")'; avatar.style.backgroundSize = 'cover'; avatar.style.backgroundPosition = 'center'; avatar.textContent = ''; }
+            else { avatar.style.backgroundImage = ''; avatar.textContent = (d.name || 'A').trim().charAt(0); }
+            $('my-page-link').href = 'actor.html?id=' + encodeURIComponent(d.id); show($('my-page-link'), true); show($('edit-profile-trigger'), true);
             $('p-name').value = d.name || ''; $('p-role').value = d.role || ''; $('p-bio').value = d.bio || '';
             $('p-social').value = d.social_url || ''; $('p-logo').value = d.logo || ''; $('p-banner').value = d.banner || '';
-            $('my-page-link').href = 'actor.html?id=' + encodeURIComponent(d.id);
             var roles = await client.from('character_roles').select('anime_id,character_name').eq('dubber_id', myDubberId);
+            var rows = !roles.error && roles.data ? roles.data : [];
+            $('account-roles').textContent = String(rows.length);
+            $('account-works').textContent = String(new Set(rows.map(function (x) { return x.anime_id; })).size);
+            var memberRows = await client.from('team_members').select('team_id').eq('dubber_id', myDubberId);
+            $('account-teams').textContent = String(!memberRows.error && memberRows.data ? new Set(memberRows.data.map(function (x) { return x.team_id; })).size : 0);
             var rb = $('my-roles'); rb.innerHTML = '';
-            if (roles.data && roles.data.length) {
+            if (rows.length) {
                 var h = document.createElement('h2'); h.textContent = 'شخصياتي المؤكَّدة'; h.style.cssText = 'font-size:1rem;margin:18px 0 8px;'; rb.appendChild(h);
-                roles.data.forEach(function (x) { var s = document.createElement('div'); s.className = 'status approved'; s.style.margin = '6px 0'; s.textContent = x.character_name + ' (' + x.anime_id + ')'; rb.appendChild(s); });
-            }
+                rows.forEach(function (x) { var s = document.createElement('div'); s.className = 'status approved'; s.textContent = x.character_name + ' (' + x.anime_id + ')'; rb.appendChild(s); });
+            } else { var empty = document.createElement('p'); empty.className = 'empty'; empty.textContent = 'ما فيه شخصيات مؤكدة مسجلة في بروفايلك بعد.'; rb.appendChild(empty); }
         }
 
         $('p-save').onclick = async function () {
@@ -246,7 +305,8 @@
                 social_url: social || null, logo: logo || null, banner: banner || null
             }).eq('id', myDubberId);
             btn.disabled = false;
-            say($('p-msg'), u.error ? 'ما انحفظ: ' + u.error.message : 'انحفظت صفحتك ✓', u.error ? 'err' : 'ok');
+            if (!u.error) { $('account-display-name').textContent = name; $('account-role-label').textContent = isAdminSession ? 'مسؤول المنصة · ' + ($('p-role').value.trim() || 'مدبلج') : isStaffSession ? 'قائد فريق · ' + ($('p-role').value.trim() || 'مدبلج') : ($('p-role').value.trim() || 'مدبلج'); $('account-avatar').textContent = name.trim().charAt(0); $('account-avatar').style.backgroundImage = logo ? 'url("' + logo.replace(/["\\]/g, '') + '")' : ''; $('account-avatar').style.backgroundSize = 'cover'; }
+            say($('p-msg'), u.error ? 'ما انحفظت التعديلات. تحقّق من بياناتك وحاول مجدداً.' : 'تم حفظ تعديلات بروفايلك بنجاح.', u.error ? 'err' : 'ok');
         };
 
         async function renderClaims() {

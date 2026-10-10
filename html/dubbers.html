@@ -2,11 +2,11 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
     <meta name="theme-color" content="#111111">
     <meta name="mobile-web-app-capable" content="yes">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <title>قائمة المدبلجين العرب - Black Echo</title>
+    <title>قائمة المدبلجين العرب - AR anime</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
     <link rel="icon" type="image/png" href="../icon-192.png">
     <link rel="manifest" href="../manifest.json">
@@ -59,11 +59,12 @@
     </style>
     <link rel="stylesheet" href="../css/finish.css">
     <link rel="stylesheet" href="../css/mobile.css">
+    <link rel="stylesheet" href="../css/modern.css">
 </head>
 <body>
        <header class="main-header">
         <div class="logo">
-            <div class="logo rgb-text">AR Anime</div>    
+            <div class="logo rgb-text">AR anime</div>    
         </div>
         <button type="button" class="menu-icon" aria-label="فتح القائمة" aria-controls="navMenu" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
         <nav id="navMenu">
@@ -85,11 +86,12 @@
         <p style="margin-top:14px;"><a href="account.html" style="display:inline-block;padding:10px 22px;border-radius:10px;background:linear-gradient(135deg,#ff2b36,#e50914);color:#fff;font-weight:900;text-decoration:none;">انضم كمدبلج مع فريقك</a></p>
     </div>
 
+    <div class="be-dubber-toolbar"><label class="be-dubber-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="dubber-search" type="search" placeholder="ابحث بالاسم أو الدور..." autocomplete="off"></label><span id="dubber-result-count" class="be-dubber-result-count" aria-live="polite"></span></div>
     <div id="dubbers-container" class="dubbers-grid"></div>
 
     <footer>
         <a href="legal.html">سياسة الخصوصية</a> | <a href="tel:+905014770828">تواصل معنا</a>
-        <p>&copy; 2026 أكاديمية Black Echo.</p>
+        <p>&copy; 2026 أكاديمية AR anime.</p>
     </footer>
 
     <script src="../data/supabase_config.js"></script>
@@ -99,51 +101,42 @@
     <script src="../data/actors_engine.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
-            await DB.installSlim(); // بيانات الأنميات والشخصيات المؤكَّدة من القاعدة
-
             const container = document.getElementById("dubbers-container");
-            container.innerHTML = "";
-
+            const search = document.getElementById("dubber-search");
+            const resultCount = document.getElementById("dubber-result-count");
+            const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[c]));
+            try { await DB.installSlim(); } catch (error) { console.warn("تعذر تحميل بعض تفاصيل الدبلجة", error); }
+            container.replaceChildren();
             if (typeof dubbersDatabase === 'undefined') {
-                container.innerHTML = `<p style="color: #888; grid-column: 1/-1; text-align: center;">لم يتم العثور على قاعدة بيانات المدبلجين.</p>`;
-                return;
+                const message = document.createElement('p'); message.className = 'be-no-dubbers'; message.textContent = 'تعذّر تحميل قائمة المدبلجين حالياً.'; container.appendChild(message); return;
             }
-
             let i = 0;
             for (const [actorId, data] of Object.entries(dubbersDatabase)) {
-                const card = document.createElement("div");
-                card.className = "dubber-card";
-                card.style.animationDelay = `${(i % 12) * 45}ms`;
-                i++;
-
-                const avatarHtml = data.logo
-                    ? `<img loading="lazy" class="dubber-avatar" src="${data.logo}" alt="${data.name}">`
-                    : `<div class="dubber-avatar-fallback"><i class="fa-solid fa-user"></i></div>`;
-
-                const aggregate = (typeof window.ActorsEngine !== "undefined")
-                    ? window.ActorsEngine.getActorAggregate(actorId)
-                    : null;
-                const profile = (window.ActorsEngine && window.ActorsEngine.getActorProfile(actorId)) || { name: data.name || actorId, role: data.role || 'مؤدي أصوات', description: 'صوت شغوف يضيف احتراماً وصدقاً لكل شخصية يؤديها.', tier: 'متوسط' };
-                const countLine = aggregate
-                    ? `<span class="dubber-count" style="display:block; color:var(--he-gold,#ffb800); font-size:0.78rem; margin-top:6px;">${aggregate.workCount} عمل • ${aggregate.characterCount} شخصية</span>`
-                    : "";
-
-                card.innerHTML = `
-                    ${avatarHtml}
-                    <h3>${profile.name}</h3>
-                    <p>${profile.role}</p>
-                    <div class="dubber-description">${profile.description}</div>
-                    <span class="dubber-tier"><i class="fa-solid fa-award"></i> ${profile.tier}</span>
-                    ${countLine}
-                    <span class="dubber-cta">عرض الشخصيات والبورتفوليو ←</span>
-                `;
-
-                card.onclick = () => {
-                    window.location.href = `actor.html?id=${encodeURIComponent(actorId)}`;
-                };
-
+                const aggregate = window.ActorsEngine?.getActorAggregate(actorId) || null;
+                const profile = window.ActorsEngine?.getActorProfile(actorId) || {name:data.name||actorId,role:data.role||'مؤدي أصوات',description:data.bio||'',tier:'عضو'};
+                const card = document.createElement("div"); card.className = "dubber-card"; card.tabIndex = 0; card.setAttribute("role", "link");
+                card.setAttribute("aria-label", "عرض ملف " + profile.name);
+                card.dataset.search = `${profile.name} ${profile.role} ${profile.description}`.toLocaleLowerCase("ar");
+                card.style.animationDelay = `${(i++ % 12) * 45}ms`;
+                const avatarHtml = data.logo && /^https:\/\//i.test(data.logo)
+                    ? `<img loading="lazy" class="dubber-avatar" src="${escapeHtml(data.logo)}" alt="صورة ${escapeHtml(profile.name)}">`
+                    : `<div class="dubber-avatar-fallback" aria-hidden="true"><i class="fa-solid fa-user"></i></div>`;
+                const countLine = aggregate ? `<span class="dubber-count">${aggregate.workCount} عمل • ${aggregate.characterCount} شخصية</span>` : '';
+                card.innerHTML = `${avatarHtml}<h3>${escapeHtml(profile.name)}</h3><p>${escapeHtml(profile.role)}</p><div class="dubber-description">${escapeHtml(profile.description)}</div><span class="dubber-tier"><i class="fa-solid fa-award" aria-hidden="true"></i> ${escapeHtml(profile.tier)}</span>${countLine}<span class="dubber-cta">عرض الشخصيات والبورتفوليو ←</span>`;
+                const avatar = card.querySelector(".dubber-avatar");
+                if (avatar) avatar.addEventListener("error", () => { const fallback = document.createElement("div"); fallback.className = "dubber-avatar-fallback"; fallback.setAttribute("aria-hidden", "true"); fallback.textContent = profile.name.slice(0, 1); avatar.replaceWith(fallback); }, {once:true});
+                const openProfile = () => { window.location.href = `actor.html?id=${encodeURIComponent(actorId)}`; };
+                card.addEventListener('click', openProfile); card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openProfile(); } });
                 container.appendChild(card);
             }
+            const empty = document.createElement('p'); empty.className = 'be-no-dubbers'; empty.textContent = 'ما لقينا نتائج مطابقة. جرّب كلمة ثانية.';
+            const updateDubberResults = () => {
+                const q = search.value.trim().toLocaleLowerCase('ar'); let visible = 0;
+                container.querySelectorAll('.dubber-card').forEach(card => { const match = !q || card.dataset.search.includes(q); card.hidden = !match; if (match) visible++; });
+                resultCount.textContent = `${visible} مدبلج${q ? ' ضمن نتائج البحث' : ''}`;
+                if (!visible) { if (!empty.isConnected) container.appendChild(empty); } else empty.remove();
+            };
+            search.addEventListener('input', updateDubberResults); updateDubberResults();
         });
     </script>
     <script src="../data/site.js"></script>
