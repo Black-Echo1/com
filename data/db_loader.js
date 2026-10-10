@@ -61,7 +61,7 @@
     let rolesCache = null;
     async function getRoles() {
         if (rolesCache) return rolesCache;
-        try { rolesCache = await rest('character_roles?select=anime_id,character_name,dubber_id&limit=5000'); }
+        try { rolesCache = await rest('character_roles?select=anime_id,character_name,dubber_id,character_image&limit=5000'); }
         catch (_) { rolesCache = []; }
         return rolesCache;
     }
@@ -101,9 +101,9 @@
 
     // نسخة خفيفة (بدون حلقات): كافية لمحرك المؤدين والفرق اللي يقرأ الأدوار والشخصيات فقط
     async function getAnimeSlim() {
-        const rows = await rest('anime?select=id,mal_id,dubbing_team,dubbed_characters&limit=1000');
+        const rows = await rest('anime?select=id,title,poster,mal_id,dubbing_team,dubbed_characters&limit=1000');
         const out = {};
-        rows.forEach((a) => { out[a.id] = { malId: a.mal_id, dubbingTeam: a.dubbing_team, dubbedCharacters: a.dubbed_characters || {}, episodes: [] }; });
+        rows.forEach((a) => { out[a.id] = { title: a.title || undefined, poster: a.poster || undefined, malId: a.mal_id, dubbingTeam: a.dubbing_team, dubbedCharacters: a.dubbed_characters || {}, characterImages: {}, teamIds: [], episodes: [] }; });
         return out;
     }
 
@@ -130,7 +130,16 @@
             if (enabled) {
                 try {
                     const [slim, cat, roles] = await Promise.all([getAnimeSlim(), getCatalog(), getRoles()]);
-                    roles.forEach((r) => { if (slim[r.anime_id]) slim[r.anime_id].dubbedCharacters[r.character_name] = r.dubber_id; });
+                    roles.forEach((r) => {
+                        if (!slim[r.anime_id]) return;
+                        slim[r.anime_id].dubbedCharacters[r.character_name] = r.dubber_id;
+                        if (r.character_image) slim[r.anime_id].characterImages[r.character_name] = r.character_image;
+                    });
+                    // الأنميات المربوطة بالفرق (بعد موافقة الأدمن)
+                    try {
+                        const links = await rest('team_anime?select=team_id,anime_id&limit=5000');
+                        links.forEach((l) => { if (slim[l.anime_id]) slim[l.anime_id].teamIds.push(l.team_id); });
+                    } catch (_) { /* patch ما انشغل بعد */ }
                     window.animeDetailsDatabase = slim;
                     // خريطة (مجاني / بإعلانات) لكل أنمي — من الـ view، بدون تحميل الحلقات
                     try {

@@ -179,6 +179,14 @@
                 document.getElementById("actor-role").innerText = profile.role;
             }
 
+            if (actorData.banner) {
+                const header = document.querySelector('.actor-header');
+                if (header) {
+                    header.style.backgroundImage = 'linear-gradient(180deg, rgba(10,10,15,.55), rgba(10,10,15,.92)), url("' + String(actorData.banner).replace(/["\\]/g, '') + '")';
+                    header.style.backgroundSize = 'cover'; header.style.backgroundPosition = 'center';
+                }
+            }
+
             const logoImg = document.getElementById("actor-logo-img");
             if (actorData.logo) {
                 logoImg.src = actorData.logo;

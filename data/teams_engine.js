@@ -86,11 +86,11 @@
 
         Object.keys(animeDetailsDatabase).forEach((animeId) => {
             const anime = animeDetailsDatabase[animeId];
-            if (resolveTeamId(anime.dubbingTeam) === teamId) {
+            if (resolveTeamId(anime.dubbingTeam) === teamId || (anime.teamIds || []).indexOf(teamId) !== -1) {
                 productions.push({
                     id: animeId,
-                    title: prettifyTitle(animeId),
-                    poster: firstEpisodeThumbnail(anime),
+                    title: anime.title || prettifyTitle(animeId),
+                    poster: anime.poster || firstEpisodeThumbnail(anime),
                     source: "dubbingTeam"
                 });
             }

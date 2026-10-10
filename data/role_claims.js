@@ -64,7 +64,8 @@
                 }
                 var r = await c.from('role_claims').insert({
                     user_id: sess.user.id, anime_id: info.animeId,
-                    character_name: info.characterName, proof_url: proof || null
+                    character_name: info.characterName, proof_url: proof || null,
+                    character_image: /^https:\/\//i.test(info.characterImage || '') ? info.characterImage : null
                 });
                 if (r.error) {
                     var m = r.error.message || '';

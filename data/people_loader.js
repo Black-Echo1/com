@@ -23,7 +23,7 @@ var teamsDatabase = {};
         (dubbers || []).forEach(function (d) {
             byId[d.id] = d;
             dubbersDatabase[d.id] = {
-                name: esc(d.name), role: esc(d.role || 'مؤدي أصوات'), logo: safeUrl(d.logo),
+                name: esc(d.name), role: esc(d.role || 'مؤدي أصوات'), logo: safeUrl(d.logo), banner: safeUrl(d.banner),
                 bio: esc(d.bio || ''), social_url: safeUrl(d.social_url), roles: []
             };
         });

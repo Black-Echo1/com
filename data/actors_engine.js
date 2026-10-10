@@ -87,7 +87,7 @@
     // وتربطه بصورة الشخصية من MAL. النتائج بتتخزن في localStorage عشان
     // ما نضربش الـ API تاني في كل زيارة (Jikan limit ~3 req/sec, no key needed).
     // ==========================================
-    const JIKAN_CACHE_KEY = "he_char_image_cache_v1";
+    const JIKAN_CACHE_KEY = "he_char_image_cache_v2"; // v2: تجاهل الكاش القديم اللي ممكن يكون محفوظ فيه فشل
     const JIKAN_CACHE_TTL_MS = 1000 * 60 * 60 * 24 * 14; // أسبوعين
 
     function loadImageCache() {
@@ -118,6 +118,31 @@
         return (s || "").toString().trim().toLowerCase().replace(/\s+/g, " ");
     }
 
+    // شخصيات AniList بنفس شكل Jikan (صفحتين × 25 = أشهر 50 شخصية)
+    async function fetchAniListCharacters(malId) {
+        try {
+            const query = `query ($malId: Int) { Media(idMal: $malId, type: ANIME) {
+                a: characters(sort: FAVOURITES_DESC, page: 1, perPage: 25) { nodes { name { full } image { large medium } } }
+                b: characters(sort: FAVOURITES_DESC, page: 2, perPage: 25) { nodes { name { full } image { large medium } } } } }`;
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), 8000);
+            const res = await fetch('https://graphql.anilist.co', {
+                method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+                body: JSON.stringify({ query, variables: { malId: Number(malId) } }), signal: controller.signal
+            });
+            clearTimeout(timer);
+            if (!res.ok) return null;
+            const media = (await res.json())?.data?.Media;
+            const nodes = [...(media?.a?.nodes || []), ...(media?.b?.nodes || [])];
+            return nodes.filter((n) => n?.name?.full).map((n) => ({ character: { name: n.name.full, images: { jpg: { image_url: n.image?.large || n.image?.medium || '' } } } }));
+        } catch (_) { return null; }
+    }
+
+    // مطابقة الاسم بغض النظر عن ترتيبه ("Tachibana, Kotoha" = "Kotoha Tachibana")
+    function charTokens(s) {
+        return (s || '').toString().toLowerCase().replace(/[^\p{L}\p{N}]+/gu, ' ').trim().split(' ').filter(Boolean).sort();
+    }
+
     // بيرجع Promise<string> (رابط الصورة أو "" لو ماتلاقاش)
     async function fetchCharImage(malId, charName) {
         if (!malId || !charName) return "";
@@ -134,26 +159,38 @@
             : null;
 
         if (!list) {
-            const data = await queueJikanFetch(`https://api.jikan.moe/v4/anime/${malId}/characters`);
-            list = (data && data.data) || [];
+            // AniList أول (أسرع وأثبت)، وJikan احتياطي
+            list = await fetchAniListCharacters(malId);
+            if (!list || !list.length) {
+                const data = await queueJikanFetch(`https://api.jikan.moe/v4/anime/${malId}/characters`);
+                list = (data && data.data) || [];
+            }
+            // لو فشل الجلب (قائمة فاضية) ما نحفظ شي، عشان فشل مؤقت ما يعطّل الصور أسبوعين
+            if (!list || !list.length) return "";
             cache[animeCacheKey] = { data: list, ts: Date.now() };
             saveImageCache(cache);
         }
 
         const target = normalizeCharKey(charName);
-        let match = list.find((entry) => normalizeCharKey(entry.character && entry.character.name) === target);
+        const tTokens = charTokens(charName);
+        const sameTokens = (a, b) => a.length && a.length === b.length && a.every((t, i) => t === b[i]);
+        let match = list.find((entry) => normalizeCharKey(entry.character && entry.character.name) === target)
+            || list.find((entry) => sameTokens(charTokens(entry.character && entry.character.name), tTokens));
         if (!match) {
-            // مطابقة جزئية احتياطية (زي "Sakura Haruka" من غير فاصلة)
+            // مطابقة جزئية احتياطية: كل كلمات الاسم الأقصر موجودة بالأطول
             match = list.find((entry) => {
-                const n = normalizeCharKey(entry.character && entry.character.name);
-                return n && (n.includes(target) || target.includes(n));
+                const eTokens = charTokens(entry.character && entry.character.name);
+                if (!eTokens.length || !tTokens.length) return false;
+                const [short, long] = eTokens.length <= tTokens.length ? [eTokens, tTokens] : [tTokens, eTokens];
+                return short.length >= 1 && short.every((t) => long.includes(t));
             });
         }
 
         const url = (match && match.character && match.character.images &&
             match.character.images.jpg && match.character.images.jpg.image_url) || "";
 
-        cache[cacheKey] = { url, ts: Date.now() };
+        // الصورة الموجودة نحفظها أسبوعين، وعدم الإيجاد ساعة فقط
+        cache[cacheKey] = { url, ts: url ? Date.now() : Date.now() - (JIKAN_CACHE_TTL_MS - 60 * 60 * 1000) };
         saveImageCache(cache);
         return url;
     }
@@ -186,7 +223,7 @@
                         animeId: animeId,
                         animeTitle: anime.title || prettifyTitle(animeId),
                         malId: anime.malId || null,
-                        charImage: "",
+                        charImage: (anime.characterImages && anime.characterImages[charName]) || "",
                         source: "dubbedCharacters"
                     });
                 }
@@ -265,7 +302,7 @@
             name,
             role: (stored && stored.role) || "مؤدي أصوات",
             logo: (stored && stored.logo) || "",
-            description: profileDescription(handle, name),
+            description: (stored && stored.bio) ? stored.bio : profileDescription(handle, name),
             tier,
             isAutoGenerated: !stored
         };

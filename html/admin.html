@@ -8,114 +8,301 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
         body{ font-family:'Cairo',sans-serif; background:#0b0b0f; color:#fff; margin:0; }
-        .wrap{ max-width:760px; margin:0 auto; padding:30px 16px 60px; }
+        .wrap{ max-width:820px; margin:0 auto; padding:26px 16px 70px; }
         h1{ font-size:1.4rem; margin:0 0 4px; font-weight:900; }
-        h2{ font-size:1.05rem; margin:28px 0 10px; color:#ffd666; }
+        h2{ font-size:1.1rem; margin:30px 0 10px; color:#ffd666; }
         .sub{ color:#a0a0ad; font-size:.9rem; margin:0 0 10px; }
-        .card{ background:#15151b; border:1px solid #2a2a33; border-radius:14px; padding:16px; margin:10px 0; display:flex; gap:14px; }
-        .card img{ width:64px; height:64px; border-radius:50%; object-fit:cover; background:#0f0f14; flex:none; }
+        .badge{ display:inline-block; padding:2px 10px; border-radius:99px; background:#2a2410; border:1px solid #5c4d12; color:#ffd666; font-size:.78rem; margin-inline-start:6px; }
+        .card{ background:#15151b; border:1px solid #2a2a33; border-radius:14px; padding:16px; margin:10px 0; }
+        .row{ display:flex; gap:14px; }
+        .row img{ width:64px; height:64px; border-radius:50%; object-fit:cover; background:#0f0f14; flex:none; }
         .info{ flex:1; min-width:0; line-height:1.8; font-size:.9rem; overflow-wrap:anywhere; }
-        .info b{ font-size:1rem; }
-        .meta{ color:#a0a0ad; font-size:.82rem; }
-        .info a{ color:#8ab4ff; }
-        .acts{ display:flex; gap:8px; margin-top:10px; }
-        button{ font:inherit; font-weight:700; padding:8px 16px; border:0; border-radius:10px; cursor:pointer; color:#fff; }
-        .ok{ background:#1f9d55; } .no{ background:#b42318; } .link{ background:#0f0f14; border:1px solid #2a2a33; color:#c9c9d3; }
+        .info b{ font-size:1rem; } .meta{ color:#a0a0ad; font-size:.82rem; } .info a{ color:#8ab4ff; }
+        .acts{ display:flex; gap:8px; margin-top:10px; flex-wrap:wrap; }
+        button{ font:inherit; font-weight:700; padding:8px 16px; border:0; border-radius:10px; cursor:pointer; color:#fff; background:#2a2a33; }
+        .ok{ background:#1f9d55; } .no{ background:#b42318; } .red{ background:linear-gradient(135deg,#ff2b36,#e50914); }
         button:disabled{ opacity:.5; cursor:wait; }
-        .empty{ color:#7d7d8a; font-size:.9rem; padding:8px 0; }
-        .err{ color:#ff6b6b; }
+        label{ display:block; font-size:.82rem; color:#c9c9d3; margin:10px 0 4px; font-weight:700; }
+        input,select,textarea{ width:100%; box-sizing:border-box; padding:9px 11px; border-radius:10px; border:1px solid #2a2a33; background:#0f0f14; color:#fff; font:inherit; }
+        textarea{ min-height:80px; resize:vertical; }
+        .inline{ display:flex; gap:8px; align-items:end; flex-wrap:wrap; } .inline > *{ flex:1; min-width:120px; }
+        .inline button{ flex:none; }
+        .empty{ color:#7d7d8a; font-size:.9rem; padding:6px 0; } .err{ color:#ff6b6b; }
+        .member{ display:flex; justify-content:space-between; align-items:center; gap:8px; padding:6px 0; border-bottom:1px solid #22222a; font-size:.9rem; }
+        details{ background:#15151b; border:1px solid #2a2a33; border-radius:14px; padding:12px 16px; margin:10px 0; }
+        summary{ cursor:pointer; font-weight:900; }
+        .toast{ position:fixed; bottom:18px; left:50%; transform:translateX(-50%); background:#1f9d55; color:#fff; padding:10px 18px; border-radius:10px; font-size:.9rem; z-index:9; }
+        .toast.bad{ background:#b42318; }
         [hidden]{ display:none !important; }
     </style>
 </head>
 <body>
-    <div class="wrap">
-        <h1>لوحة الإدارة</h1>
-        <p class="sub"><a href="account.html" style="color:#8ab4ff;">حسابي</a> · <a href="../index.html" style="color:#8ab4ff;">الرئيسية</a></p>
-        <div id="status" class="sub">جاري التحميل...</div>
-        <section id="panel" hidden>
-            <h2>طلبات الانضمام</h2><div id="joins"></div>
-            <h2>طلبات الشخصيات</h2><div id="claims"></div>
-        </section>
-    </div>
+<div class="wrap">
+    <h1>لوحة الإدارة <span class="badge" id="role-badge" hidden></span></h1>
+    <p class="sub"><a href="account.html" style="color:#8ab4ff;">حسابي</a> · <a href="../index.html" style="color:#8ab4ff;">الرئيسية</a></p>
+    <div id="status" class="sub">جاري التحميل...</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
-    <script src="../data/supabase_config.js"></script>
-    <script>
-    (function () {
-        'use strict';
-        var $ = function (id) { return document.getElementById(id); };
-        var cfg = window.SUPABASE_CONFIG || {};
-        function fail(t) { $('status').textContent = t; $('status').className = 'sub err'; }
-        if (!cfg.url || !cfg.anonKey || !window.supabase) { fail('الخدمة غير مضبوطة (supabase_config.js).'); return; }
-        var client = window.supabase.createClient(cfg.url, cfg.anonKey);
-        var teams = {}, animes = {};
+    <section id="panel" hidden>
+        <h2>طلبات الانضمام</h2><div id="joins"></div>
+        <h2>طلبات الشخصيات</h2><div id="claims"></div>
+        <h2 id="teams-title">الفرق</h2><div id="teams"></div>
+        <div id="admin-only" hidden>
+            <h2>طلبات أنميات الفرق</h2><div id="tar"></div>
+            <h2>قادة الفرق</h2><div id="leaders"></div>
+            <h2>المدبلجون</h2><div id="dubbers"></div>
+        </div>
+    </section>
+</div>
 
-        function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
-        function safeLink(url, label) {
-            if (!url || !/^https:\/\/[^\s<>"']+$/i.test(url)) return null;
-            var a = el('a', '', label); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a;
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+<script src="../data/supabase_config.js"></script>
+<script>
+(function () {
+    'use strict';
+    var $ = function (id) { return document.getElementById(id); };
+    var cfg = window.SUPABASE_CONFIG || {};
+    function fail(t) { $('status').textContent = t; $('status').className = 'sub err'; }
+    if (!cfg.url || !cfg.anonKey || !window.supabase) { fail('الخدمة غير مضبوطة (supabase_config.js).'); return; }
+    var client = window.supabase.createClient(cfg.url, cfg.anonKey);
+    var S = { admin: false, uid: null, myTeams: [], teams: [], dubbers: [], members: [], leaders: [], animes: {}, tar: [] };
+    var HTTPS = /^https:\/\/[^\s<>"']+$/i;
+
+    function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+    function field(label, node) { var w = el('div'); w.appendChild(el('label', '', label)); w.appendChild(node); return w; }
+    function input(val, ph, type) { var i = el('input'); i.type = type || 'text'; i.value = val || ''; if (ph) i.placeholder = ph; return i; }
+    function rid(p) { var a = new Uint8Array(4); crypto.getRandomValues(a); return p + Array.prototype.map.call(a, function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
+    function toast(t, bad) { var d = el('div', 'toast' + (bad ? ' bad' : ''), t); document.body.appendChild(d); setTimeout(function () { d.remove(); }, 2600); }
+    function dname(id) { var d = S.dubbers.find(function (x) { return x.id === id; }); return d ? d.name : id; }
+    function tname(id) { var t = S.teams.find(function (x) { return x.id === id; }); return t ? t.name : id; }
+    function canTeam(id) { return S.admin || S.myTeams.indexOf(id) !== -1; }
+    async function act(fn, okMsg) {
+        var r = await fn();
+        if (r && r.error) { toast(friendly(r.error.message), true); return false; }
+        if (okMsg) toast(okMsg); await load(); return true;
+    }
+    function friendly(m) {
+        if (/NO_ACCOUNT/.test(m)) return 'هذا المدبلج ما عنده حساب (مضاف يدوياً) فما يصير قائد.';
+        if (/ADMIN_ONLY/.test(m)) return 'هذا التعديل للأدمن فقط.';
+        if (/row-level security|permission denied/i.test(m)) return 'ما عندك صلاحية لهذا الإجراء.';
+        if (/duplicate/i.test(m)) return 'موجود من قبل.';
+        return m;
+    }
+    function link(url, label) { if (!url || !HTTPS.test(url)) return null; var a = el('a', '', label); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
+    function urlOrNull(v, name) { v = v.trim(); if (!v) return { v: null }; if (!HTTPS.test(v)) { toast(name + ' لازم يبدأ بـ https://', true); return null; } return { v: v }; }
+
+    /* ---------- الطلبات ---------- */
+    async function decide(table, id, status, btns) {
+        var note = null;
+        if (status === 'rejected') { note = window.prompt('سبب الرفض (يظهر له، اختياري):', ''); if (note === null) return; }
+        btns.forEach(function (b) { b.disabled = true; });
+        var ok = await act(function () { return client.from(table).update({ status: status, admin_note: note || null }).eq('id', id); }, status === 'approved' ? 'تم القبول' : 'تم الرفض');
+        if (!ok) btns.forEach(function (b) { b.disabled = false; });
+    }
+    function decisionButtons(table, id) {
+        var box = el('div', 'acts'), ok = el('button', 'ok', 'قبول'), no = el('button', 'no', 'رفض');
+        ok.onclick = function () { decide(table, id, 'approved', [ok, no]); };
+        no.onclick = function () { decide(table, id, 'rejected', [ok, no]); };
+        box.appendChild(ok); box.appendChild(no); return box;
+    }
+    async function renderRequests() {
+        var j = await client.from('join_requests').select('id,display_name,role,team_id,bio,social_url,avatar_url,created_at').eq('status', 'pending').order('created_at');
+        var c = await client.from('role_claims').select('id,anime_id,character_name,proof_url,created_at,dubber_id').eq('status', 'pending').order('created_at');
+        var jb = $('joins'); jb.innerHTML = '';
+        if (j.error) jb.appendChild(el('div', 'empty err', j.error.message));
+        else if (!j.data.length) jb.appendChild(el('div', 'empty', 'ما فيه طلبات انضمام جديدة.'));
+        else j.data.forEach(function (r) {
+            var card = el('div', 'card'), row = el('div', 'row');
+            var img = el('img'); img.alt = ''; if (HTTPS.test(r.avatar_url || '')) img.src = r.avatar_url; row.appendChild(img);
+            var info = el('div', 'info'); info.appendChild(el('b', '', r.display_name));
+            info.appendChild(el('div', 'meta', r.role + ' — ' + tname(r.team_id)));
+            if (r.bio) info.appendChild(el('div', '', r.bio));
+            var l = link(r.social_url, 'حسابه'); if (l) { var w = el('div'); w.appendChild(l); info.appendChild(w); }
+            info.appendChild(decisionButtons('join_requests', r.id)); row.appendChild(info); card.appendChild(row); jb.appendChild(card);
+        });
+        var cb = $('claims'); cb.innerHTML = '';
+        if (c.error) cb.appendChild(el('div', 'empty err', c.error.message));
+        else if (!c.data.length) cb.appendChild(el('div', 'empty', 'ما فيه طلبات شخصيات جديدة.'));
+        else c.data.forEach(function (r) {
+            var card = el('div', 'card'), info = el('div', 'info');
+            info.appendChild(el('b', '', dname(r.dubber_id) + ' ← ' + r.character_name));
+            info.appendChild(el('div', 'meta', 'الأنمي: ' + (S.animes[r.anime_id] || r.anime_id)));
+            var l = link(r.proof_url, 'رابط الإثبات'); if (l) { var w = el('div'); w.appendChild(l); info.appendChild(w); }
+            info.appendChild(decisionButtons('role_claims', r.id)); card.appendChild(info); cb.appendChild(card);
+        });
+    }
+
+    /* ---------- الفرق ---------- */
+    function teamCard(t) {
+        var d = el('details'); d.appendChild(el('summary', '', t.name));
+        var name = input(t.name), logo = input(t.logo, 'https://...'), banner = input(t.banner, 'https://...');
+        var desc = el('textarea'); desc.value = t.description || '';
+        d.appendChild(field('اسم الفريق', name)); d.appendChild(field('الشعار (رابط)', logo));
+        d.appendChild(field('الخلفية (رابط)', banner)); d.appendChild(field('الوصف', desc));
+        var save = el('button', 'red', 'حفظ بيانات الفريق'); save.style.marginTop = '12px';
+        save.onclick = async function () {
+            var n = name.value.trim(); if (n.length < 2) { toast('اكتب اسم الفريق', true); return; }
+            var lg = urlOrNull(logo.value, 'الشعار'); if (!lg) return; var bn = urlOrNull(banner.value, 'الخلفية'); if (!bn) return;
+            save.disabled = true;
+            await act(function () { return client.from('teams').update({ name: n, logo: lg.v, banner: bn.v, description: desc.value.trim() || null }).eq('id', t.id); }, 'انحفظ');
+            save.disabled = false;
+        };
+        d.appendChild(save);
+
+        // طلب إضافة أنمي لصفحة الفريق
+        d.appendChild(el('label', '', 'طلب إضافة أنمي لصفحة الفريق'));
+        var asel = el('select'); var o0 = el('option', '', '— أنمي جديد غير موجود بالموقع —'); o0.value = ''; asel.appendChild(o0);
+        Object.keys(S.animes).sort(function (a, b) { return String(S.animes[a]).localeCompare(String(S.animes[b])); }).forEach(function (id) { var o = el('option', '', S.animes[id]); o.value = id; asel.appendChild(o); });
+        var ntitle = input('', 'اسم الأنمي (لو غير موجود بالموقع)'), murl = input('', 'رابط MAL أو رابط الحلقات (https://...)', 'url');
+        var rnote = el('textarea'); rnote.placeholder = 'ملاحظات للإدارة (اختياري)';
+        var rsend = el('button', 'red', 'إرسال الطلب'); rsend.style.marginTop = '8px';
+        rsend.onclick = async function () {
+            if (!asel.value && ntitle.value.trim().length < 2) { toast('اختر أنمي أو اكتب اسمه', true); return; }
+            var mu = urlOrNull(murl.value, 'الرابط'); if (!mu) return;
+            rsend.disabled = true;
+            await act(function () { return client.from('team_anime_requests').insert({ team_id: t.id, requested_by: S.uid, anime_id: asel.value || null, new_title: asel.value ? null : ntitle.value.trim(), mal_url: mu.v, note: rnote.value.trim() || null }); }, 'وصل طلبك للإدارة');
+            rsend.disabled = false;
+        };
+        d.appendChild(asel); d.appendChild(ntitle); d.appendChild(murl); d.appendChild(rnote); d.appendChild(rsend);
+        var mine = S.tar.filter(function (q) { return q.team_id === t.id; });
+        var names = { pending: 'قيد المراجعة', approved: 'انقبل', rejected: 'انرفض' };
+        mine.forEach(function (q) { d.appendChild(el('div', 'meta', '• ' + (q.anime_id ? (S.animes[q.anime_id] || q.anime_id) : q.new_title) + ' — ' + names[q.status] + (q.admin_note ? ': ' + q.admin_note : ''))); });
+
+        d.appendChild(el('label', '', 'أعضاء الفريق'));
+        var mem = S.members.filter(function (m) { return m.team_id === t.id; });
+        if (!mem.length) d.appendChild(el('div', 'empty', 'ما فيه أعضاء.'));
+        mem.forEach(function (m) {
+            var r = el('div', 'member'); r.appendChild(el('span', '', dname(m.dubber_id) + ' — ' + (m.role || '')));
+            var b = el('button', 'no', 'إزالة');
+            b.onclick = function () { if (confirm('إزالة ' + dname(m.dubber_id) + ' من الفريق؟')) act(function () { return client.from('team_members').delete().eq('team_id', t.id).eq('dubber_id', m.dubber_id); }, 'انشال من الفريق'); };
+            r.appendChild(b); d.appendChild(r);
+        });
+        var inTeam = mem.map(function (m) { return m.dubber_id; });
+        var pick = el('select'); S.dubbers.filter(function (x) { return inTeam.indexOf(x.id) === -1; }).forEach(function (x) { var o = el('option', '', x.name); o.value = x.id; pick.appendChild(o); });
+        var role = input('مؤدي أصوات'); var add = el('button', 'ok', 'إضافة عضو');
+        add.onclick = function () { if (!pick.value) { toast('ما فيه مدبلج متاح للإضافة', true); return; } act(function () { return client.from('team_members').insert({ team_id: t.id, dubber_id: pick.value, role: role.value.trim() || null }); }, 'انضاف للفريق'); };
+        var line = el('div', 'inline'); line.appendChild(field('مدبلج', pick)); line.appendChild(field('دوره بالفريق', role)); line.appendChild(add);
+        d.appendChild(line);
+
+        if (S.admin) {
+            var del = el('button', 'no', 'حذف الفريق كاملاً'); del.style.marginTop = '14px';
+            del.onclick = function () { if (confirm('تأكيد حذف فريق «' + t.name + '» نهائياً؟')) act(function () { return client.from('teams').delete().eq('id', t.id); }, 'انحذف الفريق'); };
+            d.appendChild(del);
         }
+        return d;
+    }
+    function renderTeams() {
+        var box = $('teams'); box.innerHTML = '';
+        var list = S.teams.filter(function (t) { return canTeam(t.id); });
+        if (!list.length) box.appendChild(el('div', 'empty', 'ما عندك فرق تديرها.'));
+        list.forEach(function (t) { box.appendChild(teamCard(t)); });
+        if (S.admin) {
+            var d = el('details'); d.appendChild(el('summary', '', '+ فريق جديد'));
+            var n = input('', 'اسم الفريق'); var b = el('button', 'ok', 'إنشاء'); b.style.marginTop = '10px';
+            b.onclick = function () {
+                var v = n.value.trim(); if (v.length < 2) { toast('اكتب اسم الفريق', true); return; }
+                var mx = S.teams.reduce(function (a, t) { return Math.max(a, t.sort_order || 0); }, 0);
+                act(function () { return client.from('teams').insert({ id: rid('t_'), name: v, sort_order: mx + 1 }); }, 'انضاف الفريق');
+            };
+            d.appendChild(field('الاسم', n)); d.appendChild(b); box.appendChild(d);
+        }
+    }
 
-        async function decide(table, id, status, btns) {
-            var note = null;
-            if (status === 'rejected') { note = window.prompt('سبب الرفض (يظهر له، اختياري):', ''); if (note === null) return; }
-            btns.forEach(function (b) { b.disabled = true; });
-            var r = await client.from(table).update({ status: status, admin_note: note || null }).eq('id', id);
-            if (r.error) { alert('ما انحفظ القرار: ' + r.error.message); btns.forEach(function (b) { b.disabled = false; }); return; }
+    /* ---------- أدمن: طلبات أنميات الفرق ---------- */
+    function renderTar() {
+        var box = $('tar'); box.innerHTML = '';
+        var pend = S.tar.filter(function (q) { return q.status === 'pending'; });
+        if (!pend.length) { box.appendChild(el('div', 'empty', 'ما فيه طلبات جديدة.')); return; }
+        pend.forEach(function (q) {
+            var card = el('div', 'card'), info = el('div', 'info');
+            info.appendChild(el('b', '', tname(q.team_id) + ' ← ' + (q.anime_id ? (S.animes[q.anime_id] || q.anime_id) : q.new_title)));
+            info.appendChild(el('div', 'meta', q.anime_id ? 'أنمي موجود بالموقع: القبول يربطه بصفحة الفريق تلقائياً.' : 'أنمي جديد: بعد القبول أضفه من Table Editor ثم اربطه بالفريق.'));
+            if (q.note) info.appendChild(el('div', '', q.note));
+            var l = link(q.mal_url, 'الرابط'); if (l) { var w = el('div'); w.appendChild(l); info.appendChild(w); }
+            info.appendChild(decisionButtons('team_anime_requests', q.id)); card.appendChild(info); box.appendChild(card);
+        });
+    }
+
+    /* ---------- أدمن فقط: القادة والمدبلجون ---------- */
+    function renderLeaders() {
+        var box = $('leaders'); box.innerHTML = '';
+        if (!S.leaders.length) box.appendChild(el('div', 'empty', 'ما عيّنت أي قائد بعد.'));
+        S.leaders.forEach(function (l) {
+            var r = el('div', 'member'); r.appendChild(el('span', '', l.name + ' ← قائد ' + tname(l.team_id)));
+            var b = el('button', 'no', 'إزالة القيادة');
+            b.onclick = function () { act(function () { return client.rpc('admin_remove_team_leader', { p_team: l.team_id, p_dubber: l.dubber_id }); }, 'انشالت القيادة'); };
+            r.appendChild(b); box.appendChild(r);
+        });
+        var tsel = el('select'); S.teams.forEach(function (t) { var o = el('option', '', t.name); o.value = t.id; tsel.appendChild(o); });
+        var dsel = el('select'); S.dubbers.forEach(function (d) { var o = el('option', '', d.name); o.value = d.id; dsel.appendChild(o); });
+        var b = el('button', 'ok', 'تعيين قائد');
+        b.onclick = function () { if (!tsel.value || !dsel.value) return; act(function () { return client.rpc('admin_set_team_leader', { p_team: tsel.value, p_dubber: dsel.value }); }, 'تم تعيين القائد'); };
+        var line = el('div', 'inline'); line.style.marginTop = '12px'; line.appendChild(field('الفريق', tsel)); line.appendChild(field('المدبلج (لازم عنده حساب)', dsel)); line.appendChild(b);
+        box.appendChild(line);
+    }
+    function renderDubbers() {
+        var box = $('dubbers'); box.innerHTML = '';
+        if (!S.dubbers.length) box.appendChild(el('div', 'empty', 'ما فيه مدبلجين.'));
+        S.dubbers.forEach(function (d) {
+            var r = el('div', 'member'); r.appendChild(el('span', '', d.name + ' — ' + (d.role || '')));
+            var acts = el('div', 'acts'); acts.style.margin = '0';
+            var ed = el('button', '', 'تعديل'), rm = el('button', 'no', 'حذف');
+            ed.onclick = function () {
+                var n = window.prompt('الاسم:', d.name); if (n === null) return; var ro = window.prompt('الدور:', d.role || ''); if (ro === null) return;
+                if (n.trim().length < 2) { toast('الاسم قصير', true); return; }
+                act(function () { return client.from('dubbers').update({ name: n.trim(), role: ro.trim() || 'مؤدي أصوات' }).eq('id', d.id); }, 'انحفظ');
+            };
+            rm.onclick = function () { if (confirm('حذف «' + d.name + '» من الموقع نهائياً (مع عضويته وشخصياته)؟')) act(function () { return client.from('dubbers').delete().eq('id', d.id); }, 'انحذف'); };
+            acts.appendChild(ed); acts.appendChild(rm); r.appendChild(acts); box.appendChild(r);
+        });
+        var det = el('details'); det.appendChild(el('summary', '', '+ إضافة مدبلج مباشرة (بدون طلب)'));
+        var n = input('', 'الاسم'), ro = input('مؤدي أصوات'), ts = el('select');
+        var none = el('option', '', 'بدون فريق'); none.value = ''; ts.appendChild(none);
+        S.teams.forEach(function (t) { var o = el('option', '', t.name); o.value = t.id; ts.appendChild(o); });
+        var b = el('button', 'ok', 'إضافة'); b.style.marginTop = '10px';
+        b.onclick = async function () {
+            var v = n.value.trim(); if (v.length < 2) { toast('اكتب الاسم', true); return; }
+            var id = rid('d_'); b.disabled = true;
+            var r = await client.from('dubbers').insert({ id: id, name: v, role: ro.value.trim() || 'مؤدي أصوات' });
+            if (!r.error && ts.value) r = await client.from('team_members').insert({ team_id: ts.value, dubber_id: id, role: ro.value.trim() || null });
+            b.disabled = false;
+            if (r.error) { toast(friendly(r.error.message), true); return; }
+            toast('انضاف'); await load();
+        };
+        det.appendChild(field('الاسم', n)); det.appendChild(field('الدور', ro)); det.appendChild(field('الفريق', ts)); det.appendChild(b);
+        box.appendChild(det);
+    }
+
+    /* ---------- تحميل ---------- */
+    async function load() {
+        var t = await client.from('teams').select('id,name,logo,banner,description,sort_order').order('sort_order');
+        var d = await client.from('dubbers').select('id,name,role').order('created_at');
+        var m = await client.from('team_members').select('team_id,dubber_id,role');
+        var q = await client.from('team_anime_requests').select('id,team_id,anime_id,new_title,mal_url,note,status,admin_note,created_at').order('created_at', { ascending: false });
+        S.teams = t.data || []; S.dubbers = d.data || []; S.members = m.data || []; S.tar = q.data || [];
+        if (S.admin) { var l = await client.rpc('admin_list_leaders'); S.leaders = l.data || []; }
+        await renderRequests(); renderTeams();
+        if (S.admin) { renderTar(); renderLeaders(); renderDubbers(); }
+    }
+
+    (async function () {
+        try {
+            var sess = (await client.auth.getSession()).data.session;
+            if (!sess) { location.href = 'account.html?next=' + encodeURIComponent('admin.html'); return; }
+            S.uid = sess.user.id;
+            var st = await client.rpc('is_staff');
+            if (st.error || st.data !== true) { fail('ما عندك صلاحية الدخول لهذي الصفحة.'); return; }
+            var ad = await client.rpc('is_admin'); S.admin = ad.data === true;
+            if (!S.admin) {
+                var tl = await client.from('team_leaders').select('team_id'); S.myTeams = (tl.data || []).map(function (x) { return x.team_id; });
+                $('teams-title').textContent = 'فريقك';
+            }
+            var a = await client.from('anime').select('id,title').limit(1000); (a.data || []).forEach(function (x) { S.animes[x.id] = x.title || x.id; });
+            var badge = $('role-badge'); badge.hidden = false; badge.textContent = S.admin ? 'أدمن' : 'قائد فريق';
+            $('status').hidden = true; $('panel').hidden = false; $('admin-only').hidden = !S.admin;
             await load();
-        }
-
-        function actions(table, id) {
-            var box = el('div', 'acts');
-            var ok = el('button', 'ok', 'قبول'), no = el('button', 'no', 'رفض');
-            ok.onclick = function () { decide(table, id, 'approved', [ok, no]); };
-            no.onclick = function () { decide(table, id, 'rejected', [ok, no]); };
-            box.appendChild(ok); box.appendChild(no); return box;
-        }
-
-        async function load() {
-            var j = await client.from('join_requests').select('id,display_name,role,team_id,bio,social_url,avatar_url,created_at').eq('status', 'pending').order('created_at');
-            var c = await client.from('role_claims').select('id,anime_id,character_name,proof_url,created_at,dubbers(name)').eq('status', 'pending').order('created_at');
-            var jb = $('joins'); jb.innerHTML = '';
-            if (j.error) { jb.appendChild(el('div', 'empty err', j.error.message)); }
-            else if (!j.data.length) { jb.appendChild(el('div', 'empty', 'ما فيه طلبات انضمام جديدة.')); }
-            else j.data.forEach(function (r) {
-                var card = el('div', 'card');
-                var img = el('img'); img.alt = ''; if (/^https:\/\//i.test(r.avatar_url || '')) img.src = r.avatar_url; card.appendChild(img);
-                var info = el('div', 'info');
-                info.appendChild(el('b', '', r.display_name));
-                info.appendChild(el('div', 'meta', r.role + ' — ' + (teams[r.team_id] || r.team_id)));
-                if (r.bio) info.appendChild(el('div', '', r.bio));
-                var l = safeLink(r.social_url, 'حسابه'); if (l) { var w = el('div'); w.appendChild(l); info.appendChild(w); }
-                info.appendChild(actions('join_requests', r.id));
-                card.appendChild(info); jb.appendChild(card);
-            });
-            var cb = $('claims'); cb.innerHTML = '';
-            if (c.error) { cb.appendChild(el('div', 'empty err', c.error.message)); }
-            else if (!c.data.length) { cb.appendChild(el('div', 'empty', 'ما فيه طلبات شخصيات جديدة.')); }
-            else c.data.forEach(function (r) {
-                var card = el('div', 'card'); var info = el('div', 'info');
-                info.appendChild(el('b', '', (r.dubbers && r.dubbers.name || '—') + ' ← ' + r.character_name));
-                info.appendChild(el('div', 'meta', 'الأنمي: ' + (animes[r.anime_id] || r.anime_id)));
-                var l = safeLink(r.proof_url, 'رابط الإثبات'); if (l) { var w = el('div'); w.appendChild(l); info.appendChild(w); }
-                info.appendChild(actions('role_claims', r.id));
-                card.appendChild(info); cb.appendChild(card);
-            });
-        }
-
-        (async function () {
-            try {
-                var sess = (await client.auth.getSession()).data.session;
-                if (!sess) { location.href = 'account.html?next=' + encodeURIComponent('admin.html'); return; }
-                var adm = await client.rpc('is_admin');
-                if (adm.error || adm.data !== true) { fail('ما عندك صلاحية الدخول لهذي الصفحة.'); return; }
-                var t = await client.from('teams').select('id,name'); (t.data || []).forEach(function (x) { teams[x.id] = x.name; });
-                var a = await client.from('anime').select('id,title').limit(1000); (a.data || []).forEach(function (x) { animes[x.id] = x.title || x.id; });
-                $('status').hidden = true; $('panel').hidden = false;
-                await load();
-            } catch (e) { fail('تعذّر الاتصال: ' + (e && e.message || e)); }
-        })();
+        } catch (e) { fail('تعذّر الاتصال: ' + (e && e.message || e)); }
     })();
-    </script>
+})();
+</script>
 </body>
 </html>

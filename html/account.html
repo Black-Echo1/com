@@ -78,9 +78,23 @@
         <section class="acc-card" id="member-box" hidden>
             <h1>طلب الانضمام كمدبلج</h1>
             <p class="sub" id="who"></p>
-            <p id="admin-link" hidden style="margin:0 0 12px;"><a href="admin.html" style="color:#8ab4ff;font-weight:700;">لوحة الإدارة (قبول الطلبات) ←</a></p>
+            <p id="admin-link" hidden style="margin:0 0 12px;"><a href="admin.html" style="color:#8ab4ff;font-weight:700;">لوحة الإدارة / قائد الفريق ←</a></p>
             <div id="status-box"></div>
 
+            <div id="profile-box" hidden>
+                <h2 style="font-size:1.05rem;margin:6px 0 4px;">صفحتي كمدبلج</h2>
+                <p class="sub" style="margin-bottom:6px;">تقدر تعدّل بياناتك مباشرة. شخصياتك المؤكَّدة ما تنشال إلا من الإدارة أو قائد فريقك.</p>
+                <p style="margin:0 0 6px;"><a id="my-page-link" href="#" style="color:#8ab4ff;font-weight:700;">افتح صفحتي ←</a></p>
+                <label for="p-name">الاسم</label><input id="p-name" maxlength="60">
+                <label for="p-role">الدور</label><input id="p-role" maxlength="40">
+                <label for="p-bio">الوصف</label><textarea id="p-bio" maxlength="600"></textarea>
+                <label for="p-social">رابط حسابك</label><input id="p-social" type="url" dir="ltr" placeholder="https://...">
+                <label for="p-logo">رابط صورتك</label><input id="p-logo" type="url" dir="ltr" placeholder="https://...">
+                <label for="p-banner">رابط خلفية الصفحة</label><input id="p-banner" type="url" dir="ltr" placeholder="https://...">
+                <button type="button" class="btn" id="p-save">حفظ صفحتي</button>
+                <div class="msg" id="p-msg" role="status"></div>
+                <div id="my-roles"></div>
+            </div>
             <div id="claims-box"></div>
             <form id="apply-form" onsubmit="return false;" hidden>
                 <label for="f-name">اسمك الذي يظهر في الموقع</label>
@@ -208,7 +222,7 @@
             show($('auth-box'), !sess); show($('member-box'), !!sess);
             if (!sess) return;
             $('who').textContent = 'مسجّل بإيميل: ' + sess.user.email;
-            var adm = await client.rpc('is_admin');
+            var adm = await client.rpc('is_staff');
             show($('admin-link'), !adm.error && adm.data === true);
             var r = await client.from('join_requests').select('status,admin_note,created_at').order('created_at', { ascending: false }).limit(1);
             var req = r.data && r.data[0];
@@ -219,7 +233,44 @@
             show($('apply-form'), canApply);
             if (canApply) await loadTeams();
             await renderClaims();
+            await renderProfile();
         }
+
+        var myDubberId = null;
+        async function renderProfile() {
+            var box = $('profile-box');
+            var my = await client.rpc('my_dubber_id');
+            myDubberId = (!my.error && my.data) ? my.data : null;
+            show(box, !!myDubberId);
+            if (!myDubberId) return;
+            var r = await client.from('dubbers').select('id,name,role,logo,banner,bio,social_url').eq('id', myDubberId).maybeSingle();
+            var d = r.data; if (!d) return;
+            $('p-name').value = d.name || ''; $('p-role').value = d.role || ''; $('p-bio').value = d.bio || '';
+            $('p-social').value = d.social_url || ''; $('p-logo').value = d.logo || ''; $('p-banner').value = d.banner || '';
+            $('my-page-link').href = 'actor.html?id=' + encodeURIComponent(d.id);
+            var roles = await client.from('character_roles').select('anime_id,character_name').eq('dubber_id', myDubberId);
+            var rb = $('my-roles'); rb.innerHTML = '';
+            if (roles.data && roles.data.length) {
+                var h = document.createElement('h2'); h.textContent = 'شخصياتي المؤكَّدة'; h.style.cssText = 'font-size:1rem;margin:18px 0 8px;'; rb.appendChild(h);
+                roles.data.forEach(function (x) { var s = document.createElement('div'); s.className = 'status approved'; s.style.margin = '6px 0'; s.textContent = x.character_name + ' (' + x.anime_id + ')'; rb.appendChild(s); });
+            }
+        }
+
+        $('p-save').onclick = async function () {
+            if (!myDubberId) return;
+            var name = $('p-name').value.trim();
+            var https = /^https:\/\/[^\s<>"']+$/i;
+            var social = $('p-social').value.trim(), logo = $('p-logo').value.trim(), banner = $('p-banner').value.trim();
+            if (name.length < 2) { say($('p-msg'), 'اكتب اسمك (حرفين على الأقل).', 'err'); return; }
+            if ((social && !https.test(social)) || (logo && !https.test(logo)) || (banner && !https.test(banner))) { say($('p-msg'), 'الروابط لازم تبدأ بـ https://', 'err'); return; }
+            var btn = $('p-save'); btn.disabled = true; say($('p-msg'), '');
+            var u = await client.from('dubbers').update({
+                name: name, role: $('p-role').value.trim() || 'مؤدي أصوات', bio: $('p-bio').value.trim() || null,
+                social_url: social || null, logo: logo || null, banner: banner || null
+            }).eq('id', myDubberId);
+            btn.disabled = false;
+            say($('p-msg'), u.error ? 'ما انحفظ: ' + u.error.message : 'انحفظت صفحتك ✓', u.error ? 'err' : 'ok');
+        };
 
         async function renderClaims() {
             var box = $('claims-box'); box.innerHTML = '';
