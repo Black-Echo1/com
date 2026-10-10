@@ -20,8 +20,9 @@
         return res.json();
     }
 
-    const toEpisode = (e) => ({
-        number: Number(e.number), title: e.title, thumbnail: e.thumbnail,
+    // لو الحلقة ما لها غلاف، نستخدم غلاف الأنمي نفسه
+    const toEpisode = (e, animePoster) => ({
+        number: Number(e.number), title: e.title, thumbnail: e.thumbnail || animePoster || undefined,
         duration: e.duration, date: e.release_date, dubbingTeam: e.dubbing_team || undefined,
         servers: e.servers || []
     });
@@ -56,6 +57,15 @@
         return typeof animeCatalog !== 'undefined' ? animeCatalog : [];
     }
 
+    // الشخصيات المؤكَّدة من الإدارة (شخصية → مدبلج). لو الجدول ما انشأ بعد نتجاهله.
+    let rolesCache = null;
+    async function getRoles() {
+        if (rolesCache) return rolesCache;
+        try { rolesCache = await rest('character_roles?select=anime_id,character_name,dubber_id&limit=5000'); }
+        catch (_) { rolesCache = []; }
+        return rolesCache;
+    }
+
     async function getAnime(id) {
         if (enabled) {
             try {
@@ -63,7 +73,9 @@
                 const [a] = await rest('anime?select=*&id=eq.' + k);
                 if (a) {
                     const eps = await rest('episodes?select=*&anime_id=eq.' + k + '&order=number.asc');
-                    return toAnime(a, eps.map(toEpisode));
+                    const anime = toAnime(a, eps.map((x) => toEpisode(x, a.poster)));
+                    (await getRoles()).filter((r) => r.anime_id === id).forEach((r) => { anime.dubbedCharacters[r.character_name] = r.dubber_id; });
+                    return anime;
                 }
             } catch (e) { console.warn('DB.getAnime fallback:', e); }
         }
@@ -80,7 +92,7 @@
                 ]);
                 const out = {};
                 anime.forEach((a) => { out[a.id] = toAnime(a, []); });
-                eps.forEach((e) => { if (out[e.anime_id]) out[e.anime_id].episodes.push(toEpisode(e)); });
+                eps.forEach((e) => { if (out[e.anime_id]) out[e.anime_id].episodes.push(toEpisode(e, out[e.anime_id].poster)); });
                 return (cache.all = out);
             } catch (e) { console.warn('DB.getAllAnime fallback:', e); }
         }
@@ -117,7 +129,8 @@
         installed = (async () => {
             if (enabled) {
                 try {
-                    const [slim, cat] = await Promise.all([getAnimeSlim(), getCatalog()]);
+                    const [slim, cat, roles] = await Promise.all([getAnimeSlim(), getCatalog(), getRoles()]);
+                    roles.forEach((r) => { if (slim[r.anime_id]) slim[r.anime_id].dubbedCharacters[r.character_name] = r.dubber_id; });
                     window.animeDetailsDatabase = slim;
                     // خريطة (مجاني / بإعلانات) لكل أنمي — من الـ view، بدون تحميل الحلقات
                     try {

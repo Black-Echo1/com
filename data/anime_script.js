@@ -450,31 +450,39 @@ document.addEventListener("DOMContentLoaded", async () => {
             topCharacters.forEach(charData => {
                 const charNameMAL = charData.character.name;
                 const charImage = charData.character.images.jpg.image_url;
+                const rawOverride = (localData.dubbedCharacters || {})[charNameMAL];
 
-                const dubbedNamesDict = localData.dubbedCharacters || {};
-                const rawOverride = dubbedNamesDict[charNameMAL];
-
-                // نحاول ربط النص الموجود في dubbedCharacters بمؤدٍ مسجَّل فعلياً في dubbers_data.js
-                // (يعمل بدون أي تعديل هدّام: لو ماقدرش يربطها، تتعرض كترجمة نص عادية زي الأول تماماً)
+                // لو النص يطابق مدبلجاً مسجّلاً: نعرض الشخصية وتحتها اسم مؤديها برابط صفحته
                 const resolved = (typeof window.ActorsEngine !== "undefined")
                     ? window.ActorsEngine.resolveCharacterDisplay(rawOverride, charNameMAL)
                     : { displayName: rawOverride || charNameMAL, actorId: null, linked: false };
 
-                const finalName = resolved.displayName;
-                const linkOpen = resolved.linked ? `<a href="actor.html?id=${encodeURIComponent(resolved.actorId)}" style="text-decoration:none; color:inherit;">` : "";
-                const linkClose = resolved.linked ? `</a>` : "";
-                const dubberBadge = resolved.linked ? `<span style="display:block; font-size:10px; color:var(--he-red-2,#ff3b3b); margin-top:2px;">🎙️ صفحة المؤدي</span>` : "";
+                const card = document.createElement("div");
+                card.className = "character-card";
+                card.style.cssText = "display:inline-block;width:120px;margin:10px;text-align:center;vertical-align:top;";
+                const img = document.createElement("img");
+                img.loading = "lazy"; img.decoding = "async"; img.src = charImage; img.alt = charNameMAL;
+                img.style.cssText = "width:100px;height:150px;object-fit:cover;border-radius:8px;box-shadow:0 4px 8px rgba(0,0,0,0.2);";
+                const title = document.createElement("h5");
+                title.style.cssText = "margin-top:8px;font-size:13px;word-wrap:break-word;";
+                title.textContent = resolved.linked ? charNameMAL : resolved.displayName;
+                card.append(img, title);
 
-                const charCard = `
-                    <div class="character-card" style="display: inline-block; width: 120px; margin: 10px; text-align: center;">
-                        ${linkOpen}
-                        <img loading="lazy" decoding="async" src="${charImage}" alt="${finalName}" style="width: 100px; height: 150px; object-fit: cover; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.2);">
-                        <h5 style="margin-top: 8px; font-size: 13px; word-wrap: break-word;">${finalName}</h5>
-                        ${dubberBadge}
-                        ${linkClose}
-                    </div>
-                `;
-                charactersContainer.innerHTML += charCard;
+                if (resolved.linked) {
+                    const link = document.createElement("a");
+                    link.href = "actor.html?id=" + encodeURIComponent(resolved.actorId);
+                    link.style.cssText = "display:block;font-size:11px;color:var(--he-red-2,#ff3b3b);margin-top:2px;text-decoration:none;";
+                    link.textContent = "🎙️ " + resolved.displayName;
+                    card.appendChild(link);
+                } else if (window.RoleClaims) {
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.textContent = "🎙️ دبلجتها؟";
+                    btn.style.cssText = "margin-top:6px;font-size:11px;padding:4px 8px;border-radius:8px;border:1px solid #2a2a33;background:#15151b;color:#c9c9d3;cursor:pointer;font-family:inherit;";
+                    btn.addEventListener("click", () => window.RoleClaims.open({ animeId, animeTitle: localData.title || animeId, characterName: charNameMAL, characterImage: charImage }));
+                    card.appendChild(btn);
+                }
+                charactersContainer.appendChild(card);
             });
         } else {
             charactersContainer.innerHTML = "لا توجد بيانات للشخصيات.";

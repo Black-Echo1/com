@@ -137,12 +137,15 @@
         <p>&copy; 2026 أكاديمية Black Echo.</p>
     </footer>
 
-    <script src="../data/anime_db.js"></script>
+    <script src="../data/supabase_config.js"></script>
+    <script src="../data/db_loader.js"></script>
     <script src="../data/catalog_data.js"></script>
-    <script src="../data/dubbers_data.js"></script>
+    <script src="../data/supabase_config.js"></script>
+    <script src="../data/people_loader.js"></script>
     <script src="../data/actors_engine.js"></script>
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
+        document.addEventListener("DOMContentLoaded", async () => {
+            await DB.installSlim(); // بيانات الأنميات والشخصيات المؤكَّدة من القاعدة
 
             const urlParams = new URLSearchParams(window.location.search);
             const actorId = urlParams.get("id");
