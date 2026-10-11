@@ -525,44 +525,9 @@
         .he-top-characters{ position:relative; z-index:1; min-height:24px; margin:0 auto 14px; color:#d9d9e2; font-size:.72rem; line-height:1.8; display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
         .he-top-characters i{ color:var(--rank-color); margin-left:4px; }
 
-        #installAppBtn{
-            display:none;
-            background:var(--he-red);
-            color:#fff;
-            border:none;
-            padding:10px 20px;
-            border-radius:8px;
-            font-weight:700;
-            font-family:'Cairo',sans-serif;
-            cursor:pointer;
-            margin:0 auto 40px;
-        }
+
     </style>
 
-    <script>
-
-        let deferredPrompt;
-        window.addEventListener('beforeinstallprompt', (e) => {
-            e.preventDefault();
-            deferredPrompt = e;
-            const installBtn = document.getElementById('installAppBtn');
-            if(installBtn) installBtn.style.display = 'block';
-        });
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const installBtn = document.getElementById('installAppBtn');
-            if(installBtn) {
-                installBtn.addEventListener('click', async () => {
-                    if (deferredPrompt) {
-                        deferredPrompt.prompt();
-                        const { outcome } = await deferredPrompt.userChoice;
-                        deferredPrompt = null;
-                        installBtn.style.display = 'none';
-                    }
-                });
-            }
-        });
-    </script>
     <link rel="stylesheet" href="css/finish.css">
     <style>
         .be-cta{ display:grid; grid-template-columns:1fr 1fr; gap:14px; max-width:1200px; margin:-34px auto 8px; padding:0 20px; position:relative; z-index:5; }
@@ -648,7 +613,6 @@
         </a>
     </section>
 
-    <button id="installAppBtn">تثبيت التطبيق 📱</button>
 
     <!-- ============ أحدث الإصدارات ============ -->
     <section class="he-section" id="latest">

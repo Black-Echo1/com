@@ -432,6 +432,95 @@
         enhanceAllCards(grid);
     };
 
+    const setupAppInstall = () => {
+        if (document.querySelector('.be-app-install')) return;
+        const style = document.createElement('style');
+        style.id = 'be-app-install-style';
+        style.textContent = `
+            .be-app-install{position:fixed!important;right:20px!important;bottom:20px!important;z-index:1305!important;display:inline-flex!important;align-items:center!important;justify-content:center!important;gap:9px!important;min-width:158px!important;min-height:48px!important;padding:11px 17px!important;border:1px solid rgba(255,255,255,.2)!important;border-radius:15px!important;background:linear-gradient(135deg,#fb4756,#c81425)!important;color:#fff!important;box-shadow:0 14px 34px -18px rgba(229,9,20,.85),inset 0 1px 0 rgba(255,255,255,.2)!important;font-family:inherit!important;font-size:.86rem!important;font-weight:900!important;line-height:1.2!important;cursor:pointer!important;transition:transform .18s ease,filter .18s ease!important}
+            .be-app-install:hover{transform:translateY(-2px)!important;filter:brightness(1.08)!important}
+            .be-app-install:focus-visible,.be-install-close:focus-visible{outline:3px solid rgba(255,255,255,.8);outline-offset:3px}
+            .be-app-install[hidden],.be-install-guide[hidden]{display:none!important}
+            .be-app-install i{font-size:1rem}
+            .be-install-guide{position:fixed;inset:0;z-index:1400;display:grid;place-items:center;padding:20px;background:rgba(3,5,9,.76);backdrop-filter:blur(9px);-webkit-backdrop-filter:blur(9px)}
+            .be-install-card{position:relative;width:min(100%,430px);padding:27px 24px 23px;border:1px solid rgba(255,255,255,.12);border-radius:23px;background:linear-gradient(145deg,#191c27,#0e1118);box-shadow:0 28px 80px -30px #000;color:#f5f6fa;direction:rtl;text-align:right}
+            .be-install-close{position:absolute;top:12px;left:12px;width:38px;height:38px;border:1px solid rgba(255,255,255,.1);border-radius:12px;background:rgba(255,255,255,.06);color:#fff;font-size:1.25rem;cursor:pointer}
+            .be-install-kicker{display:inline-flex;align-items:center;gap:8px;margin:0 0 8px;color:#ff7c85;font-size:.73rem;font-weight:900}
+            .be-install-card h2{margin:0 0 8px;color:#fff;font-size:1.25rem;font-weight:900}
+            .be-install-intro{margin:0 0 14px;color:#aeb4c2;font-size:.85rem;line-height:1.8}
+            .be-install-steps{display:grid;gap:9px;margin:0;padding:0;list-style:none;counter-reset:install-step}
+            .be-install-steps li{position:relative;min-height:43px;padding:10px 45px 10px 12px;border:1px solid rgba(255,255,255,.07);border-radius:13px;background:rgba(255,255,255,.035);color:#e4e7ee;font-size:.8rem;line-height:1.65;counter-increment:install-step}
+            .be-install-steps li:before{content:counter(install-step);position:absolute;right:10px;top:9px;width:25px;height:25px;display:grid;place-items:center;border-radius:9px;background:rgba(229,9,20,.16);color:#ff7e87;font-weight:900}
+            .be-install-footnote{margin:13px 0 0;color:#8f97a8;font-size:.72rem;line-height:1.65}
+            @media(max-width:768px){.be-app-install{right:12px!important;bottom:calc(76px + env(safe-area-inset-bottom,0px))!important;min-width:148px!important;min-height:46px!important;padding:10px 14px!important;border-radius:14px!important;font-size:.8rem!important}.be-install-card{padding:25px 19px 20px;border-radius:20px}}
+            @media(prefers-reduced-motion:reduce){.be-app-install{transition:none!important}}
+        `;
+        document.head.appendChild(style);
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'be-app-install';
+        button.setAttribute('aria-label', 'تثبيت تطبيق AR anime');
+        button.setAttribute('aria-haspopup', 'dialog');
+        button.setAttribute('aria-expanded', 'false');
+        button.innerHTML = '<i class="fa-solid fa-download" aria-hidden="true"></i><span>تثبيت التطبيق</span>';
+        const guide = document.createElement('div');
+        guide.className = 'be-install-guide';
+        guide.hidden = true;
+        guide.setAttribute('role', 'dialog');
+        guide.setAttribute('aria-modal', 'true');
+        guide.setAttribute('aria-labelledby', 'be-install-title');
+        guide.innerHTML = '<section class="be-install-card"><button type="button" class="be-install-close" aria-label="إغلاق">×</button><p class="be-install-kicker"><i class="fa-solid fa-mobile-screen-button" aria-hidden="true"></i> AR ANIME · APP</p><h2 id="be-install-title">ثبّت AR anime على جهازك</h2><p class="be-install-intro">أضف الموقع إلى شاشتك الرئيسية لتفتحه كتطبيق وتصل إليه بسرعة.</p><ol class="be-install-steps"></ol><p class="be-install-footnote">إذا لم يظهر خيار التثبيت، افتح الموقع في المتصفح الأساسي وحدّث الصفحة مرة واحدة.</p></section>';
+        document.body.append(button, guide);
+
+        let deferredPrompt = null;
+        const isInstalled = () => {
+            try { return window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true; }
+            catch (_) { return window.navigator.standalone === true; }
+        };
+        button.hidden = isInstalled();
+
+        const closeGuide = () => {
+            guide.hidden = true;
+            button.setAttribute('aria-expanded', 'false');
+            button.focus();
+        };
+        const showGuide = () => {
+            const ua = window.navigator.userAgent || '';
+            const isIOS = /iPhone|iPad|iPod/i.test(ua) || (window.navigator.platform === 'MacIntel' && window.navigator.maxTouchPoints > 1);
+            const isAndroid = /Android/i.test(ua);
+            const steps = isIOS
+                ? ['افتح الموقع في Safari.', 'اضغط زر المشاركة أسفل الشاشة أو أعلاها.', 'اختر «إضافة إلى الشاشة الرئيسية»، ثم اضغط «إضافة».']
+                : isAndroid
+                    ? ['افتح قائمة المتصفح (⋮).', 'اختر «تثبيت التطبيق» أو «إضافة إلى الشاشة الرئيسية».', 'وافق على التثبيت؛ سيظهر AR anime بين تطبيقاتك.']
+                    : ['افتح قائمة المتصفح.', 'اختر «تثبيت AR anime» أو «تثبيت الموقع كتطبيق».', 'ثبّت الاختصار لفتح الموقع كتطبيق مستقل.'];
+            const list = guide.querySelector('.be-install-steps');
+            list.replaceChildren(...steps.map((text) => { const item = document.createElement('li'); item.textContent = text; return item; }));
+            guide.hidden = false;
+            button.setAttribute('aria-expanded', 'true');
+            guide.querySelector('.be-install-close').focus();
+        };
+
+        button.addEventListener('click', async () => {
+            if (!deferredPrompt) { showGuide(); return; }
+            const promptEvent = deferredPrompt;
+            deferredPrompt = null;
+            button.disabled = true;
+            try {
+                await promptEvent.prompt();
+                const choice = await promptEvent.userChoice;
+                if (choice?.outcome === 'accepted') button.hidden = true;
+            } catch (_) { showGuide(); }
+            finally { button.disabled = false; }
+        });
+        const closeButton = guide.querySelector('.be-install-close');
+        closeButton.addEventListener('click', closeGuide);
+        guide.addEventListener('click', (event) => { if (event.target === guide) closeGuide(); });
+        document.addEventListener('keydown', (event) => { if (event.key === 'Escape' && !guide.hidden) closeGuide(); });
+        window.addEventListener('beforeinstallprompt', (event) => { event.preventDefault(); deferredPrompt = event; });
+        window.addEventListener('appinstalled', () => { button.hidden = true; guide.hidden = true; });
+    };
+
     const registerServiceWorker = () => {
         if (!('serviceWorker' in navigator) || window.location.protocol === 'file:') return;
         window.addEventListener('load', () => navigator.serviceWorker.register(`${rootPrefix}sw.js`).catch(() => {}), { once: true });
@@ -451,6 +540,7 @@
         lockMobileZoom();
         setupHeader();
         setupMobileNav();
+        setupAppInstall();
         window.addEventListener('ar-anime:auth-changed', setupMobileNav);
         window.addEventListener('focus', setupMobileNav);
         setupScrollHeader();

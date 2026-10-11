@@ -23,7 +23,7 @@
     // لو الحلقة ما لها غلاف، نستخدم غلاف الأنمي نفسه
     const toEpisode = (e, animePoster) => ({
         number: Number(e.number), title: e.title, thumbnail: e.thumbnail || animePoster || undefined,
-        duration: e.duration, date: e.release_date, dubbingTeam: e.dubbing_team || undefined,
+        description: e.description || undefined, duration: e.duration, date: e.release_date, dubbingTeam: e.dubbing_team || undefined,
         servers: e.servers || []
     });
     const toAnime = (a, episodes) => ({

@@ -20,6 +20,7 @@ create table if not exists public.episodes (
   anime_id      text not null references public.anime(id) on update cascade on delete cascade,
   number        numeric not null,
   title         text,
+  description   text,
   thumbnail     text,
   duration      text,
   release_date  text,
@@ -30,7 +31,7 @@ create table if not exists public.episodes (
 
 create index if not exists episodes_anime_idx on public.episodes (anime_id, number);
 
--- أمان: الجميع يقرأ، وما أحد يكتب إلا من لوحة Supabase (أنت)
+-- أمان: سياسات القراءة العامة هنا؛ صلاحيات إدارة المحتوى للأدمن العام في content_admin_system.sql.
 alter table public.anime    enable row level security;
 alter table public.episodes enable row level security;
 

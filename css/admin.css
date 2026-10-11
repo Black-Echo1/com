@@ -73,3 +73,73 @@
   .admin-workspace .member-role-save,.admin-workspace .member-role-remove{width:100%;min-width:0}
   .admin-workspace .member-role-field input{font-size:.8rem}
 }
+
+
+/* Admin content library: anime, episode links, descriptions and safe deletion */
+.admin-workspace .content-manager{display:grid;gap:14px;min-width:0}
+.admin-workspace .content-manager-top{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;min-width:0}
+.admin-workspace .content-select-label{margin:0!important;color:#cbd1df;font-size:.82rem;font-weight:800}
+.admin-workspace .content-anime-select{width:100%;min-width:0;min-height:48px;padding:10px 13px;border:1px solid rgba(255,255,255,.11);border-radius:13px;background:#0e1118;color:#f5f6fa;font:inherit}
+.admin-workspace .content-anime-select:focus-visible,.admin-workspace .content-fields input:focus-visible,.admin-workspace .content-fields textarea:focus-visible{outline:3px solid rgba(255,107,119,.45);outline-offset:1px}
+.admin-workspace .content-selected-card{display:grid;grid-template-columns:70px minmax(0,1fr) auto;align-items:center;gap:13px;padding:12px;border:1px solid rgba(255,255,255,.09);border-radius:16px;background:linear-gradient(135deg,rgba(255,255,255,.045),rgba(255,255,255,.015));min-width:0}
+.admin-workspace .content-selected-card>img{width:70px;height:86px;object-fit:cover;border-radius:11px;background:#0b0d13}
+.admin-workspace .content-selected-copy{display:grid;gap:5px;min-width:0}
+.admin-workspace .content-selected-copy strong{color:#f7f8fb;font-size:.95rem;overflow-wrap:anywhere}
+.admin-workspace .content-selected-copy code,.admin-workspace .content-add-footer code{color:#a7afc0;font-size:.7rem;overflow-wrap:anywhere}
+.admin-workspace .content-catalog-state{font-size:.74rem;font-weight:800}
+.admin-workspace .content-catalog-state.is-visible{color:#7ee0b4}
+.admin-workspace .content-catalog-state.is-hidden{color:#ffb878}
+.admin-workspace .content-selected-actions{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px}
+.admin-workspace .content-selected-actions button{min-height:42px}
+.admin-workspace .content-workbench{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);align-items:start;gap:13px;min-width:0}
+.admin-workspace .content-panel{min-width:0;padding:16px;border:1px solid rgba(255,255,255,.08);border-radius:17px;background:rgba(255,255,255,.02)}
+.admin-workspace .content-panel-head{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:13px}
+.admin-workspace .content-panel-head h3{margin:0;color:#f5f6fa;font-size:.92rem;font-weight:900}
+.admin-workspace .content-panel-head p{margin:4px 0 0;color:#929bad;font-size:.72rem;line-height:1.55}
+.admin-workspace .content-step-icon{width:36px;height:36px;flex:none;display:grid;place-items:center;border-radius:12px;background:rgba(255,72,85,.11);color:#ff727c}
+.admin-workspace .content-episodes-list{display:grid;gap:9px;min-width:0}
+.admin-workspace .content-episode-row{display:grid;grid-template-columns:72px minmax(0,1fr) auto;align-items:center;gap:11px;min-width:0;padding:10px;border:1px solid rgba(255,255,255,.075);border-radius:14px;background:rgba(255,255,255,.025)}
+.admin-workspace .content-episode-thumbnail{width:72px;height:82px;object-fit:cover;border-radius:10px;background:#0b0d13}
+.admin-workspace .content-episode-placeholder{display:grid;place-items:center;color:#9ba3b6}
+.admin-workspace .content-episode-info{display:grid;gap:4px;min-width:0}
+.admin-workspace .content-episode-number{color:#ff939b;font-size:.68rem;font-weight:900}
+.admin-workspace .content-episode-title{color:#f4f5f8;font-size:.82rem;overflow-wrap:anywhere}
+.admin-workspace .content-episode-description{display:-webkit-box;margin:0;color:#9ca4b4;font-size:.7rem;line-height:1.55;overflow:hidden;-webkit-box-orient:vertical;-webkit-line-clamp:2}
+.admin-workspace .content-episode-link{width:max-content;max-width:100%;overflow:hidden;color:#aeb8cf;font-size:.68rem;text-overflow:ellipsis;white-space:nowrap}
+.admin-workspace .content-episode-actions{display:flex;gap:7px}
+.admin-workspace .content-episode-actions button{min-height:38px;padding:8px 11px;font-size:.72rem}
+.admin-workspace .episode-poster-note{display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:9px 11px;border:1px solid rgba(255,197,91,.18);border-radius:12px;background:rgba(255,190,75,.055);color:#e8c579;font-size:.72rem;line-height:1.5}
+.admin-workspace .episode-poster-note img{width:38px;height:48px;flex:none;object-fit:cover;border-radius:7px}
+.admin-workspace .episode-poster-note img[hidden]{display:none}
+.admin-workspace .content-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;min-width:0;margin:0;padding:0;border:0}
+.admin-workspace .content-fields[disabled]{opacity:.56}
+.admin-workspace .content-fields>label{display:grid;align-content:start;gap:5px;min-width:0;margin:0!important;color:#cbd1df;font-size:.73rem;font-weight:800}
+.admin-workspace .content-fields .content-wide-field{grid-column:1/-1}
+.admin-workspace .content-fields input,.admin-workspace .content-fields textarea{width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:10px 11px;border:1px solid rgba(255,255,255,.11);border-radius:11px;background:#0c0f15;color:#f4f5f8;font:inherit;font-size:.79rem;line-height:1.55}
+.admin-workspace .content-fields input{min-height:43px}
+.admin-workspace .content-fields input[readonly]{color:#ffbdc2;background:rgba(229,9,20,.06)}
+.admin-workspace .content-fields textarea{resize:vertical;min-height:90px}
+.admin-workspace .content-form-actions{display:flex;gap:9px;margin-top:12px}
+.admin-workspace .content-form-actions button{flex:1;min-width:0}
+.admin-workspace .content-add-anime{margin-top:2px;padding:12px 14px;border:1px solid rgba(255,255,255,.08);border-radius:16px;background:rgba(255,255,255,.02)}
+.admin-workspace .content-add-anime summary{display:flex;align-items:center;gap:9px;min-height:42px;color:#f1f3f7;font-size:.84rem;font-weight:900}
+.admin-workspace .content-add-anime summary i{color:#ff747e}
+.admin-workspace .content-add-fields{margin-top:10px}
+.admin-workspace .content-add-footer{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;color:#aab1c0;font-size:.72rem}
+.admin-workspace .content-add-footer button{flex:none}
+@media(max-width:850px){.admin-workspace .content-workbench{grid-template-columns:minmax(0,1fr)}}
+@media(max-width:640px){
+  .admin-workspace .content-selected-card{grid-template-columns:56px minmax(0,1fr);gap:9px;padding:10px}
+  .admin-workspace .content-selected-card>img{width:56px;height:70px}
+  .admin-workspace .content-selected-actions{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .admin-workspace .content-selected-actions button{min-width:0;padding-inline:8px;font-size:.7rem}
+  .admin-workspace .content-panel{padding:12px}
+  .admin-workspace .content-episode-row{grid-template-columns:56px minmax(0,1fr);gap:9px;padding:9px}
+  .admin-workspace .content-episode-thumbnail{width:56px;height:68px}
+  .admin-workspace .content-episode-actions{grid-column:1/-1;display:grid;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .admin-workspace .content-episode-actions button{width:100%}
+  .admin-workspace .content-fields{grid-template-columns:minmax(0,1fr)}
+  .admin-workspace .content-fields .content-wide-field{grid-column:auto}
+  .admin-workspace .content-add-footer{align-items:stretch;flex-direction:column}
+  .admin-workspace .content-add-footer button{width:100%}
+}

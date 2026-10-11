@@ -242,6 +242,11 @@ window.playEpisode = function(animeId, epIndex, seasonIndex = 0, keepScroll = fa
         document.querySelector(`[data-episode-index="${epIndex}"]`)?.classList.add('is-playing');
         localStorage.setItem(`blackEchoLastEpisode_${animeId}`, JSON.stringify({ seasonIndex, epIndex }));
         titleElement.innerText = `جاري تشغيل: ${epData.title}`;
+        const descriptionElement = document.getElementById("playing-episode-description");
+        if (descriptionElement) {
+            descriptionElement.textContent = epData.description || "";
+            descriptionElement.hidden = !epData.description;
+        }
         serversContainer.innerHTML = "";
         epData.servers.forEach((server, index) => {
             const btn = document.createElement("button");
@@ -329,8 +334,10 @@ window.closeInlinePlayer = function() {
     const playerContainer = document.getElementById("video-player-container");
     const iframe = document.getElementById("video-iframe");
     const video = document.getElementById("video-element");
+    const descriptionElement = document.getElementById("playing-episode-description");
     playerContainer.hidden = true;
     playerContainer.style.display = "none";
+    if (descriptionElement) { descriptionElement.textContent = ""; descriptionElement.hidden = true; }
     iframe.src = "";
     video.pause();
     video.removeAttribute("src");
@@ -343,15 +350,70 @@ window.renderSeason = function(seasonIndex) {
     const tabs = document.getElementById("season-tabs");
     if (!season || !episodesGrid) return;
     state.seasonIndex = seasonIndex;
-    episodesGrid.innerHTML = season.episodes.map((ep, index) => `
-        <div class="ep-card" data-episode-index="${index}" onclick="playEpisode('${state.animeId}', ${index}, ${seasonIndex})" style="cursor:pointer;">
-            <div class="ep-thumb-container">
-                <img loading="lazy" decoding="async" src="${ep.thumbnail}" alt="${ep.title}">
-                <span class="ep-duration">${ep.duration || ""}</span>
-                <div class="ep-play-overlay"><i class="fa-solid fa-play"></i></div>
-            </div>
-            <div class="ep-card-info"><h4>${ep.title}</h4><p>تاريخ النشر: ${ep.date || "غير محدد"}</p></div>
-        </div>`).join("");
+    const cards = document.createDocumentFragment();
+    season.episodes.forEach((ep, index) => {
+        const card = document.createElement("div");
+        card.className = "ep-card";
+        card.dataset.episodeIndex = String(index);
+        card.setAttribute("role", "button");
+        card.tabIndex = 0;
+        const play = () => window.playEpisode(state.animeId, index, seasonIndex);
+        card.addEventListener("click", play);
+        card.addEventListener("keydown", (event) => {
+            if (event.key === "Enter" || event.key === " ") { event.preventDefault(); play(); }
+        });
+
+        const thumbnail = document.createElement("div");
+        thumbnail.className = "ep-thumb-container";
+        const image = document.createElement("img");
+        image.loading = "lazy";
+        image.decoding = "async";
+        image.alt = ep.title || `الحلقة ${ep.number || index + 1}`;
+        image.src = ep.thumbnail || "../icon-192.png";
+        thumbnail.appendChild(image);
+        if (ep.duration) {
+            const duration = document.createElement("span");
+            duration.className = "ep-duration";
+            duration.textContent = ep.duration;
+            thumbnail.appendChild(duration);
+        }
+        const overlay = document.createElement("div");
+        overlay.className = "ep-play-overlay";
+        const icon = document.createElement("i");
+        icon.className = "fa-solid fa-play";
+        overlay.appendChild(icon);
+        thumbnail.appendChild(overlay);
+
+        const info = document.createElement("div");
+        info.className = "ep-card-info";
+        const heading = document.createElement("h4");
+        const number = ep.number || index + 1;
+        const title = String(ep.title || "").trim();
+        const titleNumber = title.match(/^(?:الحلقة\s*|episode\s*)([0-9٠-٩]+)/i);
+        const normalizedTitleNumber = titleNumber ? titleNumber[1].replace(/[٠-٩]/g, (digit) => String("٠١٢٣٤٥٦٧٨٩".indexOf(digit))) : "";
+        const hasNumberInTitle = !!titleNumber && Number(normalizedTitleNumber) === Number(number);
+        if (!hasNumberInTitle) {
+            const badge = document.createElement("span");
+            badge.className = "ep-number-badge";
+            badge.textContent = `الحلقة ${number}`;
+            heading.appendChild(badge);
+        }
+        heading.appendChild(document.createTextNode(title || `الحلقة ${number}`));
+        info.appendChild(heading);
+        if (ep.description) {
+            const description = document.createElement("p");
+            description.className = "ep-card-description";
+            description.textContent = ep.description;
+            info.appendChild(description);
+        }
+        const date = document.createElement("p");
+        date.className = "ep-card-date";
+        date.textContent = `تاريخ النشر: ${ep.date || "غير محدد"}`;
+        info.appendChild(date);
+        card.append(thumbnail, info);
+        cards.appendChild(card);
+    });
+    episodesGrid.replaceChildren(cards);
     document.getElementById("ep-count").innerText = `${season.episodes.length} حلقة`;
     tabs?.querySelectorAll("button").forEach((button, index) => button.classList.toggle("active", index === seasonIndex));
     const saved = JSON.parse(localStorage.getItem(`blackEchoLastEpisode_${state.animeId}`) || "null");

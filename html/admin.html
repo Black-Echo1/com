@@ -37,7 +37,8 @@
             <a href="#join-section"><i class="fa-solid fa-user-plus" aria-hidden="true"></i> طلبات الانضمام <span class="admin-count" id="join-nav-count">0</span></a>
             <a href="#claims-section"><i class="fa-solid fa-masks-theater" aria-hidden="true"></i> طلبات الشخصيات <span class="admin-count" id="claim-nav-count">0</span></a>
             <a id="teams-nav-label" href="#teams-title"><i class="fa-solid fa-people-group" aria-hidden="true"></i> فريقي</a>
-            <span id="admin-nav-only" hidden>
+        <span id="admin-nav-only" hidden>
+                <a href="#content-section"><i class="fa-solid fa-photo-film" aria-hidden="true"></i> مكتبة الأنمي</a>
                 <a href="#tar-section"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i> طلبات الأنميات <span class="admin-count" id="tar-nav-count">0</span></a>
                 <a href="#leaders-section"><i class="fa-solid fa-user-shield" aria-hidden="true"></i> القادة</a>
                 <a href="#dubbers-section"><i class="fa-solid fa-microphone-lines" aria-hidden="true"></i> المدبلجون</a>
@@ -66,6 +67,51 @@
         </section>
 
         <div id="admin-only" hidden>
+            <section class="admin-section" id="content-section" aria-labelledby="content-title">
+                <div class="admin-section-head"><span class="admin-section-icon"><i class="fa-solid fa-photo-film" aria-hidden="true"></i></span><div class="admin-section-heading"><h2 id="content-title">مكتبة الأنمي والحلقات</h2><p>أضف الأنميات والحلقات وروابط المشاهدة من هنا؛ رقم الحلقة التالي يتحدد تلقائياً.</p></div><span class="admin-count" id="content-anime-count">0</span></div>
+                <div class="content-manager">
+                    <div class="content-manager-top">
+                        <label class="content-select-label" for="content-anime-select">اختر الأنمي لإدارة حلقاته</label>
+                        <select id="content-anime-select" class="content-anime-select"><option value="">اختر أنمياً...</option></select>
+                        <div id="content-selected-card" class="content-selected-card" hidden>
+                            <img id="content-selected-poster" alt="صورة الأنمي" hidden>
+                            <div class="content-selected-copy"><strong id="content-selected-title"></strong><code id="content-selected-id"></code><span id="content-selected-status"></span></div>
+                            <div class="content-selected-actions"><button id="content-visibility-toggle" type="button"></button><button id="content-delete-anime" class="no" type="button"><i class="fa-solid fa-trash" aria-hidden="true"></i> حذف نهائي</button></div>
+                        </div>
+                    </div>
+                    <div class="content-workbench">
+                        <section class="content-panel" aria-labelledby="episode-list-title">
+                            <div class="content-panel-head"><div><h3 id="episode-list-title">حلقات الأنمي</h3><p>الصورة المصغرة لكل حلقة تُستخدم تلقائياً من بوستر الأنمي.</p></div><span id="content-episode-count" class="admin-count">0</span></div>
+                            <div id="content-episodes" class="content-episodes-list"><div class="empty">اختر أنمياً لعرض حلقاته.</div></div>
+                        </section>
+                        <section class="content-panel" aria-labelledby="episode-form-title">
+                            <div class="content-panel-head"><div><h3 id="episode-form-title">إضافة حلقة</h3><p>أدخل رابط المشاهدة والوصف، وسيُحسب الرقم تلقائياً.</p></div><span class="content-step-icon"><i class="fa-solid fa-link" aria-hidden="true"></i></span></div>
+                            <div id="episode-poster-note" class="episode-poster-note" hidden><img id="episode-poster-preview" alt="بوستر الأنمي المستخدم للحلقة"><span>سيُستخدم هذا البوستر نفسه كصورة مصغّرة للحلقة.</span></div>
+                            <div id="episode-no-poster" class="empty" hidden>لا يمكن إضافة حلقة قبل توفر صورة للأنمي؛ أضف البوستر للأنمي أولاً.</div>
+                            <fieldset id="episode-fields" class="content-fields" disabled>
+                                <label>رقم الحلقة التالي<input id="episode-number" type="number" readonly></label>
+                                <label>عنوان الحلقة<input id="episode-title-input" type="text" maxlength="120" placeholder="الحلقة 3"></label>
+                                <label class="content-wide-field">رابط المشاهدة (HTTPS)<input id="episode-url-input" type="url" inputmode="url" placeholder="https://..."></label>
+                                <label class="content-wide-field">رابط تحميل اختياري<input id="episode-download-input" type="url" inputmode="url" placeholder="https://..."></label>
+                                <label class="content-wide-field">وصف الحلقة<textarea id="episode-description-input" maxlength="1200" rows="4" placeholder="اكتب نبذة قصيرة تظهر مع الحلقة..."></textarea></label>
+                                <label>المدة (اختياري)<input id="episode-duration-input" type="text" maxlength="20" placeholder="23:45"></label>
+                                <label>تاريخ النشر (اختياري)<input id="episode-date-input" type="date"></label>
+                            </fieldset>
+                            <div class="content-form-actions"><button id="episode-save-button" class="ok" type="button" disabled><i class="fa-solid fa-plus" aria-hidden="true"></i> إضافة الحلقة</button><button id="episode-cancel-edit" type="button" hidden>إلغاء التعديل</button></div>
+                        </section>
+                    </div>
+                    <details class="content-add-anime">
+                        <summary><i class="fa-solid fa-circle-plus" aria-hidden="true"></i> إضافة أنمي جديد إلى المكتبة</summary>
+                        <div class="content-fields content-add-fields">
+                            <label>اسم الأنمي<input id="new-anime-title" type="text" maxlength="120" placeholder="اسم الأنمي"></label>
+                            <label>رابط بوستر الأنمي (مطلوب)<input id="new-anime-poster" type="url" inputmode="url" placeholder="https://..."></label>
+                            <label class="content-wide-field">رابط صورة الغلاف (اختياري)<input id="new-anime-banner" type="url" inputmode="url" placeholder="https://..."></label>
+                            <label class="content-wide-field">قصة الأنمي (اختياري)<textarea id="new-anime-story" maxlength="3000" rows="4" placeholder="نبذة عن الأنمي..."></textarea></label>
+                        </div>
+                        <div class="content-add-footer"><span>معرّف الموقع يُنشأ تلقائياً: <code id="new-anime-id-preview">—</code></span><button id="new-anime-save" class="ok" type="button"><i class="fa-solid fa-plus" aria-hidden="true"></i> إضافة الأنمي</button></div>
+                    </details>
+                </div>
+            </section>
             <section class="admin-section" id="tar-section" aria-labelledby="tar-title">
                 <div class="admin-section-head"><span class="admin-section-icon"><i class="fa-solid fa-clapperboard" aria-hidden="true"></i></span><div class="admin-section-heading"><h2 id="tar-title">طلبات أنميات الفرق</h2><p>اعتمد ربط العمل بالفريق أو راجع الطلب الجديد.</p></div><span class="admin-count" id="tar-count">0</span></div>
                 <div id="tar" class="admin-section-list"></div>
@@ -85,6 +131,7 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="../data/supabase_config.js"></script>
 <script src="../data/avatar.js"></script>
+<script src="../data/anime_admin.js"></script>
 <script>
 (function () {
     'use strict';
@@ -93,7 +140,8 @@
     function fail(t) { $('status').textContent = t; $('status').className = 'sub err'; }
     if (!cfg.url || !cfg.anonKey || !window.supabase) { fail('الخدمة غير مضبوطة (supabase_config.js).'); return; }
     var client = window.supabase.createClient(cfg.url, cfg.anonKey);
-    var S = { admin: false, uid: null, myTeams: [], teams: [], dubbers: [], members: [], leaders: [], animes: {}, tar: [] };
+    var S = { admin: false, uid: null, myTeams: [], teams: [], dubbers: [], members: [], leaders: [], animes: {}, animeList: [], tar: [] };
+    var contentManager = null;
     var HTTPS = /^https:\/\/[^\s<>"']+$/i;
 
     function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
@@ -340,11 +388,18 @@
         var d = await client.from('dubbers').select('id,name,role').order('created_at');
         var m = await client.from('team_members').select('team_id,dubber_id,role');
         var q = await client.from('team_anime_requests').select('id,team_id,anime_id,new_title,mal_url,note,status,admin_note,created_at').order('created_at', { ascending: false });
+        var a = await client.from('anime').select('id,title,poster,cover_banner,story,sort_order,is_hero,in_catalog').order('sort_order', { ascending: true }).limit(1000);
         S.teams = t.data || []; S.dubbers = d.data || []; S.members = m.data || []; S.tar = q.data || [];
+        S.animeList = a.data || []; S.animes = {};
+        S.animeList.forEach(function (x) { S.animes[x.id] = x.title || x.id; });
         count('stat-members', S.members.length);
         if (S.admin) { var l = await client.rpc('admin_list_leaders'); S.leaders = l.data || []; }
         await renderRequests(); renderTeams();
-        if (S.admin) { renderTar(); renderLeaders(); renderDubbers(); }
+        if (S.admin) {
+            renderTar(); renderLeaders(); renderDubbers();
+            if (!contentManager && window.ARAnimeContentAdmin) contentManager = window.ARAnimeContentAdmin.mount({ client: client, toast: toast, friendly: friendly, reload: load });
+            if (contentManager) await contentManager.refresh(S.animeList);
+        }
     }
 
     (async function () {
@@ -365,7 +420,6 @@
                 var tl = await client.from('team_leaders').select('team_id'); S.myTeams = (tl.data || []).map(function (x) { return x.team_id; });
                 $('teams-title').textContent = 'فريقك';
             }
-            var a = await client.from('anime').select('id,title').limit(1000); (a.data || []).forEach(function (x) { S.animes[x.id] = x.title || x.id; });
             var badge = $('role-badge'); badge.hidden = false; badge.textContent = S.admin ? 'أدمن' : 'قائد فريق';
             $('status').hidden = true; $('panel').hidden = false; $('admin-only').hidden = !S.admin;
             await load();
