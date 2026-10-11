@@ -14,6 +14,11 @@
 </head>
 <body class="ui-page">
 <header class="ui-top"><a href="../index.html" class="brand"><img src="../icon-192.png" alt=""><span>AR anime</span></a><nav><a href="account.html">حسابي</a><a href="../index.html">الرئيسية</a></nav></header>
+<datalist id="team-role-presets">
+    <option value="مدبلج محترف"><option value="مدبلج متوسط"><option value="مدبلج مبتدئ">
+    <option value="ممنتج"><option value="مساعد قائد"><option value="مترجم">
+    <option value="مدقق لغوي"><option value="كاتب نصوص"><option value="مهندس صوت"><option value="مصمم">
+</datalist>
 <main class="admin-workspace">
     <section class="workspace-hero" aria-labelledby="workspace-title">
         <div class="workspace-icon" aria-hidden="true"><i class="fa-solid fa-shield-halved"></i></div>
@@ -207,16 +212,34 @@
         var mem = S.members.filter(function (m) { return m.team_id === t.id; });
         if (!mem.length) d.appendChild(el('div', 'empty', 'ما فيه أعضاء.'));
         mem.forEach(function (m) {
-            var r = el('div', 'member'); r.appendChild(el('span', '', dname(m.dubber_id) + ' — ' + (m.role || '')));
-            var b = el('button', 'no', 'إزالة');
+            var r = el('div', 'member member-role-row');
+            var person = el('div', 'member-role-person');
+            person.appendChild(el('strong', 'member-role-name', dname(m.dubber_id)));
+            person.appendChild(el('span', 'member-role-current', 'الصفة الحالية: ' + (m.role || 'الصفة الأساسية')));
+            var roleInput = input(m.role || '', 'مثال: مدبلج محترف أو مساعد قائد');
+            roleInput.maxLength = 40; roleInput.setAttribute('list', 'team-role-presets');
+            var roleField = field('الصفة التي تظهر للجميع', roleInput); roleField.className = 'member-role-field';
+            roleField.appendChild(el('small', 'member-role-hint', 'اقتراحات جاهزة أو صفة مخصصة؛ تظهر للزوار ولا تمنح صلاحية إدارة.'));
+            var saveRole = el('button', 'ok member-role-save', 'حفظ الصفة');
+            saveRole.onclick = async function () {
+                var nextRole = roleInput.value.trim();
+                if (nextRole.length > 40 || /[<>]/.test(nextRole)) { toast('اكتب صفة من 40 حرفاً كحد أقصى، بدون رموز HTML.', true); return; }
+                saveRole.disabled = true;
+                var updated = await client.from('team_members').update({ role: nextRole || null }).eq('team_id', t.id).eq('dubber_id', m.dubber_id).select('team_id').maybeSingle();
+                saveRole.disabled = false;
+                if (updated.error) { toast(friendly(updated.error.message), true); return; }
+                if (!updated.data) { toast('تعذّر تحديث الصفة. تأكد أنك قائد هذا الفريق أو مسؤول المنصة.', true); return; }
+                toast('تم تحديث الصفة التي تظهر للجميع.'); await load();
+            };
+            var b = el('button', 'no member-role-remove', 'إزالة');
             b.onclick = function () { if (confirm('إزالة ' + dname(m.dubber_id) + ' من الفريق؟')) act(function () { return client.from('team_members').delete().eq('team_id', t.id).eq('dubber_id', m.dubber_id); }, 'انشال من الفريق'); };
-            r.appendChild(b); d.appendChild(r);
+            r.append(person, roleField, saveRole, b); d.appendChild(r);
         });
         var inTeam = mem.map(function (m) { return m.dubber_id; });
         var pick = el('select'); S.dubbers.filter(function (x) { return inTeam.indexOf(x.id) === -1; }).forEach(function (x) { var o = el('option', '', x.name); o.value = x.id; pick.appendChild(o); });
-        var role = input('مؤدي أصوات'); var add = el('button', 'ok', 'إضافة عضو');
-        add.onclick = function () { if (!pick.value) { toast('ما فيه مدبلج متاح للإضافة', true); return; } act(function () { return client.from('team_members').insert({ team_id: t.id, dubber_id: pick.value, role: role.value.trim() || null }); }, 'انضاف للفريق'); };
-        var line = el('div', 'inline'); line.appendChild(field('مدبلج', pick)); line.appendChild(field('دوره بالفريق', role)); line.appendChild(add);
+        var role = input('مؤدي أصوات', 'مثال: مدبلج مبتدئ أو ممنتج'); role.maxLength = 40; role.setAttribute('list', 'team-role-presets'); var add = el('button', 'ok', 'إضافة عضو');
+        add.onclick = function () { var memberRole = role.value.trim(); if (!pick.value) { toast('ما فيه مدبلج متاح للإضافة', true); return; } if (memberRole.length > 40 || /[<>]/.test(memberRole)) { toast('اكتب صفة من 40 حرفاً كحد أقصى، بدون رموز HTML.', true); return; } act(function () { return client.from('team_members').insert({ team_id: t.id, dubber_id: pick.value, role: memberRole || null }); }, 'انضاف للفريق'); };
+        var line = el('div', 'inline'); line.appendChild(field('مدبلج', pick)); line.appendChild(field('الصفة التي تظهر للجميع', role)); line.appendChild(add);
         d.appendChild(line);
 
         if (S.admin) {

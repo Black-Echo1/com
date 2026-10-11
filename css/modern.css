@@ -38,3 +38,17 @@ a,button,input,select,textarea{outline-offset:3px} :focus-visible{outline:2px so
 @media(max-width:360px){.be-mobile-nav.has-staff a{font-size:.58rem}}
 
 @media(max-width:768px){.main-header .menu-icon{display:none!important}.main-header #navMenu{display:none!important}}
+
+
+/* Consistent-height voice actor cards with a reserved two-line bio slot */
+.dubbers-grid{grid-auto-rows:1fr;align-items:stretch}
+.dubbers-grid .dubber-card{height:100%;display:flex;flex-direction:column;align-items:center}
+.dubbers-grid .dubber-description{
+  display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;
+  width:100%;height:3.2em;min-height:3.2em!important;max-height:3.2em;flex:0 0 3.2em;
+  margin:0;overflow:hidden;overflow-wrap:anywhere;line-height:1.6;text-overflow:ellipsis
+}
+.dubbers-grid .dubber-cta{margin-top:auto}
+@media(max-width:768px){
+  .dubbers-grid .dubber-description{height:3.3em;min-height:3.3em!important;max-height:3.3em;flex-basis:3.3em;line-height:1.65}
+}

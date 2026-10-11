@@ -16,3 +16,60 @@
 
 .admin-workspace .row .admin-avatar-fallback{display:grid;place-items:center;color:#fff;font-size:1.2rem;font-weight:900;line-height:1}
 @media(max-width:640px){.admin-workspace .row .admin-avatar-fallback{width:48px;height:48px}}
+
+
+/* Modern, consistent action buttons for the administration workspace */
+.admin-workspace button{
+  min-height:44px;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  padding:10px 15px;border:1px solid rgba(255,255,255,.11);border-radius:13px;
+  background:linear-gradient(180deg,#252b3a,#1b202d);color:#f5f7fb;
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.07),0 8px 18px -16px #000;
+  font-family:inherit;font-size:.82rem;font-weight:800;line-height:1.35;cursor:pointer;
+  transition:transform .16s ease,border-color .16s ease,background .16s ease,box-shadow .16s ease,filter .16s ease;
+}
+.admin-workspace button:hover:not(:disabled){transform:translateY(-1px);border-color:rgba(255,255,255,.24);filter:brightness(1.08);box-shadow:inset 0 1px 0 rgba(255,255,255,.1),0 11px 20px -16px #000}
+.admin-workspace button:active:not(:disabled){transform:translateY(0) scale(.985)}
+.admin-workspace button:focus-visible{outline:3px solid rgba(255,107,119,.7);outline-offset:2px}
+.admin-workspace button:disabled{opacity:.55;cursor:wait;transform:none;filter:saturate(.65)}
+.admin-workspace .red{border-color:rgba(255,91,103,.35)!important;background:linear-gradient(135deg,#fb4756,#cf1d31)!important;color:#fff!important;box-shadow:0 9px 22px -15px rgba(239,47,65,.85),inset 0 1px 0 rgba(255,255,255,.2)!important}
+.admin-workspace .red:hover:not(:disabled){border-color:rgba(255,145,153,.65)!important;background:linear-gradient(135deg,#ff5967,#df263a)!important}
+.admin-workspace .ok{border-color:rgba(71,211,154,.25)!important;background:linear-gradient(135deg,#18845e,#12684d)!important;color:#eafff5!important;box-shadow:0 8px 20px -16px rgba(28,186,124,.8),inset 0 1px 0 rgba(255,255,255,.14)!important}
+.admin-workspace .ok:hover:not(:disabled){border-color:rgba(91,234,177,.55)!important;background:linear-gradient(135deg,#20966c,#147755)!important}
+.admin-workspace .no{border-color:rgba(255,93,104,.25)!important;background:linear-gradient(135deg,#552a34,#3b202a)!important;color:#ffdfe2!important;box-shadow:inset 0 1px 0 rgba(255,255,255,.06)!important}
+.admin-workspace .no:hover:not(:disabled){border-color:rgba(255,106,118,.55)!important;background:linear-gradient(135deg,#71313d,#4c222d)!important}
+.admin-workspace .acts{display:flex;flex-wrap:wrap;gap:9px;margin-top:13px}
+.admin-workspace .acts button{flex:1 1 105px;min-height:44px;padding-inline:13px}
+.admin-workspace .team-management-card>.red,.admin-workspace .team-management-card>.ok,.admin-workspace .team-management-card>.no{width:100%;min-height:46px;border-radius:14px}
+.admin-workspace .member button{min-height:38px;padding:8px 12px;border-radius:11px;font-size:.76rem}
+.admin-workspace .inline>button{min-width:112px}
+@media(max-width:640px){
+  .admin-workspace button{min-height:46px;padding:10px 12px;border-radius:13px;font-size:.78rem}
+  .admin-workspace .acts{gap:8px}
+  .admin-workspace .acts button{min-height:46px}
+  .admin-workspace .inline>button{width:100%;min-width:0}
+}
+
+
+/* Per-member public team role editor */
+.admin-workspace .member-role-row{
+  display:grid;grid-template-columns:minmax(145px,.85fr) minmax(250px,1.45fr) auto auto;
+  grid-template-areas:"person field save remove";align-items:center;gap:12px;
+  padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)
+}
+.admin-workspace .member-role-person{grid-area:person;display:grid;gap:5px;min-width:0}
+.admin-workspace .member-role-name{color:#f5f6fa;font-size:.86rem;overflow-wrap:anywhere}
+.admin-workspace .member-role-current{color:#9ba3b6;font-size:.71rem;line-height:1.5;overflow-wrap:anywhere}
+.admin-workspace .member-role-field{grid-area:field;display:grid;gap:5px;min-width:0}
+.admin-workspace .member-role-field label{margin:0!important;color:#c9cde0;font-size:.73rem}
+.admin-workspace .member-role-field input{width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:9px 11px;border-radius:12px;font-size:.82rem}
+.admin-workspace .member-role-hint{color:#8f97a8;font-size:.67rem;line-height:1.5}
+.admin-workspace .member-role-save{grid-area:save;min-width:100px}
+.admin-workspace .member-role-remove{grid-area:remove;min-width:76px}
+@media(max-width:900px){
+  .admin-workspace .member-role-row{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);grid-template-areas:"person field" "save remove";gap:10px}
+}
+@media(max-width:640px){
+  .admin-workspace .member-role-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"person person" "field field" "save remove";gap:9px;padding:14px 0}
+  .admin-workspace .member-role-save,.admin-workspace .member-role-remove{width:100%;min-width:0}
+  .admin-workspace .member-role-field input{font-size:.8rem}
+}

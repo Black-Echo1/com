@@ -44,6 +44,8 @@
         .member-card:hover img,.member-card:hover .member-avatar-fallback{ border-color:var(--he-red-2); }
         .member-card h4{ margin:0 0 5px 0; font-size:1.05rem; }
         .member-card span{ color:var(--he-muted); font-size:0.82rem; }
+        .member-card .member-role-badge{display:inline-flex;align-items:center;justify-content:center;gap:7px;max-width:100%;margin-top:7px;padding:6px 12px;border:1px solid rgba(255,197,91,.24);border-radius:999px;background:rgba(255,190,75,.08);color:#ffcf77;font-size:.76rem;font-weight:800;line-height:1.4;overflow-wrap:anywhere;white-space:normal}
+        .member-card .member-role-badge i{color:#ffc45f;font-size:.72rem;flex:none}
 
         .anime-card{
             background:var(--he-surface); border-radius:14px; overflow:hidden; border:1px solid var(--he-border);
@@ -129,11 +131,7 @@
                 const card = document.createElement("div");
                 card.className = "member-card";
                 card.style.animationDelay = `${i * 45}ms`;
-                card.innerHTML = `
-                    ${window.ARAnimeAvatar.markup(member.name, member.avatar, 'member-avatar', 'member-avatar-fallback')}
-                    <h4>${member.name}</h4>
-                    <span>${member.role}</span>
-                `;
+                card.innerHTML = `${window.ARAnimeAvatar.markup(member.name, member.avatar, 'member-avatar', 'member-avatar-fallback')}<h4>${member.name}</h4><span class="member-role-badge"><i class="fa-solid fa-award" aria-hidden="true"></i>${member.role || 'عضو الفريق'}</span>`;
                 card.onclick = () => window.location.href = `actor.html?id=${encodeURIComponent(member.id)}`;
                 membersGrid.appendChild(card);
             });

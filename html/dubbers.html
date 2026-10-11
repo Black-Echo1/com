@@ -106,6 +106,8 @@
             const search = document.getElementById("dubber-search");
             const resultCount = document.getElementById("dubber-result-count");
             const escapeHtml = value => String(value ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;", "'":"&#39;"}[c]));
+            const graphemes = value => window.Intl?.Segmenter ? Array.from(new Intl.Segmenter('ar', {granularity:'grapheme'}).segment(value), part => part.segment) : Array.from(value);
+            const shortDescription = value => { const chars = graphemes(String(value ?? '').trim()); return chars.length > 30 ? chars.slice(0, 27).join('').trimEnd() + '...' : chars.join(''); };
             try { await DB.installSlim(); } catch (error) { console.warn("تعذر تحميل بعض تفاصيل الدبلجة", error); }
             container.replaceChildren();
             if (typeof dubbersDatabase === 'undefined') {
@@ -115,13 +117,14 @@
             for (const [actorId, data] of Object.entries(dubbersDatabase)) {
                 const aggregate = window.ActorsEngine?.getActorAggregate(actorId) || null;
                 const profile = window.ActorsEngine?.getActorProfile(actorId) || {name:data.name||actorId,role:data.role||'مؤدي أصوات',description:data.bio||'',tier:'عضو'};
+                const fullDescription = String(profile.description || '').trim();
                 const card = document.createElement("div"); card.className = "dubber-card"; card.tabIndex = 0; card.setAttribute("role", "link");
                 card.setAttribute("aria-label", "عرض ملف " + profile.name);
                 card.dataset.search = `${profile.name} ${profile.role} ${profile.description}`.toLocaleLowerCase("ar");
                 card.style.animationDelay = `${(i++ % 12) * 45}ms`;
                 const avatarHtml = window.ARAnimeAvatar.markup(profile.name, data.logo, 'dubber-avatar', 'dubber-avatar-fallback');
                 const countLine = aggregate ? `<span class="dubber-count">${aggregate.workCount} عمل • ${aggregate.characterCount} شخصية</span>` : '';
-                card.innerHTML = `${avatarHtml}<h3>${escapeHtml(profile.name)}</h3><p>${escapeHtml(profile.role)}</p><div class="dubber-description">${escapeHtml(profile.description)}</div><span class="dubber-tier"><i class="fa-solid fa-award" aria-hidden="true"></i> ${escapeHtml(profile.tier)}</span>${countLine}<span class="dubber-cta">عرض الشخصيات والبورتفوليو ←</span>`;
+                card.innerHTML = `${avatarHtml}<h3>${escapeHtml(profile.name)}</h3><p>${escapeHtml(profile.role)}</p><div class="dubber-description" title="${escapeHtml(fullDescription)}">${escapeHtml(shortDescription(fullDescription))}</div><span class="dubber-tier"><i class="fa-solid fa-award" aria-hidden="true"></i> ${escapeHtml(profile.tier)}</span>${countLine}<span class="dubber-cta">عرض الشخصيات والبورتفوليو ←</span>`;
                 const openProfile = () => { window.location.href = `actor.html?id=${encodeURIComponent(actorId)}`; };
                 card.addEventListener('click', openProfile); card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openProfile(); } });
                 container.appendChild(card);
