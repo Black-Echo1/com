@@ -97,13 +97,13 @@
             <details id="profile-box" class="account-settings" hidden>
                 <summary><i class="fa-solid fa-gear" aria-hidden="true"></i> إعدادات البروفايل</summary>
                 <div class="account-settings-body">
-                    <p class="sub">عدّل الاسم والوصف والصورة وروابطك. الشخصيات المؤكدة لا تُزال إلا من الإدارة أو قائد الفريق.</p>
+                    <p class="sub">عدّل الاسم والوصف والصورة وروابطك. للصورة والغلاف اكتب الرابط مع https أو بدونه؛ نضيف https تلقائياً عند الحاجة.</p>
                     <label for="p-name">الاسم الظاهر</label><input id="p-name" maxlength="60" autocomplete="name">
                     <label for="p-role">الدور</label><input id="p-role" maxlength="40">
                     <label for="p-bio">نبذة البروفايل</label><textarea id="p-bio" maxlength="600" placeholder="اكتب نبذة قصيرة عنك وعن أعمالك"></textarea>
                     <label for="p-social">رابط حسابك</label><input id="p-social" type="url" dir="ltr" placeholder="https://...">
-                    <label for="p-logo">رابط صورتك</label><input id="p-logo" type="url" dir="ltr" placeholder="https://...">
-                    <label for="p-banner">رابط غلاف البروفايل</label><input id="p-banner" type="url" dir="ltr" placeholder="https://...">
+                    <label for="p-logo">رابط صورتك</label><input id="p-logo" type="text" inputmode="url" dir="ltr" placeholder="example.com/photo.jpg">
+                    <label for="p-banner">رابط غلاف البروفايل</label><input id="p-banner" type="text" inputmode="url" dir="ltr" placeholder="example.com/banner.jpg">
                     <button type="button" class="btn" id="p-save"><i class="fa-solid fa-floppy-disk" aria-hidden="true"></i> حفظ التعديلات</button>
                     <div class="msg" id="p-msg" role="status"></div>
                     <div id="my-roles"></div>
@@ -121,6 +121,7 @@
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
     <script src="../data/supabase_config.js"></script>
+    <script src="../data/avatar.js"></script>
     <script>
     (function () {
         'use strict';
@@ -128,6 +129,13 @@
         var cfg = window.SUPABASE_CONFIG || {};
         function show(el, on) { el.hidden = !on; }
         function say(el, text, cls) { el.textContent = text; el.className = 'msg' + (cls ? ' ' + cls : ''); }
+        function setAccountAvatar(name, url) {
+            var current = $('account-avatar');
+            if (!current || !window.ARAnimeAvatar) return;
+            var avatar = window.ARAnimeAvatar.create(name, url, 'account-avatar account-avatar-image', 'account-avatar account-avatar-fallback');
+            avatar.id = 'account-avatar';
+            current.replaceWith(avatar);
+        }
 
         if (!cfg.url || !cfg.anonKey || !window.supabase) {
             var f = $('fatal'); f.hidden = false;
@@ -213,10 +221,8 @@
             $('account-display-name').textContent = displayName;
             $('account-role-label').textContent = 'عضو AR anime';
             $('account-joined').textContent = sess.user.created_at ? 'انضم في ' + new Date(sess.user.created_at).toLocaleDateString('ar', {year:'numeric',month:'long',day:'numeric'}) : 'عضو في AR anime';
-            var initial = displayName.trim().charAt(0) || 'A';
-            var avatar = $('account-avatar'); avatar.textContent = initial;
             var userAvatar = sess.user.user_metadata && (sess.user.user_metadata.avatar_url || sess.user.user_metadata.picture);
-            if (userAvatar && /^https:\/\//i.test(userAvatar)) { avatar.style.backgroundImage = 'url("' + userAvatar.replace(/["\\]/g, '') + '")'; avatar.style.backgroundSize = 'cover'; avatar.style.backgroundPosition = 'center'; avatar.textContent = ''; }
+            setAccountAvatar(displayName, userAvatar);
             var checks = await Promise.all([client.rpc('is_admin'), client.rpc('is_staff')]);
             var isAdmin = !checks[0].error && checks[0].data === true;
             var isStaff = !checks[1].error && checks[1].data === true;
@@ -261,9 +267,7 @@
             var d = r.data; if (!d) return;
             $('account-display-name').textContent = d.name || $('account-display-name').textContent;
             $('account-role-label').textContent = isAdminSession ? 'مسؤول المنصة · ' + (d.role || 'مدبلج') : isStaffSession ? ($('account-role-label').textContent.includes('قائد') ? $('account-role-label').textContent : 'قائد فريق') + ' · ' + (d.role || 'مدبلج') : (d.role || 'مدبلج');
-            var avatar = $('account-avatar'), safeLogo = /^https:\/\//i.test(d.logo || '') ? d.logo : '';
-            if (safeLogo) { avatar.style.backgroundImage = 'url("' + safeLogo.replace(/["\\]/g, '') + '")'; avatar.style.backgroundSize = 'cover'; avatar.style.backgroundPosition = 'center'; avatar.textContent = ''; }
-            else { avatar.style.backgroundImage = ''; avatar.textContent = (d.name || 'A').trim().charAt(0); }
+            setAccountAvatar(d.name || $('account-display-name').textContent, d.logo);
             $('my-page-link').href = 'actor.html?id=' + encodeURIComponent(d.id); show($('my-page-link'), true); show($('edit-profile-trigger'), true);
             $('p-name').value = d.name || ''; $('p-role').value = d.role || ''; $('p-bio').value = d.bio || '';
             $('p-social').value = d.social_url || ''; $('p-logo').value = d.logo || ''; $('p-banner').value = d.banner || '';
@@ -284,16 +288,19 @@
             if (!myDubberId) return;
             var name = $('p-name').value.trim();
             var https = /^https:\/\/[^\s<>"']+$/i;
-            var social = $('p-social').value.trim(), logo = $('p-logo').value.trim(), banner = $('p-banner').value.trim();
+            var social = $('p-social').value.trim(), rawLogo = $('p-logo').value.trim(), rawBanner = $('p-banner').value.trim();
+            var logo = window.ARAnimeAvatar.normalizeImageUrl(rawLogo), banner = window.ARAnimeAvatar.normalizeImageUrl(rawBanner);
             if (name.length < 2) { say($('p-msg'), 'اكتب اسمك (حرفين على الأقل).', 'err'); return; }
-            if ((social && !https.test(social)) || (logo && !https.test(logo)) || (banner && !https.test(banner))) { say($('p-msg'), 'الروابط لازم تبدأ بـ https://', 'err'); return; }
+            if (social && !https.test(social)) { say($('p-msg'), 'رابط حسابك لازم يبدأ بـ https://', 'err'); return; }
+            if ((rawLogo && !logo) || (rawBanner && !banner)) { say($('p-msg'), 'تحقق من رابط الصورة أو الغلاف.', 'err'); return; }
+            $('p-logo').value = logo; $('p-banner').value = banner;
             var btn = $('p-save'); btn.disabled = true; say($('p-msg'), '');
             var u = await client.from('dubbers').update({
                 name: name, role: $('p-role').value.trim() || 'مؤدي أصوات', bio: $('p-bio').value.trim() || null,
                 social_url: social || null, logo: logo || null, banner: banner || null
             }).eq('id', myDubberId);
             btn.disabled = false;
-            if (!u.error) { $('account-display-name').textContent = name; $('account-role-label').textContent = isAdminSession ? 'مسؤول المنصة · ' + ($('p-role').value.trim() || 'مدبلج') : isStaffSession ? 'قائد فريق · ' + ($('p-role').value.trim() || 'مدبلج') : ($('p-role').value.trim() || 'مدبلج'); $('account-avatar').textContent = name.trim().charAt(0); $('account-avatar').style.backgroundImage = logo ? 'url("' + logo.replace(/["\\]/g, '') + '")' : ''; $('account-avatar').style.backgroundSize = 'cover'; }
+            if (!u.error) { $('account-display-name').textContent = name; $('account-role-label').textContent = isAdminSession ? 'مسؤول المنصة · ' + ($('p-role').value.trim() || 'مدبلج') : isStaffSession ? 'قائد فريق · ' + ($('p-role').value.trim() || 'مدبلج') : ($('p-role').value.trim() || 'مدبلج'); setAccountAvatar(name, logo); }
             say($('p-msg'), u.error ? 'ما انحفظت التعديلات. تحقّق من بياناتك وحاول مجدداً.' : 'تم حفظ تعديلات بروفايلك بنجاح.', u.error ? 'err' : 'ok');
         };
 

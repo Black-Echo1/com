@@ -13,3 +13,6 @@
 
 @media(max-width:640px){.admin-workspace .admin-nav{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));overflow:visible;position:relative;top:auto;margin-inline:0}.admin-workspace .admin-nav a{justify-content:flex-start;white-space:normal;padding-inline:9px}.admin-workspace .admin-nav .admin-count{min-width:25px;height:24px;margin-inline-start:auto;padding-inline:6px}}
 .admin-workspace .empty.err::before{content:'!';background:rgba(255,75,90,.12);color:#ff828b}
+
+.admin-workspace .row .admin-avatar-fallback{display:grid;place-items:center;color:#fff;font-size:1.2rem;font-weight:900;line-height:1}
+@media(max-width:640px){.admin-workspace .row .admin-avatar-fallback{width:48px;height:48px}}

@@ -77,10 +77,10 @@
                     <h2 id="step-title-2">جهّز شكل بروفايلك</h2>
                     <p class="apply-step-hint">أضف صورة ورابطاً يعرّفان بك. هذي البيانات اختيارية وتقدر تكمل بدونها.</p>
                     <label for="avatar-url">رابط صورة البروفايل <span>(اختياري)</span></label>
-                    <input id="avatar-url" name="avatar_url" type="url" inputmode="url" dir="ltr" maxlength="500" placeholder="https://example.com/photo.jpg" autocomplete="url">
+                    <input id="avatar-url" name="avatar_url" type="text" inputmode="url" dir="ltr" maxlength="500" placeholder="example.com/photo.jpg" autocomplete="url">
                     <label for="social-url">رابط حساب أو عيّنة من أعمالك <span>(اختياري)</span></label>
                     <input id="social-url" name="social_url" type="url" inputmode="url" dir="ltr" maxlength="500" placeholder="https://..." autocomplete="url">
-                    <p class="apply-private-note"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> نستخدم روابط https الآمنة فقط.</p>
+                    <p class="apply-private-note"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> للصورة: اكتب الرابط كما هو، ونضيف https تلقائياً إذا لم يكن موجوداً. رابط https الموجود نقبله كما هو.</p>
                 </section>
 
                 <section class="apply-step" data-step="3" aria-labelledby="step-title-3" hidden>
@@ -113,6 +113,7 @@
     <footer class="apply-footer">© 2026 AR anime · <a href="legal.html">سياسة الخصوصية</a></footer>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
     <script src="../data/supabase_config.js"></script>
+    <script src="../data/avatar.js"></script>
     <script>
     (() => {
         'use strict';
@@ -133,6 +134,13 @@
         const arabicDigits = (value) => String(value).replace(/\d/g, (digit) => '٠١٢٣٤٥٦٧٨٩'[Number(digit)]);
         const setError = (message) => { errorBox.textContent = message || ''; errorBox.hidden = !message; };
         const safeHttps = (value) => !value || /^https:\/\/[^\s<>"']+$/i.test(value);
+        const normalizeAvatarUrl = () => {
+            const input = $('avatar-url'); const raw = input.value.trim();
+            const normalized = window.ARAnimeAvatar.normalizeImageUrl(raw);
+            if (raw && !normalized) return false;
+            input.value = normalized;
+            return true;
+        };
         const readDraft = () => {
             try { return JSON.parse(sessionStorage.getItem(draftKey) || '{}'); } catch (_) { return {}; }
         };
@@ -196,7 +204,8 @@
             }
             if (stepIndex === 1 && $('application-role').value.trim().length > 40) return 'الدور المختار أطول من المسموح.';
             if (stepIndex === 2) {
-                if (!safeHttps($('avatar-url').value.trim()) || !safeHttps($('social-url').value.trim())) return 'تحقق من الرابط؛ يجب أن يبدأ بـ https://.';
+                if (!normalizeAvatarUrl()) return 'تحقق من رابط الصورة. اكتب رابط صورة صالحاً أو اتركه فارغاً.';
+                if (!safeHttps($('social-url').value.trim())) return 'رابط حسابك أو أعمالك يجب أن يبدأ بـ https://.';
             }
             if (stepIndex === 3 && !teamById($('team-id').value)) return 'اختر فريقاً للمتابعة.';
             return '';
@@ -209,7 +218,8 @@
             teams.forEach((team) => {
                 const button = document.createElement('button'); button.type = 'button'; button.className = 'apply-team-option'; button.setAttribute('role', 'radio'); button.setAttribute('aria-checked', 'false'); button.dataset.teamId = team.id;
                 const logo = document.createElement('span'); logo.className = 'apply-team-logo';
-                if (team.logo && safeHttps(team.logo)) { const image = document.createElement('img'); image.src = team.logo; image.alt = ''; image.loading = 'lazy'; logo.appendChild(image); }
+                const teamLogo = window.ARAnimeAvatar.normalizeImageUrl(team.logo);
+                if (teamLogo) { const image = document.createElement('img'); image.src = teamLogo; image.alt = ''; image.loading = 'lazy'; logo.appendChild(image); }
                 else { const icon = document.createElement('i'); icon.className = 'fa-solid fa-people-group'; icon.setAttribute('aria-hidden', 'true'); logo.appendChild(icon); }
                 const copy = document.createElement('span'); copy.className = 'apply-team-copy';
                 const name = document.createElement('strong'); name.textContent = team.name;
@@ -232,6 +242,7 @@
         }
         form.addEventListener('input', saveDraft);
         form.addEventListener('change', saveDraft);
+        $('avatar-url').addEventListener('blur', () => { if (normalizeAvatarUrl()) saveDraft(); });
         nextButton.addEventListener('click', () => {
             const problem = validateStep();
             if (problem) { setError(problem); const target = steps[stepIndex].querySelector('input:not([type=hidden]),select,textarea'); target?.focus(); return; }
@@ -241,6 +252,8 @@
         form.addEventListener('keydown', (event) => { if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA' && stepIndex < steps.length - 1) { event.preventDefault(); nextButton.click(); } });
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
+            if (!normalizeAvatarUrl()) { setStep(2); setError('تحقق من رابط الصورة. اكتب رابط صورة صالحاً أو اتركه فارغاً.'); return; }
+            if (!safeHttps($('social-url').value.trim())) { setStep(2); setError('رابط حسابك أو أعمالك يجب أن يبدأ بـ https://.'); return; }
             const issue = validateStep();
             if (issue) { setError(issue); return; }
             if (!$('confirm-details').checked) { setError('أكد صحة بياناتك قبل إرسال الطلب.'); return; }

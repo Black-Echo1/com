@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ar-anime-v9';
+const CACHE_NAME = 'ar-anime-v11';
 const PRECACHE_URLS = [
     './',
     './index.html',
@@ -10,6 +10,7 @@ const PRECACHE_URLS = [
     './css/apply.css',
     './html/apply.html',
     './data/site.js',
+    './data/avatar.js',
     './manifest.json',
     './offline.html'
 ];

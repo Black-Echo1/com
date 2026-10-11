@@ -79,6 +79,7 @@
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="../data/supabase_config.js"></script>
+<script src="../data/avatar.js"></script>
 <script>
 (function () {
     'use strict';
@@ -112,6 +113,7 @@
     }
     function link(url, label) { if (!url || !HTTPS.test(url)) return null; var a = el('a', 'admin-text-link', label); a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer'; return a; }
     function urlOrNull(v, name) { v = v.trim(); if (!v) return { v: null }; if (!HTTPS.test(v)) { toast(name + ' لازم يبدأ بـ https://', true); return null; } return { v: v }; }
+    function imageUrlOrNull(v, name) { v = v.trim(); if (!v) return { v: null }; var normalized = window.ARAnimeAvatar.normalizeImageUrl(v); if (!normalized) { toast(name + ' ليس رابط صورة صالحاً.', true); return null; } return { v: normalized }; }
     function count(id, n) { var node = $(id); if (node) node.textContent = String(n || 0); }
 
     /* ---------- الطلبات ---------- */
@@ -139,7 +141,7 @@
         else if (!j.data.length) jb.appendChild(el('div', 'empty', 'ما فيه طلبات انضمام جديدة.'));
         else j.data.forEach(function (r) {
             var card = el('div', 'card'), row = el('div', 'row');
-            var img = el('img'); img.alt = ''; img.src = HTTPS.test(r.avatar_url || '') ? r.avatar_url : '../icon-192.png'; row.appendChild(img);
+            var img = window.ARAnimeAvatar.create(r.display_name, r.avatar_url, 'admin-avatar', 'admin-avatar-fallback'); row.appendChild(img);
             var info = el('div', 'info'); info.appendChild(el('b', '', r.display_name));
             info.appendChild(el('div', 'meta', r.role + ' — ' + tname(r.team_id)));
             if (r.bio) info.appendChild(el('div', '', r.bio));
@@ -167,14 +169,15 @@
         summaryCopy.appendChild(el('span', 'team-summary-hint', teamMembersCount + ' عضو · إدارة البيانات والطلبات والأعضاء'));
         var summaryCta = el('span', 'team-summary-cta'); summaryCta.appendChild(el('i', 'fa-solid fa-gear')); summaryCta.appendChild(document.createTextNode('إدارة الفريق'));
         summary.appendChild(summaryCopy); summary.appendChild(summaryCta); d.appendChild(summary);
-        var name = input(t.name), logo = input(t.logo, 'https://...'), banner = input(t.banner, 'https://...');
+        var name = input(t.name), logo = input(t.logo, 'example.com/logo.png'), banner = input(t.banner, 'example.com/banner.jpg');
         var desc = el('textarea'); desc.value = t.description || '';
-        d.appendChild(field('اسم الفريق', name)); d.appendChild(field('الشعار (رابط)', logo));
-        d.appendChild(field('الخلفية (رابط)', banner)); d.appendChild(field('الوصف', desc));
+        d.appendChild(field('اسم الفريق', name)); d.appendChild(field('الشعار (رابط صورة)', logo));
+        d.appendChild(field('الخلفية (رابط صورة)', banner)); d.appendChild(field('الوصف', desc));
         var save = el('button', 'red', 'حفظ بيانات الفريق'); save.style.marginTop = '12px';
         save.onclick = async function () {
             var n = name.value.trim(); if (n.length < 2) { toast('اكتب اسم الفريق', true); return; }
-            var lg = urlOrNull(logo.value, 'الشعار'); if (!lg) return; var bn = urlOrNull(banner.value, 'الخلفية'); if (!bn) return;
+            var lg = imageUrlOrNull(logo.value, 'الشعار'); if (!lg) return; var bn = imageUrlOrNull(banner.value, 'الخلفية'); if (!bn) return;
+            logo.value = lg.v || ''; banner.value = bn.v || '';
             save.disabled = true;
             await act(function () { return client.from('teams').update({ name: n, logo: lg.v, banner: bn.v, description: desc.value.trim() || null }).eq('id', t.id); }, 'انحفظ');
             save.disabled = false;

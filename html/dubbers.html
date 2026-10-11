@@ -47,7 +47,7 @@
         .dubber-card:hover .dubber-avatar{ border-color:var(--he-red-2); }
         .dubber-avatar-fallback{
             width:78px; height:78px; border-radius:50%; margin:0 auto 14px; display:flex; align-items:center; justify-content:center;
-            background:linear-gradient(135deg, var(--he-surface-2), var(--he-border)); color:var(--he-muted); font-size:1.5rem;
+            background:linear-gradient(135deg, var(--he-surface-2), var(--he-border)); color:#fff; font-size:1.5rem; font-weight:900; line-height:1; border:2px solid var(--he-border);
         }
         .dubber-card h3{ color:#fff; font-size:1.1rem; margin-bottom:6px; }
         .dubber-card p{ color:var(--he-muted); font-size:0.85rem; margin:0; }
@@ -97,6 +97,7 @@
     <script src="../data/supabase_config.js"></script>
     <script src="../data/db_loader.js"></script>
     <script src="../data/supabase_config.js"></script>
+    <script src="../data/avatar.js"></script>
     <script src="../data/people_loader.js"></script>
     <script src="../data/actors_engine.js"></script>
     <script>
@@ -118,13 +119,9 @@
                 card.setAttribute("aria-label", "عرض ملف " + profile.name);
                 card.dataset.search = `${profile.name} ${profile.role} ${profile.description}`.toLocaleLowerCase("ar");
                 card.style.animationDelay = `${(i++ % 12) * 45}ms`;
-                const avatarHtml = data.logo && /^https:\/\//i.test(data.logo)
-                    ? `<img loading="lazy" class="dubber-avatar" src="${escapeHtml(data.logo)}" alt="صورة ${escapeHtml(profile.name)}">`
-                    : `<div class="dubber-avatar-fallback" aria-hidden="true"><i class="fa-solid fa-user"></i></div>`;
+                const avatarHtml = window.ARAnimeAvatar.markup(profile.name, data.logo, 'dubber-avatar', 'dubber-avatar-fallback');
                 const countLine = aggregate ? `<span class="dubber-count">${aggregate.workCount} عمل • ${aggregate.characterCount} شخصية</span>` : '';
                 card.innerHTML = `${avatarHtml}<h3>${escapeHtml(profile.name)}</h3><p>${escapeHtml(profile.role)}</p><div class="dubber-description">${escapeHtml(profile.description)}</div><span class="dubber-tier"><i class="fa-solid fa-award" aria-hidden="true"></i> ${escapeHtml(profile.tier)}</span>${countLine}<span class="dubber-cta">عرض الشخصيات والبورتفوليو ←</span>`;
-                const avatar = card.querySelector(".dubber-avatar");
-                if (avatar) avatar.addEventListener("error", () => { const fallback = document.createElement("div"); fallback.className = "dubber-avatar-fallback"; fallback.setAttribute("aria-hidden", "true"); fallback.textContent = profile.name.slice(0, 1); avatar.replaceWith(fallback); }, {once:true});
                 const openProfile = () => { window.location.href = `actor.html?id=${encodeURIComponent(actorId)}`; };
                 card.addEventListener('click', openProfile); card.addEventListener('keydown', event => { if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); openProfile(); } });
                 container.appendChild(card);

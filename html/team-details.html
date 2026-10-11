@@ -39,8 +39,9 @@
         }
         @keyframes heFadeIn{ to{ opacity:1; transform:translateY(0); } }
         .member-card:hover{ border-color:var(--he-red-2); transform:translateY(-7px); box-shadow:0 16px 30px -12px rgba(0,0,0,0.5); }
-        .member-card img{ width:78px; height:78px; border-radius:50%; margin-bottom:14px; object-fit:cover; border:2px solid var(--he-border); }
-        .member-card:hover img{ border-color:var(--he-red-2); }
+        .member-card img,.member-card .member-avatar-fallback{ width:78px; height:78px; border-radius:50%; margin:0 auto 14px; object-fit:cover; border:2px solid var(--he-border); }
+        .member-card .member-avatar-fallback{ display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--he-surface-2),var(--he-border)); color:#fff; font-size:1.6rem; font-weight:900; line-height:1; }
+        .member-card:hover img,.member-card:hover .member-avatar-fallback{ border-color:var(--he-red-2); }
         .member-card h4{ margin:0 0 5px 0; font-size:1.05rem; }
         .member-card span{ color:var(--he-muted); font-size:0.82rem; }
 
@@ -103,6 +104,7 @@
 
     <script src="../data/supabase_config.js"></script>
     <script src="../data/db_loader.js"></script>
+    <script src="../data/avatar.js"></script>
     <script src="../data/people_loader.js"></script>
     <script src="../data/teams_engine.js"></script>
     <script>
@@ -128,7 +130,7 @@
                 card.className = "member-card";
                 card.style.animationDelay = `${i * 45}ms`;
                 card.innerHTML = `
-                    <img loading="lazy" src="${member.avatar}" alt="${member.name}">
+                    ${window.ARAnimeAvatar.markup(member.name, member.avatar, 'member-avatar', 'member-avatar-fallback')}
                     <h4>${member.name}</h4>
                     <span>${member.role}</span>
                 `;

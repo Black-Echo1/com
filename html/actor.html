@@ -34,12 +34,12 @@
         }
         .actor-logo-img{
             width:118px; height:118px; border-radius:50%; object-fit:cover;
-            border:3px solid var(--he-red-2); margin:0 auto 18px auto; display:none;
+            border:3px solid var(--he-red-2); margin:0 auto 18px auto; display:block;
             box-shadow:0 10px 30px -6px rgba(229, 9, 20, 0.5);
         }
         .actor-avatar-fallback{
             width:118px; height:118px; border-radius:50%; margin:0 auto 18px; display:flex; align-items:center; justify-content:center;
-            background:linear-gradient(135deg, var(--he-surface-2), var(--he-border)); color:var(--he-muted); font-size:2.4rem;
+            background:linear-gradient(135deg, var(--he-surface-2), var(--he-border)); color:#fff; font-size:2.4rem; font-weight:900; line-height:1;
             border:3px solid var(--he-border);
         }
         .actor-header h1{ margin:0 0 8px 0; font-size:clamp(1.8rem,4vw,2.4rem); font-weight:900; color:#fff; }
@@ -144,6 +144,7 @@
     <script src="../data/db_loader.js"></script>
     <script src="../data/catalog_data.js"></script>
     <script src="../data/supabase_config.js"></script>
+    <script src="../data/avatar.js"></script>
     <script src="../data/people_loader.js"></script>
     <script src="../data/actors_engine.js"></script>
     <script>
@@ -189,15 +190,9 @@
             }
 
             const logoImg = document.getElementById("actor-logo-img");
-            if (actorData.logo) {
-                logoImg.src = actorData.logo;
-                logoImg.style.display = "block";
-            } else {
-                const fallback = document.createElement("div");
-                fallback.className = "actor-avatar-fallback";
-                fallback.innerHTML = `<i class="fa-solid fa-user"></i>`;
-                logoImg.replaceWith(fallback);
-            }
+            const actorAvatar = window.ARAnimeAvatar.create(profile.name, actorData.logo, 'actor-logo-img', 'actor-avatar-fallback');
+            actorAvatar.id = 'actor-logo-img';
+            logoImg.replaceWith(actorAvatar);
 
             // الأدوار هنا = roles[] اليدوية (لو موجودة) + أي أدوار جديدة اتضافت في dubbedCharacters
             // داخل anime_db.js واتربطت تلقائياً بهذا المؤدي — بدون أي تكرار
