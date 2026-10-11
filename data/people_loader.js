@@ -49,7 +49,7 @@ var teamsDatabase = {};
         (members || []).forEach(function (m) {
             var team = teamsDatabase[m.team_id], d = byId[m.dubber_id];
             if (!team || !d) return;
-            team.members.push({ id: d.id, name: esc(d.name), role: esc(m.role || d.role || 'مؤدي أصوات'), avatar: safeUrl(d.logo) });
+            team.members.push({ id: d.id, name: esc(d.name), role: esc(m.role || d.role || 'مؤدي أصوات'), displayLevel: esc(m.display_level || ''), avatar: safeUrl(d.logo) });
         });
     }
 

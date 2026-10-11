@@ -140,13 +140,19 @@
     function fail(t) { $('status').textContent = t; $('status').className = 'sub err'; }
     if (!cfg.url || !cfg.anonKey || !window.supabase) { fail('الخدمة غير مضبوطة (supabase_config.js).'); return; }
     var client = window.supabase.createClient(cfg.url, cfg.anonKey);
-    var S = { admin: false, uid: null, myTeams: [], teams: [], dubbers: [], members: [], leaders: [], animes: {}, animeList: [], tar: [] };
+    var S = { admin: false, uid: null, myTeams: [], teams: [], dubbers: [], members: [], leaders: [], animes: {}, animeList: [], tar: [], displayLevelReady: false };
     var contentManager = null;
     var HTTPS = /^https:\/\/[^\s<>"']+$/i;
+    var DISPLAY_LEVELS = ['مدبلج مبتدئ', 'مدبلج متوسط', 'مدبلج محترف'];
 
     function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
     function field(label, node) { var w = el('div'); w.appendChild(el('label', '', label)); w.appendChild(node); return w; }
     function input(val, ph, type) { var i = el('input'); i.type = type || 'text'; i.value = val || ''; if (ph) i.placeholder = ph; return i; }
+    function displayLevelSelect(value) {
+        var select = el('select'); var none = el('option', '', '— غير محدد —'); none.value = ''; select.appendChild(none);
+        DISPLAY_LEVELS.forEach(function (label) { var option = el('option', '', label); option.value = label; select.appendChild(option); });
+        select.value = value || ''; return select;
+    }
     function rid(p) { var a = new Uint8Array(4); crypto.getRandomValues(a); return p + Array.prototype.map.call(a, function (b) { return ('0' + b.toString(16)).slice(-2); }).join(''); }
     function toast(t, bad) { var d = el('div', 'toast' + (bad ? ' bad' : ''), t); document.body.appendChild(d); setTimeout(function () { d.remove(); }, 2600); }
     function dname(id) { var d = S.dubbers.find(function (x) { return x.id === id; }); return d ? d.name : id; }
@@ -257,6 +263,7 @@
         mine.forEach(function (q) { d.appendChild(el('div', 'meta', '• ' + (q.anime_id ? (S.animes[q.anime_id] || q.anime_id) : q.new_title) + ' — ' + names[q.status] + (q.admin_note ? ': ' + q.admin_note : ''))); });
 
         d.appendChild(el('label', '', 'أعضاء الفريق'));
+        if (!S.displayLevelReady) d.appendChild(el('div', 'empty err', 'مستوى العرض اليدوي يحتاج إلى تطبيق supabase/display_level_system.sql. الصفة العامة الحالية تبقى قابلة للتعديل.'));
         var mem = S.members.filter(function (m) { return m.team_id === t.id; });
         if (!mem.length) d.appendChild(el('div', 'empty', 'ما فيه أعضاء.'));
         mem.forEach(function (m) {
@@ -268,12 +275,17 @@
             roleInput.maxLength = 40; roleInput.setAttribute('list', 'team-role-presets');
             var roleField = field('الصفة التي تظهر للجميع', roleInput); roleField.className = 'member-role-field';
             roleField.appendChild(el('small', 'member-role-hint', 'اقتراحات جاهزة أو صفة مخصصة؛ تظهر للزوار ولا تمنح صلاحية إدارة.'));
-            var saveRole = el('button', 'ok member-role-save', 'حفظ الصفة');
+            var levelInput = displayLevelSelect(m.display_level); levelInput.disabled = !S.displayLevelReady;
+            var levelField = field('مستوى العرض', levelInput); levelField.className = 'member-role-field member-role-level';
+            levelField.appendChild(el('small', 'member-role-hint', 'اختيار يدوي من قائد الفريق أو الأدمن؛ لا يُحسب تلقائياً.'));
+            var saveRole = el('button', 'ok member-role-save', 'حفظ التعديلات');
             saveRole.onclick = async function () {
                 var nextRole = roleInput.value.trim();
                 if (nextRole.length > 40 || /[<>]/.test(nextRole)) { toast('اكتب صفة من 40 حرفاً كحد أقصى، بدون رموز HTML.', true); return; }
                 saveRole.disabled = true;
-                var updated = await client.from('team_members').update({ role: nextRole || null }).eq('team_id', t.id).eq('dubber_id', m.dubber_id).select('team_id').maybeSingle();
+                var changes = { role: nextRole || null };
+                if (S.displayLevelReady) changes.display_level = levelInput.value || null;
+                var updated = await client.from('team_members').update(changes).eq('team_id', t.id).eq('dubber_id', m.dubber_id).select('team_id').maybeSingle();
                 saveRole.disabled = false;
                 if (updated.error) { toast(friendly(updated.error.message), true); return; }
                 if (!updated.data) { toast('تعذّر تحديث الصفة. تأكد أنك قائد هذا الفريق أو مسؤول المنصة.', true); return; }
@@ -285,9 +297,17 @@
         });
         var inTeam = mem.map(function (m) { return m.dubber_id; });
         var pick = el('select'); S.dubbers.filter(function (x) { return inTeam.indexOf(x.id) === -1; }).forEach(function (x) { var o = el('option', '', x.name); o.value = x.id; pick.appendChild(o); });
-        var role = input('مؤدي أصوات', 'مثال: مدبلج مبتدئ أو ممنتج'); role.maxLength = 40; role.setAttribute('list', 'team-role-presets'); var add = el('button', 'ok', 'إضافة عضو');
-        add.onclick = function () { var memberRole = role.value.trim(); if (!pick.value) { toast('ما فيه مدبلج متاح للإضافة', true); return; } if (memberRole.length > 40 || /[<>]/.test(memberRole)) { toast('اكتب صفة من 40 حرفاً كحد أقصى، بدون رموز HTML.', true); return; } act(function () { return client.from('team_members').insert({ team_id: t.id, dubber_id: pick.value, role: memberRole || null }); }, 'انضاف للفريق'); };
-        var line = el('div', 'inline'); line.appendChild(field('مدبلج', pick)); line.appendChild(field('الصفة التي تظهر للجميع', role)); line.appendChild(add);
+        var role = input('مؤدي أصوات', 'مثال: ممنتج أو مساعد قائد'); role.maxLength = 40; role.setAttribute('list', 'team-role-presets');
+        var newLevel = displayLevelSelect('مدبلج متوسط'); newLevel.disabled = !S.displayLevelReady; var add = el('button', 'ok', 'إضافة عضو');
+        add.onclick = function () {
+            var memberRole = role.value.trim();
+            if (!pick.value) { toast('ما فيه مدبلج متاح للإضافة', true); return; }
+            if (memberRole.length > 40 || /[<>]/.test(memberRole)) { toast('اكتب صفة من 40 حرفاً كحد أقصى، بدون رموز HTML.', true); return; }
+            var member = { team_id: t.id, dubber_id: pick.value, role: memberRole || null };
+            if (S.displayLevelReady) member.display_level = newLevel.value || null;
+            act(function () { return client.from('team_members').insert(member); }, 'انضاف للفريق');
+        };
+        var line = el('div', 'inline'); line.appendChild(field('مدبلج', pick)); line.appendChild(field('الصفة التي تظهر للجميع', role)); line.appendChild(field('مستوى العرض', newLevel)); line.appendChild(add);
         d.appendChild(line);
 
         if (S.admin) {
@@ -386,7 +406,9 @@
     async function load() {
         var t = await client.from('teams').select('id,name,logo,banner,description,sort_order').order('sort_order');
         var d = await client.from('dubbers').select('id,name,role').order('created_at');
-        var m = await client.from('team_members').select('team_id,dubber_id,role');
+        var m = await client.from('team_members').select('team_id,dubber_id,role,display_level');
+        S.displayLevelReady = !m.error;
+        if (m.error && /display_level|column|schema cache/i.test(m.error.message || '')) m = await client.from('team_members').select('team_id,dubber_id,role');
         var q = await client.from('team_anime_requests').select('id,team_id,anime_id,new_title,mal_url,note,status,admin_note,created_at').order('created_at', { ascending: false });
         var a = await client.from('anime').select('id,title,poster,cover_banner,story,sort_order,is_hero,in_catalog').order('sort_order', { ascending: true }).limit(1000);
         S.teams = t.data || []; S.dubbers = d.data || []; S.members = m.data || []; S.tar = q.data || [];

@@ -52,8 +52,8 @@
 
 /* Per-member public team role editor */
 .admin-workspace .member-role-row{
-  display:grid;grid-template-columns:minmax(145px,.85fr) minmax(250px,1.45fr) auto auto;
-  grid-template-areas:"person field save remove";align-items:center;gap:12px;
+  display:grid;grid-template-columns:minmax(140px,.8fr) minmax(190px,1.2fr) minmax(180px,1fr) auto auto;
+  grid-template-areas:"person field level save remove";align-items:center;gap:12px;
   padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)
 }
 .admin-workspace .member-role-person{grid-area:person;display:grid;gap:5px;min-width:0}
@@ -61,17 +61,19 @@
 .admin-workspace .member-role-current{color:#9ba3b6;font-size:.71rem;line-height:1.5;overflow-wrap:anywhere}
 .admin-workspace .member-role-field{grid-area:field;display:grid;gap:5px;min-width:0}
 .admin-workspace .member-role-field label{margin:0!important;color:#c9cde0;font-size:.73rem}
-.admin-workspace .member-role-field input{width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:9px 11px;border-radius:12px;font-size:.82rem}
+.admin-workspace .member-role-field input,.admin-workspace .member-role-field select{width:100%;min-width:0;max-width:100%;box-sizing:border-box;padding:9px 11px;border-radius:12px;font-size:.82rem}
+.admin-workspace .member-role-level{grid-area:level}
+.admin-workspace .member-role-level select:disabled{opacity:.55;cursor:not-allowed}
 .admin-workspace .member-role-hint{color:#8f97a8;font-size:.67rem;line-height:1.5}
 .admin-workspace .member-role-save{grid-area:save;min-width:100px}
 .admin-workspace .member-role-remove{grid-area:remove;min-width:76px}
 @media(max-width:900px){
-  .admin-workspace .member-role-row{grid-template-columns:minmax(0,1fr) minmax(0,1.4fr);grid-template-areas:"person field" "save remove";gap:10px}
+  .admin-workspace .member-role-row{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);grid-template-areas:"person person" "field level" "save remove";gap:10px}
 }
 @media(max-width:640px){
-  .admin-workspace .member-role-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"person person" "field field" "save remove";gap:9px;padding:14px 0}
+  .admin-workspace .member-role-row{grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-areas:"person person" "field field" "level level" "save remove";gap:9px;padding:14px 0}
   .admin-workspace .member-role-save,.admin-workspace .member-role-remove{width:100%;min-width:0}
-  .admin-workspace .member-role-field input{font-size:.8rem}
+  .admin-workspace .member-role-field input,.admin-workspace .member-role-field select{font-size:.8rem}
 }
 
 

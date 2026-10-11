@@ -1,4 +1,4 @@
-const CACHE_NAME = 'ar-anime-v15';
+const CACHE_NAME = 'ar-anime-v17';
 const PRECACHE_URLS = [
     './',
     './index.html',

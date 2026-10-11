@@ -151,6 +151,7 @@
     <script src="../data/supabase_config.js"></script>
     <script src="../data/avatar.js"></script>
     <script src="../data/people_loader.js"></script>
+    <script src="../data/social_links.js"></script>
     <script src="../data/actors_engine.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
@@ -172,7 +173,7 @@
             }
 
             const actorData = dubbersDatabase[actorId];
-            const profile = (window.ActorsEngine && window.ActorsEngine.getActorProfile(actorId)) || { name: actorData.name || actorId, role: actorData.role || 'مؤدي أصوات', description: 'صوت شغوف يضيف احتراماً وصدقاً لكل شخصية يؤديها.', tier: 'متوسط' };
+            const profile = (window.ActorsEngine && window.ActorsEngine.getActorProfile(actorId)) || { name: actorData.name || actorId, role: actorData.role || 'مؤدي أصوات', description: 'صوت شغوف يضيف احتراماً وصدقاً لكل شخصية يؤديها.', tier: 'غير محدد', displayLevels: [] };
 
             document.getElementById("actor-name").innerText = profile.name;
             document.title = `${profile.name} | مدبلج عربي | AR anime`;
@@ -181,7 +182,7 @@
             const description = document.getElementById('actor-description');
             if (description) description.innerText = profile.description;
             const tier = document.getElementById('actor-tier');
-            if (tier) { tier.hidden = false; tier.innerHTML = `<i class="fa-solid fa-award"></i> مستوى العرض: ${profile.tier}`; }
+            if (tier) { tier.hidden = false; tier.innerHTML = `<i class="fa-solid fa-award"></i> مستوى العرض: ${profile.tier || 'غير محدد'}`; }
             if (profile.role) {
                 document.getElementById("actor-role").innerText = profile.role;
             }
@@ -191,9 +192,11 @@
                 const decodeEscapedText = value => { const node = document.createElement('textarea'); node.innerHTML = String(value || ''); return node.value; };
                 const assignments = [];
                 Object.values(teamsDatabase).forEach(team => (team.members || []).forEach(member => {
-                    if (String(member.id) === String(actorId) && member.role) {
-                        const key = String(team.id || team.name) + '|' + member.role;
-                        if (!assignments.some(item => item.key === key)) assignments.push({ key, role: member.role, team: team.name || '' });
+                    const level = decodeEscapedText(member.displayLevel || '');
+                    const role = decodeEscapedText(member.role || '');
+                    if (String(member.id) === String(actorId) && (role || level)) {
+                        const key = String(team.id || team.name) + '|' + role + '|' + level;
+                        if (!assignments.some(item => item.key === key)) assignments.push({ key, role, level, team: team.name || '' });
                     }
                 }));
                 if (assignments.length) {
@@ -201,9 +204,10 @@
                     assignments.forEach(item => {
                         const badge = document.createElement('span'); badge.className = 'actor-team-role';
                         const icon = document.createElement('i'); icon.className = 'fa-solid fa-award'; icon.setAttribute('aria-hidden', 'true');
-                        const roleText = document.createElement('span'); roleText.textContent = decodeEscapedText(item.role);
+                        const roleText = document.createElement('span'); roleText.textContent = item.role || 'عضو الفريق';
                         badge.append(icon, roleText);
                         if (item.team) { const teamText = document.createElement('small'); teamText.textContent = '· ' + decodeEscapedText(item.team); badge.appendChild(teamText); }
+                        if (item.level) { const levelText = document.createElement('small'); levelText.textContent = '· مستوى العرض: ' + item.level; badge.appendChild(levelText); }
                         teamRolesBox.appendChild(badge);
                     });
                 }
@@ -242,13 +246,20 @@
             });
             const works = [...workMap.values()];
             const overview = document.getElementById('portfolio-overview');
-            if (overview) overview.innerHTML = `<div class="overview-card"><strong>${works.length}</strong><span>أعمال</span></div><div class="overview-card"><strong>${roles.length}</strong><span>شخصية</span></div><div class="overview-card"><strong>${profile.tier}</strong><span>مستوى العرض</span></div>`;
+            if (overview) overview.innerHTML = `<div class="overview-card"><strong>${works.length}</strong><span>أعمال</span></div><div class="overview-card"><strong>${roles.length}</strong><span>شخصية</span></div><div class="overview-card"><strong>${profile.tier || 'غير محدد'}</strong><span>مستوى العرض</span></div>`;
             const actionBox = document.getElementById('actor-actions');
             if (actionBox) actionBox.innerHTML = `<button type="button" class="actor-action primary" id="share-actor"><i class="fa-solid fa-share-nodes"></i> شارك الصفحة</button><button type="button" class="actor-action" id="follow-actor"><i class="fa-solid fa-bell"></i> متابعة محلية</button><button type="button" class="actor-action" id="print-actor"><i class="fa-solid fa-print"></i> طباعة البطاقة</button><a class="actor-action" href="../index.html#contact"><i class="fa-solid fa-envelope"></i> تواصل مع AR anime</a>`;
             const socialBox = document.getElementById('social-links');
-            const socials = actorData.socials || actorData.socialLinks || {};
-            const socialMeta = { youtube:['fa-brands fa-youtube','YouTube'], instagram:['fa-brands fa-instagram','Instagram'], tiktok:['fa-brands fa-tiktok','TikTok'], telegram:['fa-brands fa-telegram','Telegram'], discord:['fa-brands fa-discord','Discord'], x:['fa-brands fa-x-twitter','X'] };
-            if (socialBox) Object.entries(socials).forEach(([key, url]) => { if (!url || !socialMeta[key]) return; const safeUrl = String(url); if (!/^https?:\/\//i.test(safeUrl)) return; socialBox.insertAdjacentHTML('beforeend', `<a class="social-link" href="${safeUrl}" target="_blank" rel="noopener noreferrer"><i class="${socialMeta[key][0]}"></i> ${socialMeta[key][1]}</a>`); });
+            const socials = window.ARAnimeSocialLinks ? window.ARAnimeSocialLinks.collect(actorData) : Object.assign({}, actorData.socials || actorData.socialLinks || {}, actorData.social_url ? { website: actorData.social_url } : {});
+            const socialMeta = { youtube:['fa-brands fa-youtube','YouTube'], instagram:['fa-brands fa-instagram','Instagram'], tiktok:['fa-brands fa-tiktok','TikTok'], telegram:['fa-brands fa-telegram','Telegram'], discord:['fa-brands fa-discord','Discord'], x:['fa-brands fa-x-twitter','X'], website:['fa-solid fa-link','رابط التواصل'] };
+            if (socialBox) Object.entries(socials).forEach(([key, url]) => {
+                if (!url || !socialMeta[key]) return;
+                let safeUrl;
+                try { const parsed = new URL(String(url)); if (!/^https?:$/.test(parsed.protocol) || parsed.username || parsed.password) return; safeUrl = parsed.href; } catch (_) { return; }
+                const link = document.createElement('a'); link.className = 'social-link'; link.href = safeUrl; link.target = '_blank'; link.rel = 'noopener noreferrer';
+                const icon = document.createElement('i'); icon.className = socialMeta[key][0]; icon.setAttribute('aria-hidden', 'true');
+                link.append(icon, document.createTextNode(socialMeta[key][1])); socialBox.appendChild(link);
+            });
             if (socialBox && !socialBox.children.length) socialBox.innerHTML = '<span class="social-link" style="cursor:default;color:var(--he-muted);"><i class="fa-solid fa-link-slash"></i> لم تتم إضافة روابط التواصل بعد</span>';
             const factsBox = document.getElementById('profile-facts'); const facts = []; const addFacts = (value, icon, prefix='') => { (Array.isArray(value) ? value : value ? [value] : []).filter(Boolean).forEach(item => facts.push(`<span class="profile-fact"><i class="${icon}"></i> ${prefix}${item}</span>`)); }; addFacts(actorData.skills, 'fa-solid fa-wand-magic-sparkles'); addFacts(actorData.dialects, 'fa-solid fa-language'); addFacts(actorData.availability, 'fa-solid fa-circle-check'); addFacts(actorData.sampleLinks, 'fa-solid fa-headphones', 'عينة صوتية: '); if (factsBox) factsBox.innerHTML = facts.join('');
             document.getElementById('share-actor')?.addEventListener('click', async () => { const shareData = { title: `${profile.name} | AR anime`, text: `شاهد بورتفوليو ${profile.name} على AR anime`, url: cleanShareUrl }; try { if (navigator.share) await navigator.share(shareData); else { await navigator.clipboard.writeText(cleanShareUrl); alert('تم نسخ رابط المشاركة النظيف'); } } catch (_) {} });
