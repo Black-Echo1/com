@@ -14,6 +14,7 @@
     <link rel="stylesheet" href="../css/mobile.css">
     <link rel="stylesheet" href="../css/modern.css">
     <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../css/apply.css">
 </head>
 <body class="ui-page">
     <header class="main-header">
@@ -87,18 +88,10 @@
                 </div>
                 <div id="status-box" class="account-status"></div>
                 <div id="claims-box" class="account-claims"></div>
-                <form id="apply-form" class="account-join-form" onsubmit="return false;" hidden>
-                    <div class="account-section-head"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i><div><h2>قدّم طلب انضمام</h2><p>املأ بياناتك واختر الفريق والدور المناسبين لك.</p></div></div>
-                    <label for="f-name">اسمك الذي يظهر في الموقع</label><input id="f-name" maxlength="60" autocomplete="name">
-                    <label for="f-team">الفريق</label><select id="f-team"></select>
-                    <label for="f-role">الدور</label><select id="f-role"><option>مؤدي أصوات</option><option>مهندس صوت</option><option>مخرج دبلجة</option><option>مترجم</option><option>كاتب نصوص</option></select>
-                    <label for="f-bio">نبذة عنك (اختياري)</label><textarea id="f-bio" maxlength="600" placeholder="عرّفنا على خبرتك واهتماماتك"></textarea>
-                    <label for="f-social">رابط حسابك (اختياري)</label><input id="f-social" type="url" dir="ltr" placeholder="https://...">
-                    <label for="f-avatar">رابط صورتك (اختياري)</label><input id="f-avatar" type="url" dir="ltr" placeholder="https://...">
-                    <div class="hint">الروابط لازم تبدأ بـ https://</div>
-                    <button type="button" class="btn" id="apply-submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> إرسال طلب الانضمام</button>
-                    <div class="msg" id="apply-msg" role="status"></div>
-                </form>
+                <div id="apply-invite" class="account-apply-invite" hidden>
+                    <div><strong>جاهز تبدأ رحلتك مع فريق دبلجة؟</strong><p>جاوب على كم خطوة قصيرة، راجع طلبك، وبعد الإرسال ترجع مباشرة إلى حسابك.</p></div>
+                    <a id="apply-link" class="account-action primary" href="apply.html"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i> ابدأ طلب الانضمام</a>
+                </div>
             </section>
 
             <details id="profile-box" class="account-settings" hidden>
@@ -199,15 +192,6 @@
         $('edit-profile-trigger').onclick = function () { $('profile-box').open = true; $('profile-box').scrollIntoView({behavior:'smooth',block:'start'}); };
         $('share-profile').onclick = async function () { var url = $('my-page-link').hidden ? location.href : new URL($('my-page-link').href, location.href).href; try { if (navigator.share) await navigator.share({title:'بروفايلي على AR anime',url:url}); else if (navigator.clipboard) { await navigator.clipboard.writeText(url); $('share-message').textContent = 'تم نسخ رابط البروفايل إلى الحافظة.'; } } catch (_) {} };
 
-        var teamsLoaded = false;
-        async function loadTeams() {
-            if (teamsLoaded) return;
-            var r = await client.from('teams').select('id,name').order('sort_order');
-            var sel = $('f-team'); sel.innerHTML = '';
-            (r.data || []).forEach(function (t) { var o = document.createElement('option'); o.value = t.id; o.textContent = t.name; sel.appendChild(o); });
-            teamsLoaded = true;
-        }
-
         function statusBox(req) {
             var box = $('status-box'); box.innerHTML = '';
             if (!req) return;
@@ -255,11 +239,15 @@
             if (nx && /^[\w.\-\/?=&%]+$/.test(nx) && nx.indexOf('//') === -1 && nx.indexOf(':') === -1) { location.href = nx; return; }
             statusBox(req);
             var canApply = !req || req.status === 'rejected';
-            show($('apply-form'), canApply);
-            if (canApply) await loadTeams();
+            show($('apply-invite'), canApply);
+            $('apply-link').href = 'apply.html';
+            if (new URLSearchParams(location.search).get('submitted') === '1') {
+                $('share-message').textContent = 'تم إرسال طلبك بنجاح. تقدر تتابع حالته من هنا.';
+            }
+
             await renderClaims();
             await renderProfile();
-            if (myDubberId) { show($('apply-form'), false); if (!req) statusBox({status:'approved'}); }
+            if (myDubberId) { show($('apply-invite'), false); if (!req) statusBox({status:'approved'}); }
         }
 
         var myDubberId = null;
@@ -322,29 +310,6 @@
                 box.appendChild(d);
             });
         }
-
-        $('apply-submit').onclick = async function () {
-            var name = $('f-name').value.trim(), team = $('f-team').value;
-            var social = $('f-social').value.trim(), avatar = $('f-avatar').value.trim();
-            var https = /^https:\/\/[^\s<>"']+$/i;
-            if (name.length < 2) { say($('apply-msg'), 'اكتب اسمك (حرفين على الأقل).', 'err'); return; }
-            if (!team) { say($('apply-msg'), 'اختر فريقك.', 'err'); return; }
-            if ((social && !https.test(social)) || (avatar && !https.test(avatar))) { say($('apply-msg'), 'الروابط لازم تبدأ بـ https://', 'err'); return; }
-            var sess = (await client.auth.getSession()).data.session;
-            if (!sess) { await render(); return; }
-            var btn = $('apply-submit'); btn.disabled = true; say($('apply-msg'), '');
-            var ins = await client.from('join_requests').insert({
-                user_id: sess.user.id, display_name: name, team_id: team, role: $('f-role').value,
-                bio: $('f-bio').value.trim() || null, social_url: social || null, avatar_url: avatar || null
-            });
-            btn.disabled = false;
-            if (ins.error) {
-                say($('apply-msg'), /duplicate|one_pending/i.test(ins.error.message) ? 'عندك طلب قيد المراجعة بالفعل.' : 'ما قدرنا نرسل الطلب: ' + ins.error.message, 'err');
-                return;
-            }
-            say($('apply-msg'), '');
-            await render();
-        };
 
         client.auth.onAuthStateChange(function () { /* التحديث يتم عند الأزرار */ });
         render().catch(function (e) { var f = $('fatal'); f.hidden = false; f.textContent = 'تعذّر الاتصال بالخادم: ' + (e && e.message || e); });

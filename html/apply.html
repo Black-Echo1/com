@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#111111">
+    <meta name="description" content="قدّم طلب انضمام إلى أحد فرق الدبلجة في AR anime بخطوات واضحة.">
+    <title>طلب الانضمام إلى فريق - AR anime</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" type="image/png" href="../icon-192.png">
+    <link rel="manifest" href="../manifest.json">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="../css/ui.css">
+    <link rel="stylesheet" href="../css/mobile.css">
+    <link rel="stylesheet" href="../css/modern.css">
+    <link rel="stylesheet" href="../css/apply.css">
+</head>
+<body class="ui-page">
+    <header class="main-header">
+        <div class="logo"><div class="logo rgb-text">AR anime</div></div>
+        <button type="button" class="menu-icon" aria-label="فتح القائمة" aria-controls="navMenu" aria-expanded="false"><i class="fa-solid fa-bars" aria-hidden="true"></i></button>
+        <nav id="navMenu">
+            <div class="close-btn">&times;</div>
+            <a href="../index.html"><span class="rgb-text">الرئيسية</span></a>
+            <a href="browse.html"><span class="rgb-text">الأنميات</span></a>
+            <a href="teams.html"><span class="rgb-text">الفرق</span></a>
+            <a href="dubbers.html"><span class="rgb-text">المدبلجون</span></a>
+            <a href="account.html"><span class="rgb-text">حسابي</span></a>
+        </nav>
+    </header>
+
+    <main class="apply-shell">
+        <a class="apply-back" href="account.html"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i> العودة إلى حسابي</a>
+        <section class="apply-card" aria-labelledby="apply-title">
+            <div class="apply-intro">
+                <span class="apply-eyebrow"><i class="fa-solid fa-microphone-lines" aria-hidden="true"></i> انضم إلى مجتمع الدبلجة</span>
+                <h1 id="apply-title">طلب انضمام إلى فريق</h1>
+                <p>خلّنا نتعرّف عليك خطوة بخطوة. إجاباتك تُحفظ على هذا الجهاز أثناء التقديم، وتُرسل للإدارة للمراجعة عند الإنهاء.</p>
+            </div>
+
+            <div class="apply-progress" aria-label="تقدم الطلب">
+                <div class="apply-progress-top"><span id="step-label">الخطوة ١ من ٥</span><span id="step-percent">٢٠٪</span></div>
+                <div class="apply-progress-track"><span id="progress-fill"></span></div>
+                <div class="apply-step-dots" id="step-dots" aria-hidden="true"></div>
+            </div>
+
+            <form id="application-form" novalidate>
+                <section class="apply-step" data-step="0" aria-labelledby="step-title-0">
+                    <span class="apply-step-icon"><i class="fa-solid fa-signature" aria-hidden="true"></i></span>
+                    <h2 id="step-title-0">بأي اسم تحب أن يراك الجمهور؟</h2>
+                    <p class="apply-step-hint">هذا الاسم سيظهر على بروفايلك وصفحة المدبلجين إذا تمت الموافقة على طلبك.</p>
+                    <label for="display-name">اسمك المستعار أو اسمك الفني</label>
+                    <input id="display-name" name="display_name" maxlength="60" minlength="2" autocomplete="nickname" placeholder="مثال: لونا" required>
+                    <p class="apply-private-note"><i class="fa-solid fa-lock" aria-hidden="true"></i> بريد حسابك يبقى خاصاً ولا يظهر في بروفايلك.</p>
+                </section>
+
+                <section class="apply-step" data-step="1" aria-labelledby="step-title-1" hidden>
+                    <span class="apply-step-icon"><i class="fa-solid fa-sliders" aria-hidden="true"></i></span>
+                    <h2 id="step-title-1">ما المجال الذي تحب المشاركة فيه؟</h2>
+                    <p class="apply-step-hint">اختر الدور الأقرب لك. تقدر تذكر خبرتك أو اهتماماتك في النبذة.</p>
+                    <label for="application-role">الدور الذي تود التقديم عليه</label>
+                    <select id="application-role" name="role" required>
+                        <option value="مؤدي أصوات">مؤدي أصوات</option>
+                        <option value="مهندس صوت">مهندس صوت</option>
+                        <option value="مخرج دبلجة">مخرج دبلجة</option>
+                        <option value="مترجم">مترجم</option>
+                        <option value="كاتب نصوص">كاتب نصوص</option>
+                    </select>
+                    <label for="application-bio">عرّفنا عن نفسك وخبرتك <span>(اختياري)</span></label>
+                    <textarea id="application-bio" name="bio" maxlength="600" rows="5" placeholder="ما الذي تحبّه في هذا المجال؟ وهل لديك أعمال أو خبرة سابقة؟"></textarea>
+                    <div class="apply-counter"><span id="bio-count">٠</span><span> / ٦٠٠</span></div>
+                </section>
+
+                <section class="apply-step" data-step="2" aria-labelledby="step-title-2" hidden>
+                    <span class="apply-step-icon"><i class="fa-solid fa-id-card" aria-hidden="true"></i></span>
+                    <h2 id="step-title-2">جهّز شكل بروفايلك</h2>
+                    <p class="apply-step-hint">أضف صورة ورابطاً يعرّفان بك. هذي البيانات اختيارية وتقدر تكمل بدونها.</p>
+                    <label for="avatar-url">رابط صورة البروفايل <span>(اختياري)</span></label>
+                    <input id="avatar-url" name="avatar_url" type="url" inputmode="url" dir="ltr" maxlength="500" placeholder="https://example.com/photo.jpg" autocomplete="url">
+                    <label for="social-url">رابط حساب أو عيّنة من أعمالك <span>(اختياري)</span></label>
+                    <input id="social-url" name="social_url" type="url" inputmode="url" dir="ltr" maxlength="500" placeholder="https://..." autocomplete="url">
+                    <p class="apply-private-note"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> نستخدم روابط https الآمنة فقط.</p>
+                </section>
+
+                <section class="apply-step" data-step="3" aria-labelledby="step-title-3" hidden>
+                    <span class="apply-step-icon"><i class="fa-solid fa-people-group" aria-hidden="true"></i></span>
+                    <h2 id="step-title-3">أي فريق تود الانضمام إليه؟</h2>
+                    <p class="apply-step-hint">اختر الفريق الذي يناسبك. موافقة الفريق والإدارة مطلوبة قبل ظهورك كمدبلج.</p>
+                    <div id="team-options" class="apply-team-options" role="radiogroup" aria-label="اختر فريقاً"></div>
+                    <input type="hidden" id="team-id" name="team_id">
+                </section>
+
+                <section class="apply-step" data-step="4" aria-labelledby="step-title-4" hidden>
+                    <span class="apply-step-icon"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></span>
+                    <h2 id="step-title-4">راجع طلبك قبل الإرسال</h2>
+                    <p class="apply-step-hint">تأكد من الاسم والدور والفريق. سيراجع فريق الإدارة طلبك قبل إضافتك.</p>
+                    <div id="review-card" class="apply-review"></div>
+                    <label class="apply-consent"><input type="checkbox" id="confirm-details"><span>أؤكد أن المعلومات التي أدخلتها صحيحة، وأوافق على إرسالها لمراجعة طلب الانضمام.</span></label>
+                </section>
+
+                <div id="apply-error" class="apply-error" role="alert" aria-live="polite" hidden></div>
+                <div class="apply-controls">
+                    <button type="button" id="previous-step" class="apply-button secondary" hidden><i class="fa-solid fa-arrow-right" aria-hidden="true"></i> السابق</button>
+                    <button type="button" id="next-step" class="apply-button primary">التالي <i class="fa-solid fa-arrow-left" aria-hidden="true"></i></button>
+                    <button type="submit" id="submit-application" class="apply-button primary" hidden><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> إرسال الطلب</button>
+                </div>
+            </form>
+            <p class="apply-footnote"><i class="fa-regular fa-clock" aria-hidden="true"></i> لن يتم نشر بروفايلك قبل قبول الطلب.</p>
+        </section>
+    </main>
+
+    <footer class="apply-footer">© 2026 AR anime · <a href="legal.html">سياسة الخصوصية</a></footer>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
+    <script src="../data/supabase_config.js"></script>
+    <script>
+    (() => {
+        'use strict';
+        const $ = (id) => document.getElementById(id);
+        const form = $('application-form');
+        const steps = [...document.querySelectorAll('.apply-step')];
+        const errorBox = $('apply-error');
+        const nextButton = $('next-step');
+        const backButton = $('previous-step');
+        const submitButton = $('submit-application');
+        const storagePrefix = 'arAnimeJoinDraft:';
+        let stepIndex = 0;
+        let user = null;
+        let teams = [];
+        let client = null;
+        let draftKey = '';
+
+        const arabicDigits = (value) => String(value).replace(/\d/g, (digit) => '٠١٢٣٤٥٦٧٨٩'[Number(digit)]);
+        const setError = (message) => { errorBox.textContent = message || ''; errorBox.hidden = !message; };
+        const safeHttps = (value) => !value || /^https:\/\/[^\s<>"']+$/i.test(value);
+        const readDraft = () => {
+            try { return JSON.parse(sessionStorage.getItem(draftKey) || '{}'); } catch (_) { return {}; }
+        };
+        const saveDraft = () => {
+            if (!draftKey) return;
+            const data = {
+                display_name: $('display-name').value,
+                role: $('application-role').value,
+                bio: $('application-bio').value,
+                avatar_url: $('avatar-url').value,
+                social_url: $('social-url').value,
+                team_id: $('team-id').value
+            };
+            try { sessionStorage.setItem(draftKey, JSON.stringify(data)); } catch (_) {}
+            $('bio-count').textContent = arabicDigits(data.bio.length);
+        };
+        const teamById = (id) => teams.find((team) => team.id === id);
+        const renderReview = () => {
+            const selected = teamById($('team-id').value);
+            const rows = [
+                ['الاسم الظاهر', $('display-name').value.trim()],
+                ['الدور', $('application-role').value],
+                ['الفريق', selected ? selected.name : 'لم يتم اختيار فريق'],
+                ['النبذة', $('application-bio').value.trim() || 'لم تُضف نبذة'],
+                ['الصورة', $('avatar-url').value.trim() || 'لم تُضف صورة'],
+                ['الرابط', $('social-url').value.trim() || 'لم يُضف رابط']
+            ];
+            const box = $('review-card');
+            box.replaceChildren();
+            rows.forEach(([label, value]) => {
+                const row = document.createElement('div'); row.className = 'apply-review-row';
+                const title = document.createElement('span'); title.textContent = label;
+                const content = document.createElement('strong'); content.textContent = value;
+                row.append(title, content); box.appendChild(row);
+            });
+        };
+        const setStep = (index) => {
+            stepIndex = Math.max(0, Math.min(steps.length - 1, index));
+            steps.forEach((step, position) => { step.hidden = position !== stepIndex; });
+            const count = steps.length;
+            $('step-label').textContent = `الخطوة ${arabicDigits(stepIndex + 1)} من ${arabicDigits(count)}`;
+            $('step-percent').textContent = `${arabicDigits(Math.round(((stepIndex + 1) / count) * 100))}٪`;
+            $('progress-fill').style.width = `${((stepIndex + 1) / count) * 100}%`;
+            [...$('step-dots').children].forEach((dot, position) => {
+                dot.classList.toggle('is-current', position === stepIndex);
+                dot.classList.toggle('is-complete', position < stepIndex);
+            });
+            backButton.hidden = stepIndex === 0;
+            nextButton.hidden = stepIndex === count - 1;
+            submitButton.hidden = stepIndex !== count - 1;
+            if (stepIndex === count - 1) renderReview();
+            setError('');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            const title = steps[stepIndex].querySelector('h2');
+            if (title) title.setAttribute('tabindex', '-1'), title.focus({ preventScroll: true });
+        };
+        const validateStep = () => {
+            if (stepIndex === 0) {
+                const name = $('display-name').value.trim();
+                if (name.length < 2 || name.length > 60 || /[<>]/.test(name)) return 'اكتب اسماً من حرفين إلى ٦٠ حرفاً، بدون رموز HTML.';
+            }
+            if (stepIndex === 1 && $('application-role').value.trim().length > 40) return 'الدور المختار أطول من المسموح.';
+            if (stepIndex === 2) {
+                if (!safeHttps($('avatar-url').value.trim()) || !safeHttps($('social-url').value.trim())) return 'تحقق من الرابط؛ يجب أن يبدأ بـ https://.';
+            }
+            if (stepIndex === 3 && !teamById($('team-id').value)) return 'اختر فريقاً للمتابعة.';
+            return '';
+        };
+        const renderTeams = () => {
+            const box = $('team-options'); box.replaceChildren();
+            if (!teams.length) {
+                const empty = document.createElement('p'); empty.className = 'apply-team-empty'; empty.textContent = 'ما قدرنا نحمّل الفرق الآن. حدّث الصفحة أو جرّب بعد قليل.'; box.appendChild(empty); return;
+            }
+            teams.forEach((team) => {
+                const button = document.createElement('button'); button.type = 'button'; button.className = 'apply-team-option'; button.setAttribute('role', 'radio'); button.setAttribute('aria-checked', 'false'); button.dataset.teamId = team.id;
+                const logo = document.createElement('span'); logo.className = 'apply-team-logo';
+                if (team.logo && safeHttps(team.logo)) { const image = document.createElement('img'); image.src = team.logo; image.alt = ''; image.loading = 'lazy'; logo.appendChild(image); }
+                else { const icon = document.createElement('i'); icon.className = 'fa-solid fa-people-group'; icon.setAttribute('aria-hidden', 'true'); logo.appendChild(icon); }
+                const copy = document.createElement('span'); copy.className = 'apply-team-copy';
+                const name = document.createElement('strong'); name.textContent = team.name;
+                const description = document.createElement('small'); description.textContent = team.description || 'فريق دبلجة على AR anime';
+                const check = document.createElement('span'); check.className = 'apply-team-check'; check.innerHTML = '<i class="fa-solid fa-check" aria-hidden="true"></i>';
+                copy.append(name, description); button.append(logo, copy, check);
+                button.addEventListener('click', () => {
+                    $('team-id').value = team.id;
+                    box.querySelectorAll('.apply-team-option').forEach((option) => { const selected = option === button; option.classList.toggle('is-selected', selected); option.setAttribute('aria-checked', String(selected)); });
+                    saveDraft(); setError('');
+                });
+                box.appendChild(button);
+            });
+            const savedTeam = teamById($('team-id').value);
+            if (savedTeam) box.querySelector(`[data-team-id="${CSS.escape(savedTeam.id)}"]`)?.click();
+        };
+
+        for (let i = 0; i < steps.length; i += 1) {
+            const dot = document.createElement('span'); dot.className = 'apply-step-dot'; dot.setAttribute('aria-hidden', 'true'); $('step-dots').appendChild(dot);
+        }
+        form.addEventListener('input', saveDraft);
+        form.addEventListener('change', saveDraft);
+        nextButton.addEventListener('click', () => {
+            const problem = validateStep();
+            if (problem) { setError(problem); const target = steps[stepIndex].querySelector('input:not([type=hidden]),select,textarea'); target?.focus(); return; }
+            saveDraft(); setStep(stepIndex + 1);
+        });
+        backButton.addEventListener('click', () => { saveDraft(); setStep(stepIndex - 1); });
+        form.addEventListener('keydown', (event) => { if (event.key === 'Enter' && event.target.tagName !== 'TEXTAREA' && stepIndex < steps.length - 1) { event.preventDefault(); nextButton.click(); } });
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            const issue = validateStep();
+            if (issue) { setError(issue); return; }
+            if (!$('confirm-details').checked) { setError('أكد صحة بياناتك قبل إرسال الطلب.'); return; }
+            submitButton.disabled = true; setError('');
+            let result;
+            try {
+                result = await client.from('join_requests').insert({
+                    user_id: user.id,
+                    display_name: $('display-name').value.trim(),
+                    role: $('application-role').value,
+                    team_id: $('team-id').value,
+                    bio: $('application-bio').value.trim() || null,
+                    social_url: $('social-url').value.trim() || null,
+                    avatar_url: $('avatar-url').value.trim() || null
+                });
+            } catch (_) {
+                submitButton.disabled = false;
+                setError('تعذر الاتصال أثناء إرسال الطلب. بقيت إجاباتك محفوظة؛ تحقق من الإنترنت وحاول مجدداً.');
+                return;
+            }
+            submitButton.disabled = false;
+            if (result.error) {
+                const message = /duplicate|one_pending|unique/i.test(result.error.message) ? 'يبدو أن لديك طلباً قيد المراجعة بالفعل. ستجد حالته في حسابك.' : 'تعذر إرسال الطلب الآن. تحقق من اتصالك وحاول مرة أخرى.';
+                setError(message); return;
+            }
+            try { sessionStorage.removeItem(draftKey); } catch (_) {}
+            window.location.replace('account.html?submitted=1');
+        });
+
+        const init = async () => {
+            const config = window.SUPABASE_CONFIG || {};
+            if (!config.url || !config.anonKey || !window.supabase) { setError('تعذر الاتصال بخدمة الحسابات. حدّث الصفحة أو حاول لاحقاً.'); return; }
+            client = window.supabase.createClient(config.url, config.anonKey);
+            const sessionResult = await client.auth.getSession();
+            user = sessionResult.data.session?.user || null;
+            if (!user) { window.location.replace('account.html?next=apply.html'); return; }
+            draftKey = storagePrefix + user.id;
+            const pendingResult = await client.from('join_requests').select('id,status').eq('user_id', user.id).eq('status', 'pending').limit(1);
+            if (!pendingResult.error && pendingResult.data?.length) { window.location.replace('account.html'); return; }
+            const dubberResult = await client.rpc('my_dubber_id');
+            if (!dubberResult.error && dubberResult.data) { window.location.replace('account.html'); return; }
+            const draft = readDraft();
+            const metadata = user.user_metadata || {};
+            $('display-name').value = draft.display_name || metadata.full_name || metadata.name || (user.email || '').split('@')[0] || '';
+            $('application-role').value = draft.role || 'مؤدي أصوات';
+            $('application-bio').value = draft.bio || '';
+            $('avatar-url').value = draft.avatar_url || metadata.avatar_url || metadata.picture || '';
+            $('social-url').value = draft.social_url || '';
+            $('team-id').value = draft.team_id || '';
+            $('bio-count').textContent = arabicDigits($('application-bio').value.length);
+            const teamResult = await client.from('teams').select('id,name,logo,description').order('sort_order');
+            if (teamResult.error) { setError('تعذر تحميل الفرق. أعد تحميل الصفحة للمحاولة مجدداً.'); return; }
+            teams = teamResult.data || [];
+            renderTeams();
+            setStep(0);
+        };
+        init().catch(() => setError('حدث خطأ غير متوقع أثناء تحميل طلبك. أعد تحميل الصفحة للمحاولة مجدداً.'));
+    })();
+    </script>
+    <script src="../data/site.js"></script>
+</body>
+</html>
