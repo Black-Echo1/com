@@ -82,6 +82,8 @@
         .character-card img{ transition:box-shadow .3s ease; }
         .character-card:hover img{ box-shadow:0 10px 22px -6px rgba(229,9,20,0.5) !important; }
 
+        .anime-comments{max-width:1200px;margin:0 auto;padding:0 20px 64px}.anime-comments-card{background:var(--he-surface);border:1px solid var(--he-border);border-radius:16px;padding:22px}.anime-comments-title{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:0 0 18px;border-right:4px solid var(--he-red-2);padding-right:14px;font-size:1.3rem}.anime-comments-count{color:var(--he-muted);font-size:.8rem;font-weight:700}.anime-comment-form{display:grid;gap:10px;margin-bottom:20px}.anime-comment-form textarea{width:100%;box-sizing:border-box;min-height:92px;resize:vertical;padding:12px 14px;border:1px solid var(--he-border);border-radius:12px;background:#0b0d13;color:#fff;font:inherit;line-height:1.8}.anime-comment-form textarea:focus{outline:none;border-color:var(--he-red-2);box-shadow:0 0 0 3px rgba(229,9,20,.14)}.anime-comment-form button{justify-self:start;border:0;border-radius:10px;padding:10px 18px;background:linear-gradient(135deg,var(--he-red-2),var(--he-red));color:#fff;font:inherit;font-weight:800;cursor:pointer}.anime-comment-form button:disabled{opacity:.55;cursor:wait}.anime-comments-message{min-height:1.4em;margin:0;color:#ff9ba2;font-size:.8rem}.anime-comments-message.is-ok{color:#71e3a0}.anime-comments-list{display:grid;gap:12px}.anime-comment{display:flex;gap:12px;padding:14px;border:1px solid rgba(255,255,255,.07);border-radius:12px;background:rgba(255,255,255,.025)}.anime-comment-avatar{width:36px;height:36px;flex:none;display:grid;place-items:center;border-radius:50%;background:rgba(229,9,20,.15);color:#ff6c78}.anime-comment-body{min-width:0;flex:1}.anime-comment-head{display:flex;align-items:center;gap:10px;flex-wrap:wrap}.anime-comment-head strong{font-size:.88rem}.anime-comment-head time{color:var(--he-muted);font-size:.72rem}.anime-comment-body p{margin:6px 0 0;color:#d8d9df;font-size:.86rem;line-height:1.8;overflow-wrap:anywhere}.anime-comment-delete{margin-top:8px;border:0;background:transparent;color:#ff858c;font:inherit;font-size:.72rem;cursor:pointer}.anime-comments-empty{margin:0;color:var(--he-muted);font-size:.84rem}
+
         footer{ text-align:center; padding:34px 20px; color:var(--he-muted); font-size:0.85rem; border-top:1px solid var(--he-border); }
         footer a{ color:var(--he-muted); text-decoration:none; }
         footer a:hover{ color:var(--he-red-2); }
@@ -167,12 +169,26 @@
     <!-- سيتم حقن الشخصيات هنا بواسطة الجافاسكربت -->
 </div>
 
+<section id="anime-comments" class="anime-comments" aria-labelledby="anime-comments-title">
+    <div class="anime-comments-card">
+        <h2 id="anime-comments-title" class="anime-comments-title"><span><i class="fa-regular fa-comments" aria-hidden="true"></i> آراء المشاهدين</span><span class="anime-comments-count"><span id="anime-comments-count">0</span> تعليق</span></h2>
+        <form id="anime-comment-form" class="anime-comment-form">
+            <label for="anime-comment-text">شارك رأيك في هذا الأنمي</label>
+            <textarea id="anime-comment-text" maxlength="1000" placeholder="اكتب تعليقك أو تقييمك هنا..." required></textarea>
+            <button type="submit"><i class="fa-solid fa-paper-plane" aria-hidden="true"></i> نشر التعليق</button>
+            <p id="anime-comments-message" class="anime-comments-message" role="status" aria-live="polite"></p>
+        </form>
+        <div id="anime-comments-list" class="anime-comments-list" aria-live="polite"></div>
+    </div>
+</section>
+
 <footer>
     <a href="legal.html">سياسة الخصوصية</a> | <a href="tel:+905014770828">تواصل معنا</a>
     <p>&copy; 2026 أكاديمية AR anime.</p>
 </footer>
 
 <script src="../data/supabase_config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.js"></script>
 <script src="../data/db_loader.js"></script>
 <script src="../data/people_loader.js"></script>
 <script src="../data/role_claims.js"></script>
@@ -182,5 +198,6 @@
 <script>
 </script>
     <script src="../data/site.js"></script>
+    <script src="../data/anime_comments.js"></script>
 </body>
 </html>

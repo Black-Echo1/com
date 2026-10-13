@@ -57,16 +57,25 @@
 
                 <section class="apply-step" data-step="1" aria-labelledby="step-title-1" hidden>
                     <span class="apply-step-icon"><i class="fa-solid fa-sliders" aria-hidden="true"></i></span>
-                    <h2 id="step-title-1">ما المجال الذي تحب المشاركة فيه؟</h2>
-                    <p class="apply-step-hint">اختر الدور الأقرب لك. تقدر تذكر خبرتك أو اهتماماتك في النبذة.</p>
-                    <label for="application-role">الدور الذي تود التقديم عليه</label>
-                    <select id="application-role" name="role" required>
-                        <option value="مؤدي أصوات">مؤدي أصوات</option>
-                        <option value="مهندس صوت">مهندس صوت</option>
-                        <option value="مخرج دبلجة">مخرج دبلجة</option>
-                        <option value="مترجم">مترجم</option>
-                        <option value="كاتب نصوص">كاتب نصوص</option>
-                    </select>
+                    <h2 id="step-title-1">ما المجالات التي تحب المشاركة فيها؟</h2>
+                    <p class="apply-step-hint">اختر مجالاً واحداً إلى ثلاثة مجالات كحد أقصى. يمكنك تحديد أكثر من مجال يناسب خبرتك.</p>
+                    <fieldset class="apply-roles-fieldset">
+                        <legend>مجالات التقديم <span>(من ١ إلى ٣)</span></legend>
+                        <div id="application-roles" class="apply-role-options">
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="مؤدي أصوات"><span>مؤدي أصوات</span></label>
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="مترجم"><span>مترجم</span></label>
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="معدّ الحوار"><span>معدّ الحوار</span></label>
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="التدقيق اللغوي"><span>التدقيق اللغوي</span></label>
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="المونتاج"><span>المونتاج</span></label>
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="التترات"><span>التترات</span></label>
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="هندسة الصوت"><span>هندسة الصوت</span></label>
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="كتابة كلمات الشارة"><span>كتابة كلمات الشارة</span></label>
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="الألحان والتوزيع"><span>الألحان والتوزيع</span></label>
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="غناء الشارة"><span>غناء الشارة</span></label>
+                            <label class="apply-role-option"><input type="checkbox" name="roles" value="مخرج الدوبلاج"><span>مخرج الدوبلاج</span></label>
+                        </div>
+                        <small id="roles-count" class="apply-roles-count">تم اختيار ٠ من ٣</small>
+                    </fieldset>
                     <label for="application-bio">عرّفنا عن نفسك وخبرتك <span>(اختياري)</span></label>
                     <textarea id="application-bio" name="bio" maxlength="600" rows="5" placeholder="ما الذي تحبّه في هذا المجال؟ وهل لديك أعمال أو خبرة سابقة؟"></textarea>
                     <div class="apply-counter"><span id="bio-count">٠</span><span> / ٦٠٠</span></div>
@@ -94,7 +103,7 @@
                 <section class="apply-step" data-step="4" aria-labelledby="step-title-4" hidden>
                     <span class="apply-step-icon"><i class="fa-solid fa-clipboard-check" aria-hidden="true"></i></span>
                     <h2 id="step-title-4">راجع طلبك قبل الإرسال</h2>
-                    <p class="apply-step-hint">تأكد من الاسم والدور والفريق. سيراجع فريق الإدارة طلبك قبل إضافتك.</p>
+                    <p class="apply-step-hint">تأكد من الاسم والمجالات والفريق. سيراجع فريق الإدارة طلبك قبل إضافتك.</p>
                     <div id="review-card" class="apply-review"></div>
                     <label class="apply-consent"><input type="checkbox" id="confirm-details"><span>أؤكد أن المعلومات التي أدخلتها صحيحة، وأوافق على إرسالها لمراجعة طلب الانضمام.</span></label>
                 </section>
@@ -148,7 +157,7 @@
             if (!draftKey) return;
             const data = {
                 display_name: $('display-name').value,
-                role: $('application-role').value,
+                roles: selectedRoles(),
                 bio: $('application-bio').value,
                 avatar_url: $('avatar-url').value,
                 social_url: $('social-url').value,
@@ -162,7 +171,7 @@
             const selected = teamById($('team-id').value);
             const rows = [
                 ['الاسم الظاهر', $('display-name').value.trim()],
-                ['الدور', $('application-role').value],
+                ['المجالات', selectedRoles().join('، ') || 'لم يتم اختيار مجال'],
                 ['الفريق', selected ? selected.name : 'لم يتم اختيار فريق'],
                 ['النبذة', $('application-bio').value.trim() || 'لم تُضف نبذة'],
                 ['الصورة', $('avatar-url').value.trim() || 'لم تُضف صورة'],
@@ -202,7 +211,11 @@
                 const name = $('display-name').value.trim();
                 if (name.length < 2 || name.length > 60 || /[<>]/.test(name)) return 'اكتب اسماً من حرفين إلى ٦٠ حرفاً، بدون رموز HTML.';
             }
-            if (stepIndex === 1 && $('application-role').value.trim().length > 40) return 'الدور المختار أطول من المسموح.';
+            if (stepIndex === 1) {
+                const roles = selectedRoles();
+                if (!roles.length) return 'اختر مجالاً واحداً على الأقل.';
+                if (roles.length > 3) return 'يمكن اختيار ثلاثة مجالات كحد أقصى.';
+            }
             if (stepIndex === 2) {
                 if (!normalizeAvatarUrl()) return 'تحقق من رابط الصورة. اكتب رابط صورة صالحاً أو اتركه فارغاً.';
                 if (!safeHttps($('social-url').value.trim())) return 'رابط حسابك أو أعمالك يجب أن يبدأ بـ https://.';
@@ -210,6 +223,16 @@
             if (stepIndex === 3 && !teamById($('team-id').value)) return 'اختر فريقاً للمتابعة.';
             return '';
         };
+        const selectedRoles = () => [...document.querySelectorAll('input[name="roles"]:checked')].map((input) => input.value);
+        const renderRoles = () => {
+            const roles = selectedRoles();
+            document.querySelectorAll('input[name="roles"]').forEach((input) => {
+                input.closest('.apply-role-option')?.classList.toggle('is-selected', input.checked);
+                input.disabled = !input.checked && roles.length >= 3;
+            });
+            $('roles-count').textContent = `تم اختيار ${arabicDigits(roles.length)} من ٣`;
+        };
+
         const renderTeams = () => {
             const box = $('team-options'); box.replaceChildren();
             if (!teams.length) {
@@ -241,7 +264,7 @@
             const dot = document.createElement('span'); dot.className = 'apply-step-dot'; dot.setAttribute('aria-hidden', 'true'); $('step-dots').appendChild(dot);
         }
         form.addEventListener('input', saveDraft);
-        form.addEventListener('change', saveDraft);
+        form.addEventListener('change', (event) => { if (event.target.name === 'roles') renderRoles(); saveDraft(); });
         $('avatar-url').addEventListener('blur', () => { if (normalizeAvatarUrl()) saveDraft(); });
         nextButton.addEventListener('click', () => {
             const problem = validateStep();
@@ -263,7 +286,7 @@
                 result = await client.from('join_requests').insert({
                     user_id: user.id,
                     display_name: $('display-name').value.trim(),
-                    role: $('application-role').value,
+                    roles: selectedRoles(),
                     team_id: $('team-id').value,
                     bio: $('application-bio').value.trim() || null,
                     social_url: $('social-url').value.trim() || null,
@@ -298,7 +321,11 @@
             const draft = readDraft();
             const metadata = user.user_metadata || {};
             $('display-name').value = draft.display_name || metadata.full_name || metadata.name || (user.email || '').split('@')[0] || '';
-            $('application-role').value = draft.role || 'مؤدي أصوات';
+            (draft.roles || (draft.role ? [draft.role] : ['مؤدي أصوات'])).slice(0, 3).forEach((role) => {
+                const input = [...document.querySelectorAll('input[name="roles"]')].find((item) => item.value === role);
+                if (input) input.checked = true;
+            });
+            renderRoles();
             $('application-bio').value = draft.bio || '';
             $('avatar-url').value = draft.avatar_url || metadata.avatar_url || metadata.picture || '';
             $('social-url').value = draft.social_url || '';
