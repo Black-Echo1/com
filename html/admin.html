@@ -190,7 +190,7 @@
         box.appendChild(ok); box.appendChild(no); return box;
     }
     async function renderRequests() {
-        var j = await client.from('join_requests').select('id,display_name,role,team_id,bio,social_url,avatar_url,created_at').eq('status', 'pending').order('created_at');
+        var j = await client.from('join_requests').select('id,display_name,role,roles,team_id,bio,social_url,avatar_url,created_at').eq('status', 'pending').order('created_at');
         var c = await client.from('role_claims').select('id,anime_id,character_name,proof_url,created_at,dubber_id').eq('status', 'pending').order('created_at');
         count('join-count', j.data ? j.data.length : 0); count('join-nav-count', j.data ? j.data.length : 0);
         count('claim-count', c.data ? c.data.length : 0); count('claim-nav-count', c.data ? c.data.length : 0);
@@ -202,7 +202,7 @@
             var card = el('div', 'card'), row = el('div', 'row');
             var img = window.ARAnimeAvatar.create(r.display_name, r.avatar_url, 'admin-avatar', 'admin-avatar-fallback'); row.appendChild(img);
             var info = el('div', 'info'); info.appendChild(el('b', '', r.display_name));
-            info.appendChild(el('div', 'meta', r.role + ' — ' + tname(r.team_id)));
+            info.appendChild(el('div', 'meta', (Array.isArray(r.roles) && r.roles.length ? r.roles.join('، ') : r.role) + ' — ' + tname(r.team_id)));
             if (r.bio) info.appendChild(el('div', '', r.bio));
             var l = link(r.social_url, 'حسابه'); if (l) { var w = el('div'); w.appendChild(l); info.appendChild(w); }
             info.appendChild(decisionButtons('join_requests', r.id)); row.appendChild(info); card.appendChild(row); jb.appendChild(card);

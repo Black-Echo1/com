@@ -286,6 +286,7 @@
                 result = await client.from('join_requests').insert({
                     user_id: user.id,
                     display_name: $('display-name').value.trim(),
+                    role: selectedRoles()[0],
                     roles: selectedRoles(),
                     team_id: $('team-id').value,
                     bio: $('application-bio').value.trim() || null,
